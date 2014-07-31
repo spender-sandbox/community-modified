@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{5adffae4-ad3e-4f6c-8519-7fb05b81b89c}</ProjectGuid>
+    <ProjectHome />
+    <StartupFile />
+    <SearchPath />
+    <WorkingDirectory>.</WorkingDirectory>
+    <OutputPath>.</OutputPath>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'" />
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
+  <ItemGroup>
+    <Compile Include="modules\signatures\antidbg_devices.py" />
+    <Compile Include="modules\signatures\antidbg_windows.py" />
+    <Compile Include="modules\signatures\antiemu_wine.py" />
+    <Compile Include="modules\signatures\antisandbox_mouse_hook.py" />
+    <Compile Include="modules\signatures\antisandbox_productid.py" />
+    <Compile Include="modules\signatures\antisandbox_unhook.py" />
+    <Compile Include="modules\signatures\antivirus_virustotal.py" />
+    <Compile Include="modules\signatures\antivm_generic_bios.py" />
+    <Compile Include="modules\signatures\antivm_generic_disk.py" />
+    <Compile Include="modules\signatures\antivm_generic_ide.py" />
+    <Compile Include="modules\signatures\antivm_generic_scsi.py" />
+    <Compile Include="modules\signatures\antivm_generic_services.py" />
+    <Compile Include="modules\signatures\antivm_vbox_acpi.py" />
+    <Compile Include="modules\signatures\antivm_vbox_devices.py" />
+    <Compile Include="modules\signatures\antivm_vbox_files.py" />
+    <Compile Include="modules\signatures\antivm_vbox_keys.py" />
+    <Compile Include="modules\signatures\antivm_vbox_libs.py" />
+    <Compile Include="modules\signatures\antivm_vbox_window.py" />
+    <Compile Include="modules\signatures\banker_cridex.py" />
+    <Compile Include="modules\signatures\banker_prinimalka.py" />
+    <Compile Include="modules\signatures\banker_spyeye_mutex.py" />
+    <Compile Include="modules\signatures\banker_zeus_mutex.py" />
+    <Compile Include="modules\signatures\banker_zeus_p2p.py" />
+    <Compile Include="modules\signatures\banker_zeus_url.py" />
+    <Compile Include="modules\signatures\bitcoin_opencl.py" />
+    <Compile Include="modules\signatures\bot_athenahttp.py" />
+    <Compile Include="modules\signatures\bot_dirtjumper.py" />
+    <Compile Include="modules\signatures\bot_drive.py" />
+    <Compile Include="modules\signatures\bot_drive2.py" />
+    <Compile Include="modules\signatures\bot_madness.py" />
+    <Compile Include="modules\signatures\bot_russkill.py" />
+    <Compile Include="modules\signatures\bypass_firewall.py" />
+    <Compile Include="modules\signatures\downloader_cabby.py" />
+    <Compile Include="modules\signatures\exec_crash.py" />
+    <Compile Include="modules\signatures\infostealer_browser.py" />
+    <Compile Include="modules\signatures\infostealer_ftp.py" />
+    <Compile Include="modules\signatures\injection_createremotethread.py" />
+    <Compile Include="modules\signatures\injection_runpe.py" />
+    <Compile Include="modules\signatures\locker_regedit.py" />
+    <Compile Include="modules\signatures\locker_taskmgr.py" />
+    <Compile Include="modules\signatures\network_bind.py" />
+    <Compile Include="modules\signatures\network_http.py" />
+    <Compile Include="modules\signatures\network_icmp.py" />
+    <Compile Include="modules\signatures\network_irc.py" />
+    <Compile Include="modules\signatures\network_smtp.py" />
+    <Compile Include="modules\signatures\network_tor.py" />
+    <Compile Include="modules\signatures\network_tor_service.py" />
+    <Compile Include="modules\signatures\origin_langid.py" />
+    <Compile Include="modules\signatures\packer_entropy.py" />
+    <Compile Include="modules\signatures\packer_upx.py" />
+    <Compile Include="modules\signatures\persistence_ads.py" />
+    <Compile Include="modules\signatures\persistence_autorun.py" />
+    <Compile Include="modules\signatures\rat_beebus_mutex.py" />
+    <Compile Include="modules\signatures\rat_fynloski_mutex.py" />
+    <Compile Include="modules\signatures\rat_pcclient.py" />
+    <Compile Include="modules\signatures\rat_plugx_mutex.py" />
+    <Compile Include="modules\signatures\rat_spynet.py" />
+    <Compile Include="modules\signatures\rat_xtreme_mutex.py" />
+    <Compile Include="modules\signatures\recon_checkip.py" />
+    <Compile Include="modules\signatures\recon_fingerprint.py" />
+    <Compile Include="modules\signatures\recon_systeminfo.py" />
+    <Compile Include="modules\signatures\sniffer_winpcap.py" />
+    <Compile Include="modules\signatures\spreading_autoruninf.py" />
+    <Compile Include="modules\signatures\targeted_flame.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="modules\" />
+    <Folder Include="modules\signatures" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" />
+</Project>
