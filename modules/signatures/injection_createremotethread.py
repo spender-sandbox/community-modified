@@ -28,16 +28,22 @@ class InjectionCRT(Signature):
         Signature.__init__(self, *args, **kwargs)
         self.lastprocess = None
 
+    filter_categories = set(["process","threading"])
+
     def on_call(self, call, process):
         if process is not self.lastprocess:
             self.sequence = 0
             self.process_handle = 0
             self.lastprocess = process
 
-        if (call["api"]  == "OpenProcess" or call["api"] == "NtOpenProcess") and self.sequence == 0:
+        if call["api"] == "OpenProcess" and call["status"] == True and self.sequence == 0:
             if self.get_argument(call, "ProcessId") != process["process_id"]:
                 self.sequence = 1
                 self.process_handle = call["return"]
+        elif call["api"] == "NtOpenProcess" and call["status"] == True and self.sequence == 0:
+            if self.get_argument(call, "ProcessIdentifier") != process["process_id"]:
+                self.sequence = 1
+                self.process_handle = self.get_argument(call, "ProcessHandle")
         elif (call["api"] == "VirtualAllocEx" or call["api"] == "NtAllocateVirtualMemory") and self.sequence == 1:
             if self.get_argument(call, "ProcessHandle") == self.process_handle:
                 self.sequence = 2
@@ -47,3 +53,4 @@ class InjectionCRT(Signature):
         elif call["api"].startswith("CreateRemoteThread") and self.sequence == 3:
             if self.get_argument(call, "ProcessHandle") == self.process_handle:
                 return True
+
