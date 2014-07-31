@@ -20,7 +20,7 @@ class InjectionRUNPE(Signature):
     description = "Executed a process and injected code into it, probably while unpacking"
     severity = 2
     categories = ["injection"]
-    authors = ["glysbaysb"]
+    authors = ["glysbaysb", "Accuvant"]
     minimum = "1.0"
     evented = True
 
