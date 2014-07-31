@@ -20,7 +20,7 @@ class InjectionCRT(Signature):
     description = "Code injection with CreateRemoteThread in a remote process"
     severity = 2
     categories = ["injection"]
-    authors = ["JoseMi Holguin", "nex"]
+    authors = ["JoseMi Holguin", "nex", "Accuvant"]
     minimum = "1.0"
     evented = True
 
@@ -34,11 +34,11 @@ class InjectionCRT(Signature):
             self.process_handle = 0
             self.lastprocess = process
 
-        if call["api"]  == "OpenProcess" and self.sequence == 0:
+        if (call["api"]  == "OpenProcess" or call["api"] == "NtOpenProcess") and self.sequence == 0:
             if self.get_argument(call, "ProcessId") != process["process_id"]:
                 self.sequence = 1
                 self.process_handle = call["return"]
-        elif call["api"] == "VirtualAllocEx" and self.sequence == 1:
+        elif (call["api"] == "VirtualAllocEx" or call["api"] == "NtAllocateVirtualMemory") and self.sequence == 1:
             if self.get_argument(call, "ProcessHandle") == self.process_handle:
                 self.sequence = 2
         elif (call["api"] == "NtWriteVirtualMemory" or call["api"] == "WriteProcessMemory") and self.sequence == 2:
