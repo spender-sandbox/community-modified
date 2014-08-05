@@ -52,6 +52,7 @@
     <Compile Include="modules\signatures\banker_geodo.py" />
     <Compile Include="modules\signatures\infostealer_browser.py" />
     <Compile Include="modules\signatures\infostealer_ftp.py" />
+    <Compile Include="modules\signatures\infostealer_mail.py" />
     <Compile Include="modules\signatures\injection_createremotethread.py" />
     <Compile Include="modules\signatures\injection_runpe.py" />
     <Compile Include="modules\signatures\locker_regedit.py" />
