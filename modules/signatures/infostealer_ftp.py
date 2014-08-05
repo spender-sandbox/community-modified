@@ -27,12 +27,12 @@ class FTPStealer(Signature):
         file_indicators = [
             ".*\\\\CuteFTP\\\\sm\.dat$",
             ".*\\\\FlashFXP\\\\.*\\\\Sites\.dat$",
-            ".*\\\\FlashFXP\\\\.*\\\\Sites\.dat$",
             ".*\\\\FileZilla\\\\sitemanager\.xml$",
             ".*\\\\FileZilla\\\\recentservers\.xml$",
             ".*\\\\VanDyke\\\\Config\\\\Sessions\\\\.*",
-            ".*\\\\Far Manager\\\\.*",
-            ".*\\\\FTP Explorer\\\\.*"
+            ".*\\\\Far\\ Manager\\\\.*",
+            ".*\\\\FTP\\ Explorer\\\\.*"
+            ".*\\\\FTP\\ Commander.*"
             ".*\\\\SmartFTP\\\\.*",
             ".*\\\\TurboFTP\\\\.*",
             ".*\\\\FTPRush\\\\.*",
