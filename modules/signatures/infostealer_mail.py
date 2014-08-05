@@ -5,7 +5,7 @@
 from lib.cuckoo.common.abstracts import Signature
 
 class EmailStealer(Signature):
-    name = "infostealer_email"
+    name = "infostealer_mail"
     description = "Harvests information related to installed mail clients"
     severity = 3
     categories = ["infostealer"]
@@ -15,7 +15,10 @@ class EmailStealer(Signature):
     def run(self):
         file_indicators = [
             ".*\.pst$",
-            ".*\\\\Microsoft\\\\Windows\\ Live\\ Mail.*"
+            ".*\\\\Microsoft\\\\Windows\\ Live\\ Mail.*",
+            ".*\\\\Foxmail\\\\mail\\\\.*\\\\Account\.stg$",
+            ".*\\\\Foxmail.*\\\\Accounts\.tdat$",
+            ".*\\\\Thunderbird\\\\Profiles\\\\.*\.default$"
         ]
         registry_indicators = [
             ".*\\\\Software\\\\Clients\\\\Mail.*",
