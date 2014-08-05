@@ -42,7 +42,7 @@ class Geodo(Signature):
             for match in match_file:
                 self.data.append({"file": match})
         if match_batch_file:
-            for match in match_batch:
+            for match in match_batch_file:
                 self.data.append({"batchfile": match})
         if match_runkey:
             for match in match_runkey:
