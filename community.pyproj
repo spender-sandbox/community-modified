@@ -49,12 +49,14 @@
     <Compile Include="modules\signatures\bypass_firewall.py" />
     <Compile Include="modules\signatures\downloader_cabby.py" />
     <Compile Include="modules\signatures\exec_crash.py" />
+    <Compile Include="modules\signatures\banker_geodo.py" />
     <Compile Include="modules\signatures\infostealer_browser.py" />
     <Compile Include="modules\signatures\infostealer_ftp.py" />
     <Compile Include="modules\signatures\injection_createremotethread.py" />
     <Compile Include="modules\signatures\injection_runpe.py" />
     <Compile Include="modules\signatures\locker_regedit.py" />
     <Compile Include="modules\signatures\locker_taskmgr.py" />
+    <Compile Include="modules\signatures\mimics_filetime.py" />
     <Compile Include="modules\signatures\network_bind.py" />
     <Compile Include="modules\signatures\network_http.py" />
     <Compile Include="modules\signatures\network_icmp.py" />
@@ -76,6 +78,7 @@
     <Compile Include="modules\signatures\recon_checkip.py" />
     <Compile Include="modules\signatures\recon_fingerprint.py" />
     <Compile Include="modules\signatures\recon_systeminfo.py" />
+    <Compile Include="modules\signatures\removes_zoneid_ads.py" />
     <Compile Include="modules\signatures\sniffer_winpcap.py" />
     <Compile Include="modules\signatures\spreading_autoruninf.py" />
     <Compile Include="modules\signatures\targeted_flame.py" />
