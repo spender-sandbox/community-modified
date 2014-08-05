@@ -17,7 +17,7 @@ from lib.cuckoo.common.abstracts import Signature
 
 class ADS(Signature):
     name = "persistence_ads"
-    description = "Creates an Alternate Data Stream (ADS)"
+    description = "Attempts to interact with an Alternate Data Stream (ADS)"
     severity = 3
     categories = ["persistence", "ads"]
     authors = ["nex"]
