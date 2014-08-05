@@ -1,6 +1,6 @@
 # Copyright (C) 2012 Michael Boman (@mboman)
 #
-# This program is free software: you can redistribute it and/or modify
+# This program is free Software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
@@ -29,38 +29,41 @@ class Autorun(Signature):
 
     def run(self):
         indicators = [
-            ".*\\\\SOFTWARE\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\Run$",
-            ".*\\\\SOFTWARE\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\RunOnce$",
-            ".*\\\\SOFTWARE\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\RunServices$",
-            ".*\\\\Software\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\RunOnceEx$",
-            ".*\\\\SOFTWARE\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\RunServicesOnce$",
-            ".*\\\\SOFTWARE\\\\Microsoft\\\\Windows\\ NT\\\\CurrentVersion\\\\Winlogon$",
-            ".*\\\\SOFTWARE\\\\Microsoft\\\\Windows\\ NT\\\\CurrentVersion\\\\Winlogon\\\\Notify$",
+            ".*\\\\Software\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\Run\\\\.*",
+            ".*\\\\Software\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\RunOnce\\\\.*",
+            ".*\\\\Software\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\RunServices\\\\.*",
+            ".*\\\\Software\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\RunOnceEx\\\\.*",
+            ".*\\\\Software\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\RunServicesOnce\\\\.*",
+            ".*\\\\Software\\\\Microsoft\\\\Windows\\ NT\\\\CurrentVersion\\\\Winlogon\\\\Notify\\\\.*",
             ".*\\\\Software\\\\Microsoft\\\\Windows\\ NT\\\\CurrentVersion\\\\Winlogon\\\\Userinit$",
-            ".*\\\\SOFTWARE\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\Policies\\\\Explorer\\\\Run$",
-            ".*\\\\SOFTWARE\\\\Microsoft\\\\Active\\ Setup\\\\Installed Components\\\\.*",
-            ".*\\\\SOFTWARE\\\\Microsoft\\\\Windows\\ NT\\\\CurrentVersion\\\\Windows\\\\Appinit_Dlls.*",
-            ".*\\\\SOFTWARE\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\Explorer\\\\SharedTaskScheduler.*",
-            ".*\\\\Software\\\\Microsoft\\\\Windows\\ NT\\\\CurrentVersion\\\\Image\\ File\\ Execution\\ Options.*",
-            ".*\\\\SOFTWARE\\\\Microsoft\\\\Windows\\ NT\\\\CurrentVersion\\\\Winlogon\\\\Shell$",
-            ".*\\\\System\\\\CurrentControlSet\\\\Services.*",
-            ".*\\\\SOFTWARE\\\\Classes\\\\Exefile\\\\Shell\\\\Open\\\\Command\\\\\(Default\).*",
+            ".*\\\\Software\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\Policies\\\\Explorer\\\\Run\\\\.*",
+            ".*\\\\Software\\\\Microsoft\\\\Active\\ Setup\\\\Installed Components\\\\.*",
+            ".*\\\\Software\\\\Microsoft\\\\Windows\\ NT\\\\CurrentVersion\\\\Windows\\\\AppInit_DLLs$",
+            ".*\\\\Software\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\Explorer\\\\SharedTaskScheduler\\\\.*",
+            ".*\\\\Software\\\\Microsoft\\\\Windows\\ NT\\\\CurrentVersion\\\\Image\\ File\\ Execution\\ Options\\\\[^\\\\]*\\\\\Debugger$",
+            ".*\\\\Software\\\\Microsoft\\\\Windows\\ NT\\\\CurrentVersion\\\\Winlogon\\\\Shell$",
+            ".*\\\\System\\\\CurrentControlSet\\\\Services\\\\.*",
+            ".*\\\\Software\\\\Classes\\\\Exefile\\\\Shell\\\\Open\\\\Command\\\\\(Default\)$",
             ".*\\\\Software\\\\Microsoft\\\\Windows NT\\\\CurrentVersion\\\\Windows\\\\load$",
-            ".*\\\\SOFTWARE\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\ShellServiceObjectDelayLoad$"
+            ".*\\\\Software\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\ShellServiceObjectDelayLoad\\\\.*"
         ]
 
         for indicator in indicators:
-            if self.check_key(pattern=indicator, regex=True):
+            match_key = self.check_key(pattern=indicator, regex=True)
+            if match_key:
+                self.data.append({"key" : match_key})
                 return True
 
         indicators = [
             ".*\\\\win\.ini$",
             ".*\\\\system\.ini$",
-            ".*\\\\Start Menu\\\\Programs\\\\Startup$"
+            ".*\\\\Start Menu\\\\Programs\\\\Startup\\\\.*"
         ]
 
         for indicator in indicators:
-            if self.check_file(pattern=indicator, regex=True):
+            match_file = self.check_file(pattern=indicator, regex=True)
+            if match_file:
+                self.data.append({"file" : match_file})
                 return True
 
         return False
