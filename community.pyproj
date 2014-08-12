@@ -75,6 +75,7 @@
     <Compile Include="modules\signatures\rat_fynloski_mutex.py" />
     <Compile Include="modules\signatures\rat_pcclient.py" />
     <Compile Include="modules\signatures\rat_plugx_mutex.py" />
+    <Compile Include="modules\signatures\rat_poisonivy.py" />
     <Compile Include="modules\signatures\rat_spynet.py" />
     <Compile Include="modules\signatures\rat_xtreme_mutex.py" />
     <Compile Include="modules\signatures\recon_checkip.py" />
