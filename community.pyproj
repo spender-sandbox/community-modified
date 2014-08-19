@@ -84,6 +84,7 @@
     <Compile Include="modules\signatures\removes_zoneid_ads.py" />
     <Compile Include="modules\signatures\sniffer_winpcap.py" />
     <Compile Include="modules\signatures\spreading_autoruninf.py" />
+    <Compile Include="modules\signatures\static_authenticode.py" />
     <Compile Include="modules\signatures\targeted_flame.py" />
   </ItemGroup>
   <ItemGroup>
