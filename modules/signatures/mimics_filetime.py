@@ -33,9 +33,9 @@ class HandleInfo:
         self.createtime, self.lastaccesstime, self.lastwritetime, self.changetime  = struct.unpack_from("QQQQ", buffer)
 
     def check_file_times(self, other):
-        if ((self.createtime != -1 and self.createtime == other.createtime) or
-            (self.lastwritetime != -1 and self.lastwritetime == other.lastwritetime) or
-            (self.changetime != -1 and self.changetime == other.changetime)):
+        if ((self.createtime != 0 and self.createtime == other.createtime) or
+            (self.lastwritetime != 0 and self.lastwritetime == other.lastwritetime) or
+            (self.changetime != 0 and self.changetime == other.changetime)):
                 file = other.filename.lower()
                 if "\\windows\\" in file or "\\system32\\" in file or "\\syswow64\\" in file:
                         return other.filename
@@ -105,8 +105,8 @@ class MimicsFiletime(Signature):
                                         filename = obj.check_file_times(val)
                                         if filename:
                                                 break
-                        if filename:
-                                self.data.append({"mimic_source" : filename, "mimic_dest" : self.handles[handle].filename})
+                        if filename and filename != obj.filename:
+                                self.data.append({"mimic_source" : filename, "mimic_dest" : obj.filename})
                                 return True
 
         return None
