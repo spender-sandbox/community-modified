@@ -38,7 +38,7 @@ class InjectionRUNPE(Signature):
             self.sequence = 1
             self.process_handle = self.get_argument(call, "ProcessHandle")
             self.thread_handle = self.get_argument(call, "ThreadHandle")
-        elif call["api"] == "NtUnmapViewOfSection" and self.sequence == 1:
+        elif (call["api"] == "NtUnmapViewOfSection" or call["api"] == "NtAllocateVirtualMemory") and self.sequence == 1:
             if self.get_argument(call, "ProcessHandle") == self.process_handle:
                 self.sequence = 2
         elif (call["api"] == "NtWriteVirtualMemory" or call["api"] == "WriteProcessMemory" or call["api"] == "NtMapViewOfSection") and self.sequence == 2:
