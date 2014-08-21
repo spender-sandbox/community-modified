@@ -36,21 +36,19 @@ class InjectionCRT(Signature):
             self.process_handles = set()
             self.lastprocess = process
 
-        if call["api"] == "OpenProcess" and call["status"] == True and self.sequence == 0:
+        if call["api"] == "OpenProcess" and call["status"] == True:
             if self.get_argument(call, "ProcessId") != process["process_id"]:
-                self.sequence = 1
                 self.process_handles.add(call["return"])
-        elif call["api"] == "NtOpenProcess" and call["status"] == True and self.sequence == 0:
+        elif call["api"] == "NtOpenProcess" and call["status"] == True:
             if self.get_argument(call, "ProcessIdentifier") != process["process_id"]:
-                self.sequence = 1
                 self.process_handles.add(self.get_argument(call, "ProcessHandle"))
-        elif (call["api"] == "VirtualAllocEx" or call["api"] == "NtAllocateVirtualMemory") and self.sequence == 1:
+        elif (call["api"] == "VirtualAllocEx" or call["api"] == "NtAllocateVirtualMemory") and self.sequence == 0:
+            if self.get_argument(call, "ProcessHandle") in self.process_handles:
+                self.sequence = 1
+        elif (call["api"] == "NtWriteVirtualMemory" or call["api"] == "WriteProcessMemory") and self.sequence == 1:
             if self.get_argument(call, "ProcessHandle") in self.process_handles:
                 self.sequence = 2
-        elif (call["api"] == "NtWriteVirtualMemory" or call["api"] == "WriteProcessMemory") and self.sequence == 2:
-            if self.get_argument(call, "ProcessHandle") in self.process_handles:
-                self.sequence = 3
-        elif call["api"].startswith("CreateRemoteThread") and self.sequence == 3:
+        elif call["api"].startswith("CreateRemoteThread") and self.sequence == 2:
             if self.get_argument(call, "ProcessHandle") in self.process_handles:
                 return True
 
