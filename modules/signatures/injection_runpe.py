@@ -28,6 +28,8 @@ class InjectionRUNPE(Signature):
         Signature.__init__(self, *args, **kwargs)
         self.lastprocess = None
 
+    filter_categories = set(["process","threading"])
+
     def on_call(self, call, process):
         if process is not self.lastprocess:
             self.sequence = 0
