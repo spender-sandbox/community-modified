@@ -25,9 +25,10 @@ class Prinimalka(Signature):
     minimum = "1.0"
     evented = True
 
+    filter_apinames = set(["RegSetValueExA","RegSetValueExW"])
+
     def on_call(self, call, process):
-        if call["api"].startswith("RegSetValueEx"):
-            if self.get_argument(call, "ValueName").endswith("_opt_server1"):
-                server = self.get_argument(call, "Buffer").rstrip("\\x00")
-                self.description += " (C&C: {0})".format(server)
-                return True
+        if self.get_argument(call, "ValueName").endswith("_opt_server1"):
+            server = self.get_argument(call, "Buffer").rstrip("\\x00")
+            self.description += " (C&C: {0})".format(server)
+            return True

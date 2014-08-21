@@ -43,13 +43,11 @@ class BrowserStealer(Signature):
 
     ]
 
+    filter_categories = set(["filesystem"])
+
     def on_call(self, call, process):
         # If the current process appears to be a browser, continue.
         if process["process_name"].lower() in ("iexplore.exe", "firefox.exe", "chrome.exe"):
-            return None
-
-        # If the call category is not filesystem, continue.
-        if call["category"] != "filesystem":
             return None
 
         for argument in call["arguments"]:

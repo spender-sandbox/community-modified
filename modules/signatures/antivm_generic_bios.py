@@ -24,6 +24,8 @@ class AntiVMBios(Signature):
     minimum = "1.0"
     evented = True
 
+    filter_categories = set(["registry"])
+ 
     def on_call(self, call, process):
         #if self.check_key(pattern="HKEY_LOCAL_MACHINE\\HARDWARE\\DESCRIPTION\\System"):
         if (self.check_argument_call(call, pattern="SystemBiosVersion", name="ValueName", category="registry") or

@@ -28,6 +28,8 @@ class VBoxDetectACPI(Signature):
         Signature.__init__(self, *args, **kwargs)
         self.lastprocess = None
 
+    filter_apinames = set(["RegOpenKeyExA", "RegOpenKeyExW", "RegEnumKeyExA", "RegEnumKeyExW"])
+
     def on_call(self, call, process):
         if process is not self.lastprocess:
             self.opened = False

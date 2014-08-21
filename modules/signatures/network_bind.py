@@ -28,10 +28,9 @@ class NetworkBIND(Signature):
         Signature.__init__(self, *args, **kwargs)
         self.binds = []
 
-    def on_call(self, call, process):
-        if call["api"] != "bind":
-            return
+    filter_apinames = set(["bind"])
 
+    def on_call(self, call, process):
         bind = "{0}:{1}".format(self.get_argument(call, "ip"), self.get_argument(call, "port"))
         if bind not in self.binds:
             self.binds.append(bind)

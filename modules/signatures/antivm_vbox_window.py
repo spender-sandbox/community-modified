@@ -24,6 +24,8 @@ class VBoxDetectWindow(Signature):
     minimum = "1.0"
     evented = True
 
+    filter_categories = set(["windows"])
+
     def on_call(self, call, process):
         indicators = [
             "VBoxTrayToolWndClass",
@@ -31,6 +33,6 @@ class VBoxDetectWindow(Signature):
         ]
 
         for indicator in indicators:
-            if self.check_argument_call(call, pattern=indicator, category="window"):
+            if self.check_argument_call(call, pattern=indicator, category="windows"):
                 self.data.append({"window" : indicator})
                 return True

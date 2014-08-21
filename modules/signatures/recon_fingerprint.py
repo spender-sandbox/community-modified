@@ -29,15 +29,14 @@ class Fingerprint(Signature):
         self.threshold = 3
         self.matches = 0
 
+    filter_categories = set(["registry"])
+
     def on_call(self, call, process):
         indicators = [
             "MachineGuid",
             "DigitalProductId",
             "SystemBiosDate"
         ]
-
-        if call["category"] != "registry":
-            return
 
         for argument in call["arguments"]:
             for indicator in indicators:

@@ -28,6 +28,8 @@ class DiskInformation(Signature):
         Signature.__init__(self, *args, **kwargs)
         self.lastprocess = None
 
+    filter_apinames = set(["NtCreateFile", "DeviceIoControl"])
+
     def on_call(self, call, process):
         indicators = [
             "scsi0",

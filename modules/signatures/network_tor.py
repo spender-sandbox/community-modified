@@ -24,6 +24,8 @@ class Tor(Signature):
     minimum = "1.0"
     evented = True
 
+    filter_apinames = set(["CreateServiceA"])
+
     def on_call(self, call, process):
         if self.check_argument_call(call,
                                     pattern="Tor Win32 Service",

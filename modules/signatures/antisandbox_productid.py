@@ -24,9 +24,8 @@ class GetProductID(Signature):
     minimum = "1.0"
     evented = True
 
-    def on_call(self, call, process):
-        if not call["api"].startswith("RegQueryValueEx"):
-            return
+    filter_apinames = set(["RegQueryValueExA","RegQueryValueExW","NtQueryValueKey"])
 
+    def on_call(self, call, process):
         if self.get_argument(call, "ValueName") == "ProductId":
             return True

@@ -24,6 +24,8 @@ class Unhook(Signature):
     minimum = "1.2"
     evented = True
 
+    filter_categories = set(["__notification__"])
+
     def on_call(self, call, process):
         subcategory = self.check_argument_call(call,
                                                api="__anomaly__",

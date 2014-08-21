@@ -28,9 +28,13 @@ class AntiVMServices(Signature):
         Signature.__init__(self, *args, **kwargs)
         self.lastprocess = None
 
+    #filter_apinames = set(["EnumServicesStatus", "EnumServicesStatusEx", "RegOpenKeyExA", "RegEnumKeyExA", "RegOpenKeyExW", "RegEnumKeyExW"])
+    filter_apinames = set(["RegOpenKeyExA", "RegEnumKeyExA", "RegOpenKeyExW", "RegEnumKeyExW"])
+
     def on_call(self, call, process):
-        if call["api"].startswith("EnumServicesStatus"):
-            return True
+        # this API is not currently hooked
+        #if call["api"].startswith("EnumServicesStatus"):
+        #    return True
             
         if process is not self.lastprocess:
             self.handle = None

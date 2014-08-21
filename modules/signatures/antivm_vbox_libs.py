@@ -24,6 +24,8 @@ class VBoxDetectLibs(Signature):
     minimum = "1.0"
     evented = True
 
+    filter_apinames = set(["LdrLoadDll"])
+
     def on_call(self, call, process):
         indicators = [
             "VBoxDisp.dll",

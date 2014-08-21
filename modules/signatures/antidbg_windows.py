@@ -24,6 +24,8 @@ class AntiDBGWindows(Signature):
     minimum = "1.0"
     evented = True
 
+    filter_categories = set(["windows"])
+
     def on_call(self, call, process):
         indicators = [
             "OLLYDBG",

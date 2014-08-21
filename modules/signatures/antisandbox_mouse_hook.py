@@ -24,10 +24,9 @@ class HookMouse(Signature):
     minimum = "1.0"
     evented = True
 
-    def on_call(self, call, process):
-        if not call["api"].startswith("SetWindowsHookEx"):
-            return
+    filter_apinames = set(["SetWindowsHookExA","SetWindowsHookExW"])
 
+    def on_call(self, call, process):
         if int(self.get_argument(call, "HookIdentifier")) in [7, 14]:
             if int(self.get_argument(call, "ThreadId")) == 0:
                 return True
