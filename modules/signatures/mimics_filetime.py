@@ -9,10 +9,10 @@ class HandleInfo:
     def __init__(self, handle, filename):
         self.handle = handle
         self.filename = filename
-        self.createtime = -1
-        self.lastaccesstime = -1
-        self.lastwritetime = -1
-        self.changetime = -1
+        self.createtime = 0
+        self.lastaccesstime = 0
+        self.lastwritetime = 0
+        self.changetime = 0
 
     def __repr__(self):
         return "HandleInfo(%x)" % self.handle
@@ -30,7 +30,15 @@ class HandleInfo:
         return hash(self.__repr__())
 
     def set_file_times(self, buffer):
-        self.createtime, self.lastaccesstime, self.lastwritetime, self.changetime  = struct.unpack_from("QQQQ", buffer)
+        crt, lat, lwt, cht = struct.unpack_from("QQQQ", buffer)
+        if crt != 0:
+            self.createtime = crt
+        if lat != 0:
+            self.lastaccesstime = lat
+        if lwt != 0:
+            self.lastwritetime = lwt
+        if cht != 0:
+            self.changetime = cht
 
     def check_file_times(self, other):
         if ((self.createtime != 0 and self.createtime == other.createtime) or
@@ -84,7 +92,7 @@ class MimicsFiletime(Signature):
                 if querytype == self.BasicFileInformation:
                         try:
                                 obj = self.handles[handle]
-                                obj.set_file_times(self.get_argument(call, "FileInformation"))
+                                obj.set_file_times(self.get_raw_argument(call, "FileInformation"))
                         except:
                                 pass
         elif call["api"] == "NtSetInformationFile":
@@ -93,7 +101,7 @@ class MimicsFiletime(Signature):
                 if settype == self.BasicFileInformation:
                         try:
                                 obj = self.handles[handle]
-                                obj.set_file_times(self.get_argument(call, "FileInformation"))
+                                obj.set_file_times(self.get_raw_argument(call, "FileInformation"))
                         except:
                                 return None
                         for val in self.handles.itervalues():
