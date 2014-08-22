@@ -87,7 +87,9 @@ class ReadsSelf(Signature):
             if handle in self.lastres.handles:
                 obj = self.lastres.handles[handle]
                 length = self.get_raw_argument(call, "Length")
-                self.data.append({"self_read" : "process: " + self.lastprocess["process_name"] + ", pid: " + str(self.lastprocess["process_id"]) + ", offset: " + "0x{0:08x}".format(obj.fpos) + ", length: " + "0x{0:08x}".format(length)})
+                self.data.append({"self_read" : "process: " + self.lastprocess["process_name"] + ", pid: " +
+                    str(self.lastprocess["process_id"]) + ", offset: " + "0x{0:08x}".format(obj.fpos) +
+                    ", length: " + "0x{0:08x}".format(length)})
                 obj.read(length)
         elif call["api"] == "NtSetInformationFile" and call["status"]:
             handle = int(self.get_argument(call, "FileHandle"), 16)
