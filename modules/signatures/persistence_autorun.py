@@ -25,7 +25,7 @@ class Autorun(Signature):
     severity = 3
     categories = ["persistence"]
     authors = ["Michael Boman", "nex","securitykitten"]
-    minimum = "0.5"
+    minimum = "1.2"
 
     def run(self):
         indicators = [
@@ -49,7 +49,7 @@ class Autorun(Signature):
         ]
 
         for indicator in indicators:
-            match_key = self.check_key(pattern=indicator, regex=True)
+            match_key = self.check_write_key(pattern=indicator, regex=True)
             if match_key:
                 self.data.append({"key" : match_key})
                 return True
