@@ -50,6 +50,7 @@
     <Compile Include="modules\signatures\downloader_cabby.py" />
     <Compile Include="modules\signatures\exec_crash.py" />
     <Compile Include="modules\signatures\banker_geodo.py" />
+    <Compile Include="modules\signatures\infostealer_keylog.py" />
     <Compile Include="modules\signatures\infostealer_browser.py" />
     <Compile Include="modules\signatures\infostealer_ftp.py" />
     <Compile Include="modules\signatures\infostealer_im.py" />
