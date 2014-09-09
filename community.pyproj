@@ -80,6 +80,7 @@
     <Compile Include="modules\signatures\rat_spynet.py" />
     <Compile Include="modules\signatures\rat_xtreme_mutex.py" />
     <Compile Include="modules\signatures\recon_checkip.py" />
+    <Compile Include="modules\signatures\recon_programs.py" />
     <Compile Include="modules\signatures\recon_fingerprint.py" />
     <Compile Include="modules\signatures\recon_systeminfo.py" />
     <Compile Include="modules\signatures\removes_zoneid_ads.py" />
