@@ -16,6 +16,6 @@ class KeyLogger(Signature):
 
     def on_call(self, call, process):
         id = int(self.get_argument(call, "HookIdentifier"), 10)
-        # WH_KEYBOARD_LL
-        if id == 13:
+        # WH_KEYBOARD or WH_KEYBOARD_LL
+        if id == 2 or id == 13:
             return True
