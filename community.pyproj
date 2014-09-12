@@ -61,6 +61,7 @@
     <Compile Include="modules\signatures\injection_runpe.py" />
     <Compile Include="modules\signatures\locker_regedit.py" />
     <Compile Include="modules\signatures\locker_taskmgr.py" />
+    <Compile Include="modules\signatures\polymorphic.py" />
     <Compile Include="modules\signatures\reads_self.py" />
     <Compile Include="modules\signatures\mimics_filetime.py" />
     <Compile Include="modules\signatures\network_bind.py" />
