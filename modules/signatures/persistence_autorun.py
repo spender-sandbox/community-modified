@@ -62,7 +62,7 @@ class Autorun(Signature):
         ]
 
         for indicator in indicators:
-            match_file = self.check_file(pattern=indicator, regex=True)
+            match_file = self.check_write_file(pattern=indicator, regex=True)
             if match_file:
                 self.data.append({"file" : match_file})
                 return True
