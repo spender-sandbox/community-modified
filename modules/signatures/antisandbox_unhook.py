@@ -1,4 +1,4 @@
-# Copyright (C) 2014 Claudio "nex" Guarnieri (@botherder)
+# Copyright (C) 2014 Claudio "nex" Guarnieri (@botherder), Accuvant, Inc. (bspengler@accuvant.com)
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -20,11 +20,15 @@ class Unhook(Signature):
     description = "Tries to unhook Windows functions monitored by Cuckoo"
     severity = 3
     categories = ["anti-sandbox"]
-    authors = ["nex"]
+    authors = ["nex","Accuvant"]
     minimum = "1.2"
     evented = True
 
     filter_categories = set(["__notification__"])
+
+    def __init__(self, *args, **kwargs):
+        Signature.__init__(self, *args, **kwargs)
+        self.saw_unhook = False
 
     def on_call(self, call, process):
         subcategory = self.check_argument_call(call,
@@ -32,4 +36,8 @@ class Unhook(Signature):
                                                name="Subcategory",
                                                pattern="unhook")
         if subcategory:
-            return True
+            funcname = self.get_argument(call, "FunctionName")
+            self.data.append({"function" : funcname})
+    
+    def on_complete(self):
+        return self.saw_unhook

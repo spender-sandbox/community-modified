@@ -55,6 +55,7 @@
     <Compile Include="modules\signatures\infostealer_ftp.py" />
     <Compile Include="modules\signatures\infostealer_im.py" />
     <Compile Include="modules\signatures\infostealer_mail.py" />
+    <Compile Include="modules\signatures\injection_rwx.py" />
     <Compile Include="modules\signatures\injection_needextension.py" />
     <Compile Include="modules\signatures\injection_createremotethread.py" />
     <Compile Include="modules\signatures\injection_runpe.py" />
