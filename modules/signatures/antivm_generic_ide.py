@@ -24,5 +24,5 @@ class AntiVMIDE(Signature):
     minimum = "0.5"
 
     def run(self):
-        return self.check_key(pattern=".*\\\\SYSTEM\\\\CurrentControlSet\\\\Enum\\\\IDE$",
+        return self.check_key(pattern=".*\\\\SYSTEM\\\\(CurrentControlSet|ControlSet001)\\\\Enum\\\\IDE$",
                               regex=True)

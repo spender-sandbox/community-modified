@@ -1,4 +1,4 @@
-# Copyright (C) 2012 Claudio "nex" Guarnieri (@botherder)
+# Copyright (C) 2012,2014 Claudio "nex" Guarnieri (@botherder), Accuvant, Inc. (bspengler@accuvant.com)
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -20,7 +20,7 @@ class AntiVMServices(Signature):
     description = "Enumerates services, possibly for anti-virtualization"
     severity = 3
     categories = ["anti-vm"]
-    authors = ["nex"]
+    authors = ["nex", "Accuvant"]
     minimum = "1.0"
     evented = True
 
@@ -43,12 +43,14 @@ class AntiVMServices(Signature):
         if not self.handle:
             if call["api"].startswith("RegOpenKeyEx"):
                 correct = False
-                if self.get_argument(call,"SubKey") == "SYSTEM\\ControlSet001\\Services":
+                if self.get_argument(call,"SubKey").lower() == "system\\controlset001\\services":
                     correct = True
-                else:
+                elif self.get_argument(call,"SubKey").lower() == "system\\currentcontrolset\\services":
+                    correct = True
+                
+                if correct:
                     self.handle = self.get_argument(call,"Handle")
-
-                if not correct:
+                else:
                     self.handle = None
         else:
             if call["api"].startswith("RegEnumKeyEx"):
