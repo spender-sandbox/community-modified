@@ -42,7 +42,7 @@ class InjectionRUNPE(Signature):
         if call["api"] == "CreateProcessInternalW":
             self.process_handles.add(self.get_argument(call, "ProcessHandle"))
             self.thread_handles.add(self.get_argument(call, "ThreadHandle"))
-        elif (call["api"] == "NtUnmapViewOfSection" or call["api"] == "NtAllocateVirtualMemory") and self.sequence == 0:
+        elif (call["api"] == "NtUnmapViewOfSection" or call["api"] == "NtAllocateVirtualMemory" or call["api"] == "NtGetContextThread") and self.sequence == 0:
             if self.get_argument(call, "ProcessHandle") in self.process_handles:
                 self.sequence = 1
         elif (call["api"] == "NtWriteVirtualMemory" or call["api"] == "WriteProcessMemory" or call["api"] == "NtMapViewOfSection") and self.sequence == 1:
