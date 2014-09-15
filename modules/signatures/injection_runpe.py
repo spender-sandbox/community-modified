@@ -48,12 +48,12 @@ class InjectionRUNPE(Signature):
         elif call["api"] == "NtGetContextThread" and self.sequence == 0:
            if self.get_argument(call, "ThreadHandle") in self.thread_handles:
                 self.sequence = 1
-        elif (call["api"] == "NtWriteVirtualMemory" or call["api"] == "WriteProcessMemory" or call["api"] == "NtMapViewOfSection") and self.sequence == 1:
+        elif (call["api"] == "NtWriteVirtualMemory" or call["api"] == "WriteProcessMemory" or call["api"] == "NtMapViewOfSection") and (self.sequence == 1 or self.sequence == 2):
             if self.get_argument(call, "ProcessHandle") in self.process_handles:
-                self.sequence = 2
-        elif (call["api"] == "SetThreadContext" or call["api"] == "NtSetContextThread") and self.sequence == 2:
+                self.sequence = self.sequence + 1
+        elif (call["api"] == "SetThreadContext" or call["api"] == "NtSetContextThread") and (self.sequence == 1 or self.sequence == 2):
             if self.get_argument(call, "ThreadHandle") in self.thread_handles:
-                self.sequence = 3
+                self.sequence = self.sequence + 1
         elif call["api"] == "NtResumeThread" and self.sequence == 3:
             if self.get_argument(call, "ThreadHandle") in self.thread_handles:
                 return True
