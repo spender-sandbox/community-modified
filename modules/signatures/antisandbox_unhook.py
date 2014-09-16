@@ -38,7 +38,8 @@ class Unhook(Signature):
         if subcategory:
             self.saw_unhook = True
             funcname = self.get_argument(call, "FunctionName")
-            self.data.append({"function" : funcname})
+            if funcname != "":
+               self.data.append({"function" : funcname})
     
     def on_complete(self):
         return self.saw_unhook
