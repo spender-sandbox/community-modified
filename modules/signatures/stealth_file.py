@@ -28,7 +28,7 @@ class StealthFile(Signature):
                         self.handles[handle] = filename
         elif call["api"] == "NtClose":
                 handle = int(self.get_argument(call, "Handle"), 16)
-                self.handles.pop(handle)
+                self.handles.pop(handle, None)
         if call["api"] == "NtCreateFile" and call["status"]:
             disp = int(self.get_argument(call, "CreateDisposition"), 10)
             attrib = int(self.get_argument(call, "FileAttributes"), 16)
