@@ -65,6 +65,7 @@ class MimicsFiletime(Signature):
         self.lastprocess = 0
         self.handles = dict()
         self.old_handles = []
+        self.saw_mimic = False
 
     filter_apinames = set(["NtOpenFile","NtCreateFile","NtClose","NtQueryInformationFile","NtSetInformationFile"])
 
@@ -74,7 +75,7 @@ class MimicsFiletime(Signature):
                 self.old_handles = []
                 self.lastprocess = process
 
-        if call["api"] == "NtOpenFile" or call["api"] == "NtCreateFile" and call["status"]:
+        if (call["api"] == "NtOpenFile" or call["api"] == "NtCreateFile") and call["status"]:
                 handle = int(self.get_argument(call, "FileHandle"), 16)
                 filename = self.get_argument(call, "FileName")
                 if handle not in self.handles:
@@ -115,6 +116,10 @@ class MimicsFiletime(Signature):
                                                 break
                         if filename and filename != obj.filename:
                                 self.data.append({"mimic_source" : filename, "mimic_dest" : obj.filename})
-                                return True
-
+                                self.saw_mimic = True
         return None
+
+    def on_complete(self):
+        if self.saw_mimic:
+            return True
+        return False
