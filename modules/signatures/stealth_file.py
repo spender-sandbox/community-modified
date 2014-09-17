@@ -18,10 +18,15 @@ class StealthFile(Signature):
         self.handles = dict()
         self.saw_stealth = False
 
-    filter_apinames = set(["NtCreateFile", "NtOpenFile", "NtClose", "NtSetInformationFile"])
+    filter_apinames = set(["NtCreateFile", "NtDuplicateObject", "NtOpenFile", "NtClose", "NtSetInformationFile"])
 
     def on_call(self, call, process):
-        if (call["api"] == "NtOpenFile" or call["api"] == "NtCreateFile") and call["status"]:
+        if call["api"] == "NtDuplicateObject" and call["status"]:
+            srchandle = int(self.get_argument(call, "SourceHandle"), 16)
+            tgthandle = int(self.get_argument(call, "TargetHandle"), 16)
+            if srchandle in self.handles:
+                self.handles[tgthandle] = self.handles[srchandle]
+        elif (call["api"] == "NtOpenFile" or call["api"] == "NtCreateFile") and call["status"]:
                 handle = int(self.get_argument(call, "FileHandle"), 16)
                 filename = self.get_argument(call, "FileName")
                 if handle not in self.handles:
