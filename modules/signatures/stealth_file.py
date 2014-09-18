@@ -14,6 +14,8 @@ class StealthFile(Signature):
     minimum = "1.2"
     evented = True
 
+    BasicFileInformation = 4
+
     def __init__(self, *args, **kwargs):
         Signature.__init__(self, *args, **kwargs)
         self.handles = dict()
@@ -47,13 +49,19 @@ class StealthFile(Signature):
                     self.data.append({"file" : filename })
         elif call["api"] == "NtSetInformationFile":
             handle = int(self.get_argument(call, "FileHandle"), 16)
-            crt, lat, lwt, cht, attrib = struct.unpack_from("QQQQI", self.get_raw_argument(call, "FileInformation"))
-            if attrib & 4 or attrib & 2:
-                self.saw_stealth = True
-                if handle in self.handles:
-                    self.data.append({"file" : self.handles[handle]})
-                else:
-                    self.data.append({"file" : "UNKNOWN"})
+            settype = int(self.get_argument(call, "FileInformationClass"), 10)
+            if settype == self.BasicFileInformation:
+                attrib = 0
+                try:
+                    crt, lat, lwt, cht, attrib = struct.unpack_from("QQQQI", self.get_raw_argument(call, "FileInformation"))
+                except:
+                    pass
+                if attrib & 4 or attrib & 2:
+                    self.saw_stealth = True
+                    if handle in self.handles:
+                        self.data.append({"file" : self.handles[handle]})
+                    else:
+                        self.data.append({"file" : "UNKNOWN"})
 
         return None
 
