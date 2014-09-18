@@ -3,6 +3,7 @@
 # See the file 'docs/LICENSE' for copying permission.
 
 from lib.cuckoo.common.abstracts import Signature
+import struct
 
 class StealthFile(Signature):
     name = "stealth_file"
