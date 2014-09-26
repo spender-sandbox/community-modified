@@ -16,6 +16,8 @@ class EmailStealer(Signature):
         file_indicators = [
             ".*\.pst$",
             ".*\\\\Microsoft\\\\Windows\\ Live\\ Mail.*",
+            ".*\\\\Microsoft\\\\Address\\ Book\\\\.*\.wab$",
+            ".*\\\\Microsoft\\\\Outlook\\ Express\\\\.*\.dbx$",
             ".*\\\\Foxmail\\\\mail\\\\.*\\\\Account\.stg$",
             ".*\\\\Foxmail.*\\\\Accounts\.tdat$",
             ".*\\\\Thunderbird\\\\Profiles\\\\.*\.default$"
