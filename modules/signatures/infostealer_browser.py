@@ -48,6 +48,8 @@ class BrowserStealer(Signature):
 
     def on_call(self, call, process):
         # If the current process appears to be a browser, continue.
+        # TODO: implement better checks here -- the malware can be named whatever it wants or can
+        # inject into browser processes
         if process["process_name"].lower() in ("iexplore.exe", "firefox.exe", "chrome.exe"):
             return None
 
