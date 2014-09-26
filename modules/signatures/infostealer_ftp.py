@@ -29,6 +29,7 @@ class FTPStealer(Signature):
             ".*\\\\FlashFXP\\\\.*\\\\Sites\.dat$",
             ".*\\\\FileZilla\\\\sitemanager\.xml$",
             ".*\\\\FileZilla\\\\recentservers\.xml$",
+            ".*\\\\FTPRush\\\\RushSite\.xml$",
             ".*\\\\VanDyke\\\\Config\\\\Sessions\\\\.*",
             ".*\\\\Far\\ Manager\\\\.*",
             ".*\\\\FTP\\ Explorer\\\\.*"
