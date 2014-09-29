@@ -58,7 +58,8 @@ class Autorun(Signature):
         indicators = [
             ".*\\\\win\.ini$",
             ".*\\\\system\.ini$",
-            ".*\\\\Start Menu\\\\Programs\\\\Startup\\\\.*"
+            ".*\\\\Start Menu\\\\Programs\\\\Startup\\\\.*",
+            ".*\\\\WINDOWS\\\\Tasks\\\\.*"
         ]
 
         for indicator in indicators:
