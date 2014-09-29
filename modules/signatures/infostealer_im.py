@@ -27,16 +27,16 @@ class IMStealer(Signature):
             ".*\\\\Xfire\\\\XfireUser\.ini$"
         ]
         registry_indicators = [
-            ".*\\\\Software\\\\America\\ Online\\\\AIM6\\\\Passwords.*",
-            ".*\\\\Software\\\\AIM\\\\AIMPRO\\\\.*",
-            ".*\\\\Software\\\\Beyluxe\\ Messenger\\\\.*",
-            ".*\\\\Software\\\\BigAntSoft\\\\BigAntMessenger\\\\.*",
-            ".*\\\\Software\\\\Camfrog\\\\Client\\\\.*",
-            ".*\\\\Software\\\\Google\\\\Google\\ Talk\\\\Accounts\\\\.*",
-            ".*\\\\Software\\\\IMVU\\\\.*",
-            ".*\\\\Software\\\\Nimbuzz\\\\PCClient\\\\Application\\\\.*",
-            ".*\\\\Software\\\\Paltalk\\\\.*",
-            ".*\\\\Software\\\\Yahoo\\\\Pager\\\\.*"
+            ".*\\\\Software\\\\(Wow6432Node\\\\)?America\\ Online\\\\AIM6\\\\Passwords.*",
+            ".*\\\\Software\\\\(Wow6432Node\\\\)?AIM\\\\AIMPRO\\\\.*",
+            ".*\\\\Software\\\\(Wow6432Node\\\\)?Beyluxe\\ Messenger\\\\.*",
+            ".*\\\\Software\\\\(Wow6432Node\\\\)?BigAntSoft\\\\BigAntMessenger\\\\.*",
+            ".*\\\\Software\\\\(Wow6432Node\\\\)?Camfrog\\\\Client\\\\.*",
+            ".*\\\\Software\\\\(Wow6432Node\\\\)?Google\\\\Google\\ Talk\\\\Accounts\\\\.*",
+            ".*\\\\Software\\\\(Wow6432Node\\\\)?IMVU\\\\.*",
+            ".*\\\\Software\\\\(Wow6432Node\\\\)?Nimbuzz\\\\PCClient\\\\Application\\\\.*",
+            ".*\\\\Software\\\\(Wow6432Node\\\\)?Paltalk\\\\.*",
+            ".*\\\\Software\\\\(Wow6432Node\\\\)?Yahoo\\\\Pager\\\\.*"
         ]
 
         for indicator in file_indicators:

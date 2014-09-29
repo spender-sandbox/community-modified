@@ -13,7 +13,7 @@ class InstalledApps(Signature):
     minimum = "1.2"
 
     def run(self):
-        if self.check_read_key(pattern= ".*\\\\Software\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\Uninstall.*", regex=True):
+        if self.check_read_key(pattern= ".*\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\Uninstall.*", regex=True):
             return True
 
         return False

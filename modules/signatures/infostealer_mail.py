@@ -23,14 +23,14 @@ class EmailStealer(Signature):
             ".*\\\\Thunderbird\\\\Profiles\\\\.*\.default$"
         ]
         registry_indicators = [
-            ".*\\\\Software\\\\Clients\\\\Mail.*",
-            ".*\\\\Software\\\\Microsoft\\\\Windows\\ Messaging\\ Subsystem\\\\MSMapiApps.*",
-            ".*\\\\Software\\\\Microsoft\\\\Windows\\ Messaging\\ Subsystem\\\\Profiles.*",
-            ".*\\\\Software\\\\Microsoft\\\\Windows\\ NT\\\\CurrentVersion\\\\Windows\\ Messaging\\ Subsystem\\\\Profiles.*",
-            ".*\\\\Software\\\\Microsoft\\\\Office\\\\.*\\\\Outlook\\\\Profiles\\\\Outlook.*",
-            ".*\\\\Software\\\\Microsoft\\\\Office\\\\Outlook\\\\OMI\\ Account\\ Manager\\\\Accounts.*",
-            ".*\\\\Software\\\\Microsoft\\\\Internet\\ Account\\ Manager\\\\Accounts.*",
-            ".*\\\\Software\\\\IncrediMail.*"
+            ".*\\\\Software\\\\(Wow6432Node\\\\)?Clients\\\\Mail.*",
+            ".*\\\\Microsoft\\\\Windows\\ Messaging\\ Subsystem\\\\MSMapiApps.*",
+            ".*\\\\Microsoft\\\\Windows\\ Messaging\\ Subsystem\\\\Profiles.*",
+            ".*\\\\Microsoft\\\\Windows\\ NT\\\\CurrentVersion\\\\Windows\\ Messaging\\ Subsystem\\\\Profiles.*",
+            ".*\\\\Microsoft\\\\Office\\\\.*\\\\Outlook\\\\Profiles\\\\Outlook.*",
+            ".*\\\\Microsoft\\\\Office\\\\Outlook\\\\OMI\\ Account\\ Manager\\\\Accounts.*",
+            ".*\\\\Microsoft\\\\Internet\\ Account\\ Manager\\\\Accounts.*",
+            ".*\\\\Software\\\\(Wow6432Node\\\\)?IncrediMail.*"
         ]
 
         for indicator in file_indicators:

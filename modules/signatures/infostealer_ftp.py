@@ -43,24 +43,24 @@ class FTPStealer(Signature):
             ".*\\\\Ipswitch\\\\WS_FTP\\\\.*",
         ]
         registry_indicators = [
-            ".*\\\\Software\\\\Far.*\\\\Hosts$",
-            ".*\\\\Software\\\\Far.*\\\\FTPHost$",
-            ".*\\\\Software\\\\GlobalSCAPE\\\\CuteFTP.*",
-            ".*\\\\Software\\\\Ghisler\\\\Windows Commander.*",
-            ".*\\\\Software\\\\Ghisler\\\\Total Commander.*",
-            ".*\\\\Software\\\\BPFTP\\\\.*",
-            ".*\\\\Software\\\\FileZilla.*",
-            ".*\\\\Software\\\\TurboFTP.*",
-            ".*\\\\Software\\\\Sota\\\\FFFTP.*",
-            ".*\\\\Software\\\\FTPWare\\\\CoreFTP\\\\.*",
-            ".*\\\\Software\\\\FTP\\ Explorer\\\\.*",
-            ".*\\\\Software\\\\FTPClient\\\\.*",
-            ".*\\\\Software\\\\LinasFTP\\\\.*",
-            ".*\\\\Software\\\\Robo-FTP.*",
-            ".*\\\\Software\\\\MAS-Soft\\\\FTPInfo\\\\.*",
-            ".*\\\\Software\\\\SoftX\.org\\\\FTPClient\\\\.*",
-            ".*\\\\Software\\\\NCH\\ Software\\\\CoreFTP\\\\.*",
-            ".*\\\\Software\\\\BulletProof Software\\\\BulletProof FTP Client.*"
+            ".*\\\\Software\\\\(Wow6432Node\\\\)?Far.*\\\\Hosts$",
+            ".*\\\\Software\\\\(Wow6432Node\\\\)?Far.*\\\\FTPHost$",
+            ".*\\\\Software\\\\(Wow6432Node\\\\)?GlobalSCAPE\\\\CuteFTP.*",
+            ".*\\\\Software\\\\(Wow6432Node\\\\)?Ghisler\\\\Windows Commander.*",
+            ".*\\\\Software\\\\(Wow6432Node\\\\)?Ghisler\\\\Total Commander.*",
+            ".*\\\\Software\\\\(Wow6432Node\\\\)?BPFTP\\\\.*",
+            ".*\\\\Software\\\\(Wow6432Node\\\\)?FileZilla.*",
+            ".*\\\\Software\\\\(Wow6432Node\\\\)?TurboFTP.*",
+            ".*\\\\Software\\\\(Wow6432Node\\\\)?Sota\\\\FFFTP.*",
+            ".*\\\\Software\\\\(Wow6432Node\\\\)?FTPWare\\\\CoreFTP\\\\.*",
+            ".*\\\\Software\\\\(Wow6432Node\\\\)?FTP\\ Explorer\\\\.*",
+            ".*\\\\Software\\\\(Wow6432Node\\\\)?FTPClient\\\\.*",
+            ".*\\\\Software\\\\(Wow6432Node\\\\)?LinasFTP\\\\.*",
+            ".*\\\\Software\\\\(Wow6432Node\\\\)?Robo-FTP.*",
+            ".*\\\\Software\\\\(Wow6432Node\\\\)?MAS-Soft\\\\FTPInfo\\\\.*",
+            ".*\\\\Software\\\\(Wow6432Node\\\\)?SoftX\.org\\\\FTPClient\\\\.*",
+            ".*\\\\Software\\\\(Wow6432Node\\\\)?NCH\\ Software\\\\CoreFTP\\\\.*",
+            ".*\\\\Software\\\\(Wow6432Node\\\\)?BulletProof Software\\\\BulletProof FTP Client.*"
         ]
 
         for indicator in file_indicators:

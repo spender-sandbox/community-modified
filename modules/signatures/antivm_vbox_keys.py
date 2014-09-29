@@ -24,5 +24,5 @@ class VBoxDetectKeys(Signature):
     minimum = "0.5"
 
     def run(self):
-        return self.check_key(pattern=".*\\\\SOFTWARE\\\\Oracle\\\\VirtualBox\\ Guest\\ Additions$",
+        return self.check_key(pattern=".*\\\\SOFTWARE\\\\(Wow6432Node\\\\)?Oracle\\\\VirtualBox\\ Guest\\ Additions$",
                               regex=True)

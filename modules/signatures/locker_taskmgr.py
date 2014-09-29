@@ -36,7 +36,7 @@ class DisableTaskMgr(Signature):
             self.saw_disable = True
 
     def run(self):
-        if self.check_key(pattern=".*\\\\SOFTWARE\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\Policies\\\\System$",
+        if self.check_key(pattern=".*\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\Policies\\\\System$",
                           regex=True):
             if self.saw_disable:
                 return True
