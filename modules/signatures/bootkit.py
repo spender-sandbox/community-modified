@@ -41,8 +41,8 @@ class Bootkit(Signature):
             filename = self.get_argument(call, "FileName")
             handle = int(self.get_argument(call, "FileHandle"), 16)
             access = int(self.get_argument(call, "DesiredAccess"), 16)
-
-            if filename and (filename.lower() == "\\??\\physicaldrive0" or filename.lower().startswith("\\device\\harddisk")) and access & 0x40000000:
+            # FILE_WRITE_ACCESS or GENERIC_WRITE
+            if filename and (filename.lower() == "\\??\\physicaldrive0" or filename.lower().startswith("\\device\\harddisk")) and access & 0x40000002:
                 if handle not in self.handles:
                     self.handles[handle] = filename
         elif call["api"] == "DeviceIoControl" or call["api"] == "NtDeviceIoControlFile":
