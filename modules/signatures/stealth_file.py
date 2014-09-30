@@ -19,11 +19,16 @@ class StealthFile(Signature):
     def __init__(self, *args, **kwargs):
         Signature.__init__(self, *args, **kwargs)
         self.handles = dict()
+        self.lastprocess = 0
         self.saw_stealth = False
 
     filter_apinames = set(["NtCreateFile", "NtDuplicateObject", "NtOpenFile", "NtClose", "NtSetInformationFile"])
 
     def on_call(self, call, process):
+        if process is not self.lastprocess:
+            self.handles = dict()
+            self.lastprocess = process
+
         if call["api"] == "NtDuplicateObject" and call["status"]:
             srchandle = int(self.get_argument(call, "SourceHandle"), 16)
             tgthandle = int(self.get_argument(call, "TargetHandle"), 16)
