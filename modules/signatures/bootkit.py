@@ -47,7 +47,10 @@ class Bootkit(Signature):
                     self.handles[handle] = filename
         elif call["api"] == "DeviceIoControl" or call["api"] == "NtDeviceIoControlFile":
             ioctl = int(self.get_argument(call, "IoControlCode"), 16)
-            handle = int(self.get_argument(call, "FileHandle"), 16)
+            if call["api"] == "DeviceIoControl":
+                handle = int(self.get_argument(call, "DeviceHandle"), 16)
+            else:
+                handle = int(self.get_argument(call, "FileHandle"), 16) 
             # IOCTL_SCSI_PASS_THROUGH_DIRECT
             if handle in self.handles and ioctl == 0x4d004:
                 return True
