@@ -52,7 +52,7 @@ class Bootkit(Signature):
             else:
                 handle = int(self.get_argument(call, "FileHandle"), 16) 
             # IOCTL_SCSI_PASS_THROUGH_DIRECT
-            if handle in self.handles and ioctl == 0x4d004:
+            if handle in self.handles and ioctl == 0x4d014:
                 return True
         elif call["api"] == "NtWriteFile":
             handle = int(self.get_argument(call, "FileHandle"), 16)
