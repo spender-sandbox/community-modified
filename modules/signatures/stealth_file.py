@@ -71,6 +71,4 @@ class StealthFile(Signature):
         return None
 
     def on_complete(self):
-        if self.saw_stealth:
-            return True
-        return False
+        return self.saw_stealth

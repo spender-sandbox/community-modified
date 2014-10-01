@@ -26,6 +26,10 @@ class BrowserStealer(Signature):
     minimum = "1.0"
     evented = True
 
+    def __init__(self, *args, **kwargs):
+        Signature.__init__(self, *args, **kwargs)
+        self.saw_stealer = False
+
     indicators = [
         re.compile(".*\\\\Mozilla\\\\Firefox\\\\Profiles\\\\.*\\\\.default\\\\signons\.sqlite$"),
         re.compile(".*\\\\Mozilla\\\\Firefox\\\\Profiles\\\\.*\\\\.default\\\\secmod\.db$"),
@@ -62,4 +66,7 @@ class BrowserStealer(Signature):
                             "process_id" : process["process_id"],
                             "process_name" : process["process_name"]}
                         )
-                        return True
+                        self.saw_stealer = True
+
+    def on_complete(self):
+        return self.saw_stealer

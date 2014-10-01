@@ -32,17 +32,17 @@ class EmailStealer(Signature):
             ".*\\\\Microsoft\\\\Internet\\ Account\\ Manager\\\\Accounts.*",
             ".*\\\\Software\\\\(Wow6432Node\\\\)?IncrediMail.*"
         ]
-
+        found_stealer = False
         for indicator in file_indicators:
             file_match = self.check_file(pattern=indicator, regex=True, all=True)
             if file_match:
                 for match in file_match:
                     self.data.append({"file" : match })
-                return True
+                found_stealer = True
         for indicator in registry_indicators:
             key_match = self.check_key(pattern=indicator, regex=True, all=True)
             if key_match:
                 for match in key_match:
                     self.data.append({"key" : match })
-                return True
-        return False
+                found_stealer = True
+        return found_stealer

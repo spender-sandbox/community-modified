@@ -48,12 +48,13 @@ class Autorun(Signature):
             ".*\\\\Microsoft\\\\Windows NT\\\\CurrentVersion\\\\Windows\\\\load$",
             ".*\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\ShellServiceObjectDelayLoad\\\\.*"
         ]
-
+        found_autorun = False
         for indicator in indicators:
-            match_key = self.check_write_key(pattern=indicator, regex=True)
+            match_key = self.check_write_key(pattern=indicator, regex=True, all=True)
             if match_key:
-                self.data.append({"key" : match_key})
-                return True
+                for match in match_key:
+                    self.data.append({"key" : match})
+                found_autorun = True
 
         indicators = [
             ".*\\\\win\.ini$",
@@ -63,9 +64,10 @@ class Autorun(Signature):
         ]
 
         for indicator in indicators:
-            match_file = self.check_write_file(pattern=indicator, regex=True)
+            match_file = self.check_write_file(pattern=indicator, regex=True, all=True)
             if match_file:
-                self.data.append({"file" : match_file})
-                return True
+                for match in match_file:
+                    self.data.append({"file" : match})
+                found_autorun = True
 
-        return False
+        return found_autorun
