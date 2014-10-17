@@ -4,6 +4,7 @@
 
 import struct
 from lib.cuckoo.common.abstracts import Signature
+import re
 
 class HandleInfo:
     def __init__(self, handle, filename):
@@ -45,7 +46,7 @@ class HandleInfo:
             (self.lastwritetime != 0 and self.lastwritetime == other.lastwritetime) or
             (self.changetime != 0 and self.changetime == other.changetime)):
                 file = other.filename.lower()
-                if "\\windows\\" in file or "\\system32\\" in file or "\\syswow64\\" in file:
+                if re.match(r'^[A-Z]?:\\Windows\\.*', file, re.IGNORECASE) or "\\system32\\" in file or "\\syswow64\\" in file:
                         return other.filename
         return None
 
