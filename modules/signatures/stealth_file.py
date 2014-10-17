@@ -4,6 +4,7 @@
 
 from lib.cuckoo.common.abstracts import Signature
 import struct
+import re
 
 class StealthFile(Signature):
     name = "stealth_file"
@@ -21,6 +22,7 @@ class StealthFile(Signature):
         self.handles = dict()
         self.lastprocess = 0
         self.saw_stealth = False
+        self.stealth_files = []
 
     filter_apinames = set(["NtCreateFile", "NtDuplicateObject", "NtOpenFile", "NtClose", "NtSetInformationFile"])
 
@@ -51,7 +53,8 @@ class StealthFile(Signature):
                 if attrib & 4 or attrib & 2:
                     self.saw_stealth = True
                     filename = self.get_argument(call, "FileName")
-                    self.data.append({"file" : filename })
+                    if filename not in self.stealth_files:
+                        self.stealth_files.append(filename)
         elif call["api"] == "NtSetInformationFile":
             handle = int(self.get_argument(call, "FileHandle"), 16)
             settype = int(self.get_argument(call, "FileInformationClass"), 10)
@@ -64,11 +67,27 @@ class StealthFile(Signature):
                 if attrib & 4 or attrib & 2:
                     self.saw_stealth = True
                     if handle in self.handles:
-                        self.data.append({"file" : self.handles[handle]})
+                        if self.handles[handle] not in self.stealth_files:
+                            self.stealth_files.append(self.handles[handle])
                     else:
-                        self.data.append({"file" : "UNKNOWN"})
+                        if "UNKNOWN" not in self.stealth_files:
+                            self.stealth_files.append("UNKNOWN")
 
         return None
 
     def on_complete(self):
+        whitelists = [
+            r'^[A-Z]?:\\Documents and Settings\\[^\\]+\\Local Settings\\Temporary Internet Files$',
+            r'^[A-Z]?:\\Documents and Settings\\[^\\]+\\Local Settings\\History$',
+            r'^[A-Z]?:\\Documents and Settings\\[^\\]+\\Local Settings\\Temporary Internet Files\\Content.IE5\\$',
+            r'^[A-Z]?:\\Documents and Settings\\[^\\]+\\Local Settings\\History\\History.IE5\\$',
+            r'^[A-Z]?:\\Documents and Settings\\[^\\]+\\Local Settings\\Cookies\\$',
+        ]
+
+        for file in self.stealth_files:
+            for entry in whitelists:
+                if re.match(entry, file, re.IGNORECASE):
+                    self.data.append({"file" : file})
+
         return self.saw_stealth
+
