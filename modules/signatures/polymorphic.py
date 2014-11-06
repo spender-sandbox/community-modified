@@ -1,4 +1,4 @@
-# Copyright (C) 2013 Lord Alfred Remorin
+# Copyright (C) 2013-2014 Lord Alfred Remorin, Accuvant Inc. (bspengler@accuvant.com)
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -28,10 +28,11 @@ class Polymorphic(Signature):
     description = "Creates a file similar to target file"
     severity = 3
     categories = ["persistence"]
-    authors = ["lordr"]
-    minimum = "0.5"
+    authors = ["lordr", "Accuvant"]
+    minimum = "1.2"
 
     def run(self):
+        found_polymorphic = False
         if self.results["target"]["category"] == "file":
             target_ssdeep = self.results["target"]["file"]["ssdeep"]
             target_sha1 = self.results["target"]["file"]["sha1"]
@@ -50,8 +51,10 @@ class Polymorphic(Signature):
                     continue
                 try:
                     if pydeep.compare(target_ssdeep, drop_ssdeep) > 20:
-                        return True
+                        found_polymorphic = True
+                        for path in drop["guest_paths"]:
+                            self.data.append({"file" : path})
                 except:
                     continue
 
-        return False
+        return found_polymorphic
