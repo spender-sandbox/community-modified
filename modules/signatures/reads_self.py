@@ -32,13 +32,25 @@ class HandleInfo:
 
     def read(self, len):
         self.fpos = self.fpos + len
-        self.performed_read = True
 
 class ProcResults:
     def __init__(self, process):
         self.process = process
         self.handles = dict()
         self.old_handles = []
+        self.reads = []
+
+    def merge_reads(self):
+        # cheap implementation, just merges typical linear accesses broke up into chunks
+        outlist = []
+        laststart = read[0][0]
+        for i, read in enumerate(self.reads):
+            if i == len(self.reads) - 1:
+                outlist.append((laststart, read[1]))
+            elif read[1] != self.reads[i+1][0]:
+                    outlist.append((laststart, read[1]))
+                    laststart = self.reads[i+1][0]
+        return outlist
 
     def add_handle(self, handle, filename):
         if handle not in self.handles:
@@ -87,9 +99,7 @@ class ReadsSelf(Signature):
             if handle in self.lastres.handles:
                 obj = self.lastres.handles[handle]
                 length = self.get_raw_argument(call, "Length")
-                self.data.append({"self_read" : "process: " + self.lastprocess["process_name"] + ", pid: " +
-                    str(self.lastprocess["process_id"]) + ", offset: " + "0x{0:08x}".format(obj.fpos) +
-                    ", length: " + "0x{0:08x}".format(length)})
+                self.lastres.reads.append((obj.fps, obj.fps + length))
                 obj.read(length)
         elif call["api"] == "NtSetInformationFile" and call["status"]:
             handle = int(self.get_argument(call, "FileHandle"), 16)
@@ -102,11 +112,14 @@ class ReadsSelf(Signature):
         return None
 
     def on_complete(self):
+        performed_read = False
         for res in self.processes:
-            for obj in res.handles.itervalues():
-                if obj.performed_read:
-                    return True
-            for obj in res.old_handles:
-                if obj.performed_read:
-                    return True
-        return False
+            if not res.reads:
+                continue
+            performed_read = True
+            newreads = res.merge_reads()
+            for read in newreads:
+                self.data.append({"self_read" : "process: " + res.process["process_name"] + ", pid: " +
+                    str(res.process["process_id"]) + ", offset: " + "0x{0:08x}".format(read[0]) +
+                    ", length: " + "0x{0:08x}".format(read[1] - read[0])})
+        return performed_read
