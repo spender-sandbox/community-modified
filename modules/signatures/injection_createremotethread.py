@@ -34,14 +34,17 @@ class InjectionCRT(Signature):
         if process is not self.lastprocess:
             self.sequence = 0
             self.process_handles = set()
+            self.process_pids = set()
             self.lastprocess = process
 
         if call["api"] == "OpenProcess" and call["status"] == True:
             if self.get_argument(call, "ProcessId") != process["process_id"]:
                 self.process_handles.add(call["return"])
+                self.process_pids.add(self.get_argument(call, "ProcessId"))
         elif call["api"] == "NtOpenProcess" and call["status"] == True:
             if self.get_argument(call, "ProcessIdentifier") != process["process_id"]:
                 self.process_handles.add(self.get_argument(call, "ProcessHandle"))
+                self.process_pids.add(self.get_argument(call, "ProcessIdentifier"))
         elif (call["api"] == "ZwMapViewOfSection") and self.sequence == 0:
             if self.get_argument(call, "ProcessHandle") in self.process_handles:
                 self.sequence = 2
@@ -51,7 +54,10 @@ class InjectionCRT(Signature):
         elif (call["api"] == "NtWriteVirtualMemory" or call["api"] == "WriteProcessMemory") and self.sequence == 1:
             if self.get_argument(call, "ProcessHandle") in self.process_handles:
                 self.sequence = 2
-        elif (call["api"].startswith("CreateRemoteThread") or call["api"] == "NtQueueApcThread") and self.sequence == 2:
+        elif call["api"].startswith("CreateRemoteThread") and self.sequence == 2:
             if self.get_argument(call, "ProcessHandle") in self.process_handles:
+                return True
+        elif call["api"] == "NtQueueApcThread" and self.sequence == 2:
+            if self.get_argument(call, "ProcessId") in self.process_pids:
                 return True
 
