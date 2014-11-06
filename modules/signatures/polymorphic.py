@@ -50,10 +50,12 @@ class Polymorphic(Signature):
                 if drop_ssdeep == "" or drop_ssdeep == None:
                     continue
                 try:
-                    if pydeep.compare(target_ssdeep, drop_ssdeep) > 20:
+                    percent = pydeep.compare(target_ssdeep, drop_ssdeep)
+                    if percent > 20:
                         found_polymorphic = True
                         for path in drop["guest_paths"]:
                             self.data.append({"file" : path})
+                        self.data.append({"percent_match" : percent})
                 except:
                     continue
 
