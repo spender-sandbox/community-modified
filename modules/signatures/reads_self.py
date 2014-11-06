@@ -43,8 +43,8 @@ class ProcResults:
     def merge_reads(self):
         # cheap implementation, just merges typical linear accesses broke up into chunks
         outlist = []
-        laststart = read[0][0]
         slist = sorted(self.reads)
+        laststart = slist[0][0]
         for i, read in enumerate(slist):
             if i == len(slist) - 1:
                 outlist.append((laststart, read[1]))
