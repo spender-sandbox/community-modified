@@ -21,7 +21,6 @@ class StealthFile(Signature):
         Signature.__init__(self, *args, **kwargs)
         self.handles = dict()
         self.lastprocess = 0
-        self.saw_stealth = False
         self.stealth_files = []
 
     filter_apinames = set(["NtCreateFile", "NtDuplicateObject", "NtOpenFile", "NtClose", "NtSetInformationFile"])
@@ -51,7 +50,6 @@ class StealthFile(Signature):
             if disp != 1 and disp != 3:
                 # SYSTEM or HIDDEN
                 if attrib & 4 or attrib & 2:
-                    self.saw_stealth = True
                     filename = self.get_argument(call, "FileName")
                     if filename not in self.stealth_files:
                         self.stealth_files.append(filename)
@@ -65,7 +63,6 @@ class StealthFile(Signature):
                 except:
                     pass
                 if attrib & 4 or attrib & 2:
-                    self.saw_stealth = True
                     if handle in self.handles:
                         if self.handles[handle] not in self.stealth_files:
                             self.stealth_files.append(self.handles[handle])
@@ -83,11 +80,15 @@ class StealthFile(Signature):
             r'^[A-Z]?:\\Documents and Settings\\[^\\]+\\Local Settings\\History\\History.IE5\\$',
             r'^[A-Z]?:\\Documents and Settings\\[^\\]+\\Local Settings\\Cookies\\$',
         ]
-
+        saw_stealth = False
         for file in self.stealth_files:
+            addit = True
             for entry in whitelists:
                 if re.match(entry, file, re.IGNORECASE):
-                    self.data.append({"file" : file})
+                    addit = False
+            if addit:
+                saw_stealth = True
+                self.data.append({"file" : file})
 
-        return self.saw_stealth
+        return saw_stealth
 
