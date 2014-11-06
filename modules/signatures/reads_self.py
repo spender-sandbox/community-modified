@@ -100,7 +100,7 @@ class ReadsSelf(Signature):
             if handle in self.lastres.handles:
                 obj = self.lastres.handles[handle]
                 length = self.get_raw_argument(call, "Length")
-                self.lastres.reads.append((obj.fps, obj.fps + length))
+                self.lastres.reads.append((obj.fpos, obj.fpos + length))
                 obj.read(length)
         elif call["api"] == "NtSetInformationFile" and call["status"]:
             handle = int(self.get_argument(call, "FileHandle"), 16)
