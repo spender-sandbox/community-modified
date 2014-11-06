@@ -44,12 +44,13 @@ class ProcResults:
         # cheap implementation, just merges typical linear accesses broke up into chunks
         outlist = []
         laststart = read[0][0]
-        for i, read in enumerate(self.reads):
-            if i == len(self.reads) - 1:
+        slist = sorted(self.reads)
+        for i, read in enumerate(slist):
+            if i == len(slist) - 1:
                 outlist.append((laststart, read[1]))
-            elif read[1] != self.reads[i+1][0]:
+            elif read[1] != slist[i+1][0]:
                     outlist.append((laststart, read[1]))
-                    laststart = self.reads[i+1][0]
+                    laststart = slist[i+1][0]
         return outlist
 
     def add_handle(self, handle, filename):
