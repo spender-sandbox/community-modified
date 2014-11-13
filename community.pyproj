@@ -15,6 +15,9 @@
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'" />
   <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
   <ItemGroup>
+    <Compile Include="modules\signatures\antiav_servicestop.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="modules\signatures\antidbg_devices.py" />
     <Compile Include="modules\signatures\antidbg_windows.py" />
     <Compile Include="modules\signatures\antiemu_wine.py" />
