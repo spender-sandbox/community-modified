@@ -29,7 +29,7 @@ class KnownVirustotal(Signature):
                 if self.results["virustotal"]["positives"] > 0:
                     for engine, signature in self.results["virustotal"]["scans"].items():
                         if signature["detected"]:
-                            self.data.append({engine, signature["result"]})
+                            self.data.append({engine : signature["result"]})
                     return True
 
         return False
