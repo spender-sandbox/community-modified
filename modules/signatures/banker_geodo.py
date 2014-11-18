@@ -32,7 +32,6 @@ class Geodo(Signature):
 
         match_file = self.check_file(pattern=".*\\\\Application\\ Data\\\\Microsoft\\\\[a-z]{3}(api32|audio|bios|boot|cap32|common|config|crypt|edit32|error|mgr32|serial|setup|share|sock|system|update|video|windows)\.exe$", regex=True, all=True)
         match_batch_file = self.check_file(pattern=".*\\\\Application\\ Data\\\\\d{1,10}\.bat$", regex=True, all=True)
-        match_url = self.check_url(pattern="^http://\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}/[a-f0-9]{1,8}/[a-f0-9]{1,8}/$", regex=True, all=True)
         match_runkey = self.check_key(pattern=".*\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\Run\\\\[a-z]{3}(api32|audio|bios|boot|cap32|common|config|crypt|edit32|error|mgr32|serial|setup|share|sock|system|update|video|windows)\.exe$", regex=True, all=True)
         match_otherkey = self.check_key(pattern=".*\\\\Microsoft\\\\Office\\\\Common\\\\(?P<hex>[A-F0-9]+)\\\\(?P=hex)(CS|PS|SS|RS)", regex=True, all=True)
         match_mutex = self.check_mutex(pattern="^[A-F0-9]{1,8}(I|M|RM)$", regex=True, all=True)

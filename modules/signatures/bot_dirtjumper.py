@@ -26,7 +26,10 @@ class DirtJumper(Signature):
 
     def run(self):
         if "network" in self.results:
-            for http in self.results["network"]["http"]:
+            httpitems = self.results["network"].get("http")
+            if not httpitems:
+                return False
+            for http in httpitems:
                 if http["method"] == "POST" and http["body"].startswith("k=") and http.get("user-agent", "") == "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US)":
                     self.data.append({"url" : http["uri"], "data" : http["body"]})
                     return True

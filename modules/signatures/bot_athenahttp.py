@@ -43,7 +43,10 @@ class AthenaHttp(Signature):
         athena_http_re = re.compile("a=(%[A-Fa-f0-9]{2})+&b=[-A-Za-z0-9+/]+(%3[dD])*&c=(%[A-Fa-f0-9]{2})+")
 
         if "network" in self.results:
-            for http in self.results["network"]["http"]:
+            httpitems = self.results["network"].get("http")
+            if not httpitems:
+                return False
+            for http in httpitems:
                 if http["method"] == "POST" and athena_http_re.search(http["body"]):
                     self.data.append({"url" : http["uri"], "data" : http["body"]})
                     return True
