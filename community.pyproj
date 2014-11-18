@@ -32,6 +32,7 @@
     <Compile Include="modules\signatures\antivm_generic_services.py" />
     <Compile Include="modules\signatures\antivm_vbox_acpi.py" />
     <Compile Include="modules\signatures\antivm_vbox_devices.py" />
+    <Compile Include="modules\signatures\antivm_sboxie_libs.py" />
     <Compile Include="modules\signatures\antivm_vmware_keys.py" />
     <Compile Include="modules\signatures\antivm_vmware_files.py" />
     <Compile Include="modules\signatures\antivm_vbox_files.py" />
