@@ -29,7 +29,7 @@ class CopiesSelf(Signature):
         target_sha1 = self.results["target"]["file"]["sha1"]
 
         for drop in self.results["dropped"]:
-            if drop["sha1"] == target_sha1 and len(drop["guests_paths"]) > 1:
+            if drop["sha1"] == target_sha1 and len(drop["guest_paths"]) > 1:
                 for path in drop["guest_paths"][1:]:
                     self.data.append({"copy" : path})
                 return True
