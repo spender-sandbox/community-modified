@@ -26,14 +26,15 @@ class DeletesSelf(Signature):
 
     def __init__(self, *args, **kwargs):
         Signature.__init__(self, *args, **kwargs)
+        # get the path of the initial monitored executable
         self.initialpath = None
+        processes = self.results["behavior"]["processes"]
+        if len(processes):
+            self.initialpath = processes[0]["module_path"].lower()
 
     filter_apinames = set(["NtDeleteFile","DeleteFileA", "DeleteFileW", "MoveFileWithProgressW"])
 
     def on_call(self, call, process):
-        if not self.initialpath:
-            self.initialpath = process["module_path"].lower()
-
         if not call["status"]:
             return None
 
