@@ -25,7 +25,7 @@ except ImportError:
 
 class Polymorphic(Signature):
     name = "polymorphic"
-    description = "Creates a file similar to target file"
+    description = "Creates a slightly modified copy of itself"
     severity = 3
     categories = ["persistence"]
     authors = ["lordr", "Accuvant"]
