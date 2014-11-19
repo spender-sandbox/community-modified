@@ -28,6 +28,7 @@ class BrowserStealer(Signature):
 
     def __init__(self, *args, **kwargs):
         Signature.__init__(self, *args, **kwargs)
+        self.filematches = set()
         self.saw_stealer = False
 
     indicators = [
@@ -61,12 +62,10 @@ class BrowserStealer(Signature):
             if argument["name"] == "FileName":
                 for indicator in self.indicators:
                     if indicator.match(argument["value"]):
-                        self.data.append({
-                            "file" : argument["value"],
-                            "process_id" : process["process_id"],
-                            "process_name" : process["process_name"]}
-                        )
+                        self.filematches.add(argument["value"])
                         self.saw_stealer = True
 
     def on_complete(self):
+        for file in self.filematches:
+            self.data.append({"file" : file })
         return self.saw_stealer
