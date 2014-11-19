@@ -1,4 +1,4 @@
-# Copyright (C) 2012 Michael Boman (@mboman)
+# Copyright (C) 2012,2014 Michael Boman (@mboman), Accuvant, Inc. (bspengler@accuvant.com)
 #
 # This program is free Software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -24,10 +24,22 @@ class Autorun(Signature):
     description = "Installs itself for autorun at Windows startup"
     severity = 3
     categories = ["persistence"]
-    authors = ["Michael Boman", "nex","securitykitten"]
+    authors = ["Michael Boman", "nex","securitykitten","Accuvant"]
     minimum = "1.2"
+    evented = True
 
-    def run(self):
+    def __init__(self, *args, **kwargs):
+        Signature.__init__(self, *args, **kwargs)
+        self.registry_writes = dict()
+
+    filter_apinames = set(["RegSetValueExA", "RegSetValueExW", "NtSetValueKey"])
+
+    def on_call(self, call, process):
+        if call["status"]:
+            fullname = self.get_argument(call, "FullName")
+            self.registry_writes[fullname] = self.get_argument(call, "Buffer")
+
+    def on_complete(self):
         indicators = [
             ".*\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\Run\\\\.*",
             ".*\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\RunOnce\\\\.*",
@@ -54,6 +66,7 @@ class Autorun(Signature):
             if match_key:
                 for match in match_key:
                     self.data.append({"key" : match})
+                    self.data.append({"value" : self.registry_writes.get(match, "unknown")})
                 found_autorun = True
 
         indicators = [
