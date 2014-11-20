@@ -10,7 +10,7 @@ class InjectionRWX(Signature):
     severity = 3
     categories = ["injection"]
     authors = ["Accuvant"]
-    minimum = "1.0"
+    minimum = "1.2"
     evented = True
 
     def __init__(self, *args, **kwargs):

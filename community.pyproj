@@ -66,6 +66,7 @@
     <Compile Include="modules\signatures\bootkit.py" />
     <Compile Include="modules\signatures\antiav_srp.py" />
     <Compile Include="modules\signatures\copies_self.py" />
+    <Compile Include="modules\signatures\mimics_agent.py" />
     <Compile Include="modules\signatures\stealth_file.py" />
     <Compile Include="modules\signatures\injection_rwx.py" />
     <Compile Include="modules\signatures\injection_needextension.py" />
