@@ -18,7 +18,7 @@ from lib.cuckoo.common.abstracts import Signature
 class InjectionCRT(Signature):
     name = "injection_createremotethread"
     description = "Code injection with CreateRemoteThread or NtQueueApcThread in a remote process"
-    severity = 2
+    severity = 3
     categories = ["injection"]
     authors = ["JoseMi Holguin", "nex", "Accuvant"]
     minimum = "1.0"

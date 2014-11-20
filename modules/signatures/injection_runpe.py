@@ -18,7 +18,7 @@ from lib.cuckoo.common.abstracts import Signature
 class InjectionRUNPE(Signature):
     name = "injection_runpe"
     description = "Executed a process and injected code into it, probably while unpacking"
-    severity = 2
+    severity = 3
     categories = ["injection"]
     authors = ["glysbaysb", "Accuvant"]
     minimum = "1.0"
