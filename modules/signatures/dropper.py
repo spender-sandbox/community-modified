@@ -25,11 +25,15 @@ class Dropper(Signature):
 
     def run(self):
         is_dropper = False
+        mainprocesspath = ""
         processpaths = set()
         processes = self.results["behavior"]["processes"]
         if processes:
+            mainprocesspath = processes[0]["module_path"].lower()
             for process in processes[1:]:
-                processpaths.add(process["module_path"].lower())
+                processpath = process["module_path"].lower()
+                if processpath != mainprocesspath:
+                    processpaths.add(processpath)
         for processpath in processpaths:
             for drop in self.results["dropped"]:
                 for path in drop["guest_paths"]:
