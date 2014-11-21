@@ -54,6 +54,7 @@
     <Compile Include="modules\signatures\bot_madness.py" />
     <Compile Include="modules\signatures\bot_russkill.py" />
     <Compile Include="modules\signatures\bypass_firewall.py" />
+    <Compile Include="modules\signatures\dropper.py" />
     <Compile Include="modules\signatures\debugs_self.py" />
     <Compile Include="modules\signatures\deletes_self.py" />
     <Compile Include="modules\signatures\downloader_cabby.py" />
