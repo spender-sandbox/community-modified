@@ -20,7 +20,7 @@ class InjectionExtension(Signature):
 
     def on_call(self, call, process):
         if call["status"] == False:
-            procname = process["process_name"].tolower()
+            procname = process["process_name"].lower()
             if procname.endswith(".exe") == False:
                 procname += ".exe"
                 apiarg1 = self.get_argument(call, "ApplicationName")
