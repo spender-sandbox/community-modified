@@ -68,7 +68,7 @@ class Autorun(Signature):
             if match_key:
                 for match in match_key:
                     self.data.append({"key" : match})
-                    self.data.append({"value" : self.registry_writes.get(match, "unknown")})
+                    self.data.append({"data" : self.registry_writes.get(match, "unknown")})
                 found_autorun = True
 
         indicators = [
