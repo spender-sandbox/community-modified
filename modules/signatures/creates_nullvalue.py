@@ -17,7 +17,7 @@ from lib.cuckoo.common.abstracts import Signature
 
 class CreatesNullValue(Signature):
     name = "creates_nullvalue"
-    description = "Creates a registry value with NUL characters to avoid detection with regedit"
+    description = "Creates a registry key or value with NUL characters to avoid detection with regedit"
     severity = 3
     categories = ["stealth"]
     authors = ["Accuvant"]
@@ -26,11 +26,24 @@ class CreatesNullValue(Signature):
 
     def __init__(self, *args, **kwargs):
         Signature.__init__(self, *args, **kwargs)
-
-    filter_apinames = set(["NtSetValueKey"])
+        self.saw_null = False
+        self.regkeyvals = set()
+    filter_apinames = set(["NtSetValueKey", "NtCreateKey"])
 
     def on_call(self, call, process):
-       valuename = self.get_argument(call, "ValueName")
-       if "\\x00" in valuename:
-           self.data.append({"value" : self.get_argument(call, "FullName")})
-           return True
+        if call["api"] == "NtCreateKey":
+            keyname = self.get_argument(call, "ObjectAttributes")
+            if "\\x00" in keyname:
+                self.regkeyvals.add(keyname)
+                self.saw_null = True
+        else:
+            valuename = self.get_argument(call, "ValueName")
+            if "\\x00" in valuename:
+                self.regkeyvals.add(self.get_argument(call, "FullName"))
+                self.saw_null = True
+
+    def on_complete(self):
+        if self.saw_null:
+            for keyval in self.regkeyvals:
+                self.data.append({"keyval" : keyval})
+        return self.saw_null
