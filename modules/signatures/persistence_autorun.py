@@ -60,8 +60,8 @@ class Autorun(Signature):
             ".*\\\\Microsoft\\\\Windows NT\\\\CurrentVersion\\\\Windows\\\\load$",
             ".*\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\ShellServiceObjectDelayLoad\\\\.*",
             ".*\\\\System\\\\(CurrentControlSet|ControlSet001)\\\\Control\\\\Session\\ Manager\\\\AppCertDlls\\\\.*",
-            ".*\\\\Software\\\\(Wow6432Node\\\\)?Classes\\\\clsid\\\\{AB8902B4-09CA-4bb6-B78D-A8F59079A8D5}\\\\.*",
-            ".*\\\\Software\\\\(Wow6432Node\\\\)?Classes\\\\clsid\\\\{73E709EA-5D93-4B2E-BBB0-99B7938DA9E4}\\\\.*"
+            ".*\\\\Software\\\\(Wow6432Node\\\\)?Classes\\\\clsid\\\\[^\\\\]*\\\\InprocServer32\\\\.*",
+            ".*\\\\Software\\\\(Wow6432Node\\\\)?Classes\\\\clsid\\\\[^\\\\]*\\\\LocalServer32\\\\.*"
             ]
         found_autorun = False
         for indicator in indicators:
