@@ -40,6 +40,7 @@ class BrowserStealer(Signature):
         re.compile(".*\\\\Cookies\\\\.*"),
         re.compile(".*\\\\Temporary\\\\ Internet\\ Files\\\\Content\.IE5\\\\index\.dat$"),
         re.compile(".*\\\\Application\\ Data\\\\Google\\\\Chrome\\\\.*"),
+        re.compile(".*\\\\Application\\ Data\\\\Mozilla\\\\Firefox\\\\.*"),
         re.compile(".*\\\\Application\\ Data\\\\Opera\\\\.*"),
         re.compile(".*\\\\Application\\ Data\\\\Chromium\\\\.*"),
         re.compile(".*\\\\Application\\ Data\\\\ChromePlus\\\\.*"),
