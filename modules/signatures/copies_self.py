@@ -26,11 +26,17 @@ class CopiesSelf(Signature):
     def run(self):
         if self.results["target"]["category"] != "file":
             return False
+        # get the path of the initial monitored executable
+        initialpath = None
+        processes = self.results["behavior"]["processes"]
+        if len(processes):
+            initialpath = processes[0]["module_path"].lower()
         target_sha1 = self.results["target"]["file"]["sha1"]
 
         for drop in self.results["dropped"]:
             if drop["sha1"] == target_sha1 and len(drop["guest_paths"]) > 1:
-                for path in drop["guest_paths"][1:]:
-                    self.data.append({"copy" : path})
+                for path in drop["guest_paths"]:
+                    if initialpath and initialpath != path.lower():
+                        self.data.append({"copy" : path})
                 return True
         return False
