@@ -69,6 +69,8 @@
     <Compile Include="modules\signatures\bootkit.py" />
     <Compile Include="modules\signatures\antiav_srp.py" />
     <Compile Include="modules\signatures\copies_self.py" />
+    <Compile Include="modules\signatures\pdf_eof.py" />
+    <Compile Include="modules\signatures\pdf_page.py" />
     <Compile Include="modules\signatures\stealth_childproc.py" />
     <Compile Include="modules\signatures\mimics_agent.py" />
     <Compile Include="modules\signatures\stealth_file.py" />
