@@ -17,7 +17,7 @@ from lib.cuckoo.common.abstracts import Signature
 
 class PDF_EOF(Signature):
     name = "pdf_eof"
-    description = "The PDF has data after that last %% EOF marker."
+    description = "The PDF has data after the last %% EOF marker."
     severity = 3
     categories = ["pdf"]
     authors = ["KillerInstinct"]
