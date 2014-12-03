@@ -7,7 +7,7 @@ from lib.cuckoo.common.abstracts import Signature
 class InjectionRWX(Signature):
     name = "injection_rwx"
     description = "Creates RWX memory"
-    severity = 3
+    severity = 2
     categories = ["injection"]
     authors = ["Accuvant"]
     minimum = "1.2"
