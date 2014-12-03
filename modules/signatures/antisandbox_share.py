@@ -42,6 +42,6 @@ class AntiSandboxShare(Signature):
             for drop in self.results["dropped"]:
                 for path in drop["guest_paths"]:
                     if path.lower() == unsharedlower:
-                        self.data.append({"binary" : path})
+                        self.data.append({"file" : path})
                         found_unshared_drop = True
         return found_unshared_drop
