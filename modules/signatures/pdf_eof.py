@@ -28,7 +28,7 @@ class PDF_EOF(Signature):
             if self.results["target"]["category"] == "file":
                 if "PDF" in self.results["target"]["file"]["type"]:
                     if "Data After EOF" in self.results["static"]["Info"]:
-                        if self.results["static"]["Info"]["Data After EOF"] != 0:
+                        if self.results["static"]["Info"]["Data After EOF"] != "0 bytes":
                             return True
 
         return False
