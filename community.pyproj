@@ -57,6 +57,7 @@
     <Compile Include="modules\signatures\bypass_firewall.py" />
     <Compile Include="modules\signatures\creates_nullvalue.py" />
     <Compile Include="modules\signatures\antisandbox_share.py" />
+    <Compile Include="modules\signatures\prevents_safeboot.py" />
     <Compile Include="modules\signatures\dropper.py" />
     <Compile Include="modules\signatures\debugs_self.py" />
     <Compile Include="modules\signatures\deletes_self.py" />
@@ -67,6 +68,7 @@
     <Compile Include="modules\signatures\infostealer_browser.py" />
     <Compile Include="modules\signatures\infostealer_ftp.py" />
     <Compile Include="modules\signatures\infostealer_im.py" />
+    <Compile Include="modules\signatures\disables_uac.py" />
     <Compile Include="modules\signatures\infostealer_mail.py" />
     <Compile Include="modules\signatures\bootkit.py" />
     <Compile Include="modules\signatures\antiav_srp.py" />
