@@ -57,6 +57,7 @@
     <Compile Include="modules\signatures\bypass_firewall.py" />
     <Compile Include="modules\signatures\creates_nullvalue.py" />
     <Compile Include="modules\signatures\antisandbox_share.py" />
+    <Compile Include="modules\signatures\network_torgateway.py" />
     <Compile Include="modules\signatures\prevents_safeboot.py" />
     <Compile Include="modules\signatures\dropper.py" />
     <Compile Include="modules\signatures\debugs_self.py" />
@@ -115,6 +116,7 @@
     <Compile Include="modules\signatures\spreading_autoruninf.py" />
     <Compile Include="modules\signatures\static_authenticode.py" />
     <Compile Include="modules\signatures\targeted_flame.py" />
+    <Compile Include="modules\signatures\volatility_sig.py" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="modules\" />
