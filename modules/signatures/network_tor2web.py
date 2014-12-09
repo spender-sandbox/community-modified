@@ -1,4 +1,4 @@
-# Copyright (C) 2012 Claudio "nex" Guarnieri (@botherder)
+# Copyright (C) 2014 Claudio "nex" Guarnieri (@botherder)
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -15,19 +15,18 @@
 
 from lib.cuckoo.common.abstracts import Signature
 
-class HookMouse(Signature):
-    name = "antisandbox_mouse_hook"
-    description = "Installs an hook procedure to monitor for mouse events"
+class Tor2Web(Signature):
+    name = "network_tor2web"
+    description = "Connects to Tor Hidden Services through Tor2Web"
     severity = 3
-    categories = ["hooking", "anti-sandbox"]
+    categories = ["network"]
     authors = ["nex"]
-    minimum = "1.0"
-    evented = True
+    minimum = "0.5"
 
-    filter_apinames = set(["SetWindowsHookExA", "SetWindowsHookExW"])
+    def run(self):
+        domain = self.check_domain(pattern="^.*\.tor2web\.([a-z]{2,3})$", regex=True)
+        if domain:
+            self.data.append({"domain" : domain})
+            return True
 
-
-    def on_call(self, call, process):
-        if int(self.get_argument(call, "HookIdentifier")) in [7, 14]:
-            if int(self.get_argument(call, "ThreadId")) == 0:
-                return True
+        return False
