@@ -45,9 +45,10 @@ class TorGateway(Signature):
         found_torgateway = False
         for indicator in domain_indicators:
             domains = self.check_domain(pattern=indicator, regex=True, all=True)
-            for domain in domains:
-                self.data.append({"domain" : domain})
-                found_torgateway = True
+            if domains:
+                for domain in domains:
+                    self.data.append({"domain" : domain})
+                    found_torgateway = True
         for indicator in ip_indicators:
             ip = self.check_ip(pattern=indicator)
             if ip:
