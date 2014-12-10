@@ -28,7 +28,7 @@ class AntiSandboxShare(Signature):
         Signature.__init__(self, *args, **kwargs)
         self.unshared = set()
 
-    filter_apinames = set(["NtOpenFile", "NtCreateFile", "NtClose"])
+    filter_apinames = set(["NtOpenFile", "NtCreateFile"])
 
     def on_call(self, call, process):
         share = int(self.get_argument(call, "ShareAccess"), 16)
