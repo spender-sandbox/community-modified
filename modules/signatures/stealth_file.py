@@ -78,6 +78,7 @@ class StealthFile(Signature):
             r'^[A-Z]?:\\Documents and Settings\\[^\\]+\\Local Settings\\History$',
             r'^[A-Z]?:\\Documents and Settings\\[^\\]+\\Local Settings\\Temporary Internet Files\\Content.IE5\\$',
             r'^[A-Z]?:\\Documents and Settings\\[^\\]+\\Local Settings\\History\\History.IE5\\$',
+            r'^[A-Z]?:\\Documents and Settings\\[^\\]+\\Local Settings\\History\\History.IE5\\MSHist[0-9]+\\$',
             r'^[A-Z]?:\\Documents and Settings\\[^\\]+\\Cookies\\$',
         ]
         saw_stealth = False
