@@ -14,6 +14,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 from lib.cuckoo.common.abstracts import Signature
+import re
 
 class AntiSandboxShare(Signature):
     name = "antisandbox_share"
