@@ -48,7 +48,7 @@ class AntiSandboxShare(Signature):
                     if path.lower() == unsharedlower:
                         addit = True
                         for entry in whitelists:
-                            if re.match(entry, file, re.IGNORECASE):
+                            if re.match(entry, path, re.IGNORECASE):
                                 addit = False
                         if addit:
                             self.data.append({"file" : path})
