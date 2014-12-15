@@ -38,7 +38,8 @@ class AntiSandboxShare(Signature):
             self.unshared.add(self.get_argument(call, "FileName"))
     def on_complete(self):
         whitelists = [
-            r'^[A-Z]?:\\Documents and Settings\\[^\\]+\\Cookies\\.*\.txt$'
+            r'^[A-Z]?:\\Documents and Settings\\[^\\]+\\Cookies\\.*\.txt$',
+            r'^[A-Z]?:\\Users\\[^\\]+\\AppData\\Roaming\\Microsoft\\Windows\\Cookies\\.*\.txt$'
         ]
         found_unshared_drop = False
         for unshare in self.unshared:
