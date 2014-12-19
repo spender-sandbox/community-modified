@@ -38,11 +38,11 @@ class ZeusP2P(Signature):
         # 2CCB0BFE-ECAB-89CD-0261-B06D1C10937F
         exp = re.compile(".*[A-Z0-9]{8}-([A-Z0-9]{4}-){3}[A-Z0-9]{12}", re.IGNORECASE)
         mutexes = self.results["behavior"]["summary"]["mutexes"]
-        
+        mutexset = set()
         count = 0
         for mutex in mutexes:
-            if exp.match(mutex):  
-                self.data.append({"mutex": mutex})
+            if exp.match(mutex):
+                mutexset.add(mutex)
                 count += 1 
 
         # Check if there are at least 5 mutexes opened matching the pattern?   
@@ -60,5 +60,8 @@ class ZeusP2P(Signature):
             
         if count < 4:
             return False
-    
+
+        for mutex in mutexset:
+            self.data.append({"mutex": mutex})
+
         return True
