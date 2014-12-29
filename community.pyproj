@@ -48,6 +48,7 @@
     <Compile Include="modules\signatures\banker_zeus_p2p.py" />
     <Compile Include="modules\signatures\banker_zeus_url.py" />
     <Compile Include="modules\signatures\bitcoin_opencl.py" />
+    <Compile Include="modules\signatures\virus.py" />
     <Compile Include="modules\signatures\bot_athenahttp.py" />
     <Compile Include="modules\signatures\bot_dirtjumper.py" />
     <Compile Include="modules\signatures\bot_drive.py" />

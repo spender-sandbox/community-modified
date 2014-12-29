@@ -26,6 +26,7 @@ class CopiesSelf(Signature):
     def run(self):
         if self.results["target"]["category"] != "file":
             return False
+        created_copy = False
         # get the path of the initial monitored executable
         initialpath = None
         processes = self.results["behavior"]["processes"]
@@ -38,5 +39,6 @@ class CopiesSelf(Signature):
                 for path in drop["guest_paths"]:
                     if initialpath and initialpath != path.lower():
                         self.data.append({"copy" : path})
-                return True
-        return False
+                        created_copy = True
+                return created_copy
+        return created_copy
