@@ -63,14 +63,21 @@ class Autorun(Signature):
             ".*\\\\Software\\\\(Wow6432Node\\\\)?Classes\\\\clsid\\\\[^\\\\]*\\\\InprocServer32\\\\.*",
             ".*\\\\Software\\\\(Wow6432Node\\\\)?Classes\\\\clsid\\\\[^\\\\]*\\\\LocalServer32\\\\.*"
             ]
+        whitelists = [
+            ".*\\\\Software\\\\(Wow6432Node\\\\)?Classes\\\\clsid\\\\{CAFEEFAC-0017-0000-FFFF-ABCDEFFEDCBA}\\\\InprocServer32\\\\.*"
+            ]
         found_autorun = False
         for indicator in indicators:
             match_key = self.check_write_key(pattern=indicator, regex=True, all=True)
             if match_key:
                 for match in match_key:
-                    self.data.append({"key" : match})
-                    self.data.append({"data" : self.registry_writes.get(match, "unknown")})
-                found_autorun = True
+                    found_autorun = True
+                    for entry in whitelists:
+                        if re.match(entry, match, re.IGNORECASE):
+                            found_autorun = False
+                    if found_autorun:
+                        self.data.append({"key" : match})
+                        self.data.append({"data" : self.registry_writes.get(match, "unknown")})
 
         indicators = [
             ".*\\\\win\.ini$",
