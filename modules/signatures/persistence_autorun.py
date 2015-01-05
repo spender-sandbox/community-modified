@@ -71,13 +71,16 @@ class Autorun(Signature):
             match_key = self.check_write_key(pattern=indicator, regex=True, all=True)
             if match_key:
                 for match in match_key:
-                    found_autorun = True
+                    in_whitelist = False
                     for entry in whitelists:
                         if re.match(entry, match, re.IGNORECASE):
-                            found_autorun = False
-                    if found_autorun:
+                            in_whitelist = True
+                            break
+
+                    if not in_whitelist:
                         self.data.append({"key" : match})
                         self.data.append({"data" : self.registry_writes.get(match, "unknown")})
+                        found_autorun = True
 
         indicators = [
             ".*\\\\win\.ini$",
