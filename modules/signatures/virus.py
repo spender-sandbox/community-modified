@@ -42,7 +42,7 @@ class Virus(Signature):
             dstname = self.get_argument(call, "NewFileName").lower()
             self.copydests.add(dstname)
             self.readcopyfiles[dstname] = srcname
-            if srcname not in self.invalidating_files and srcname not in self.copydests:
+            if srcname not in self.invalidated_files and srcname not in self.copydests:
                 self.readfiles.add(srcname)
             if dstname in self.readfiles:
                 self.infected_files.add(dstname)
