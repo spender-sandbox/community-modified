@@ -29,6 +29,7 @@ class Unhook(Signature):
     def __init__(self, *args, **kwargs):
         Signature.__init__(self, *args, **kwargs)
         self.saw_unhook = False
+        self.unhook_info = set()
 
     def on_call(self, call, process):
         subcategory = self.check_argument_call(call,
@@ -39,7 +40,9 @@ class Unhook(Signature):
             self.saw_unhook = True
             funcname = self.get_argument(call, "FunctionName")
             if funcname != "":
-               self.data.append({"unhook" : "function_name: " + funcname + ", type: " + self.get_argument(call, "UnhookType")})
+               self.unhook_info.add("function_name: " + funcname + ", type: " + self.get_argument(call, "UnhookType"))
     
     def on_complete(self):
+        for info in self.unhook_info:
+            self.data.append({"unhook" : info })
         return self.saw_unhook
