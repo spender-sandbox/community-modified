@@ -54,7 +54,7 @@ class InjectionCRT(Signature):
         elif (call["api"] == "NtWriteVirtualMemory" or call["api"] == "WriteProcessMemory") and self.sequence == 1:
             if self.get_argument(call, "ProcessHandle") in self.process_handles:
                 self.sequence = 2
-        elif call["api"].startswith("CreateRemoteThread") and self.sequence == 2:
+        elif (call["api"] == "CreateRemoteThread" or call["api"].startswith("NtCreateThread")) and self.sequence == 2:
             if self.get_argument(call, "ProcessHandle") in self.process_handles:
                 return True
         elif call["api"] == "NtQueueApcThread" and self.sequence == 2:
