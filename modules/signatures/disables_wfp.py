@@ -18,7 +18,7 @@ class DisablesWFP(Signature):
         self.saw_disable = False
         self.nextopen = None
 
-    filter_apinames = set(["NtWriteFile", "NtCreateFile", "NtOpenFile"])
+    filter_apinames = set(["NtWriteFile", "CopyFileA", "CopyFileW", "CopyFileExW"])
 
     def on_call(self, call, process):
         if call["api"] == "NtWriteFile":
