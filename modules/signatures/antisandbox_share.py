@@ -27,6 +27,7 @@ class AntiSandboxShare(Signature):
 
     def __init__(self, *args, **kwargs):
         Signature.__init__(self, *args, **kwargs)
+        self.potentially_unshared = []
         self.unshared = set()
 
     filter_apinames = set(["NtOpenFile", "NtCreateFile"])
@@ -35,7 +36,7 @@ class AntiSandboxShare(Signature):
         share = int(self.get_argument(call, "ShareAccess"), 16)
         # missing FILE_SHARE_READ
         if (share & 1) == 0:
-            self.unshared.add(self.get_argument(call, "FileName"))
+            self.potentially_unshared.add(self.get_argument(call, "FileName"))
     def on_complete(self):
         whitelists = [
             r'^[A-Z]?:\\Documents and Settings\\[^\\]+\\Cookies\\.*\.txt$',
