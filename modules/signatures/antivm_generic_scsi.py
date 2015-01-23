@@ -40,7 +40,7 @@ class AntiVMSCSI(Signature):
             self.opened = False
             self.lastprocess = process
 
-        # First I check if the malware opens the releavant registry key.
+        # First I check if the malware opens the relevant registry key.
         if call["api"].startswith("RegOpenKeyEx"):
             # Store the number of arguments matched.
             args_matched = 0
