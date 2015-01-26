@@ -1,4 +1,4 @@
-# Copyright (C) 2012-2014 Claudio "nex" Guarnieri (@botherder)
+# Copyright (C) 2012-2015 Claudio "nex" Guarnieri (@botherder), Accuvant, Inc. (bspengler@accuvant.com)
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -22,8 +22,8 @@ class BrowserStealer(Signature):
     description = "Steals private information from local Internet browsers"
     severity = 3
     categories = ["infostealer"]
-    authors = ["nex"]
-    minimum = "1.0"
+    authors = ["nex", "Accuvant"]
+    minimum = "1.2"
     evented = True
 
     def __init__(self, *args, **kwargs):
@@ -49,8 +49,7 @@ class BrowserStealer(Signature):
         re.compile(".*\\\\Application\\ Data\\\\RockMelt\\\\.*")
 
     ]
-
-    filter_categories = set(["filesystem"])
+    filter_apinames = set(["NtReadFile", "CopyFileA", "CopyFileW", "CopyFileExW"])
 
     def on_call(self, call, process):
         # If the current process appears to be a browser, continue.
@@ -59,12 +58,18 @@ class BrowserStealer(Signature):
         if process["process_name"].lower() in ("iexplore.exe", "firefox.exe", "chrome.exe"):
             return None
 
-        for argument in call["arguments"]:
-            if argument["name"] == "FileName":
-                for indicator in self.indicators:
-                    if indicator.match(argument["value"]):
-                        self.filematches.add(argument["value"])
-                        self.saw_stealer = True
+        filename = None
+        if call["api"] == "NtReadFile":
+            filename = self.get_argument(call, "HandleName")
+        else:
+            filename = self.get_argument(call, "ExistingFileName")
+        if not filename:
+            return None
+
+        for indicator in self.indicators:
+            if indicator.match(filename):
+                self.filematches.add(filename)
+                self.saw_stealer = True
 
     def on_complete(self):
         for file in self.filematches:
