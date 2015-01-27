@@ -3,7 +3,6 @@
 # See the file 'docs/LICENSE' for copying permission.
 
 from lib.cuckoo.common.abstracts import Signature
-import re
 
 class StealthWebHistory(Signature):
     name = "stealth_webhistory"
@@ -15,9 +14,9 @@ class StealthWebHistory(Signature):
 
     def run(self):
         file_indicators = [
-        re.compile(".*\\\\History\\\\History\.IE5\\\\.*"),
-        re.compile(".*\\\\Cookies\\\\.*"),
-        re.compile(".*\\\\Temporary\\\\ Internet\\ Files\\\\Content\.IE5\\\\.*"),
+        ".*\\\\History\\\\History\.IE5\\\\.*",
+        ".*\\\\Cookies\\\\.*",
+        ".*\\\\Temporary\\\\ Internet\\ Files\\\\Content\.IE5\\\\.*",
         ]
         found_cleaner = False
         for indicator in file_indicators:
