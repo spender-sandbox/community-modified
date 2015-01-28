@@ -51,6 +51,7 @@
     <Compile Include="modules\signatures\banker_zeus_url.py" />
     <Compile Include="modules\signatures\bitcoin_opencl.py" />
     <Compile Include="modules\signatures\disables_wfp.py" />
+    <Compile Include="modules\signatures\persistence_service.py" />
     <Compile Include="modules\signatures\stealth_webhistory.py" />
     <Compile Include="modules\signatures\virus.py" />
     <Compile Include="modules\signatures\bot_athenahttp.py" />
