@@ -1,4 +1,4 @@
-# Copyright (C) 2012 JoseMi "h0rm1" Holguin (@j0sm1)
+# Copyright (C) 2012-2015 JoseMi "h0rm1" Holguin (@j0sm1), Accuvant, Inc. (bspengler@accuvant.com)
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
