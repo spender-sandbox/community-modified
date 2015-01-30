@@ -39,10 +39,6 @@ class InjectionExplorer(Signature):
     def on_call(self, call, process):
         if process is not self.lastprocess:
             self.sequence = 0
-            # technically we should have a separate state machine for each created process, but since this
-            # code doesn't deal with handles properly as it is, this is sufficient
-            self.process_handles = set()
-            self.thread_handles = set()
             self.lastprocess = process
 
         if call["api"] == "NtOpenSection" or call["api"] == "NtCreateSection":
