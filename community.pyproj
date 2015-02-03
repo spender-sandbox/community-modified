@@ -27,6 +27,7 @@
     <Compile Include="modules\signatures\antisandbox_productid.py" />
     <Compile Include="modules\signatures\antisandbox_unhook.py" />
     <Compile Include="modules\signatures\antivirus_virustotal.py" />
+    <Compile Include="modules\signatures\antivm_generic_system.py" />
     <Compile Include="modules\signatures\antivm_generic_bios.py" />
     <Compile Include="modules\signatures\antivm_generic_disk.py" />
     <Compile Include="modules\signatures\antivm_generic_ide.py" />
