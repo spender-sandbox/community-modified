@@ -9,12 +9,14 @@ class KeyLogger(Signature):
     severity = 3
     categories = ["infostealer"]
     authors = ["Accuvant"]
-    minimum = "1.0"
+    minimum = "1.2"
     evented = True
 
-    filter_apinames = set(["SetWindowsHookExA","SetWindowsHookExW"])
+    filter_apinames = set(["SetWindowsHookExA","SetWindowsHookExW","GetAsyncKeyState"])
 
     def on_call(self, call, process):
+        if call["api"] == "GetAsyncKeyState":
+            return True
         id = int(self.get_argument(call, "HookIdentifier"), 10)
         thread = int(self.get_argument(call, "ThreadId"), 10)
 
