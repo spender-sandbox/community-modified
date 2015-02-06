@@ -51,6 +51,7 @@
     <Compile Include="modules\signatures\banker_zeus_p2p.py" />
     <Compile Include="modules\signatures\banker_zeus_url.py" />
     <Compile Include="modules\signatures\bitcoin_opencl.py" />
+    <Compile Include="modules\signatures\driver_load.py" />
     <Compile Include="modules\signatures\disables_wfp.py" />
     <Compile Include="modules\signatures\injection_explorer.py" />
     <Compile Include="modules\signatures\persistence_service.py" />
