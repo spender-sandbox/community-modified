@@ -31,7 +31,8 @@ class DriverLoad(Signature):
     filter_apinames = set(["NtLoadDriver"])
 
     def on_call(self, call, process):
-        self.data.append({"driver service name" : self.get_argument(call, "DriverServiceName")})
+        drivername = self.get_argument(call, "DriverServiceName")
+        self.data.append({"driver service name" : drivername })
         self.found_driverload = True
 
     def on_complete(self):
