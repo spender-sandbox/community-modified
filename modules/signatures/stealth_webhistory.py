@@ -21,7 +21,7 @@ class StealthWebHistory(Signature):
         found_cleaner = False
         for indicator in file_indicators:
             file_match = self.check_delete_file(pattern=indicator, regex=True, all=True)
-            if file_match:
+            if file_match and len(file_match) > 10:
                 for match in file_match:
                     self.data.append({"file" : match })
                 found_cleaner = True
