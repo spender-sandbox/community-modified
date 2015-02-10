@@ -1,4 +1,4 @@
-# Copyright (C) 2012,2014 Michael Boman (@mboman), Accuvant, Inc. (bspengler@accuvant.com)
+# Copyright (C) 2012,2014,2015 Michael Boman (@mboman), Accuvant, Inc. (bspengler@accuvant.com)
 #
 # This program is free Software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -32,11 +32,20 @@ class Autorun(Signature):
     def __init__(self, *args, **kwargs):
         Signature.__init__(self, *args, **kwargs)
         self.registry_writes = dict()
+        self.found_autorun = False
 
-    filter_apinames = set(["RegSetValueExA", "RegSetValueExW", "NtSetValueKey"])
+    filter_apinames = set(["RegSetValueExA", "RegSetValueExW", "NtSetValueKey", "CreateServiceA", "CreateServiceW"])
 
     def on_call(self, call, process):
-        if call["status"]:
+        if call["api"].startswith("CreateService") and call["status"]:
+            starttype = int(self.get_argument(call, "StartType"), 10)
+            servicename = self.get_argument(call, "ServiceName")
+            binpath = self.get_argument(call, "BinaryPathName")
+            if starttype < 3:
+                self.data.append({"service name" : servicename })
+                self.data.append({"service path" : binpath })
+                self.found_autorun = True
+        elif call["status"]:
             fullname = self.get_argument(call, "FullName")
             self.registry_writes[fullname] = self.get_argument(call, "Buffer")
 
@@ -67,7 +76,7 @@ class Autorun(Signature):
         whitelists = [
             ".*\\\\Software\\\\(Wow6432Node\\\\)?Classes\\\\clsid\\\\{CAFEEFAC-0017-0000-FFFF-ABCDEFFEDCBA}\\\\InprocServer32\\\\.*"
             ]
-        found_autorun = False
+
         for indicator in indicators:
             match_key = self.check_write_key(pattern=indicator, regex=True, all=True)
             if match_key:
@@ -81,7 +90,7 @@ class Autorun(Signature):
                     if not in_whitelist:
                         self.data.append({"key" : match})
                         self.data.append({"data" : self.registry_writes.get(match, "unknown")})
-                        found_autorun = True
+                        self.found_autorun = True
 
         indicators = [
             ".*\\\\win\.ini$",
@@ -95,6 +104,6 @@ class Autorun(Signature):
             if match_file:
                 for match in match_file:
                     self.data.append({"file" : match})
-                found_autorun = True
+                self.found_autorun = True
 
-        return found_autorun
+        return self.found_autorun
