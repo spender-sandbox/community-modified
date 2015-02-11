@@ -19,7 +19,7 @@ class StealthHiddenReg(Signature):
         ]
 
         for indicator in reg_indicators:
-            file_match = self.check_write_key(pattern=indicator, regex=True, all=True)
+            reg_match = self.check_write_key(pattern=indicator, regex=True, all=True)
             if reg_match:
                 return True
         return False
