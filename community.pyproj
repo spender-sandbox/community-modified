@@ -56,6 +56,7 @@
     <Compile Include="modules\signatures\injection_explorer.py" />
     <Compile Include="modules\signatures\persistence_service.py" />
     <Compile Include="modules\signatures\stealth_network.py" />
+    <Compile Include="modules\signatures\stealth_hiddenreg.py" />
     <Compile Include="modules\signatures\stealth_webhistory.py" />
     <Compile Include="modules\signatures\virus.py" />
     <Compile Include="modules\signatures\bot_athenahttp.py" />
