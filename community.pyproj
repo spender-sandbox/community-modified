@@ -67,7 +67,6 @@
     <Compile Include="modules\signatures\bot_russkill.py" />
     <Compile Include="modules\signatures\bypass_firewall.py" />
     <Compile Include="modules\signatures\creates_nullvalue.py" />
-    <Compile Include="modules\signatures\antisandbox_share.py" />
     <Compile Include="modules\signatures\network_torgateway.py" />
     <Compile Include="modules\signatures\prevents_safeboot.py" />
     <Compile Include="modules\signatures\dropper.py" />

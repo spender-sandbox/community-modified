@@ -67,6 +67,7 @@ class MimicsFiletime(Signature):
         self.handles = dict()
         self.old_handles = []
         self.saw_mimic = False
+        self.mimics = set()
 
     filter_apinames = set(["NtOpenFile","NtCreateFile","NtClose","NtQueryInformationFile","NtSetInformationFile"])
 
@@ -116,11 +117,13 @@ class MimicsFiletime(Signature):
                                         if filename:
                                                 break
                         if filename and filename != obj.filename:
-                                self.data.append({"mimic_source" : filename, "mimic_dest" : obj.filename})
+                                self.mimics.add((filename, obj.filename))
                                 self.saw_mimic = True
         return None
 
     def on_complete(self):
         if self.saw_mimic:
+            for mimic in self.mimics:
+                self.data.append({"mimic_source" : mimic[0], "mimic_dest" : mimic[1]})
             return True
         return False
