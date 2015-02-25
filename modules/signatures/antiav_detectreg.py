@@ -15,12 +15,31 @@ class AntiAVDetectReg(Signature):
 
     def run(self):
         reg_indicators = [
+            ".*\\\\Software\\\\Avg$",
+            ".*\\\\Software\\\\AVAST\\ Software\\\\.*",
+            ".*\\\\Software\\\\Avira$",
+            ".*\\\\Software\\\\Bitdefender$",
             ".*\\\\Software\\\\BitDefender\\\\.*",
+            ".*\\\\Software\\\\Coranti$",
+            ".*\\\\Software\\\\Data\\ Fellows\\\\F-Secure$",
+            ".*\\\\Software\\\\Doctor\\ Web$",
+            ".*\\\\Software\\\\ESET$",
             ".*\\\\Software\\\\ESET\\\\.*",
+            ".*\\\\Software\\\\G\\ Data$",
+            ".*\\\\Software\\\\Symantec$",
             ".*\\\\Software\\\\KasperskyLab\\\\.*",
             ".*\\\\Software\\\\McAfee\\\\.*",
             ".*\\\\Software\\\\McAfee\.com\\\\.*",
+            ".*\\\\Software\\\\Microsoft\\\\Microsoft\\ Antimalware$",
+            ".*\\\\Software\\\\Network\\ Associates\\\\TVD$",
+            ".*\\\\Software\\\\Panda\\ Software$",
+            ".*\\\\Software\\\\rising$",
+            ".*\\\\Software\\\\Softed\\\\ViGUARD$",
+            ".*\\\\Software\\\\Sophos$",
             ".*\\\\Software\\\\Sophos\\\\.*",
+            ".*\\\\Software\\\\TrendMicro$",
+            ".*\\\\Software\\\\VBA32$",
+            ".*\\\\Software\\\\Zone\\ Labs\\\\ZoneAlarm$",
         ]
         found = False
         for indicator in reg_indicators:
