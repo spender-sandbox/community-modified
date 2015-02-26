@@ -23,6 +23,6 @@ class StealthNetwork(Signature):
 
     def on_complete(self):
         if ((("hosts" in self.results["network"]) and len(self.results["network"]["hosts"]) > 0) or
-            (("domains" in self.results["network"]) and len(self.results["network"]["domains"]) > 0)) and len(results["behavior"]["processes"]) and not self.foundnetwork:
+            (("domains" in self.results["network"]) and len(self.results["network"]["domains"]) > 0)) and len(self.results["behavior"]["processes"]) and not self.foundnetwork:
             return True
         return False
