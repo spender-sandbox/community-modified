@@ -17,7 +17,7 @@ from lib.cuckoo.common.abstracts import Signature
 
 class InjectionCRT(Signature):
     name = "injection_createremotethread"
-    description = "Code injection with CreateRemoteThread or NtQueueApcThread in a remote process"
+    description = "Code injection with CreateRemoteThread in a remote process"
     severity = 3
     categories = ["injection"]
     authors = ["JoseMi Holguin", "nex", "Accuvant"]
@@ -54,10 +54,18 @@ class InjectionCRT(Signature):
         elif (call["api"] == "NtWriteVirtualMemory" or call["api"] == "WriteProcessMemory") and self.sequence == 1:
             if self.get_argument(call, "ProcessHandle") in self.process_handles:
                 self.sequence = 2
+        elif (call["api"] == "NtWriteVirtualMemory" or call["api"] == "WriteProcessMemory") and self.sequence == 2:
+            if self.get_argument(call, "ProcessHandle") in self.process_handles:
+                addr = int(self.get_argument(call, "BaseAddress"), 16)
+                buf = self.get_argument(call, "Buffer")
+                if addr >= 0x7c900000 and addr < 0x80000000 and buf.startswith("\\xe9"):
+                    self.description = "Code injection via WriteProcessMemory-modified NTDLL code in a remote process"
+                    return True
         elif (call["api"] == "CreateRemoteThread" or call["api"].startswith("NtCreateThread")) and self.sequence == 2:
             if self.get_argument(call, "ProcessHandle") in self.process_handles:
                 return True
         elif call["api"] == "NtQueueApcThread" and self.sequence == 2:
             if self.get_argument(call, "ProcessId") in self.process_pids:
+                self.description = "Code injection with NtQueueApcThread in a remote process"
                 return True
 
