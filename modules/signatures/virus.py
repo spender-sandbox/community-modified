@@ -33,10 +33,12 @@ class Virus(Signature):
             self.lastprocess = process
 
         if call["api"] == "NtDuplicateObject" and call["status"]:
-            srchandle = int(self.get_argument(call, "SourceHandle"), 16)
-            tgthandle = int(self.get_argument(call, "TargetHandle"), 16)
-            if srchandle in self.handles:
-                self.handles[tgthandle] = self.handles[srchandle]
+            tgtarg = self.get_argument(call, "TargetHandle")
+            if tgtarg:
+                srchandle = int(self.get_argument(call, "SourceHandle"), 16)
+                tgthandle = int(tgtarg, 16)
+                if srchandle in self.handles:
+                    self.handles[tgthandle] = self.handles[srchandle]
         elif call["api"].startswith("CopyFile"):
             srcname = self.get_argument(call, "ExistingFileName").lower()
             dstname = self.get_argument(call, "NewFileName").lower()
