@@ -30,6 +30,7 @@ class EncryptedIOC(Signature):
         matches = [
             r'(https?:\/\/)?([\da-z\.-]+)\.([0-9a-z\.]{2,6})(:\d{1,5})?([\/\w\.-]*)\/?',
         ]
+        dedup = list()
         extracted_config = False
         for potential_ioc in self.iocs:
             for entry in matches:
@@ -50,6 +51,10 @@ class EncryptedIOC(Signature):
                                 ioc += tmp + "."
                             else:
                                 ioc += tmp
-                        self.data.append({"ioc": ioc})
+                        if ioc not in dedup:
+                            dedup.append(ioc)
+        if dedup:
+            for data in dedup:
+                self.data.append({"ioc": ioc})
 
         return extracted_config
