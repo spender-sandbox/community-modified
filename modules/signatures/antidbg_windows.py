@@ -20,11 +20,15 @@ class AntiDBGWindows(Signature):
     description = "Checks for the presence of known windows from debuggers and forensic tools"
     severity = 3
     categories = ["anti-debug"]
-    authors = ["nex"]
-    minimum = "1.0"
+    authors = ["nex", "KillerInstinct"]
+    minimum = "1.2"
     evented = True
 
     filter_categories = set(["windows"])
+
+    def __init__(self, *args, **kwargs):
+        Signature.__init__(self, *args, **kwargs)
+        self.ret = dict()
 
     def on_call(self, call, process):
         indicators = [
@@ -36,9 +40,25 @@ class AntiDBGWindows(Signature):
             "PROCMON_WINDOW_CLASS",
             "File Monitor - Sysinternals: www.sysinternals.com",
             "Process Monitor - Sysinternals: www.sysinternals.com",
+            "Registry Monitor - Sysinternals: www.sysinternals.com",
         ]
 
         for indicator in indicators:
             if self.check_argument_call(call, pattern=indicator, category="windows"):
-                self.data.append({"window" : indicator})
-                return True
+                if process["process_name"] not in self.ret.keys():
+                    self.ret[process["process_name"]] = list()
+                curapi = call["api"]
+                window = self.get_argument(call, "ClassName")
+                if window == "0":
+                    window = self.get_argument(call, "WindowName")
+                if (curapi, window) not in self.ret[process["process_name"]]:
+                    self.ret[process["process_name"]].append((curapi, window))
+                return None
+
+    def on_complete(self):
+        if self.ret:
+            for proc in self.ret.keys():
+                for api, value in self.ret[proc]:
+                    self.data.append({"Window": api + " -> " + value})
+            return True
+        return False
