@@ -54,7 +54,7 @@ class EncryptedIOC(Signature):
                         if ioc not in dedup:
                             dedup.append(ioc)
         if dedup:
-            for data in dedup:
+            for ioc in dedup:
                 self.data.append({"ioc": ioc})
 
         return extracted_config
