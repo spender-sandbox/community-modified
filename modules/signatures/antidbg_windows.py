@@ -36,11 +36,15 @@ class AntiDBGWindows(Signature):
             "WinDbgFrameClass",
             "pediy06",
             "GBDYLLO",
+            "RegmonClass",
             "FilemonClass",
+            "Regmonclass",
+            "Filemonclass",
             "PROCMON_WINDOW_CLASS",
             "File Monitor - Sysinternals: www.sysinternals.com",
             "Process Monitor - Sysinternals: www.sysinternals.com",
             "Registry Monitor - Sysinternals: www.sysinternals.com",
+            "18467-41",
         ]
 
         for indicator in indicators:
