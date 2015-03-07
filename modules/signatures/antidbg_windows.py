@@ -47,18 +47,17 @@ class AntiDBGWindows(Signature):
             if self.check_argument_call(call, pattern=indicator, category="windows"):
                 if process["process_name"] not in self.ret.keys():
                     self.ret[process["process_name"]] = list()
-                curapi = call["api"]
                 window = self.get_argument(call, "ClassName")
                 if window == "0":
                     window = self.get_argument(call, "WindowName")
-                if (curapi, window) not in self.ret[process["process_name"]]:
-                    self.ret[process["process_name"]].append((curapi, window))
+                if window not in self.ret[process["process_name"]]:
+                    self.ret[process["process_name"]].append(window)
                 return None
 
     def on_complete(self):
         if self.ret:
             for proc in self.ret.keys():
-                for api, value in self.ret[proc]:
-                    self.data.append({"Window": api + " -> " + value})
+                for value in self.ret[proc]:
+                    self.data.append({"Window": value})
             return True
         return False
