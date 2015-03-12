@@ -24,8 +24,9 @@ class NetworkSMTP(Signature):
     minimum = "0.5"
 
     def run(self):
-        if "smtp" in self.results["network"]:
-            if len(self.results["network"]["smtp"]) > 0:
-                return True
+        if "network" in self.results:
+            if "smtp" in self.results["network"]:
+                if len(self.results["network"]["smtp"]) > 0:
+                    return True
 
         return False

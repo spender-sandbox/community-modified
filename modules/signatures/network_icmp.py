@@ -24,8 +24,9 @@ class NetworkICMP(Signature):
     minimum = "1.0"
 
     def run(self):
-        if "icmp" in self.results["network"]:
-            if len(self.results["network"]["icmp"]) > 0:
-                return True
+        if "network" in self.results:
+            if "icmp" in self.results["network"]:
+                if len(self.results["network"]["icmp"]) > 0:
+                    return True
 
         return False

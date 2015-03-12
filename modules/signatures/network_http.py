@@ -24,8 +24,9 @@ class NetworkHTTP(Signature):
     minimum = "0.5"
 
     def run(self):
-        if "http" in self.results["network"]:
-            if len(self.results["network"]["http"]) > 0:
-                return True
+        if "network" in self.results:
+            if "http" in self.results["network"]:
+                if len(self.results["network"]["http"]) > 0:
+                    return True
 
         return False

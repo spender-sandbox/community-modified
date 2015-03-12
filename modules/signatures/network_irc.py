@@ -24,8 +24,9 @@ class NetworkIRC(Signature):
     minimum = "0.6"
 
     def run(self):
-        if "irc" in self.results["network"]:
-            if len(self.results["network"]["irc"]) > 0:
-                return True
+        if "network" in self.results:
+            if "irc" in self.results["network"]:
+                if len(self.results["network"]["irc"]) > 0:
+                    return True
 
         return False
