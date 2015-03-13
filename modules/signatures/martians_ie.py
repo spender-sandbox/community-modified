@@ -1,5 +1,4 @@
-# Copyright (C) 2014 Accuvant Inc. (bspengler@accuvant.com)
-#
+# Copyright (C) 2015 Will Metcalf (william.metcalf@gmail.com)#
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
@@ -21,7 +20,7 @@ class MartiansIE(Signature):
     description = "Martian Subprocess Started By IE"
     severity = 3
     categories = ["martians"]
-    authors = ["Accuvant/ET"]
+    authors = ["Will Metcalf"]
     minimum = "0.5"
 
     def go_deeper(self, pdict, result=None):
