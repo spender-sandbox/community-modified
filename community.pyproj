@@ -54,6 +54,10 @@
     <Compile Include="modules\signatures\driver_load.py" />
     <Compile Include="modules\signatures\disables_wfp.py" />
     <Compile Include="modules\signatures\injection_explorer.py" />
+    <Compile Include="modules\signatures\packer_themida.py" />
+    <Compile Include="modules\signatures\packer_vmprotect.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="modules\signatures\persistence_service.py" />
     <Compile Include="modules\signatures\stealth_network.py" />
     <Compile Include="modules\signatures\stealth_hiddenreg.py" />
