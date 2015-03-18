@@ -54,4 +54,13 @@ class Office_Macro(Signature):
                 for positive in positives:
                     self.data.append({"Lure": positive})
 
+        # Increase severity on empty documents with macros
+        if ret and "static" in self.results:
+            if "Metadata" in self.results["static"]:
+                if "SummaryInformation" in self.results["static"]["Metadata"]:
+                    words = self.results["static"]["Metadata"]["SummaryInformation"]["num_words"]
+                    if words == "0":
+                        self.severity = 3
+                        self.description += " The file also appears to have no content."
+
         return ret
