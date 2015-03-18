@@ -63,7 +63,7 @@ class MartiansIE(Signature):
         processes = self.results["behavior"]["processtree"]
         if len(processes):
             self.initialpath = processes[0]["module_path"].lower()
-        if self.ie_paths_re.match(self.initialpath) and processes[0].has_key("children"):
+        if self.initialpath and self.ie_paths_re.match(self.initialpath) and processes[0].has_key("children"):
            self.martians = self.find_martians(processes,self.white_list_re_compiled)
            if len(self.martians) > 0:
                for martian in self.martians:
