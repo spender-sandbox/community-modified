@@ -35,7 +35,7 @@ class CheckIP(Signature):
             "whatismyipaddress.com",
             "myipaddress.com",
             "ip-addr.es",
-            "api.ipify.com",
+            "api.ipify.org",
             "ipinfo.info",
             "myexternalip.com",
         ]
