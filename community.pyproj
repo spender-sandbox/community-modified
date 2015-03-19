@@ -37,6 +37,8 @@
     <Compile Include="modules\signatures\antivm_vmware_devices.py" />
     <Compile Include="modules\signatures\antivm_vbox_devices.py" />
     <Compile Include="modules\signatures\antivm_sboxie_libs.py" />
+    <Compile Include="modules\signatures\antivm_vmware_events.py" />
+    <Compile Include="modules\signatures\antivm_vmware_mutexes.py" />
     <Compile Include="modules\signatures\antivm_vpc_files.py" />
     <Compile Include="modules\signatures\antivm_vmware_keys.py" />
     <Compile Include="modules\signatures\antivm_vmware_files.py" />
@@ -51,15 +53,23 @@
     <Compile Include="modules\signatures\banker_zeus_p2p.py" />
     <Compile Include="modules\signatures\banker_zeus_url.py" />
     <Compile Include="modules\signatures\bitcoin_opencl.py" />
+    <Compile Include="modules\signatures\deepfreeze_mutex.py" />
     <Compile Include="modules\signatures\driver_load.py" />
     <Compile Include="modules\signatures\disables_wfp.py" />
+    <Compile Include="modules\signatures\encrypted_ioc.py" />
     <Compile Include="modules\signatures\injection_explorer.py" />
     <Compile Include="modules\signatures\martians_ie.py" />
+    <Compile Include="modules\signatures\multiple_ua.py" />
+    <Compile Include="modules\signatures\office_macro.py" />
+    <Compile Include="modules\signatures\office_suspicious.py" />
+    <Compile Include="modules\signatures\packer_armadillo_mutex.py" />
+    <Compile Include="modules\signatures\packer_armadillo_regkey.py" />
     <Compile Include="modules\signatures\packer_themida.py" />
     <Compile Include="modules\signatures\packer_vmprotect.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="modules\signatures\persistence_service.py" />
+    <Compile Include="modules\signatures\ransomware_files.py" />
     <Compile Include="modules\signatures\stealth_network.py" />
     <Compile Include="modules\signatures\stealth_hiddenreg.py" />
     <Compile Include="modules\signatures\stealth_webhistory.py" />
