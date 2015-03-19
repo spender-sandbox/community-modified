@@ -25,7 +25,7 @@ class VMwareDetectMutexs(Signature):
 
     def run(self):
         ret = False
-        indocators = [
+        indicators = [
             ".*VMwareGuestDnDDataMutex$",
             ".*VMwareGuestCopyPasteMutex$",
             ".*VMToolsHookQueueLock$",

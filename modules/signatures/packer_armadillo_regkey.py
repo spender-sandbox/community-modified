@@ -30,6 +30,7 @@ class ArmadilloRegKey(Signature):
 
         for indicator in indicators:
             match = self.check_key(pattern=indicator, regex=True)
-            return True
+            if match:
+                return True
 
         return False
