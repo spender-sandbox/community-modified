@@ -40,6 +40,8 @@ class AntiAVDetectReg(Signature):
             ".*\\\\Software\\\\TrendMicro$",
             ".*\\\\Software\\\\VBA32$",
             ".*\\\\Software\\\\Zone\\ Labs\\\\ZoneAlarm$",
+            ".*\\\\Software\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\App\\ Paths\\\\mbam.exe$",
+            ".*\\\\SYSTEM\\\\CurrentControlSet\\\\services\\\\Avg\\\\SystemValues$"
         ]
         found = False
         for indicator in reg_indicators:
