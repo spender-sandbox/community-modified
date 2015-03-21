@@ -26,12 +26,24 @@ class Office_Macro(Signature):
     def run(self):
         ret = False
         if "static" in self.results:
+            # 97-2003 OLE and 2007+ XML macros
             if "Macro" in self.results["static"]:
                 if "Code" in self.results["static"]["Macro"]:
                     ret = True
                     total = len(self.results["static"]["Macro"]["Code"])
                     if total > 1:
                         self.description = "The office file has %s macros." % str(total)
+            # 97-2003 XML macros
+            if not ret and "strings" in self.results:
+                header = False
+                for line in self.results["strings"]:
+                    if "<?xml" in line:
+                        header = True
+                    if header and 'macrosPresent="yes"' in line:
+                        ret = True
+                        self.description = "The office file has an MSO/ActiveMime based macro."
+                        self.severity = 3
+                        break
 
         # Check for known lures
         if ret and "strings" in self.results:
