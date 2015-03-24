@@ -16,7 +16,11 @@ class KeyLogger(Signature):
 
     def on_call(self, call, process):
         if call["api"] == "GetAsyncKeyState":
-            return True
+            # avoid an IE false positive
+            keycode = int(self.get_argument(call, "KeyCode"), 10)
+            # VK_SHIFT / VK_CONTROL
+            if keycode != 16 and keycode != 17:
+                return True
         id = int(self.get_argument(call, "HookIdentifier"), 10)
         thread = int(self.get_argument(call, "ThreadId"), 10)
 
