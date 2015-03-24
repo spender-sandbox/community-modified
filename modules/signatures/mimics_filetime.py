@@ -73,52 +73,56 @@ class MimicsFiletime(Signature):
 
     def on_call(self, call, process):
         if process is not self.lastprocess:
-                self.handles = dict()
-                self.old_handles = []
-                self.lastprocess = process
+            self.handles = dict()
+            self.old_handles = []
+            self.lastprocess = process
 
         if (call["api"] == "NtOpenFile" or call["api"] == "NtCreateFile") and call["status"]:
-                handle = int(self.get_argument(call, "FileHandle"), 16)
-                filename = self.get_argument(call, "FileName")
-                if handle not in self.handles:
-                        self.handles[handle] = HandleInfo(handle, filename)
+            handle = int(self.get_argument(call, "FileHandle"), 16)
+            filename = self.get_argument(call, "FileName")
+            if handle not in self.handles:
+                self.handles[handle] = HandleInfo(handle, filename)
         elif call["api"] == "NtClose":
-                handle = int(self.get_argument(call, "Handle"), 16)
-                try:
-                        self.old_handles.append(self.handles[handle])
-                        del self.handles[handle]
-                except:
+            handle = int(self.get_argument(call, "Handle"), 16)
+            try:
+                self.old_handles.append(self.handles[handle])
+                del self.handles[handle]
+            except:
                         pass
         elif call["api"] == "NtQueryInformationFile":
-                handle = int(self.get_argument(call, "FileHandle"), 16)
-                querytype = int(self.get_argument(call, "FileInformationClass"), 10)
-                if querytype == self.BasicFileInformation:
-                        try:
-                                obj = self.handles[handle]
-                                obj.set_file_times(self.get_raw_argument(call, "FileInformation"))
-                        except:
-                                pass
+            handle = int(self.get_argument(call, "FileHandle"), 16)
+            querytype = int(self.get_argument(call, "FileInformationClass"), 10)
+            if querytype == self.BasicFileInformation:
+                try:
+                    obj = self.handles[handle]
+                    obj.set_file_times(self.get_raw_argument(call, "FileInformation"))
+                except:
+                    pass
         elif call["api"] == "NtSetInformationFile":
-                handle = int(self.get_argument(call, "FileHandle"), 16)
-                settype = int(self.get_argument(call, "FileInformationClass"), 10)
-                if settype == self.BasicFileInformation:
-                        try:
-                                obj = self.handles[handle]
-                                obj.set_file_times(self.get_raw_argument(call, "FileInformation"))
-                        except:
-                                return None
-                        for val in self.handles.itervalues():
-                                filename = obj.check_file_times(val)
-                                if filename:
-                                        break
-                        if not filename:
-                                for val in self.old_handles:
-                                        filename = obj.check_file_times(val)
-                                        if filename:
-                                                break
-                        if filename and filename != obj.filename:
-                                self.mimics.add((filename, obj.filename))
-                                self.saw_mimic = True
+            handle = int(self.get_argument(call, "FileHandle"), 16)
+            settype = int(self.get_argument(call, "FileInformationClass"), 10)
+            if settype != self.BasicFileInformation:
+                return None
+            try:
+                obj = self.handles[handle]
+                obj.set_file_times(self.get_raw_argument(call, "FileInformation"))
+            except:
+                return None
+            for val in self.handles.itervalues():
+                filename = obj.check_file_times(val)
+                if filename:
+                    break
+            if not filename:
+                for val in self.old_handles:
+                    filename = obj.check_file_times(val)
+                    if filename:
+                        break
+            if filename and filename != obj.filename:
+                # prevent a false-positive
+                if filename.lower() == "c:\\windows\\system32\\cscui.dll" and obj.filename.lower() == "c:\\program files\\internet explorer\\iexplore.exe":
+                    return None
+                self.mimics.add((filename, obj.filename))
+                self.saw_mimic = True
         return None
 
     def on_complete(self):
