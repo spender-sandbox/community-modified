@@ -75,6 +75,7 @@ class Autorun(Signature):
             ]
         whitelists = [
             ".*\\\\Software\\\\(Wow6432Node\\\\)?Classes\\\\clsid\\\\{CAFEEFAC-0017-0000-FFFF-ABCDEFFEDCBA}\\\\InprocServer32\\\\.*"
+            ".*\\\\Software\\\\(Wow6432Node\\\\)?Classes\\\\clsid\\\\[^\\\\]*\\\\InprocServer32\\\\ThreadingModel$",
             ]
 
         for indicator in indicators:
@@ -88,9 +89,11 @@ class Autorun(Signature):
                             break
 
                     if not in_whitelist:
-                        self.data.append({"key" : match})
-                        self.data.append({"data" : self.registry_writes.get(match, "unknown")})
-                        self.found_autorun = True
+                        data = self.registry_writes.get(match, "unknown")
+                        if data.lower() != "c:\\program files\\java\\jre7\\bin\jp2iexp.dll":
+                            self.data.append({"key" : match})
+                            self.data.append({"data" : data})
+                            self.found_autorun = True
 
         indicators = [
             ".*\\\\win\.ini$",
