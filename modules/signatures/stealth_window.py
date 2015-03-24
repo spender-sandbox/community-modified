@@ -17,8 +17,8 @@ from lib.cuckoo.common.abstracts import Signature
 
 class Hidden_Window(Signature):
     name = "stealth_window"
-    description = "A process created a hidden window."
-    severity = 3
+    description = "A process created a hidden window"
+    severity = 2
     categories = ["stealth"]
     authors = ["KillerInstinct"]
     minimum = "1.2"
@@ -48,7 +48,7 @@ class Hidden_Window(Signature):
                 self.hidden.append((proc, spawn))
                 self.data.append({"Process": proc + " -> " + spawn})
 
-        if call["api"] == "ShellExecuteExW":
+        elif call["api"] == "ShellExecuteExW":
             buf = str(self.get_argument(call, "Show"))
             # Handle SW_HIDE flag
             if buf == "0":
