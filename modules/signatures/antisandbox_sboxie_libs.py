@@ -16,10 +16,10 @@
 from lib.cuckoo.common.abstracts import Signature
 
 class SandboxieDetectLibs(Signature):
-    name = "antivm_sboxie_libs"
+    name = "antisandbox_sboxie_libs"
     description = "Detects Sandboxie through the presence of a library"
     severity = 3
-    categories = ["anti-vm"]
+    categories = ["anti-sandbox"]
     authors = ["Accuvant"]
     minimum = "1.2"
     evented = True
