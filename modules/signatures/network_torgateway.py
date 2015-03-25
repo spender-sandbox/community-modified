@@ -41,7 +41,7 @@ class TorGateway(Signature):
             "^.*\.torconnectpay\.com$",
             "^.*\.torwalletpay\.com$",
             "^.*\.walterwhitepay\.com$",
-            "^.*\rossulbrichtpay\.com$"
+            "^.*\.rossulbrichtpay\.com$"
         ]
         ip_indicators = [
             "195.85.254.203"
