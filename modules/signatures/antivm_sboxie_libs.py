@@ -1,4 +1,4 @@
-# Copyright (C) 2014 Accuvant, Inc. (bspengler@accuvant.com)
+# Copyright (C) 2014-2015 Accuvant, Inc. (bspengler@accuvant.com)
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -24,7 +24,7 @@ class SandboxieDetectLibs(Signature):
     minimum = "1.2"
     evented = True
 
-    filter_apinames = set(["LdrLoadDll"])
+    filter_apinames = set(["LdrLoadDll", "LdrGetDllHandle"])
 
     def on_call(self, call, process):
         dllname = self.get_argument(call, "FileName")
