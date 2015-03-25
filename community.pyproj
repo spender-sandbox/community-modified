@@ -25,6 +25,7 @@
     <Compile Include="modules\signatures\antiemu_wine.py" />
     <Compile Include="modules\signatures\antisandbox_mouse_hook.py" />
     <Compile Include="modules\signatures\antisandbox_productid.py" />
+    <Compile Include="modules\signatures\antisandbox_sunbelt_files.py" />
     <Compile Include="modules\signatures\antisandbox_sunbelt_libs.py" />
     <Compile Include="modules\signatures\antisandbox_unhook.py" />
     <Compile Include="modules\signatures\antivirus_virustotal.py" />
