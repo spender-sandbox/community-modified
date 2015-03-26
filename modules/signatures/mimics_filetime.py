@@ -118,8 +118,8 @@ class MimicsFiletime(Signature):
                     if filename:
                         break
             if filename and filename != obj.filename:
-                # prevent a false-positive
-                if filename.lower() == "c:\\windows\\system32\\cscui.dll" and obj.filename.lower() == "c:\\program files\\internet explorer\\iexplore.exe":
+                # prevent a false-positive with IE as the destination
+                if obj.filename.lower() == "c:\\program files\\internet explorer\\iexplore.exe":
                     return None
                 self.mimics.add((filename, obj.filename))
                 self.saw_mimic = True
