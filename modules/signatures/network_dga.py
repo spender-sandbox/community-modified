@@ -24,7 +24,7 @@ class NetworkDGA(Signature):
     minimum = "1.3"
 
     def run(self):
-        resolv_success = False
+        resolv_success = 0
         dga_score = 0
 
         if "network" in self.results:
@@ -45,11 +45,13 @@ class NetworkDGA(Signature):
                                         dga_score += 2
                                     dga_score += 1
                             else:
-                                resolv_success = True
+                                resolv_success += 1
 
         # to deal with old malware with completely dead domains
         if not resolv_success:
             dga_score = 0
+        else:
+            dga_score /= resolv_success
 
         if dga_score > 4:
             return True
