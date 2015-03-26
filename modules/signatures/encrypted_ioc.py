@@ -8,7 +8,7 @@ from lib.cuckoo.common.abstracts import Signature
 class EncryptedIOC(Signature):
     name = "encrypted_ioc"
     description = "At least one IP Address, Domain, or File Name was found in a crypto call"
-    severity = 3
+    severity = 2
     categories = ["crypto"]
     authors = ["KillerInstinct"]
     minimum = "1.2"
