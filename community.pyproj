@@ -65,6 +65,7 @@
     <Compile Include="modules\signatures\injection_explorer.py" />
     <Compile Include="modules\signatures\martians_ie.py" />
     <Compile Include="modules\signatures\multiple_ua.py" />
+    <Compile Include="modules\signatures\network_dga.py" />
     <Compile Include="modules\signatures\office_macro.py" />
     <Compile Include="modules\signatures\office_suspicious.py" />
     <Compile Include="modules\signatures\packer_armadillo_mutex.py" />
