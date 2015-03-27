@@ -13,6 +13,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+import re
 from lib.cuckoo.common.abstracts import Signature
 
 class Hidden_Window(Signature):
@@ -32,26 +33,26 @@ class Hidden_Window(Signature):
 
     def on_call(self, call, process):
         if call["api"] == "CreateProcessInternalW":
-            clbuf = self.get_argument(call, "CommandLine")
-            cfbuf = self.get_argument(call, "CreationFlags")
+            clbuf = self.get_argument(call, "CommandLine").lower()
+            cfbuf = int(self.get_argument(call, "CreationFlags"), 16)
             # Handle Powershell CommandLine Arguments
-            if "powershell" in clbuf and ("-win hidden" in clbuf or
-                                          "-windowstyle hidden" in clbuf):
+            if "powershell" in clbuf and (re.search("-win[ ]+hidden", clbuf) or
+                                          re.search("-windowstyle[ ]+hidden", clbuf)):
                 proc = process["process_name"]
                 spawn = self.get_argument(call, "ApplicationName")
                 self.hidden.append((proc, spawn))
                 self.data.append({"Process": proc + " -> " + spawn})
-            # Handle CREATE_NO_WINDOW flag
-            elif cfbuf == "0x08000000":
+            # Handle CREATE_NO_WINDOW flag, ignored for CREATE_NEW_CONSOLE and DETACHED_PROCESS
+            elif cfbuf & 0x08000000 and  not (cfbuf & 0x10 or cfbuf & 0x8):
                 proc = process["process_name"]
                 spawn = self.get_argument(call, "ApplicationName")
                 self.hidden.append((proc, spawn))
                 self.data.append({"Process": proc + " -> " + spawn})
 
         elif call["api"] == "ShellExecuteExW":
-            buf = str(self.get_argument(call, "Show"))
+            buf = int(self.get_argument(call, "Show"), 10)
             # Handle SW_HIDE flag
-            if buf == "0":
+            if buf == 0:
                 proc = process["process_name"]
                 spawn = self.get_argument(call, "FilePath")
                 self.hidden.append((proc, spawn))
