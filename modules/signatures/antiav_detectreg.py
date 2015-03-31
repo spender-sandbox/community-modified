@@ -15,6 +15,7 @@ class AntiAVDetectReg(Signature):
 
     def run(self):
         reg_indicators = [
+            ".*\\\\SYSTEM\\\\CurrentControlSet\\\\services\\\\Avg\\\\SystemValues$"
             ".*\\\\Software\\\\Avg$",
             ".*\\\\Software\\\\AVAST\\ Software\\\\.*",
             ".*\\\\Software\\\\Avira$",

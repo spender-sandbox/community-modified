@@ -17,7 +17,7 @@ from lib.cuckoo.common.abstracts import Signature
 
 class Dridex_APIs(Signature):
     name = "dridex_behavior"
-    description = "Observed known Dridex behavioral API's."
+    description = "Exhibits behavior characteristic of Dridex malware"
     severity = 3
     categories = ["banker", "trojan"]
     families = ["dridex"]
@@ -37,19 +37,19 @@ class Dridex_APIs(Signature):
         if call["api"] == "RegQueryValueExA":
             # There are many more ways to get the computer name, this is the
             # pattern observed with all Dridex varients 08/14 - 03/15 so far.
-            testkey = self.get_argument(call, "FullName")
-            if testkey == "HKEY_LOCAL_MACHINE\\SYSTEM\\ControlSet001\\Control\\ComputerName\\ComputerName\\ComputerName":
+            testkey = self.get_argument(call, "FullName").lower()
+            if testkey == "hkey_local_machine\\system\\controlset001\\control\\computername\\computername\\computername":
                 if self.get_argument(call, "ValueName") == "ComputerName":
                     buf = self.get_argument(call, "Data")
                     if buf:
-                        self.compname = buf
-            if testkey == "HKEY_CURRENT_USER\\Volatile Environment\\USERNAME":
+                        self.compname = buf.lower()
+            if testkey == "hkey_current_user\\volatile environment\\username":
                 if self.get_argument(call, "ValueName") == "USERNAME":
                     buf = self.get_argument(call, "Data")
                     if buf:
-                        self.username = buf
+                        self.username = buf.lower()
         if call["api"] == "CryptHashData":
-            self.crypted.append(self.get_argument(call, "Buffer"))
+            self.crypted.append(self.get_argument(call, "Buffer").lower())
 
     def on_complete(self):
         ret = False
