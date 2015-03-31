@@ -41,7 +41,7 @@ class NetworkDGA(Signature):
                                         dga_score += 2
                                     if len(dns["request"]) > 30:
                                         dga_score += 10
-                                    if dns["request"].endswith((".su", ".kz")):
+                                    if dns["request"].endswith((".su", ".kz", ".cc", ".ws", ".tk", ".so", ".to")):
                                         dga_score += 2
                                     dga_score += 1
                             else:
