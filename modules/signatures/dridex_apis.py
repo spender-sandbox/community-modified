@@ -29,6 +29,7 @@ class Dridex_APIs(Signature):
         Signature.__init__(self, *args, **kwargs)
         self.compname = ""
         self.username = ""
+        self.is_xp = False
         self.crypted = []
 
     filter_apinames = set(["RegQueryValueExA", "CryptHashData"])
@@ -39,21 +40,23 @@ class Dridex_APIs(Signature):
             # pattern observed with all Dridex varients 08/14 - 03/15 so far.
             testkey = self.get_argument(call, "FullName").lower()
             if testkey == "hkey_local_machine\\system\\controlset001\\control\\computername\\computername\\computername":
-                if self.get_argument(call, "ValueName") == "ComputerName":
-                    buf = self.get_argument(call, "Data")
-                    if buf:
-                        self.compname = buf.lower()
+                buf = self.get_argument(call, "Data")
+                if buf:
+                    self.compname = buf.lower()
             if testkey == "hkey_current_user\\volatile environment\\username":
-                if self.get_argument(call, "ValueName") == "USERNAME":
+                if call["status"]:
                     buf = self.get_argument(call, "Data")
                     if buf:
                         self.username = buf.lower()
+                else:
+                    self.is_xp = True
+
         if call["api"] == "CryptHashData":
             self.crypted.append(self.get_argument(call, "Buffer").lower())
 
     def on_complete(self):
         ret = False
-        if self.compname and self.username and self.crypted:
+        if self.compname and (self.username or self.is_xp) and self.crypted:
             buf = self.compname + self.username
             for item in self.crypted:
                 if buf in item:
