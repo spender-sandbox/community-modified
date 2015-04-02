@@ -32,5 +32,5 @@ class Dyre_APIs(Signature):
 
     def on_call(self, call, process):
         buf = self.get_argument(call, "Buffer")
-        if buf == "qwererthwebfsdvjaf+\x00":
+        if buf == "qwererthwebfsdvjaf+\\x00":
             return True
