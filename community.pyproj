@@ -63,6 +63,9 @@
     <Compile Include="modules\signatures\dridex_apis.py" />
     <Compile Include="modules\signatures\driver_load.py" />
     <Compile Include="modules\signatures\disables_wfp.py" />
+    <Compile Include="modules\signatures\dyre_apis.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="modules\signatures\encrypted_ioc.py" />
     <Compile Include="modules\signatures\infostealer_bitcoin.py" />
     <Compile Include="modules\signatures\injection_explorer.py" />
