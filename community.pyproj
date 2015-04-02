@@ -79,6 +79,9 @@
     </Compile>
     <Compile Include="modules\signatures\persistence_service.py" />
     <Compile Include="modules\signatures\ransomware_files.py" />
+    <Compile Include="modules\signatures\stealth_hidenotifications.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="modules\signatures\stealth_network.py" />
     <Compile Include="modules\signatures\stealth_hiddenreg.py" />
     <Compile Include="modules\signatures\stealth_webhistory.py" />
