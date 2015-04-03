@@ -21,9 +21,10 @@ class KeyLogger(Signature):
             # VK_SHIFT / VK_CONTROL
             if keycode != 16 and keycode != 17:
                 return True
-        id = int(self.get_argument(call, "HookIdentifier"), 10)
-        thread = int(self.get_argument(call, "ThreadId"), 10)
+        else:
+            id = int(self.get_argument(call, "HookIdentifier"), 10)
+            thread = int(self.get_argument(call, "ThreadId"), 10)
 
-        # global WH_KEYBOARD or WH_KEYBOARD_LL hook
-        if thread == 0 and (id == 2 or id == 13):
-            return True
+            # global WH_KEYBOARD or WH_KEYBOARD_LL hook
+            if thread == 0 and (id == 2 or id == 13):
+                return True
