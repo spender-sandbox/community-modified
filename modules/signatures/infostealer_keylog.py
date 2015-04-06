@@ -18,8 +18,8 @@ class KeyLogger(Signature):
         if call["api"] == "GetAsyncKeyState":
             # avoid an IE false positive
             keycode = int(self.get_argument(call, "KeyCode"), 10)
-            # VK_SHIFT / VK_CONTROL / VK_ESCAPE / VK_CANCEL / VK_MENU
-            if keycode != 16 and keycode != 17 and keycode != 27 and keycode != 3 and keycode != 18:
+            # whitelist a-z, 0-9
+            if (keycode >= 0x30 and keycode <= 0x39) or (keycode >= 0x4a and keycode <= 0x5a):
                 return True
         else:
             id = int(self.get_argument(call, "HookIdentifier"), 10)
