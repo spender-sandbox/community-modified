@@ -19,6 +19,7 @@ class Unhook(Signature):
     name = "antisandbox_unhook"
     description = "Tries to unhook Windows functions monitored by Cuckoo"
     severity = 3
+    confidence = 60
     categories = ["anti-sandbox"]
     authors = ["nex","Accuvant"]
     minimum = "1.2"
@@ -43,6 +44,15 @@ class Unhook(Signature):
                self.unhook_info.add("function_name: " + funcname + ", type: " + self.get_argument(call, "UnhookType"))
     
     def on_complete(self):
+        # lower the severity, commonly seen in legit binaries
+        if self.unhook_info == set(["SetUnhandledExceptionFilter"]):
+            severity = 2
+            confidence = 0
+
+        if len(self.unhook_info) > 5:
+            weight = len(self.unhook_info)
+            confidence = 100
+
         for info in self.unhook_info:
             self.data.append({"unhook" : info })
         return self.saw_unhook
