@@ -17,7 +17,7 @@ from lib.cuckoo.common.abstracts import Signature
 
 class RansomwareFiles(Signature):
     name = "ransomware_files"
-    description = "Created known ransomware decryption instruction file."
+    description = "Created known ransomware decryption instruction / key file."
     severity = 3
     categories = ["ransomware"]
     authors = ["KillerInstinct"]
@@ -29,6 +29,8 @@ class RansomwareFiles(Signature):
             "help_decrypt.html",
             "decrypt_instruction.html",
             "decrypt_instructions.txt",
+            "vault.key",
+            "\\vault.txt",
         ]
 
         if "behavior" in self.results:
