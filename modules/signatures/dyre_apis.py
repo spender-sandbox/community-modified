@@ -43,13 +43,13 @@ class Dyre_APIs(Signature):
             buf = self.get_argument(call, "Path")
             if len(buf) > 10:
                 self.networkapis.add(buf)
- 
+
         return None
-    
+
     def on_complete(self):
         cryptoret = False
         networkret = False
- 
+
         # Crypto API check
         if self.cryptoapis:
             cryptoret = True
@@ -61,7 +61,7 @@ class Dyre_APIs(Signature):
                 if "processes" in self.results["behavior"]:
                     for proc in self.results["behavior"]["processes"]:
                         if "environ" in proc:
-                            if "ComputerName" in proc["environ"]:
+                            if proc["environ"] and "ComputerName" in proc["environ"]:
                                 compnames.add(proc["environ"]["ComputerName"])
             for httpreq in self.networkapis:
                 # Generate patterns (again, should only ever be one)
@@ -70,7 +70,7 @@ class Dyre_APIs(Signature):
                     if buf:
                         networkret = True
                         campaign = buf.group(1)
- 
+
         # Check if there are any winners
         if cryptoret or networkret:
             if cryptoret and networkret:
@@ -78,13 +78,13 @@ class Dyre_APIs(Signature):
                 self.description = "Exhibits behaviorial and network characteristics of Upatre+Dyre/Mini-Dyre malware"
                 self.data.append({"Campaign": campaign})
                 return True
- 
+
             elif networkret:
                 self.description = "Exhibits network behavior characteristic of Upatre+Dyre/Mini-Dyre malware"
                 self.data.append({"Campaign": campaign})
                 return True
- 
+
             elif cryptoret:
                 return True
- 
+
         return False
