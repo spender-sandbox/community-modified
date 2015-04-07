@@ -1,4 +1,4 @@
-# Copyright (C) 2015 Accuvant, Inc. (bspengler@accuvant.com)
+# Copyright (C) 2015 Accuvant, Inc. (bspengler@accuvant.com), KillerInstinct
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -12,6 +12,7 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
+import re
 
 from lib.cuckoo.common.abstracts import Signature
 
@@ -19,18 +20,71 @@ class Dyre_APIs(Signature):
     name = "dyre_behavior"
     description = "Exhibits behavior characteristic of Dyre malware"
     severity = 3
+    confidence = 90
     categories = ["banker", "trojan"]
-    families = ["dyre"]
-    authors = ["Accuvant"]
-    minimum = "1.2"
+    families = ["dyre", "mini-dyre"]
+    authors = ["Accuvant", "KillerInstinct"]
+    minimum = "1.3"
     evented = True
 
     def __init__(self, *args, **kwargs):
         Signature.__init__(self, *args, **kwargs)
+        self.cryptoapis = set()
+        self.networkapis = set()
 
-    filter_apinames = set(["CryptHashData"])
+    filter_apinames = set(["CryptHashData", "HttpOpenRequestA"])
 
     def on_call(self, call, process):
-        buf = self.get_argument(call, "Buffer")
-        if buf == "qwererthwebfsdvjaf+\\x00":
-            return True
+        if call["api"] == "CryptHashData":
+            buf = self.get_argument(call, "Buffer")
+            if buf == "qwererthwebfsdvjaf+\\x00":
+                return True
+        elif call["api"] == "HttpOpenRequestA":
+            buf = self.get_argument(call, "Path")
+            if len(buf) > 10:
+                self.networkapis.add(buf)
+ 
+        return None
+    
+    def on_complete(self):
+        cryptoret = False
+        networkret = False
+ 
+        # Crypto API check
+        if self.cryptoapis:
+            cryptoret = True
+        # C2 Beacon check
+        if self.networkapis:
+            # Gather computer names (should only ever be one honestly)
+            compnames = set()
+            if "behavior" in self.results:
+                if "processes" in self.results["behavior"]:
+                    for proc in self.results["behavior"]["processes"]:
+                        if "environ" in proc:
+                            if "ComputerName" in proc["environ"]:
+                                compnames.add(proc["environ"]["ComputerName"])
+            for httpreq in self.networkapis:
+                # Generate patterns (again, should only ever be one)
+                for cname in compnames:
+                    buf = re.match("/(\d{4}[a-z]{2}\d{2})/" + cname + "_", httpreq)
+                    if buf:
+                        networkret = True
+                        campaign = buf.group(1)
+ 
+        # Check if there are any winners
+        if cryptoret or networkret:
+            if cryptoret and networkret:
+                self.confidence = 100
+                self.description = "Exhibits behaviorial and network characteristics of Upatre+Dyre/Mini-Dyre malware"
+                self.data.append({"Campaign": campaign})
+                return True
+ 
+            elif networkret:
+                self.description = "Exhibits network behavior characteristic of Upatre+Dyre/Mini-Dyre malware"
+                self.data.append({"Campaign": campaign})
+                return True
+ 
+            elif cryptoret:
+                return True
+ 
+        return False
