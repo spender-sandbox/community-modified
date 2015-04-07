@@ -16,10 +16,10 @@ class DeletesShadowCopies(Signature):
     def __init__(self, *args, **kwargs):
         Signature.__init__(self, *args, **kwargs)
 
-    filter_apinames = set(["CreateInternalProcessW","ShellExecuteExW"])
+    filter_apinames = set(["CreateProcessInternalW","ShellExecuteExW"])
 
     def on_call(self, call, process):
-        if call["api"] == "CreateInternalProcessW":
+        if call["api"] == "CreateProcessInternalW":
             cmdline = self.get_argument(call, "CommandLine").lower()
             if "vssadmin" in cmdline and "delete" in cmdline and "shadows" in cmdline:
                 return True
