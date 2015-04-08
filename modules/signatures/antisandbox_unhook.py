@@ -45,7 +45,7 @@ class Unhook(Signature):
     
     def on_complete(self):
         # lower the severity, commonly seen in legit binaries
-        if self.unhook_info == set(["SetUnhandledExceptionFilter"]):
+        if self.unhook_info == set(["function_name: SetUnhandledExceptionFilter, type: modification"]):
             severity = 2
             confidence = 0
 
