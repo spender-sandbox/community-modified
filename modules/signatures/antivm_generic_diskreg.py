@@ -1,4 +1,4 @@
-# Copyright (C) 2012 Claudio "nex" Guarnieri (@botherder)
+# Copyright (C) 2012,2015 Claudio "nex" Guarnieri (@botherder), Accuvant, Inc. (bspengler@accuvant.com)
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -15,14 +15,21 @@
 
 from lib.cuckoo.common.abstracts import Signature
 
-class AntiVMIDE(Signature):
-    name = "antivm_generic_ide"
-    description = "Checks the presence of IDE drives in the registry, possibly for anti-virtualization"
+class AntiVMDiskReg(Signature):
+    name = "antivm_generic_diskreg"
+    description = "Checks the presence of disk drives in the registry, possibly for anti-virtualization"
     severity = 3
+    confidence = 50
     categories = ["anti-vm"]
     authors = ["nex"]
     minimum = "0.5"
 
     def run(self):
-        return self.check_key(pattern=".*\\\\SYSTEM\\\\(CurrentControlSet|ControlSet001)\\\\Enum\\\\IDE$",
-                              regex=True)
+        indicators = [
+            ".*\\\\SYSTEM\\\\(CurrentControlSet|ControlSet001)\\\\Enum\\\\IDE$",
+            ".*\\\\SYSTEM\\\\(CurrentControlSet|ControlSet001)\\\\Services\\\\Disk\\\\Enum\\\\.*",
+            ]
+        for indicator in indicators:
+            if self.check_key(pattern=indicator, regex=True):
+                return True
+        return False
