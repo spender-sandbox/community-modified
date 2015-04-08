@@ -1,4 +1,4 @@
-# Copyright (C) 2014 Accuvant Inc. (bspengler@accuvant.com)
+# Copyright (C) 2014-2015 Accuvant Inc. (bspengler@accuvant.com)
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -25,6 +25,8 @@ class CopiesSelf(Signature):
 
     def run(self):
         if self.results["target"]["category"] != "file":
+            return False
+        if "PE32" not in self.results["target"]["file"]["type"] and sefl.results["target"]["file"]["type"] != "MS-DOS executable":
             return False
         created_copy = False
         # get the path of the initial monitored executable
