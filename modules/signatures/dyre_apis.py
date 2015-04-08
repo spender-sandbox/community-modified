@@ -29,7 +29,7 @@ class Dyre_APIs(Signature):
 
     def __init__(self, *args, **kwargs):
         Signature.__init__(self, *args, **kwargs)
-        self.cryptoapis = set()
+        self.cryptoapis = False
         self.networkapis = set()
 
     filter_apinames = set(["CryptHashData", "HttpOpenRequestA"])
@@ -38,7 +38,7 @@ class Dyre_APIs(Signature):
         if call["api"] == "CryptHashData":
             buf = self.get_argument(call, "Buffer")
             if buf == "qwererthwebfsdvjaf+\\x00":
-                return True
+                self.cryptoapis = True
         elif call["api"] == "HttpOpenRequestA":
             buf = self.get_argument(call, "Path")
             if len(buf) > 10:
