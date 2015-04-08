@@ -1,4 +1,4 @@
-# Copyright (C) 2015 KillerInstinct
+# Copyright (C) 2015 KillerInstinct, Accuvant, Inc. (bspengler@accuvant.com)
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -21,24 +21,20 @@ class RansomwareFiles(Signature):
     severity = 3
     categories = ["ransomware"]
     authors = ["KillerInstinct"]
-    minimum = "0.5"
+    minimum = "1.2"
 
     def run(self):
         # Lower-case file names
         file_list = [
-            "help_decrypt.html",
-            "decrypt_instruction.html",
-            "decrypt_instructions.txt",
-            "vault.key",
-            "\\vault.txt",
+            "\\\\help_decrypt.html$",
+            "\\\\decrypt_instruction.html$",
+            "\\\\decrypt_instructions.txt$",
+            "\\\\vault.key$",
+            "\\\\vault.txt$",
         ]
 
-        if "behavior" in self.results:
-            if "summary" in self.results["behavior"]:
-                if "files" in self.results["behavior"]["summary"]:
-                    for path in self.results["behavior"]["summary"]["files"]:
-                        for badfile in file_list:
-                            if badfile in path.lower():
-                                return True
+        for file in file_list:
+            if self.check_write_file(pattern=file, regex=True):
+                return True
 
         return False
