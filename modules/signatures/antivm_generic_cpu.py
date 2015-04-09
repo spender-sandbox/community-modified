@@ -24,6 +24,6 @@ class AntiVMCPU(Signature):
     minimum = "1.2"
 
     def run(self):
-        if self.check_read_key(pattern=".*\\\\HARDWARE\\\\DESCRIPTION\\\\System\\\\CentralProcessor\\\\0\\\\ProcessorNameString$", regex=True):
+        if self.check_read_key(pattern=r'.*\\HARDWARE\\DESCRIPTION\\System\\CentralProcessor\\[^\\]+\\ProcessorNameString$', regex=True):
             return True
         return False
