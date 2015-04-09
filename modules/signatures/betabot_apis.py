@@ -38,7 +38,7 @@ class BetaBot_APIs(Signature):
         if call["api"] == "NtCreateEvent" or call["api"] == "NtOpenEvent":
             self.events.add(self.get_argument(call, "EventName"))
         elif call["api"] == "HttpSendRequestA":
-            if str(process["module_path"]) == "C:\\Windows\\explorer.exe":
+            if str(process["module_path"]).lower() == "c:\\windows\\explorer.exe":
                 buf = self.get_argument(call, "PostData")
                 if buf:
                     self.postreqs.add(buf)
