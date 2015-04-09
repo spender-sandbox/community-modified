@@ -25,8 +25,8 @@ class Autorun(Signature):
     description = "Installs itself for autorun at Windows startup"
     severity = 3
     categories = ["persistence"]
-    authors = ["Michael Boman", "nex","securitykitten","Accuvant"]
-    minimum = "1.2"
+    authors = ["Michael Boman", "nex", "securitykitten", "Accuvant", "KillerInstinct"]
+    minimum = "1.3"
     evented = True
 
     def __init__(self, *args, **kwargs):
@@ -108,5 +108,11 @@ class Autorun(Signature):
                 for match in match_file:
                     self.data.append({"file" : match})
                 self.found_autorun = True
+
+        taskpat = ".*\\\\Windows\\\\System32\\\\schtasks\.exe.*/CREATE.*/SC\s+(ONLOGON|ONSTART).*"
+        tasked = self.check_executed_command(pattern=taskpat, regex=True)
+        if tasked:
+            self.found_autorun = True
+            self.data.append({"task": tasked})
 
         return self.found_autorun
