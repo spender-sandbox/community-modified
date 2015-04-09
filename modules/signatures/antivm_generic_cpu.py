@@ -1,4 +1,4 @@
-# Copyright (C) 2013,2015 Claudio "nex" Guarnieri (@botherder), Accuvant, Inc. (bspengler@accuvant.com)
+# Copyright (C) 2015 Accuvant, Inc. (bspengler@accuvant.com)
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -15,15 +15,15 @@
 
 from lib.cuckoo.common.abstracts import Signature
 
-class AntiVMBios(Signature):
-    name = "antivm_generic_bios"
-    description = "Checks the version of Bios, possibly for anti-virtualization"
+class AntiVMCPU(Signature):
+    name = "antivm_generic_cpu"
+    description = "Checks the CPU name from registry, possibly for anti-virtualization"
     severity = 3
     categories = ["anti-vm"]
-    authors = ["nex", "Accuvant"]
+    authors = ["Accuvant"]
     minimum = "1.2"
 
     def run(self):
-        if self.check_read_key(pattern=".*\\\\HARDWARE\\\\DESCRIPTION\\\\System\\\\(SystemBiosVersion|VideoBiosVersion)$", regex=True):
+        if self.check_read_key(pattern=".*\\\\HARDWARE\\\\DESCRIPTION\\\\System\\\\CentralProcessor\\\\0\\\\ProcessorNameString$", regex=True):
             return True
         return False

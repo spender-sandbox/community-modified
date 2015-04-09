@@ -47,13 +47,21 @@ class BetaBot_APIs(Signature):
     def on_complete(self):
         malscore = 0
         # Check for ADS deletion path (Always in hidden ProgramData)
-        if self.check_delete_file(pattern="C:\\\\ProgramData\\\\.*:Zone\.Identifier$", regex=True):
-            malscore += 3
+        # TODO: make this use environ info
+        ads_paths = [
+            "C:\\\\ProgramData\\\\.*:Zone\.Identifier$",
+            "C:\\\\Program\\ Files\\\\Common\\ Files\\\\Microsoft\\\\.*:Zone\.Identifier$"
+        ]
+        for indicator in ads_paths:
+            if self.check_delete_file(pattern=indicator, regex=True):
+                malscore += 3
 
         # Check for known filesystem behavior
+        # TODO: make these use environ info
         file_paths = [
             ".*\\\\jagexcache$",
             ".*\\\\AppData\\\\Roaming\\\\\.minecraft$",
+            ".*\\\\Application\\ Data\\\\\.minecraft$",
             ".*\\\\League\\ of\\ Legends$",
         ]
         for indicator in file_paths:
