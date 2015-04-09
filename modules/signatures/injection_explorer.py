@@ -34,7 +34,7 @@ class InjectionExplorer(Signature):
                                 "\\basenamedobjects\\urlzonessm_administrator",
                                 "\\basenamedobjects\\urlzonessm_system"]
 
-    filter_apinames = set(["NtOpenSection", "NtCreateSection", "NtOpenProcess", "ReadProcessMemory", "NtReadVirtualMemory", "FindWindowA", "FindWindowW", "FindWindowExA", "FindWindowExW", "SendNotifyMessageA", "SendNotifyMessageW"])
+    filter_apinames = set(["NtOpenSection", "NtCreateSection", "NtOpenProcess", "ReadProcessMemory", "NtReadVirtualMemory", "FindWindowA", "FindWindowW", "FindWindowExA", "FindWindowExW", "SendNotifyMessageA", "SendNotifyMessageW", "SetWindowLongA", "SetWindowLongW", "SetWindowLongPtrA", "SetWindowLongPtrW"])
 
     def on_call(self, call, process):
         if process is not self.lastprocess:
@@ -53,5 +53,7 @@ class InjectionExplorer(Signature):
             classname = self.get_argument(call, "ClassName")
             if classname.lower() == "shell_traywnd":
                 self.sequence = 4
-        elif self.sequence == 4 and call["api"].startswith("SendNotifyMessage"):
+        elif self.sequence == 4 and call["api"].startswith("SetWindowLong"):
+            self.sequence = 5
+        elif self.sequence == 5 and call["api"].startswith("SendNotifyMessage"):
             return True
