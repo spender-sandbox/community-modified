@@ -26,6 +26,7 @@
     <Compile Include="modules\signatures\antisandbox_mouse_hook.py" />
     <Compile Include="modules\signatures\antisandbox_productid.py" />
     <Compile Include="modules\signatures\antisandbox_joe_anubis_files.py" />
+    <Compile Include="modules\signatures\antiav_avast_libs.py" />
     <Compile Include="modules\signatures\antisandbox_sleep.py" />
     <Compile Include="modules\signatures\antisandbox_sunbelt_files.py" />
     <Compile Include="modules\signatures\antisandbox_sunbelt_libs.py" />
