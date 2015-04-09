@@ -28,5 +28,5 @@ class SandboxieDetectLibs(Signature):
 
     def on_call(self, call, process):
         dllname = self.get_argument(call, "FileName")
-        if "sbiedll.dll" in dllname.lower():
+        if "sbiedll" in dllname.lower():
             return True
