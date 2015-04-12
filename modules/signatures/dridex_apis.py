@@ -12,8 +12,10 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
+import re
 
 from lib.cuckoo.common.abstracts import Signature
+from lib.cuckoo.common.signature_utils import DridexDecode_v1
 
 class Dridex_APIs(Signature):
     name = "dridex_behavior"
@@ -22,7 +24,7 @@ class Dridex_APIs(Signature):
     categories = ["banker", "trojan"]
     families = ["dridex"]
     authors = ["KillerInstinct"]
-    minimum = "1.2"
+    minimum = "1.3"
     evented = True
 
     def __init__(self, *args, **kwargs):
@@ -31,8 +33,12 @@ class Dridex_APIs(Signature):
         self.username = ""
         self.is_xp = False
         self.crypted = []
+        # Set to false if you don't want to extract c2 IPs
+        self.extract = True
+        self.sockmon = dict()
+        self.payloadip = dict()
 
-    filter_apinames = set(["RegQueryValueExA", "CryptHashData"])
+    filter_apinames = set(["RegQueryValueExA", "CryptHashData", "connect", "send", "recv"])
 
     def on_call(self, call, process):
         if call["api"] == "RegQueryValueExA":
@@ -54,6 +60,48 @@ class Dridex_APIs(Signature):
         if call["api"] == "CryptHashData":
             self.crypted.append(self.get_argument(call, "Buffer").lower())
 
+        if call["api"] == "connect":
+            if not self.extract:
+                return None
+
+            socknum = str(self.get_argument(call, "socket"))
+            if socknum and socknum not in self.sockmon.keys():
+                self.sockmon[socknum] = ""
+
+            lastip = self.get_argument(call, "ip")
+            self.sockmon[socknum] = lastip
+
+        if call["api"] == "send":
+            if not self.extract:
+                return None
+
+            socknum = str(self.get_argument(call, "socket"))
+            if socknum and socknum in self.sockmon.keys():
+                buf = self.get_argument(call, "buffer")
+                # POST is a stable indicator observed so far
+                if buf and buf[:4] == "POST":
+                    self.payloadip["send"] = self.sockmon[socknum]
+
+        if call["api"] == "recv":
+            if not self.extract:
+                return None
+
+            socknum = str(self.get_argument(call, "socket"))
+            if socknum and socknum in self.sockmon.keys():
+                buf = self.get_argument(call, "buffer")
+                if buf:
+                    clen = re.search(r"Content-Length:\s([^\s]+)", buf)
+                    if clen:
+                        length = int(clen.group(1))
+                        if length > 100000:
+                            if self.sockmon[socknum] == self.payloadip["send"]:
+                                # Just a sanity check to make sure the IP hasn't changed
+                                # since this is a primitive send/recv monitor
+                                self.payloadip["recv"] = self.sockmon[socknum]
+
+        return None
+
+
     def on_complete(self):
         ret = False
         if self.compname and (self.username or self.is_xp) and self.crypted:
@@ -61,5 +109,20 @@ class Dridex_APIs(Signature):
             for item in self.crypted:
                 if buf in item:
                     ret = True
+
+        if self.extract and ret and self.payloadip and "recv" in self.payloadip:
+            if "suricata" in self.results and "files" in self.results["suricata"]:
+                for sfile in self.results["suricata"]["files"]:
+                    if int(sfile["size"]) > 100000 and sfile["srcip"] == self.payloadip["recv"]:
+                        if "file_info" in sfile.keys():
+                                payload = sfile["file_info"]["path"]
+                                decoder = DridexDecode_v1()
+                                decoded = decoder.run(payload)
+                                break
+
+        if decoded:
+            # We got the IPs :)
+            for ip in decoded:
+                self.data.append({"ioc": ip})
 
         return ret
