@@ -118,11 +118,11 @@ class Dridex_APIs(Signature):
                                 payload = sfile["file_info"]["path"]
                                 decoder = DridexDecode_v1()
                                 decoded = decoder.run(payload)
+                                if decoded:
+                                    # We got the IPs :)
+                                    for ip in decoded:
+                                        self.data.append({"ioc": ip})
                                 break
 
-        if decoded:
-            # We got the IPs :)
-            for ip in decoded:
-                self.data.append({"ioc": ip})
 
         return ret
