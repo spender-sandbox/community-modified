@@ -29,8 +29,9 @@ class ADS(Signature):
             if len(file_path) <= 3:
                 continue
 
-            if ":" in file_path.replace("/", "\\").split("\\")[-1]:
-                self.data.append({"file" : file_path})
-                result = True
+            if ":" in file_path.split("\\")[-1]:
+                if not file_path.lower().startswith("c:\\dosdevices\\") or not file_path[:-1] == ":":
+                    self.data.append({"file" : file_path})
+                    result = True
 
         return result
