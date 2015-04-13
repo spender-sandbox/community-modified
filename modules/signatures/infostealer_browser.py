@@ -32,21 +32,21 @@ class BrowserStealer(Signature):
         self.saw_stealer = False
 
     indicators = [
-        re.compile(".*\\\\Mozilla\\\\Firefox\\\\Profiles\\\\.*\\\\.default\\\\signons\.sqlite$"),
-        re.compile(".*\\\\Mozilla\\\\Firefox\\\\Profiles\\\\.*\\\\.default\\\\secmod\.db$"),
-        re.compile(".*\\\\Mozilla\\\\Firefox\\\\Profiles\\\\.*\\\\.default\\\\cert8\.db$"),
-        re.compile(".*\\\\Mozilla\\\\Firefox\\\\Profiles\\\\.*\\\\.default\\\\key3\.db$"),
-        re.compile(".*\\\\History\\\\History\.IE5\\\\index\.dat$"),
-        re.compile(".*\\\\Cookies\\\\.*"),
-        re.compile(".*\\\\Temporary\\\\ Internet\\ Files\\\\Content\.IE5\\\\index\.dat$"),
-        re.compile(".*\\\\Application\\ Data\\\\Google\\\\Chrome\\\\.*"),
-        re.compile(".*\\\\Application\\ Data\\\\Mozilla\\\\Firefox\\\\.*"),
-        re.compile(".*\\\\Application\\ Data\\\\Opera\\\\.*"),
-        re.compile(".*\\\\Application\\ Data\\\\Chromium\\\\.*"),
-        re.compile(".*\\\\Application\\ Data\\\\ChromePlus\\\\.*"),
-        re.compile(".*\\\\Application\\ Data\\\\Nichrome\\\\.*"),
-        re.compile(".*\\\\Application\\ Data\\\\Bromium\\\\.*"),
-        re.compile(".*\\\\Application\\ Data\\\\RockMelt\\\\.*")
+        re.compile(".*\\\\Mozilla\\\\Firefox\\\\Profiles\\\\.*\\\\.default\\\\signons\.sqlite$", re.I),
+        re.compile(".*\\\\Mozilla\\\\Firefox\\\\Profiles\\\\.*\\\\.default\\\\secmod\.db$", re.I),
+        re.compile(".*\\\\Mozilla\\\\Firefox\\\\Profiles\\\\.*\\\\.default\\\\cert8\.db$", re.I),
+        re.compile(".*\\\\Mozilla\\\\Firefox\\\\Profiles\\\\.*\\\\.default\\\\key3\.db$", re.I),
+        re.compile(".*\\\\History\\\\History\.IE5\\\\index\.dat$", re.I),
+        re.compile(".*\\\\Cookies\\\\.*", re.I),
+        re.compile(".*\\\\Temporary\\\\ Internet\\ Files\\\\Content\.IE5\\\\index\.dat$", re.I),
+        re.compile(".*\\\\Application\\ Data\\\\Google\\\\Chrome\\\\.*", re.I),
+        re.compile(".*\\\\Application\\ Data\\\\Mozilla\\\\Firefox\\\\.*", re.I),
+        re.compile(".*\\\\Application\\ Data\\\\Opera\\\\.*", re.I),
+        re.compile(".*\\\\Application\\ Data\\\\Chromium\\\\.*", re.I),
+        re.compile(".*\\\\Application\\ Data\\\\ChromePlus\\\\.*", re.I),
+        re.compile(".*\\\\Application\\ Data\\\\Nichrome\\\\.*", re.I),
+        re.compile(".*\\\\Application\\ Data\\\\Bromium\\\\.*", re.I),
+        re.compile(".*\\\\Application\\ Data\\\\RockMelt\\\\.*", re.I)
 
     ]
     filter_apinames = set(["NtReadFile", "CopyFileA", "CopyFileW", "CopyFileExW"])
