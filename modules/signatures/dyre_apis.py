@@ -64,12 +64,19 @@ class Dyre_APIs(Signature):
                             if proc["environ"] and "ComputerName" in proc["environ"]:
                                 compnames.add(proc["environ"]["ComputerName"])
             for httpreq in self.networkapis:
-                # Generate patterns (again, should only ever be one)
+                # Generate patterns (should only ever be one per indicator)
                 for cname in compnames:
-                    buf = re.match("/(\d{4}[a-z]{2}\d{2})/" + cname + "_", httpreq)
-                    if buf:
-                        networkret = True
-                        campaign = buf.group(1)
+                    # Patterns ordered by highest fidelity
+                    indicators = [
+                    "/(\d{4}[a-z]{2}\d{2})/" + cname + "_",
+                    "/([^/]+)/" + cname + "/\d+/\d+/\d+/$",
+                    ]
+                    for indicator in indicators:
+                        buf = re.match(indicator, httpreq)
+                        if buf:
+                            networkret = True
+                            campaign = buf.group(1)
+                            break
 
         # Check if there are any winners
         if cryptoret or networkret:
