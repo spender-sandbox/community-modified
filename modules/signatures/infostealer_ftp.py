@@ -27,6 +27,7 @@ class FTPStealer(Signature):
         file_indicators = [
             ".*\\\\CuteFTP\\\\sm\.dat$",
             ".*\\\\FlashFXP\\\\.*\\\\Sites\.dat$",
+            ".*\\\\FlashFXP\\\\.*\\\\Quick\.dat$",
             ".*\\\\FileZilla\\\\sitemanager\.xml$",
             ".*\\\\FileZilla\\\\recentservers\.xml$",
             ".*\\\\FTPRush\\\\RushSite\.xml$",
