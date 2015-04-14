@@ -24,5 +24,5 @@ class VMwareDetectKeys(Signature):
     minimum = "1.2"
 
     def run(self):
-        return self.check_key(pattern=".*\\\\SOFTWARE\\\\(Wow6432Node\\\\)?VMWare,\\ Inc\.\\\\VMware\\ Tools.*",
+        return self.check_key(pattern=".*\\\\SOFTWARE\\\\(Wow6432Node\\\\)?VMWare,\\ Inc\..*",
                               regex=True)
