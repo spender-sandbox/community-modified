@@ -94,7 +94,7 @@ class Dridex_APIs(Signature):
                     if clen:
                         length = int(clen.group(1))
                         if length > 100000:
-                            if self.sockmon[socknum] == self.payloadip["send"]:
+                            if "send" in self.payloadip and self.sockmon[socknum] == self.payloadip["send"]:
                                 # Just a sanity check to make sure the IP hasn't changed
                                 # since this is a primitive send/recv monitor
                                 self.payloadip["recv"] = self.sockmon[socknum]
