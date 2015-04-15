@@ -25,14 +25,11 @@ class VBoxDetectDevices(Signature):
 
     def run(self):
         indicators = [
-            "\\??\\VBoxGuest",
-            "\\Device\\VBoxGuest",
-            "\\Device\\VBoxMouse",
-            "\\Device\\VBoxVideo",
-            "\\??\\VBoxMiniRdrDN",
-            "\\??\\pipe\\VBoxMiniRdDN",
-            "\\??\\VBoxTrayIPC",
-            "\\??\\pipe\\VBoxTrayIPC"
+            ".*\\VBoxGuest$",
+            ".*\\VBoxMouse$",
+            ".*\\VBoxVideo$",
+            ".*\\VBoxMiniRdrDN$",
+            ".*\\VBoxTrayIPC$",
         ]
 
         for indicator in indicators:
