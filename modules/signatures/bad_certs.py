@@ -18,7 +18,7 @@ from lib.cuckoo.common.abstracts import Signature
 class BadCerts(Signature):
     name = "bad_certs"
     description = "The executable used a known stolen/malicious Authenticode signature"
-    severity = 2
+    severity = 3
     categories = ["static"]
     authors = ["Accuvant"]
     minimum = "1.3"
