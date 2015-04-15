@@ -30,6 +30,7 @@
     <Compile Include="modules\signatures\antisandbox_sleep.py" />
     <Compile Include="modules\signatures\antisandbox_sunbelt_files.py" />
     <Compile Include="modules\signatures\antisandbox_sunbelt_libs.py" />
+    <Compile Include="modules\signatures\antisandbox_suspend.py" />
     <Compile Include="modules\signatures\antisandbox_unhook.py" />
     <Compile Include="modules\signatures\antivirus_virustotal.py" />
     <Compile Include="modules\signatures\antivm_generic_cpu.py" />
