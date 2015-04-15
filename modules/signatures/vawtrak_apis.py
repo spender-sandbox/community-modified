@@ -39,7 +39,6 @@ class Vawtrak_APIs(Signature):
         self.stepctr = 0
         self.pidwalk = 0
 
-
     def on_call(self, call, process):
         regsvr = "c:\\windows\\system32\\regsvr32.exe"
         curproc = process["process_name"]
@@ -52,7 +51,7 @@ class Vawtrak_APIs(Signature):
                 buff = self.get_argument(call, "Buffer").lower()
                 if "regsvr32.exe" in buff:
                     if "\\programdata\\" + val + "\\" in buff:
-                        self.vawtrackauto = True
+                        self.vawtrakauto = True
 
         if call["api"] == "CreateToolhelp32Snapshot":
             if process["module_path"].lower() == regsvr:
@@ -93,7 +92,7 @@ class Vawtrak_APIs(Signature):
     def on_complete(self):
         malscore = 0
         # Check for autorun registry/filesystem behavior
-        if self.vawtrackauto:
+        if self.vawtrakauto:
             malscore += 4
 
         # Check for process injection event behavior

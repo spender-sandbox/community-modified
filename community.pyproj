@@ -90,6 +90,7 @@
     </Compile>
     <Compile Include="modules\signatures\persistence_service.py" />
     <Compile Include="modules\signatures\ransomware_files.py" />
+    <Compile Include="modules\signatures\recon_beacon.py" />
     <Compile Include="modules\signatures\stealth_hidenotifications.py">
       <SubType>Code</SubType>
     </Compile>
@@ -97,6 +98,7 @@
     <Compile Include="modules\signatures\stealth_hiddenreg.py" />
     <Compile Include="modules\signatures\stealth_webhistory.py" />
     <Compile Include="modules\signatures\stealth_window.py" />
+    <Compile Include="modules\signatures\vawtrak_apis.py" />
     <Compile Include="modules\signatures\virus.py" />
     <Compile Include="modules\signatures\bot_athenahttp.py" />
     <Compile Include="modules\signatures\bot_dirtjumper.py" />
