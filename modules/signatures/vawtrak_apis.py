@@ -27,8 +27,7 @@ class Vawtrak_APIs(Signature):
     evented = True
 
     filter_apinames = set(["CreateToolhelp32Snapshot", "Process32FirstW", "Process32NextW",
-                           "NtOpenProcess", "NtCreateEvent", "NtOpenEvent", "CreateRemoteThread",
-                           "RegSetValueExA"])
+                           "NtOpenProcess", "NtCreateEvent", "NtOpenEvent", "RegSetValueExA"])
 
     def __init__(self, *args, **kwargs):
         Signature.__init__(self, *args, **kwargs)
@@ -113,7 +112,7 @@ class Vawtrak_APIs(Signature):
                 if event in self.cevents[explorerpath]:
                     malscore += 6
 
-        # Check for autorun check event trigger
+        # Check for autorun test event trigger
         if dllpath in self.oevents and explorerpath in self.cevents:
             for event in self.oevents[dllpath]:
                 if event in self.cevents[explorerpath]:
