@@ -13,9 +13,12 @@ class Authenticode(Signature):
     minimum = "1.2"
 
     def run(self):
+        found_sig = False
+
         if "static" in self.results:
-            if "pe_dirents" in self.results["static"]:
-                for entry in self.results["static"]["pe_dirents"]:
-                    if entry["name"] == "IMAGE_DIRECTORY_ENTRY_SECURITY" and entry["virtual_address"] != "0x00000000" and entry["size"] != "0x00000000":
-                        return True
-        return False
+            if "digital_signers" in self.results["static"]:
+                for sign in self.results["digital_signers"]:
+                    self.data.append(sign)
+                    found_sig = True
+
+        return found_sig
