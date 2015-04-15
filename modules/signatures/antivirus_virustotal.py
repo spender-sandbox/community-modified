@@ -1,4 +1,4 @@
-# Copyright (C) 2012 Michael Boman (@mboman)
+# Copyright (C) 2012, 2015 Michael Boman (@mboman), Accuvant, Inc. (bspengler@accuvant.com)
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -17,7 +17,8 @@ from lib.cuckoo.common.abstracts import Signature
 
 class KnownVirustotal(Signature):
     name = "antivirus_virustotal"
-    description = "File has been identified by at least one AntiVirus on VirusTotal as malicious"
+    description = "File has been identified by at least one Antivirus on VirusTotal as malicious"
+    confidence = 50
     severity = 2
     categories = ["antivirus"]
     authors = ["Michael Boman", "nex"]
@@ -26,7 +27,13 @@ class KnownVirustotal(Signature):
     def run(self):
         if "virustotal" in self.results:
             if "positives" in self.results["virustotal"]:
-                if self.results["virustotal"]["positives"] > 0:
+                positives = self.results["virustotal"]["positives"]
+                if positives > 0:
+                    if positives > 10:
+                        self.description = "File has been identified by at least ten Antiviruses on VirusTotal as malicious"
+                        self.severity = 3
+                        self.confidence = 100
+                        self.weight = positives
                     for engine, signature in self.results["virustotal"]["scans"].items():
                         if signature["detected"]:
                             self.data.append({engine : signature["result"]})
