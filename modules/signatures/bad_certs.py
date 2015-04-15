@@ -31,6 +31,16 @@ class BadCerts(Signature):
             "e9af1f9af597a9330c52a7686bf70b0094ad7616",
             "3e1a6e52a1756017dd8f03ff85ec353273b20c66",
             "efad94fc87b2b3a652f1a98901204ea8fbeef474",
+            # Stolen Sony cert
+            "8df46b5fdac2eb3b4757f99866c199ff2b13427a",
+            # Stolen Bit9 cert
+            "555d2d20851e849f0c109e243cf8a5da1f9995d7",
+            # Sysprint AG cert used in Turla
+            "24215864f128972b2622172dee6282460799ca46",
+            # Stolen Source Medical Solutions cert
+            "b501aab2ffc3bddb7e847c4acee4be41de38f16e",
+            # Adobe stolen cert
+            "fdf01dd3f37c66ac4c779d92623c77814a07fe4c",
             ]
         if "static" in self.results:
             if "digital_signers" in self.results["static"]:
