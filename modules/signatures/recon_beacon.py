@@ -60,10 +60,10 @@ class Recon_Beacon(Signature):
                             uname = proc["environ"]["UserName"].lower()
 
         if self.proclogs and cname and uname:
-            ret = True
             for proc in self.proclogs:
                 for beacon in self.proclogs[proc]:
                     if cname in beacon.lower() or uname in beacon.lower():
                         self.data.append({"Beacon": proc + ": " + beacon})
+                        ret = True
 
         return ret
