@@ -24,7 +24,7 @@ class BrowserHelperObject(Signature):
     minimum = "1.2"
 
     def run(self):
-        if self.check_write_key(pattern=".*\\\\SOFTWARE\\\\(Wow6432Node\\\\)?Microsoft\\\\Windows\\ NT\\\\CurrentVersion\\\\Explorer\\\\Browser Helper Objects\\\\.*", regex=True):
+        if self.check_write_key(pattern=".*\\\\SOFTWARE\\\\(Wow6432Node\\\\)?Microsoft\\\\Windows\\ NT\\\\CurrentVersion\\\\Explorer\\\\Browser\\ Helper\\ Objects\\\\.*", regex=True):
             return True
 
         return False
