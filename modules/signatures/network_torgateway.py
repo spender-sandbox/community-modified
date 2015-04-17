@@ -25,23 +25,24 @@ class TorGateway(Signature):
 
     def run(self):
         domain_indicators = [
-            "^.*\.tor2web\.([a-z]{2,3})$",
-            "^.*\.bortor\.com$",
-            "^.*\.torpacho\.com$",
-            "^.*\.torsanctions\.com$",
-            "^.*\.torwild\.com$",
-            "^.*\.pay2tor\.com$",
-            "^.*\.tor2pay\.com$",
-            "^.*\.tor4pay\.com$",
-            "^.*\.pay4tor\.com$",
-            "^.*\.torexplorer\.com$",
-            "^.*\.onion\.to$",
-            "^.*\.onion\.cab$",
-            "^.*\.torpaycash\.com$",
-            "^.*\.torconnectpay\.com$",
-            "^.*\.torwalletpay\.com$",
-            "^.*\.walterwhitepay\.com$",
-            "^.*\.rossulbrichtpay\.com$"
+            ".*\.tor2web\.([a-z]{2,3})$",
+            ".*\.bortor\.com$",
+            ".*\.torpacho\.com$",
+            ".*\.torsanctions\.com$",
+            ".*\.torwild\.com$",
+            ".*\.pay2tor\.com$",
+            ".*\.tor2pay\.com$",
+            ".*\.tor4pay\.com$",
+            ".*\.pay4tor\.com$",
+            ".*\.torexplorer\.com$",
+            ".*\.onion\.to$",
+            ".*\.onion\.cab$",
+            ".*\.tor2web\.blutmagie\.de$",
+            ".*\.torpaycash\.com$",
+            ".*\.torconnectpay\.com$",
+            ".*\.torwalletpay\.com$",
+            ".*\.walterwhitepay\.com$",
+            ".*\.rossulbrichtpay\.com$"
         ]
         ip_indicators = [
             "195.85.254.203"
