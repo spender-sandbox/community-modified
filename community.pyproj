@@ -96,6 +96,7 @@
     </Compile>
     <Compile Include="modules\signatures\stealth_network.py" />
     <Compile Include="modules\signatures\stealth_hiddenreg.py" />
+    <Compile Include="modules\signatures\ransomware_recyclebin.py" />
     <Compile Include="modules\signatures\stealth_webhistory.py" />
     <Compile Include="modules\signatures\stealth_window.py" />
     <Compile Include="modules\signatures\browser_bho.py" />
