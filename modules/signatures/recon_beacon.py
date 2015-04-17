@@ -49,7 +49,6 @@ class Recon_Beacon(Signature):
         ret = False
         uname = ""
         cname = ""
-        leaks = tuple()
         if "behavior" in self.results:
             if "processes" in self.results["behavior"]:
                 for proc in self.results["behavior"]["processes"]:
