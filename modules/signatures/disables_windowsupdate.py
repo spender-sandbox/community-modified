@@ -13,6 +13,6 @@ class DisablesWindowsUpdate(Signature):
     minimum = "1.2"
 
     def run(self):
-        if self.check_write_key(pattern=".*\\\\SOFTWARE\\\\(Wow6432Node\\\\)?Policies\\\\Microsoft\\\\Windows\\\\WindowsUpdate\\\\AU\\\\NoAutoUpdate$", regex=True):
+        if self.check_write_key(pattern=".*\\\\SOFTWARE\\\\(Wow6432Node\\\\)?Policies\\\\Microsoft\\\\Windows\\\\WindowsUpdate\\\\(AU\\\\NoAutoUpdate|Auto\\ Update\\\\AUOptions)$", regex=True):
             return True
         return False
