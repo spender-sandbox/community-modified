@@ -64,6 +64,9 @@
     <Compile Include="modules\signatures\deepfreeze_mutex.py" />
     <Compile Include="modules\signatures\disables_browserwarn.py" />
     <Compile Include="modules\signatures\deletes_shadowcopies.py" />
+    <Compile Include="modules\signatures\disables_wer.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="modules\signatures\disables_sysrestore.py" />
     <Compile Include="modules\signatures\disables_windowsupdate.py" />
     <Compile Include="modules\signatures\dridex_apis.py" />
