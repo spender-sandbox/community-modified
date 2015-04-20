@@ -77,6 +77,12 @@
     <Compile Include="modules\signatures\injection_explorer.py" />
     <Compile Include="modules\signatures\kraken_mutex.py" />
     <Compile Include="modules\signatures\martians_ie.py" />
+    <Compile Include="modules\signatures\modifies_certs.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="modules\signatures\modifies_seccenter.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="modules\signatures\multiple_ua.py" />
     <Compile Include="modules\signatures\network_dga.py" />
     <Compile Include="modules\signatures\office_macro.py" />
