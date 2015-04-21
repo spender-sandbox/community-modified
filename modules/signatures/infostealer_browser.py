@@ -38,7 +38,7 @@ class BrowserStealer(Signature):
         re.compile(".*\\\\Mozilla\\\\Firefox\\\\Profiles\\\\.*\\\\.default\\\\key3\.db$", re.I),
         re.compile(".*\\\\History\\\\History\.IE5\\\\index\.dat$", re.I),
         re.compile(".*\\\\Cookies\\\\.*", re.I),
-        re.compile(".*\\\\Temporary\\\\ Internet\\ Files\\\\Content\.IE5\\\\index\.dat$", re.I),
+        re.compile(".*\\\\Temporary\\ Internet\\ Files\\\\Content\.IE5\\\\index\.dat$", re.I),
         re.compile(".*\\\\Application\\ Data\\\\Google\\\\Chrome\\\\.*", re.I),
         re.compile(".*\\\\Application\\ Data\\\\Mozilla\\\\Firefox\\\\.*", re.I),
         re.compile(".*\\\\Application\\ Data\\\\Opera\\\\.*", re.I),
