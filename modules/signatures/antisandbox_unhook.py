@@ -41,14 +41,10 @@ class Unhook(Signature):
             self.saw_unhook = True
             funcname = self.get_argument(call, "FunctionName")
             if funcname != "":
-               self.unhook_info.add("function_name: " + funcname + ", type: " + self.get_argument(call, "UnhookType"))
+                if funcname != "SetUnhandledExceptionFilter" or self.get_argument(call, "UnhookType") != "modification":
+                    self.unhook_info.add("function_name: " + funcname + ", type: " + self.get_argument(call, "UnhookType"))
     
     def on_complete(self):
-        # lower the severity, commonly seen in legit binaries
-        if self.unhook_info == set(["function_name: SetUnhandledExceptionFilter, type: modification"]):
-            severity = 2
-            confidence = 0
-
         if len(self.unhook_info) > 5:
             weight = len(self.unhook_info)
             confidence = 100
