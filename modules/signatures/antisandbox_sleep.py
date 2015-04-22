@@ -25,6 +25,8 @@ class AntiSandboxSleep(Signature):
             if sleepy != None:
                 current_proc = process["process_name"]
                 skip = self.get_argument(call, "Status")
+                if skip and skip == "Infinite":
+                    return None
                 if skip and skip != "Skipped":
                     skip = "Slept"
                 new = (current_proc, sleepy, skip)
