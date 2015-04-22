@@ -26,13 +26,13 @@ class RansomwareFiles(Signature):
     def run(self):
         # Lower-case file names
         file_list = [
-            "\\\\help_decrypt.html$",
-            "\\\\decrypt_instruction.html$",
-            "\\\\decrypt_instructions.txt$",
-            "\\\\vault.key$",
-            "\\\\vault.txt$",
-            "\\\\!Decrypt-All-Files.*.txt$",
-            "\\\\!Decrypt-All-Files.*.bmp$",
+            ".*\\\\help_decrypt.html$",
+            ".*\\\\decrypt_instruction.html$",
+            ".*\\\\decrypt_instructions.txt$",
+            ".*\\\\vault.key$",
+            ".*\\\\vault.txt$",
+            ".*\\\\!Decrypt-All-Files.*.txt$",
+            ".*\\\\!Decrypt-All-Files.*.bmp$",
         ]
 
         for file in file_list:
