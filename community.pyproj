@@ -62,6 +62,7 @@
     <Compile Include="modules\signatures\banker_zeus_url.py" />
     <Compile Include="modules\signatures\betabot_apis.py" />
     <Compile Include="modules\signatures\bitcoin_opencl.py" />
+    <Compile Include="modules\signatures\browser_security.py" />
     <Compile Include="modules\signatures\browser_startpage.py" />
     <Compile Include="modules\signatures\browser_addon.py" />
     <Compile Include="modules\signatures\deepfreeze_mutex.py" />
