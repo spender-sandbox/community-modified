@@ -2,9 +2,13 @@
 # This file is part of Cuckoo Sandbox - http://www.cuckoosandbox.org
 # See the file 'docs/LICENSE' for copying permission.
 
+try:
+    import re2 as re
+except ImportError:
+    import re
+
 import struct
 from lib.cuckoo.common.abstracts import Signature
-import re
 
 class HandleInfo:
     def __init__(self, handle, filename):

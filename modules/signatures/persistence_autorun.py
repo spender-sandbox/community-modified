@@ -17,7 +17,11 @@
 
 # Additional keys added from SysInternals Administrators Guide
 
-import re
+try:
+    import re2 as re
+except ImportError:
+    import re
+
 from lib.cuckoo.common.abstracts import Signature
 
 class Autorun(Signature):
