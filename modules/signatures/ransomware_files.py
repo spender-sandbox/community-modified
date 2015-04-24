@@ -33,6 +33,8 @@ class RansomwareFiles(Signature):
             ".*\\\\vault.txt$",
             ".*\\\\!Decrypt-All-Files.*.txt$",
             ".*\\\\!Decrypt-All-Files.*.bmp$",
+            ".*\\\\help_restore_files.txt$",
+            ".*\\\\recovery_key.txt$",
         ]
 
         for file in file_list:
