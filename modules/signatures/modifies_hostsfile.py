@@ -15,7 +15,7 @@
 
 from lib.cuckoo.common.abstracts import Signature
 
-class Modifies_HostFileSignature):
+class Modifies_HostFile(Signature):
     name = "modifies_hostfile"
     description = "The sample wrote data to the system hosts file."
     severity = 3
@@ -25,15 +25,14 @@ class Modifies_HostFileSignature):
 
     def run(self):
         ret = False
-        match = self.check_write_file(pattern=".*\\\\Windows\\\\System32\\\\drivers\\\\etc\\\\hosts$", regex=True)
+        match = self.check_write_file(pattern=".*\\\\Windows\\\\(System32|SysWow64)\\\\drivers\\\\etc\\\\hosts$", regex=True)
         if match:
             ret = True
-            hfile = "c:\\windows\\system32\\drivers\\etc\\hosts"
+            hfile = match.lower()
             data = ""
             if "dropped" in self.results:
                 for dfile in self.results["dropped"]:
                     if hfile in map(str.lower, dfile["guests_paths"]):
-                        print "Found it"
                         with open(dfile["path"], "r") as rfile:
                             data = rfile.read()
                         break
