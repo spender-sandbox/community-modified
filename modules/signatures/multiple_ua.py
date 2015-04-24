@@ -36,6 +36,7 @@ class Multiple_UA(Signature):
         whitelist = {
             "AcroRd32.exe": "Mozilla/3.0 (compatible; Acrobat 5.0; Windows)",
             "iexplore.exe": "VCSoapClient",
+            "iexplore.exe": "Shockwave Flash",
         }
         ua = self.get_argument(call, "Agent")
         proc = process["process_name"]
