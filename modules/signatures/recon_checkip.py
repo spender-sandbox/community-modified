@@ -38,6 +38,7 @@ class CheckIP(Signature):
             "api.ipify.org",
             "ipinfo.info",
             "myexternalip.com",
+            "ip4.telize.com",
         ]
 
         for indicator in indicators:
