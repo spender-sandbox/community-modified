@@ -47,6 +47,7 @@
     <Compile Include="modules\signatures\antivm_vbox_devices.py" />
     <Compile Include="modules\signatures\antisandbox_sboxie_libs.py" />
     <Compile Include="modules\signatures\antivm_vmware_events.py" />
+    <Compile Include="modules\signatures\antivm_vpc_keys.py" />
     <Compile Include="modules\signatures\antivm_vmware_mutexes.py" />
     <Compile Include="modules\signatures\antivm_vpc_files.py" />
     <Compile Include="modules\signatures\antivm_vmware_keys.py" />
