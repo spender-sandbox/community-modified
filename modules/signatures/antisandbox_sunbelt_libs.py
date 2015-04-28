@@ -28,13 +28,11 @@ class SunbeltDetectLibs(Signature):
 
     def on_call(self, call, process):
         indicators = [
-                "api_log.dll",
-                "dir_watch.dll"
+                "api_log",
+                "dir_watch"
             ]
         dllname = self.get_argument(call, "FileName").lower()
         
         for indicator in indicators:
             if indicator in dllname:
                 return True
-
-        return False

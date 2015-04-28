@@ -30,4 +30,3 @@ class WineDetectFunc(Signature):
         funcname = self.get_argument(call, "FunctionName")
         if not call["status"] and funcname == "wine_get_unix_file_name":
             return True
-        return None

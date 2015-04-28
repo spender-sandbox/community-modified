@@ -40,8 +40,6 @@ class AntiAVServiceStop(Signature):
             if code == 1 and handle in self.handles and self.handles[handle] not in self.stoppedservices:
                 self.stoppedservices.append(self.handles[handle])
 
-        return None
-
     def on_complete(self):
         ret = False
         if self.stoppedservices:
