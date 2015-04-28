@@ -1,4 +1,4 @@
-# Copyright (C) 2012 Claudio "nex" Guarnieri (@botherder)
+# Copyright (C) 2015 Accuvant, Inc. (bspengler@accuvant.com)
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -15,13 +15,19 @@
 
 from lib.cuckoo.common.abstracts import Signature
 
-class WineDetectReg(Signature):
-    name = "antiemu_wine_reg"
-    description = "Detects the presence of Wine emulator via registry key"
+class WineDetectFunc(Signature):
+    name = "antiemu_wine_func"
+    description = "Detects the presence of Wine emulator via function name"
     severity = 3
     categories = ["anti-emulation"]
-    authors = ["nex"]
-    minimum = "0.5"
+    authors = ["Accuvant"]
+    minimum = "1.0"
+    evented = True
 
-    def run(self):
-        return self.check_key(pattern="HKEY_CURRENT_USER\\Software\\Wine")
+    filter_apinames = set(["LdrGetProcedureAddress"])
+
+    def on_call(self, call, process):
+        funcname = self.get_argument(call, "FunctionName")
+        if not call["status"] and funcname == "wine_get_unix_file_name":
+            return True
+        return None
