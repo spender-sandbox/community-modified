@@ -39,6 +39,7 @@ class CheckIP(Signature):
             "ipinfo.info",
             "myexternalip.com",
             "ip4.telize.com",
+            "ip.xss.ru",
         ]
 
         for indicator in indicators:
