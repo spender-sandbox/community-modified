@@ -34,6 +34,9 @@ class RansomwareFiles(Signature):
             ".*\\\\!Decrypt-All-Files.*.txt$",
             ".*\\\\!Decrypt-All-Files.*.bmp$",
             ".*\\\\help_restore_files.txt$",
+            ".*\\\\help_to_save_files.txt$",
+            ".*\\\\help_to_save_files.bmp$",
+            ".*\\\\recovery_file.txt$",
             ".*\\\\recovery_key.txt$",
         ]
 
