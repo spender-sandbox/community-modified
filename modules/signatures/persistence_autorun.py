@@ -113,7 +113,7 @@ class Autorun(Signature):
                     self.data.append({"file" : match})
                 self.found_autorun = True
 
-        taskpat = ".*\\\\Windows\\\\System32\\\\schtasks\.exe.*/CREATE.*/SC\s+(ONLOGON|ONSTART).*"
+        taskpat = ".*schtasks\.exe.*/CREATE.*/SC\s+(ONLOGON|ONSTART).*"
         tasked = self.check_executed_command(pattern=taskpat, regex=True)
         if tasked:
             self.found_autorun = True
