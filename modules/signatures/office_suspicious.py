@@ -30,7 +30,7 @@ class Office_Suspicious(Signature):
             if "Metadata" in self.results["static"]:
                 if self.results["static"]["Metadata"]["HasMacros"] == "Yes":
                     if "behavior" in self.results:
-                        if "processtree" in self.results["behavior"]:
+                        if "processtree" in self.results["behavior"] and len(self.results["behavior"]["processtree"]):
                             parent = self.results["behavior"]["processtree"][0]
                             parentmod = parent["module_path"]
                             if "children" in parent:
