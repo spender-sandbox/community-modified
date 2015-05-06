@@ -55,9 +55,10 @@ class BitcoinWallet(Signature):
 
         for indicator in indicators:
             file_matches = self.check_file(pattern=indicator, regex=True, all=True)
-            for match in file_matches:
-                self.data.append({"file" : match})
-                found_match = True
-            self.weight += len(file_matches)
+            if file_matches:
+                for match in file_matches:
+                    self.data.append({"file" : match})
+                    found_match = True
+                self.weight += len(file_matches)
 
         return found_match
