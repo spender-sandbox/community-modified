@@ -35,6 +35,7 @@ class DiskInformation(Signature):
         ioctls = [
             0x2d1400, # IOCTL_STORAGE_QUERY_PROPERTY
             0x70000,  # IOCTL_DISK_GET_DRIVE_GEOMETRY
+            0x700a0,  # IOCTL_DISK_GET_DRIVE_GEOMETRY_EX
             0x4d008,  # IOCTL_SCSI_MINIPORT
             0x7405c,  # IOCTL_DISK_GET_LENGTH_INFO
         ]
