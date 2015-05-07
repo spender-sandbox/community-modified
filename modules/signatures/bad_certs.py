@@ -44,7 +44,7 @@ class BadCerts(Signature):
             ]
         if "static" in self.results:
             if "digital_signers" in self.results["static"]:
-                for sign in self.results["digital_signers"]:
+                for sign in self.results["static"]["digital_signers"]:
                     for md5 in md5_indicators:
                         if md5 == sign["md5_fingerprint"]:
                             self.data.append(sign)
