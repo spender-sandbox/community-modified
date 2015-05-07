@@ -34,8 +34,8 @@ class Multiple_UA(Signature):
     def on_call(self, call, process):
         # Dict whitelist with process name as key, and useragent as value
         whitelist = {
-            "acrord32.exe": ["Mozilla/3.0 (compatible; Acrobat 5.0; Windows)"]
-            "iexplore.exe": ["VCSoapClient", "Shockwave Flash"]
+            "acrord32.exe": ["Mozilla/3.0 (compatible; Acrobat 5.0; Windows)"],
+            "iexplore.exe": ["VCSoapClient", "Shockwave Flash"],
         }
         ua = self.get_argument(call, "Agent")
         proc = process["process_name"].lower()
