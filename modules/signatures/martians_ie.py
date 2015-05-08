@@ -49,7 +49,7 @@ class MartiansIE(Signature):
        return result
 
     def run(self):
-        self.ie_paths_re = re.compile(r"^c:\\program files\\internet explorer(?:\s\(x86\))?\\iexplore.exe$",re.I)
+        self.ie_paths_re = re.compile(r"^c:\\program files(?:\s\(x86\))?\\internet explorer\\iexplore.exe$",re.I)
         #run through re.escape()
         self.white_list_re = ["^C\\:\\\\Program Files(?:\s\\(x86\\))?\\\\Adobe\\\\Reader\\ \\d+\\.\\d+\\\\Reader\\\\AcroRd32\\.exe$",
                          "^C\\:\\\\Program Files(?:\s\\(x86\\))?\\\\Java\\\\jre\\d+\\\\bin\\\\j(?:avaw?|p2launcher)\\.exe$",
