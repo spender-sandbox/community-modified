@@ -49,6 +49,9 @@ class Unhook(Signature):
             weight = len(self.unhook_info)
             confidence = 100
 
+        if not self.unhook_info:
+            self.saw_unhook = False
+
         for info in self.unhook_info:
             self.data.append({"unhook" : info })
         return self.saw_unhook
