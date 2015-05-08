@@ -88,14 +88,25 @@ class StealthFile(Signature):
             r'^[A-Z]?:\\Documents and Settings\\[^\\]+\\Cookies\\$',
         ]
         saw_stealth = False
-        for file in self.stealth_files:
+        target_name = False
+
+        if "file" in self.results["target"] and "PE32" not in self.results["target"]["file"]["type"]:
+            target_name = self.results["target"]["file"]["name"]
+            
+        for hfile in self.stealth_files:
             addit = True
             for entry in whitelists:
-                if re.match(entry, file, re.IGNORECASE):
+                if re.match(entry, hfile, re.IGNORECASE):
                     addit = False
+
+            if target_name and not hfile.endswith("\\"):
+                fname = hfile.split("\\")[-1][2:]
+                if fname == target_name or fname in target_name:
+                    addit = False
+
             if addit:
                 saw_stealth = True
-                self.data.append({"file" : file})
+                self.data.append({"file" : hfile})
 
         return saw_stealth
 
