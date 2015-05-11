@@ -19,6 +19,7 @@ class Dropper(Signature):
     name = "dropper"
     description = "Drops a binary and executes it"
     severity = 2
+    confidence = 50
     categories = ["dropper"]
     authors = ["Accuvant"]
     minimum = "1.2"

@@ -24,6 +24,7 @@ class BrowserStealer(Signature):
     name = "infostealer_browser"
     description = "Steals private information from local Internet browsers"
     severity = 3
+    confidence = 30
     categories = ["infostealer"]
     authors = ["nex", "Accuvant"]
     minimum = "1.2"

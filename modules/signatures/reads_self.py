@@ -66,6 +66,7 @@ class ReadsSelf(Signature):
     name = "reads_self"
     description = "Reads data out of its own binary image"
     severity = 2
+    confidence = 30
     categories = ["generic"]
     authors = ["Accuvant"]
     minimum = "1.2"

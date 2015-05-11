@@ -8,6 +8,7 @@ class InstalledApps(Signature):
     name = "recon_programs"
     description = "Collects information about installed applications"
     severity = 3
+    confidence = 20
     categories = ["recon"]
     authors = ["Accuvant"]
     minimum = "1.2"

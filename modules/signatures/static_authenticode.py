@@ -8,6 +8,8 @@ class Authenticode(Signature):
     name = "static_authenticode"
     description = "Presents an Authenticode digital signature"
     severity = 1
+    weight = -1
+    confidence = 30
     categories = ["static"]
     authors = ["Accuvant"]
     minimum = "1.2"
