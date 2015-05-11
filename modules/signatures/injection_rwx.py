@@ -8,6 +8,7 @@ class InjectionRWX(Signature):
     name = "injection_rwx"
     description = "Creates RWX memory"
     severity = 2
+    confidence = 50
     categories = ["injection"]
     authors = ["Accuvant"]
     minimum = "1.2"
