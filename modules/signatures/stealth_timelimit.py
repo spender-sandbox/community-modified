@@ -17,6 +17,7 @@ class StealthTimeout(Signature):
 
     def __init__(self, *args, **kwargs):
         Signature.__init__(self, *args, **kwargs)
+        self.lastprocess = 0
         self.systimeidx = 0
         self.exitidx = 0
         self.curidx = 0
