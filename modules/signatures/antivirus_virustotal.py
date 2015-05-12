@@ -29,6 +29,9 @@ class KnownVirustotal(Signature):
             if "positives" in self.results["virustotal"]:
                 positives = self.results["virustotal"]["positives"]
                 if positives > 0:
+                    if positives > 4:
+                        self.confidence = 75
+                        self.weight = positives - 4
                     if positives > 10:
                         self.description = "File has been identified by at least ten Antiviruses on VirusTotal as malicious"
                         self.severity = 3
