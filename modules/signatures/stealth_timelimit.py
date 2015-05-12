@@ -33,10 +33,11 @@ class StealthTimeout(Signature):
         if call["api"] == "GetSystemTimeAsFileTime" or call["api"] == "GetSystemTime" or call["api"] == "GetLocalTime" or call["api"] == "NtQuerySystemTime":
             self.systimeidx = self.curidx
         elif call["api"] == "NtTerminateProcess":
-            self.exitidx = self.curidx
+            handle = self.get_argument(call, "ProcessHandle")
+            if handle == "0xffffffff" or handle == "0x00000000":
+                self.exitidx = self.curidx
+                if self.systimeidx and self.exitidx and self.systimeidx > (self.exitidx - 10):
+                    return True
 
         return None
 
-    def on_complete(self):
-        if self.systimeidx and self.exitidx and self.systimeidx > (self.exitidx - 10):
-            return True
