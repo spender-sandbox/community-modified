@@ -19,6 +19,7 @@ class FleerCivetMutexes(Signature):
     name = "fleercivet_mutex"
     description = "Creates known FleerCivet mutexes"
     severity = 3
+    weight = 5
     categories = ["trojan"]
     families = ["fleercivet"]
     authors = ["Accuvant"]
