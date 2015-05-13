@@ -114,6 +114,7 @@
     </Compile>
     <Compile Include="modules\signatures\persistence_service.py" />
     <Compile Include="modules\signatures\ransomware_files.py" />
+    <Compile Include="modules\signatures\trojan_fleercivet_mutex.py" />
     <Compile Include="modules\signatures\recon_beacon.py" />
     <Compile Include="modules\signatures\stealth_timelimit.py" />
     <Compile Include="modules\signatures\stealth_hidenotifications.py">
