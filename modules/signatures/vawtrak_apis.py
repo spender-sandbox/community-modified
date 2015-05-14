@@ -19,7 +19,7 @@ class Vawtrak_APIs(Signature):
     name = "vawtrak_behavior"
     description = "Exhibits behavior characteristics of Vawtrak / Neverquest malware."
     severity = 3
-    confidence = 90
+    weight = 3
     categories = ["banking", "trojan"]
     families = ["vawtrak", "neverquest"]
     authors = ["KillerInstinct"]

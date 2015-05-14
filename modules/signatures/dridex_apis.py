@@ -23,6 +23,7 @@ from lib.cuckoo.common.signature_utils import DridexDecode_v1
 class Dridex_APIs(Signature):
     name = "dridex_behavior"
     description = "Exhibits behavior characteristic of Dridex malware"
+    weight = 3
     severity = 3
     categories = ["banker", "trojan"]
     families = ["dridex"]

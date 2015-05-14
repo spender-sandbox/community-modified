@@ -18,6 +18,7 @@ from lib.cuckoo.common.abstracts import Signature
 class Office_Suspicious(Signature):
     name = "office_suspicious"
     description = "The office file created a suspicious child process."
+    weight = 3
     severity = 3
     categories = ["office"]
     authors = ["KillerInstinct"]
