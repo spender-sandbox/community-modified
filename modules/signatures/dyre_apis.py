@@ -23,8 +23,8 @@ from lib.cuckoo.common.abstracts import Signature
 class Dyre_APIs(Signature):
     name = "dyre_behavior"
     description = "Exhibits behavior characteristic of Dyre malware"
+    weight = 3
     severity = 3
-    confidence = 90
     categories = ["banker", "trojan"]
     families = ["dyre", "mini-dyre"]
     authors = ["Accuvant", "KillerInstinct"]

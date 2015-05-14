@@ -17,14 +17,14 @@ try:
     import re2 as re
 except ImportError:
     import re
-    
+
 from lib.cuckoo.common.abstracts import Signature
 
 class BetaBot_APIs(Signature):
     name = "betabot_behavior"
     description = "Exhibits behavior characteristics of BetaBot / Neurevt malware"
     severity = 3
-    confidence = 90
+    weight = 3
     categories = ["trojan"]
     families = ["betabot", "neurevt"]
     authors = ["KillerInstinct"]

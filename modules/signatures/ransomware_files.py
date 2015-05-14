@@ -18,6 +18,7 @@ from lib.cuckoo.common.abstracts import Signature
 class RansomwareFiles(Signature):
     name = "ransomware_files"
     description = "Created known ransomware decryption instruction / key file."
+    weight = 3
     severity = 3
     categories = ["ransomware"]
     authors = ["KillerInstinct"]

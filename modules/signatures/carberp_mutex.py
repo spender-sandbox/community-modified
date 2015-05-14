@@ -18,6 +18,7 @@ from lib.cuckoo.common.abstracts import Signature
 class CarberpMutexes(Signature):
     name = "carberp_mutex"
     description = "Attempts to create a known Carberp/Rovnix mutex."
+    weight = 3
     severity = 3
     categories = ["banker", "trojan", "rootkit"]
     families = ["carberp"]
