@@ -27,11 +27,15 @@ class SuricataAlert(Signature):
 
     def run(self):
         sigset = set()
+        whitelist = [
+            "ET POLICY Application Crash Report Sent to Microsoft",
+        ]
         if "suricata" in self.results:
             if "alerts" in self.results["suricata"]:
                 for alert in self.results["suricata"]["alerts"]:
                     if "signature" in alert:
-                        sigset.add(alert["signature"])
+                        if alert["signature"] not in whitelist:
+                            sigset.add(alert["signature"])
         for sig in sigset:
             self.data.append({"signature" : sig})
             self.weight += 1
