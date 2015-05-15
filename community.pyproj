@@ -73,6 +73,7 @@
     <Compile Include="modules\signatures\browser_security.py" />
     <Compile Include="modules\signatures\browser_startpage.py" />
     <Compile Include="modules\signatures\browser_addon.py" />
+    <Compile Include="modules\signatures\carberp_mutex.py" />
     <Compile Include="modules\signatures\deepfreeze_mutex.py" />
     <Compile Include="modules\signatures\disables_browserwarn.py" />
     <Compile Include="modules\signatures\deletes_shadowcopies.py" />
