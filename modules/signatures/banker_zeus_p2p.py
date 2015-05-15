@@ -42,6 +42,18 @@ class ZeusP2P(Signature):
         if count < 5:
             return False
 
+        # Check for UDP Traffic on remote port greater than 1024.
+        # TODO: this might be faulty without checking whether the destination
+        # IP is really valid.
+        count = 0
+        if "network" in self.results:
+            for udp in self.results["network"]["udp"]:
+                if udp["dport"] > 1024:
+                    count += 1
+            
+        if count < 4:
+            return False
+
         for mutex in mutexes:
             self.data.append({"mutex": mutex})
 
