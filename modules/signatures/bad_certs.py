@@ -41,6 +41,8 @@ class BadCerts(Signature):
             "b501aab2ffc3bddb7e847c4acee4be41de38f16e",
             # Adobe stolen cert
             "fdf01dd3f37c66ac4c779d92623c77814a07fe4c",
+            # used in a Dridex sample: KASHTAN OOO
+            "401909e89a0e59335b624e147719f0b88d51705a",
             ]
         if "static" in self.results:
             if "digital_signers" in self.results["static"]:
