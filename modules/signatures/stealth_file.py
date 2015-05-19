@@ -82,10 +82,21 @@ class StealthFile(Signature):
         whitelists = [
             r'^[A-Z]?:\\Documents and Settings\\[^\\]+\\Local Settings\\Temporary Internet Files$',
             r'^[A-Z]?:\\Documents and Settings\\[^\\]+\\Local Settings\\History$',
-            r'^[A-Z]?:\\Documents and Settings\\[^\\]+\\Local Settings\\Temporary Internet Files\\Content.IE5\\$',
-            r'^[A-Z]?:\\Documents and Settings\\[^\\]+\\Local Settings\\History\\History.IE5\\$',
-            r'^[A-Z]?:\\Documents and Settings\\[^\\]+\\Local Settings\\History\\History.IE5\\MSHist[0-9]+\\$',
+            r'^[A-Z]?:\\Documents and Settings\\[^\\]+\\Local Settings\\Temporary Internet Files\\Content\.IE5\\$',
+            r'^[A-Z]?:\\Documents and Settings\\[^\\]+\\Local Settings\\History\\History\.IE5\\$',
+            r'^[A-Z]?:\\Documents and Settings\\[^\\]+\\Local Settings\\History\\History\.IE5\\MSHist[0-9]+\\$',
+            r'^[A-Z]?:\\Documents and Settings\\[^\\]+\\Local Settings\\History\\History\.IE5\\MSHist[0-9]+\\index\.dat$',
             r'^[A-Z]?:\\Documents and Settings\\[^\\]+\\Cookies\\$',
+            r'^[A-Z]?:\\Users\\[^\\]+\\AppData\\Local\\Microsoft\\Feeds\\.*',
+            r'^[A-Z]?:\\Users\\[^\\]+\\AppData\\Local\\Microsoft\\Feeds Cache\\$',
+            r'^[A-Z]?:\\Users\\[^\\]+\\AppData\\Roaming\\Microsoft\\Windows\\IETIdCache\\$',
+            r'^[A-Z]?:\\Users\\[^\\]+\\AppData\\Roaming\\Microsoft\\Windows\\IETIdCache\\index\.dat$',
+            r'^[A-Z]?:\\Users\\[^\\]+\\AppData\\Roaming\\Microsoft\\Windows\\PrivacIE\\$',
+            r'^[A-Z]?:\\Users\\[^\\]+\\AppData\\Local\\Microsoft\\Internet Explorer\\DOMStore\\$',
+            r'^[A-Z]?:\\Users\\[^\\]+\\AppData\\Local\\Microsoft\\Internet Explorer\\DOMStore\\.*',
+            r'^[A-Z]?:\\Users\\[^\\]+\\AppData\\Local\\Microsoft\\Windows\\History\\History\.IE5\\$',
+            r'^[A-Z]?:\\Users\\[^\\]+\\AppData\\Local\\Microsoft\\Windows\\History\\History\.IE5\\MSHist[0-9]+\\$',
+            r'^[A-Z]?:\\Users\\[^\\]+\\AppData\\Local\\Microsoft\\Windows\\History\\History\.IE5\\MSHist[0-9]+\\index\.dat$',
         ]
         saw_stealth = False
         target_name = False

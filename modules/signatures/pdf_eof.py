@@ -23,12 +23,13 @@ class PDF_EOF(Signature):
     authors = ["KillerInstinct"]
     minimum = "0.5"
 
+    filter_analysistypes = set(["file"])
+
     def run(self):
         if "static" in self.results:
-            if self.results["target"]["category"] == "file":
-                if "PDF" in self.results["target"]["file"]["type"]:
-                    if "Data After EOF" in self.results["static"]["Info"]:
-                        if self.results["static"]["Info"]["Data After EOF"] != "0":
-                            return True
+            if "PDF" in self.results["target"]["file"]["type"]:
+                if "Data After EOF" in self.results["static"]["Info"]:
+                    if self.results["static"]["Info"]["Data After EOF"] != "0":
+                        return True
 
         return False

@@ -72,6 +72,8 @@ class ReadsSelf(Signature):
     minimum = "1.2"
     evented = True
 
+    filter_analysistypes = set(["file"])
+
     FilePositionInformation = 14
 
     def __init__(self, *args, **kwargs):

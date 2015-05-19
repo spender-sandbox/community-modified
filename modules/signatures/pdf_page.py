@@ -23,12 +23,13 @@ class PDF_Page(Signature):
     authors = ["KillerInstinct"]
     minimum = "0.5"
 
+    filter_analysistypes = set(["file"])
+
     def run(self):
         if "static" in self.results:
-            if self.results["target"]["category"] == "file":
-                if "PDF" in self.results["target"]["file"]["type"]:
-                    if "/Page" in self.results["static"]["Streams"]:
-                        if self.results["static"]["Streams"]["/Page"] == 1:
-                            return True
+            if "PDF" in self.results["target"]["file"]["type"]:
+                if "/Page" in self.results["static"]["Streams"]:
+                    if self.results["static"]["Streams"]["/Page"] == 1:
+                        return True
 
         return False

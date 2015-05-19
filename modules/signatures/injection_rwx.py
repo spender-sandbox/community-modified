@@ -18,6 +18,7 @@ class InjectionRWX(Signature):
         Signature.__init__(self, *args, **kwargs)
 
     filter_apinames = set(["NtAllocateVirtualMemory","NtProtectVirtualMemory","VirtualProtectEx"])
+    filter_analysistypes = set(["file"])
 
     def on_call(self, call, process):
         if call["api"] == "NtAllocateVirtualMemory" or call["api"] == "VirtualProtectEx":

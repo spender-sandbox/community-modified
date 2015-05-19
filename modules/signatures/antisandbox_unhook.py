@@ -41,7 +41,8 @@ class Unhook(Signature):
             self.saw_unhook = True
             funcname = self.get_argument(call, "FunctionName")
             if funcname != "":
-                if funcname != "SetUnhandledExceptionFilter" or self.get_argument(call, "UnhookType") != "modification":
+                if (funcname != "SetUnhandledExceptionFilter" and funcname != "SetWindowsHookExW" and funcname != "UnhookWindowsHookEx" and
+                    funcname != "CoCreateInstance") or self.get_argument(call, "UnhookType") != "modification":
                     self.unhook_info.add("function_name: " + funcname + ", type: " + self.get_argument(call, "UnhookType"))
     
     def on_complete(self):

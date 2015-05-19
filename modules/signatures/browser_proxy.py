@@ -28,7 +28,11 @@ class ModifyProxy(Signature):
     authors = ["Kevin Ross", "Accuvant"]
     minimum = "1.2"
 
+    filter_analysistypes = set(["file"])
+
     def run(self):
+        # will need to turn this into an evented signature later, as IE will read the existing value of some of these entries
+        # and write them back as the same value
         reg_indicators = [
         ".*\\\\SOFTWARE\\\\(Wow6432Node\\\\)?Microsoft\\\\Windows\\\\CurrentVersion\\\\Internet\\ Settings\\\\ProxyEnable$",
         ".*\\\\SOFTWARE\\\\(Wow6432Node\\\\)?Microsoft\\\\Windows\\\\CurrentVersion\\\\Internet\\ Settings\\\\ProxyServer$",
@@ -38,6 +42,10 @@ class ModifyProxy(Signature):
         ]
         whitelist = [
         ".*\\\\SOFTWARE\\\\(Wow6432Node\\\\)?Microsoft\\\\Windows\\\\CurrentVersion\\\\Internet\\ Settings\\\\Wpad\\\\WpadLastNetwork$",
+        ".*\\\\SOFTWARE\\\\(Wow6432Node\\\\)?Microsoft\\\\Windows\\\\CurrentVersion\\\\Internet\\ Settings\\\\Wpad\\\\[^\\\\]*\\\\WpadDecisionReason$",
+        ".*\\\\SOFTWARE\\\\(Wow6432Node\\\\)?Microsoft\\\\Windows\\\\CurrentVersion\\\\Internet\\ Settings\\\\Wpad\\\\[^\\\\]*\\\\WpadDecisionTime$",
+        ".*\\\\SOFTWARE\\\\(Wow6432Node\\\\)?Microsoft\\\\Windows\\\\CurrentVersion\\\\Internet\\ Settings\\\\Wpad\\\\[^\\\\]*\\\\WpadDecision$",
+        ".*\\\\SOFTWARE\\\\(Wow6432Node\\\\)?Microsoft\\\\Windows\\\\CurrentVersion\\\\Internet\\ Settings\\\\Wpad\\\\[^\\\\]*\\\\WpadNetworkName$",
         ]
         for indicator in reg_indicators:
             matches = self.check_write_key(pattern=indicator, regex=True, all=True)

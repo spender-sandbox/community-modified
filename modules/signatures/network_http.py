@@ -19,9 +19,12 @@ class NetworkHTTP(Signature):
     name = "network_http"
     description = "Performs some HTTP requests"
     severity = 2
+    confidence = 30
     categories = ["http"]
     authors = ["nex"]
     minimum = "0.5"
+
+    filter_analysistypes = set(["file"])
 
     def run(self):
         if "network" in self.results:

@@ -13,6 +13,7 @@ class EncryptedIOC(Signature):
     name = "encrypted_ioc"
     description = "At least one IP Address, Domain, or File Name was found in a crypto call"
     severity = 2
+    weight = 0
     categories = ["crypto"]
     authors = ["KillerInstinct"]
     minimum = "1.2"
@@ -24,6 +25,7 @@ class EncryptedIOC(Signature):
 
     # May add to this later
     filter_apinames = set(["CryptHashData"])
+    filter_analysistypes = set(["file"])
 
     def on_call(self, call, process):
         if call["api"] == "CryptHashData":

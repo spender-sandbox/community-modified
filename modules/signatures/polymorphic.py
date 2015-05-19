@@ -31,32 +31,33 @@ class Polymorphic(Signature):
     authors = ["lordr", "Accuvant"]
     minimum = "1.2"
 
+    filter_analysistypes = set(["file"])
+
     def run(self):
         found_polymorphic = False
-        if self.results["target"]["category"] == "file":
-            target_ssdeep = self.results["target"]["file"]["ssdeep"]
-            target_sha1 = self.results["target"]["file"]["sha1"]
-            target_size = self.results["target"]["file"]["size"]
+        target_ssdeep = self.results["target"]["file"]["ssdeep"]
+        target_sha1 = self.results["target"]["file"]["sha1"]
+        target_size = self.results["target"]["file"]["size"]
 
-            if target_ssdeep == "" or target_ssdeep == None:
-                return False
+        if target_ssdeep == "" or target_ssdeep == None:
+            return False
 
-            for drop in self.results["dropped"]:
-                if drop["sha1"] == target_sha1:
-                    continue
-                if fabs(target_size - drop["size"]) >= 1024:
-                    continue
-                drop_ssdeep = drop["ssdeep"]
-                if drop_ssdeep == "" or drop_ssdeep == None:
-                    continue
-                try:
-                    percent = pydeep.compare(target_ssdeep, drop_ssdeep)
-                    if percent > 20:
-                        found_polymorphic = True
-                        for path in drop["guest_paths"]:
-                            self.data.append({"file" : path})
-                        self.data.append({"percent_match" : percent})
-                except:
-                    continue
+        for drop in self.results["dropped"]:
+            if drop["sha1"] == target_sha1:
+                continue
+            if fabs(target_size - drop["size"]) >= 1024:
+                continue
+            drop_ssdeep = drop["ssdeep"]
+            if drop_ssdeep == "" or drop_ssdeep == None:
+                continue
+            try:
+                percent = pydeep.compare(target_ssdeep, drop_ssdeep)
+                if percent > 20:
+                    found_polymorphic = True
+                    for path in drop["guest_paths"]:
+                        self.data.append({"file" : path})
+                    self.data.append({"percent_match" : percent})
+            except:
+                continue
 
         return found_polymorphic
