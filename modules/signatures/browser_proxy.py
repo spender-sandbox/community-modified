@@ -1,4 +1,4 @@
-# Copyright (C) 2015 Kevin Ross
+# Copyright (C) 2015 Kevin Ross, Accuvant, Inc. (bspengler@accuvant.com)
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -13,6 +13,11 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+try:
+    import re2 as re
+except ImportError:
+    import re
+
 from lib.cuckoo.common.abstracts import Signature
 
 class ModifyProxy(Signature):
@@ -20,7 +25,7 @@ class ModifyProxy(Signature):
     description = "Attempts to modify proxy settings"
     severity = 3
     categories = ["browser"]
-    authors = ["Kevin Ross"]
+    authors = ["Kevin Ross", "Accuvant"]
     minimum = "1.2"
 
     def run(self):
@@ -31,10 +36,18 @@ class ModifyProxy(Signature):
         ".*\\\\SOFTWARE\\\\(Wow6432Node\\\\)?Microsoft\\\\Windows\\\\CurrentVersion\\\\Internet\\ Settings\\\\ProxyOverride$",
         ".*\\\\SOFTWARE\\\\(Wow6432Node\\\\)?Microsoft\\\\Windows\\\\CurrentVersion\\\\Internet\\ Settings\\\\Wpad\\\\.*",
         ]
-
+        whitelist = [
+        ".*\\\\SOFTWARE\\\\(Wow6432Node\\\\)?Microsoft\\\\Windows\\\\CurrentVersion\\\\Internet\\ Settings\\\\Wpad\\\\WpadLastNetwork$",
+        ]
         for indicator in reg_indicators:
-            if self.check_write_key(pattern=indicator, regex=True):
-                return True
+            matches = self.check_write_key(pattern=indicator, regex=True, all=True)
+            for match in matches:
+                foundwhite = False
+                for white in whitelist:
+                    if re.match(white, match, re.IGNORECASE):
+                        foundwhite = True
+                if not foundwhite:
+                    return True
 
         return False 
 
