@@ -33,7 +33,7 @@ class Poweliks_APIs(Signature):
 
     def on_call(self, call, process):
         # May need to add in some deobfuscation later...
-        if "eval(" in self.get_argument(call, "Buffer")
+        if "eval(" in self.get_argument(call, "Buffer"):
             return True
 
         return None
