@@ -41,13 +41,14 @@ class ModifyProxy(Signature):
         ]
         for indicator in reg_indicators:
             matches = self.check_write_key(pattern=indicator, regex=True, all=True)
-            for match in matches:
-                foundwhite = False
-                for white in whitelist:
-                    if re.match(white, match, re.IGNORECASE):
-                        foundwhite = True
-                if not foundwhite:
-                    return True
+            if matches:
+                for match in matches:
+                    foundwhite = False
+                    for white in whitelist:
+                        if re.match(white, match, re.IGNORECASE):
+                            foundwhite = True
+                    if not foundwhite:
+                        return True
 
         return False 
 
