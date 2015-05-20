@@ -13,6 +13,11 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+try:
+    import re2 as re
+except ImportError:
+    import re
+
 from lib.cuckoo.common.abstracts import Signature
 
 class NetworkHTTP(Signature):
@@ -27,9 +32,17 @@ class NetworkHTTP(Signature):
     filter_analysistypes = set(["file"])
 
     def run(self):
+        whitelist = [
+            "^http://crl.microsoft.com/.*",
+            ]
         if "network" in self.results:
             if "http" in self.results["network"]:
-                if len(self.results["network"]["http"]) > 0:
-                    return True
+                for req in self.results["network"]["http"]:
+                    is_whitelisted = False
+                    for white in whitelist:
+                        if re.match(white, req["uri"], re.IGNORECASE):
+                            is_whitelisted = True
+                    if not is_whitelisted:
+                        return True
 
         return False
