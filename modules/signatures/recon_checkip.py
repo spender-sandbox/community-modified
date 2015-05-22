@@ -21,7 +21,7 @@ class CheckIP(Signature):
     severity = 2
     categories = ["recon"]
     authors = ["nex", "Accuvant"]
-    minimum = "0.5"
+    minimum = "1.2"
 
     def run(self):
         dns_indicators = [
