@@ -36,13 +36,17 @@ class EncryptedIOC(Signature):
         matches = [
             r'(https?:\/\/)?([\da-z\.-]+)\.([0-9a-z\.]{2,6})(:\d{1,5})?([\/\w\.-]*)\/?',
         ]
+        whitelist = [
+            "http://crl.microsoft.com",
+            "http://www.microsoft.com",
+        ]
         dedup = list()
-        extracted_config = False
+        extracted_data= False
         for potential_ioc in self.iocs:
             for entry in matches:
                 all_matches = re.findall(entry, potential_ioc)
                 if all_matches:
-                    extracted_config = True
+                    extracted_data = True
                     for buf in all_matches:
                         ioc = ""
                         idx = 0
@@ -57,10 +61,12 @@ class EncryptedIOC(Signature):
                                 ioc += tmp + "."
                             else:
                                 ioc += tmp
-                        if ioc not in dedup:
-                            dedup.append(ioc)
+                        for item in whitelist:
+                            if item not in ioc:
+                                if ioc not in dedup:
+                                    dedup.append(ioc)
         if dedup:
             for ioc in dedup:
                 self.data.append({"ioc": ioc})
 
-        return extracted_config
+        return extracted_data
