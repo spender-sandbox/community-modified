@@ -32,22 +32,16 @@ class Multiple_UA(Signature):
     filter_apinames = set(["InternetOpenA", "InternetOpenW"])
 
     def on_call(self, call, process):
-        # Dict whitelist with process name as key, and useragent as value
+        # Dict whitelist with process name as key, and useragents as values
         whitelist = {
             "acrord32.exe": ["Mozilla/3.0 (compatible; Acrobat 5.0; Windows)"],
             "iexplore.exe": ["VCSoapClient", "Shockwave Flash"],
         }
         ua = self.get_argument(call, "Agent")
         proc = process["process_name"].lower()
-        if proc in whitelist.keys() and ua == whitelist[proc]:
-            for goodua in whitelist[proc]:
-                if ua == goodua:
-                    return None
+        if proc in whitelist.keys() and ua in whitelist[proc]:
+            return None
 
-                else:
-                    if ua not in self.useragents:
-                        self.useragents.append(ua)
-                        self.procs.append((process["process_name"], ua))
         else:
             if ua not in self.useragents:
                 self.useragents.append(ua)
