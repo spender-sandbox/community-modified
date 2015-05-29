@@ -61,10 +61,13 @@ class EncryptedIOC(Signature):
                                 ioc += tmp + "."
                             else:
                                 ioc += tmp
+                        
+                        addit = True
                         for item in whitelist:
-                            if item not in ioc:
-                                if ioc not in dedup:
-                                    dedup.append(ioc)
+                            if item in ioc:
+                                addit = False
+                        if addit and ioc not in dedup:
+                            dedup.append(ioc)
         if dedup:
             for ioc in dedup:
                 self.data.append({"ioc": ioc})
