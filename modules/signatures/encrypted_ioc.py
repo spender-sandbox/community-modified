@@ -46,7 +46,6 @@ class EncryptedIOC(Signature):
             for entry in matches:
                 all_matches = re.findall(entry, potential_ioc)
                 if all_matches:
-                    extracted_data = True
                     for buf in all_matches:
                         ioc = ""
                         idx = 0
@@ -69,6 +68,7 @@ class EncryptedIOC(Signature):
                         if addit and ioc not in dedup:
                             dedup.append(ioc)
         if dedup:
+            extracted_data = True
             for ioc in dedup:
                 self.data.append({"ioc": ioc})
 
