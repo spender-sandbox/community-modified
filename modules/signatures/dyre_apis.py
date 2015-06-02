@@ -39,9 +39,12 @@ class Dyre_APIs(Signature):
     filter_apinames = set(["CryptHashData", "HttpOpenRequestA"])
 
     def on_call(self, call, process):
+        iocs = ["J7dnlDvybciDvu8d46D\\x00",
+                "qwererthwebfsdvjaf+\\x00",
+               ]
         if call["api"] == "CryptHashData":
             buf = self.get_argument(call, "Buffer")
-            if buf == "qwererthwebfsdvjaf+\\x00":
+            if buf in iocs:
                 self.cryptoapis = True
         elif call["api"] == "HttpOpenRequestA":
             buf = self.get_argument(call, "Path")
