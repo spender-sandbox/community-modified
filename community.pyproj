@@ -82,6 +82,7 @@
     </Compile>
     <Compile Include="modules\signatures\disables_sysrestore.py" />
     <Compile Include="modules\signatures\disables_windowsupdate.py" />
+    <Compile Include="modules\signatures\andromeda_apis.py" />
     <Compile Include="modules\signatures\dridex_apis.py" />
     <Compile Include="modules\signatures\modifies_hostsfile.py" />
     <Compile Include="modules\signatures\poweliks_apis.py" />
