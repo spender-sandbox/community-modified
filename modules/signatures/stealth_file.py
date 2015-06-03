@@ -101,7 +101,7 @@ class StealthFile(Signature):
             r'^[A-Z]?:\\Users\\[^\\]+\\AppData\\Local\\Microsoft\\Windows\\History\\History\.IE5\\MSHist[0-9]+\\index\.dat$',
         ]
         saw_stealth = False
-        target_name = False
+        target_name = None
 
         if "file" in self.results["target"] and "PE32" not in self.results["target"]["file"]["type"]:
             target_name = self.results["target"]["file"]["name"]
