@@ -18,7 +18,7 @@ class Authenticode(Signature):
         found_sig = False
 
         if "static" in self.results:
-            if "digital_signers" in self.results["static"]:
+            if "digital_signers" in self.results["static"] and self.results["static"]["digital_signers"]:
                 for sign in self.results["static"]["digital_signers"]:
                     self.data.append(sign)
                     found_sig = True

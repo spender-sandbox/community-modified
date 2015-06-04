@@ -45,7 +45,7 @@ class BadCerts(Signature):
             "401909e89a0e59335b624e147719f0b88d51705a",
             ]
         if "static" in self.results:
-            if "digital_signers" in self.results["static"]:
+            if "digital_signers" in self.results["static"] and self.results["static"]["digital_signers"]:
                 for sign in self.results["static"]["digital_signers"]:
                     for md5 in md5_indicators:
                         if md5 == sign["md5_fingerprint"]:
