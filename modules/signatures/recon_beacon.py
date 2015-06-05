@@ -48,16 +48,14 @@ class Recon_Beacon(Signature):
 
     def on_complete(self):
         ret = False
-        uname = ""
-        cname = ""
-        if "behavior" in self.results:
-            if "processes" in self.results["behavior"]:
-                for proc in self.results["behavior"]["processes"]:
-                    if "environ" in proc:
-                        if proc["environ"] and "ComputerName" in proc["environ"] and not cname:
-                            cname = proc["environ"]["ComputerName"].lower()
-                        if proc["environ"] and "UserName" in proc["environ"] and not uname:
-                            uname = proc["environ"]["UserName"].lower()
+        # should perhaps check for any observed username, not just that of the initial process
+        initproc = self.get_initial_process()
+        uname = self.get_environ_entry(initproc, "UserName")
+        cname = self.get_environ_entry(initproc, "ComputerName")
+        if uname:
+            uname = uname.lower()
+        if cname:
+            cname = cname.lower()
 
         if self.proclogs and cname and uname:
             for proc in self.proclogs:

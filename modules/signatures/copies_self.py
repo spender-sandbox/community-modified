@@ -31,9 +31,9 @@ class CopiesSelf(Signature):
         created_copy = False
         # get the path of the initial monitored executable
         initialpath = None
-        processes = self.results["behavior"]["processes"]
-        if len(processes):
-            initialpath = processes[0]["module_path"].lower()
+        initialproc = self.get_initial_process()
+        if initialproc:
+            initialpath = initialproc["module_path"].lower()
         target_sha1 = self.results["target"]["file"]["sha1"]
 
         for drop in self.results["dropped"]:

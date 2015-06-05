@@ -28,10 +28,9 @@ class Andromeda_APIs(Signature):
 
     def __init__(self, *args, **kwargs):
         Signature.__init__(self, *args, **kwargs)
-        self.sysvolserial = None
-        if "behavior" in self.results and "processes" in self.results["behavior"] and len(self.results["behavior"]["processes"]):
-            if "environ" in self.results["behavior"]["processes"][0] and "SystemVolumeSerialNumber" in self.results["behavior"]["processes"][0]["environ"]:
-                self.sysvolserial = int(self.results["behavior"]["processes"][0]["environ"]["SystemVolumeSerialNumber"].replace("-",""), 16)
+        self.sysvolserial = self.get_environ_entry(self.get_initial_process, "SystemVolumeSerialNumber")
+        if self.sysvolserial:
+            self.sysvolserial = int(self.sysvolserial.replace("-",""), 16)
 
     filter_apinames = set(["NtOpenEvent"])
 

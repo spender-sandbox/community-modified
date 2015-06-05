@@ -28,8 +28,10 @@ class Dropper(Signature):
         is_dropper = False
         mainprocesspath = ""
         processpaths = set()
-        processes = self.results["behavior"]["processes"]
-        if processes:
+        processes = None
+        if "behavior" in self.results and "processes" in self.results["behavior"]:
+            processes = self.results["behavior"]["processes"]
+        if processes and len(processes):
             mainprocesspath = processes[0]["module_path"].lower()
             for process in processes[1:]:
                 processpath = process["module_path"].lower()

@@ -63,26 +63,19 @@ class Dyre_APIs(Signature):
             cryptoret = True
         # C2 Beacon check
         if self.networkapis:
-            # Gather computer names (should only ever be one honestly)
-            compnames = set()
-            if "behavior" in self.results:
-                if "processes" in self.results["behavior"]:
-                    for proc in self.results["behavior"]["processes"]:
-                        if "environ" in proc:
-                            if proc["environ"] and "ComputerName" in proc["environ"]:
-                                compnames.add(proc["environ"]["ComputerName"])
+            # Gather computer name
+            compname = self.get_environ_entry(self.get_initial_process(), "ComputerName")
             for httpreq in self.networkapis:
                 # Generate patterns (should only ever be one per indicator)
-                for cname in compnames:
-                    indicators = [
-                        "/(\d{4}[a-z]{2}\d{2})/" + cname + "_",
-                        "/([^/]+)/" + cname + "/\d+/\d+/\d+/$",
-                    ]
-                    for indicator in indicators:
-                        buf = re.match(indicator, httpreq)
-                        if buf:
-                            networkret = True
-                            campaign.add(buf.group(1))
+                indicators = [
+                    "/(\d{4}[a-z]{2}\d{2})/" + compname + "_",
+                    "/([^/]+)/" + compname + "/\d+/\d+/\d+/$",
+                ]
+                for indicator in indicators:
+                    buf = re.match(indicator, httpreq)
+                    if buf:
+                        networkret = True
+                        campaign.add(buf.group(1))
 
         # Check if there are any winners
         if cryptoret or networkret:

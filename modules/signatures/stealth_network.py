@@ -22,8 +22,9 @@ class StealthNetwork(Signature):
         self.foundnetwork = True
 
     def on_complete(self):
+        initialproc = self.get_initial_process()
         if "network" in self.results:
             if ((("hosts" in self.results["network"]) and len(self.results["network"]["hosts"]) > 0) or
-                (("domains" in self.results["network"]) and len(self.results["network"]["domains"]) > 0)) and len(self.results["behavior"]["processes"]) and not self.foundnetwork:
+                (("domains" in self.results["network"]) and len(self.results["network"]["domains"]) > 0)) and initialproc and not self.foundnetwork:
                 return True
         return False
