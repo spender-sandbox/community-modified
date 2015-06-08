@@ -28,7 +28,7 @@ class Andromeda_APIs(Signature):
 
     def __init__(self, *args, **kwargs):
         Signature.__init__(self, *args, **kwargs)
-        self.sysvolserial = self.get_environ_entry(self.get_initial_process, "SystemVolumeSerialNumber")
+        self.sysvolserial = self.get_environ_entry(self.get_initial_process(), "SystemVolumeSerialNumber")
         if self.sysvolserial:
             self.sysvolserial = int(self.sysvolserial.replace("-",""), 16)
 
