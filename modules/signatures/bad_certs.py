@@ -43,6 +43,8 @@ class BadCerts(Signature):
             "fdf01dd3f37c66ac4c779d92623c77814a07fe4c",
             # used in a Dridex sample: KASHTAN OOO
             "401909e89a0e59335b624e147719f0b88d51705a",
+            # used in a Punkey sample: MOGLIANI & SON LIMITED
+            "c5d386f697777643751ec33b6b689eef71791293",
             ]
         if "static" in self.results:
             if "digital_signers" in self.results["static"] and self.results["static"]["digital_signers"]:
