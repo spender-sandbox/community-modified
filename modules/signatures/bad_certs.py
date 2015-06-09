@@ -19,6 +19,7 @@ class BadCerts(Signature):
     name = "bad_certs"
     description = "The executable used a known stolen/malicious Authenticode signature"
     severity = 3
+    weight = 3
     categories = ["static"]
     authors = ["Accuvant"]
     minimum = "1.3"
