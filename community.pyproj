@@ -18,6 +18,7 @@
     <PtvsTargetsFile>$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets</PtvsTargetsFile>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="modules\signatures\ek_gondad.py" />
     <Compile Include="modules\signatures\antiav_bitdefender_libs.py" />
     <Compile Include="modules\signatures\antianalysis_detectreg.py" />
     <Compile Include="modules\signatures\antiav_detectreg.py" />
