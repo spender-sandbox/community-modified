@@ -38,6 +38,7 @@ class StealthTimeout(Signature):
             if handle == "0xffffffff" or handle == "0x00000000":
                 self.exitidx = self.curidx
                 if self.systimeidx and self.exitidx and self.systimeidx > (self.exitidx - 10):
+                    self.data.append({"process" : process["process_name"] + ", PID " + str(process["process_id"])})
                     return True
 
         return None
