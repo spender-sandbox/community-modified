@@ -46,6 +46,8 @@ class BadCerts(Signature):
             "401909e89a0e59335b624e147719f0b88d51705a",
             # used in a Punkey sample: MOGLIANI & SON LIMITED
             "c5d386f697777643751ec33b6b689eef71791293",
+            # used in Duqu2: HON HAI PRECISION INDUSTRY CO. LTD.
+            "c7938dd4bec741574683b4f3dd54717f98e54c90",
             ]
         if "static" in self.results:
             if "digital_signers" in self.results["static"] and self.results["static"]["digital_signers"]:
