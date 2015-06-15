@@ -92,6 +92,8 @@ class StealthFile(Signature):
             r'^[A-Z]?:\\Users\\[^\\]+\\AppData\\Local\\Microsoft\\Feeds Cache\\index\.dat$',
             r'^[A-Z]?:\\Users\\[^\\]+\\AppData\\Roaming\\Microsoft\\Windows\\IETldCache\\$',
             r'^[A-Z]?:\\Users\\[^\\]+\\AppData\\Roaming\\Microsoft\\Windows\\IETldCache\\index\.dat$',
+            r'^[A-Z]?:\\Users\\[^\\]+\\AppData\\Roaming\\Microsoft\\Windows\\IECompatCache\\$',
+            r'^[A-Z]?:\\Users\\[^\\]+\\AppData\\Roaming\\Microsoft\\Windows\\IECompatCache\\index.dat$',
             r'^[A-Z]?:\\Users\\[^\\]+\\AppData\\Roaming\\Microsoft\\Windows\\PrivacIE\\$',
             r'^[A-Z]?:\\Users\\[^\\]+\\AppData\\Roaming\\Microsoft\\Windows\\PrivacIE\\index\.dat$',
             r'^[A-Z]?:\\Users\\[^\\]+\\AppData\\Local\\Microsoft\\Internet Explorer\\DOMStore\\$',
