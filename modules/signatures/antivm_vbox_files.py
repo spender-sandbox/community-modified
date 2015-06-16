@@ -44,7 +44,9 @@ class VBoxDetectFiles(Signature):
             ".*VBoxWHQLFake\.exe$",
             ".*VBoxGuest\.[a-zA-Z]{3}$",
             ".*VBoxMouse\.[a-zA-Z]{3}$",
-            ".*VBoxVideo\.[a-zA-Z]{3}$"
+            ".*VBoxVideo\.[a-zA-Z]{3}$",
+            ".*\\VirtualBox Guest Additions\\uninst\.exe$",
+            ".*\\VirtualBox Guest Additions\\uninst\.exe\.dll$",
         ]
 
         for indicator in indicators:
