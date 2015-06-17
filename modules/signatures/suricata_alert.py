@@ -35,9 +35,13 @@ class SuricataAlert(Signature):
             if "alerts" in self.results["suricata"]:
                 for alert in self.results["suricata"]["alerts"]:
                     if "signature" in alert:
+                        addsig = True
                         for item in whitelist:
-                            if item not in alert["signature"]:
-                                sigset.add(alert["signature"])
+                            if item in alert["signature"]:
+                                addsig = False
+                                break
+                        if addsig:
+                            sigset.add(alert["signature"])
         for sig in sigset:
             self.data.append({"signature" : sig})
             self.weight += 1
