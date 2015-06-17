@@ -27,8 +27,8 @@ class VMwareDetectFiles(Signature):
         indicators = [
             ".*\\\\drivers\\\\vmmouse\.sys$",
             ".*\\\\drivers\\\\vmhgfs\.sys$",
-            ".*\\\\VMware Tools\\\\TPAutoConnSvc.exe$",
-            ".*\\\\VMware Tools\\\\TPAutoConnSvc.exe.dll$",
+            ".*\\\\VMware\\ Tools\\\\TPAutoConnSvc.exe$",
+            ".*\\\\VMware\\ Tools\\\\TPAutoConnSvc.exe.dll$",
         ]
 
         for indicator in indicators:
