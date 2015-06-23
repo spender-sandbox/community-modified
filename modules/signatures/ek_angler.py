@@ -31,10 +31,10 @@ class Angler_JS(Signature):
 
     filter_categories = set(["browser"])
     # backward compat
-    filter_apinames = set(["JSEval", "COleScript_Compile"])
+    filter_apinames = set(["JsEval", "COleScript_Compile"])
 
     def on_call(self, call, process):
-        if call["api"] == "JSEval":
+        if call["api"] == "JsEval":
             buf = self.get_argument(call, "Javascript")
             if "/malware.dontneedcoffee.com/.test()" in buf:
                 return True
