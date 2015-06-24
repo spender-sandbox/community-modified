@@ -26,7 +26,7 @@ class Dyre_APIs(Signature):
     weight = 3
     severity = 3
     categories = ["banker", "trojan"]
-    families = ["dyre", "mini-dyre"]
+    families = ["dyre"]
     authors = ["Accuvant", "KillerInstinct"]
     minimum = "1.3"
     evented = True
@@ -35,12 +35,16 @@ class Dyre_APIs(Signature):
         Signature.__init__(self, *args, **kwargs)
         self.cryptoapis = False
         self.networkapis = set()
+        self.syncapis = False
 
-    filter_apinames = set(["CryptHashData", "HttpOpenRequestA"])
+    filter_apinames = set(["CryptHashData", "HttpOpenRequestA",
+                           "NtCreateNamedPipeFile"])
 
     def on_call(self, call, process):
         iocs = ["J7dnlDvybciDvu8d46D\\x00",
                 "qwererthwebfsdvjaf+\\x00",
+               ]
+        pipe = ["\\??\\pipe\\3obdw5e5w4",
                ]
         if call["api"] == "CryptHashData":
             buf = self.get_argument(call, "Buffer")
@@ -50,17 +54,22 @@ class Dyre_APIs(Signature):
             buf = self.get_argument(call, "Path")
             if len(buf) > 10:
                 self.networkapis.add(buf)
+        elif call["api"] == "NtCreateNamedPipeFile":
+            buf = self.get_argument(call, "PipeName")
+            for npipe in pipe:
+                if buf == npipe:
+                    self.syncapis = True
+                    break
 
         return None
 
     def on_complete(self):
-        cryptoret = False
         networkret = False
         campaign = set()
+        
+        if self.check_mutex(pattern="^(Global|Local)\\\\pen3j3832h$", regex=True):
+            self.syncapis = True
 
-        # Crypto API check
-        if self.cryptoapis:
-            cryptoret = True
         # C2 Beacon check
         if self.networkapis:
             # Gather computer name
@@ -78,8 +87,8 @@ class Dyre_APIs(Signature):
                         campaign.add(buf.group(1))
 
         # Check if there are any winners
-        if cryptoret or networkret:
-            if cryptoret and networkret:
+        if self.cryptoapis or self.syncapis or networkret:
+            if (self.cryptoapis or self.syncapis) and networkret:
                 self.confidence = 100
                 self.description = "Exhibits behaviorial and network characteristics of Upatre+Dyre/Mini-Dyre malware"
                 for camp in campaign:
@@ -92,7 +101,10 @@ class Dyre_APIs(Signature):
                     self.data.append({"Campaign": camp})
                 return True
 
-            elif cryptoret:
+            elif self.cryptoapis:
+                return True
+                
+            elif self.syncapis:
                 return True
 
         return False
