@@ -48,6 +48,11 @@ class BadCerts(Signature):
             "c5d386f697777643751ec33b6b689eef71791293",
             # used in Duqu2: HON HAI PRECISION INDUSTRY CO. LTD.
             "c7938dd4bec741574683b4f3dd54717f98e54c90",
+            # HackingTeam Dump
+            "2e8734348c03390d24faf96e86bb01b39e3ad4db",
+            "b7c646e3a433986e165ba45b209da4a2c4111939",
+            "fdc9281ab92d4fb85a03254dcb62d1c29a803fb1",
+            "2a1da6dc8635e6c725cccbe6c035eec813fbeb2e",
             ]
         if "static" in self.results:
             if "digital_signers" in self.results["static"] and self.results["static"]["digital_signers"]:
