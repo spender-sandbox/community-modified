@@ -18,6 +18,7 @@
     <PtvsTargetsFile>$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets</PtvsTargetsFile>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="modules\signatures\bad_ssl_certs.py" />
     <Compile Include="modules\signatures\ek_angler.py" />
     <Compile Include="modules\signatures\ek_gondad.py" />
     <Compile Include="modules\signatures\antiav_bitdefender_libs.py" />
@@ -204,6 +205,7 @@
     <Compile Include="modules\signatures\static_authenticode.py" />
     <Compile Include="modules\signatures\targeted_flame.py" />
     <Compile Include="modules\signatures\volatility_sig.py" />
+    <Compile Include="modules\signatures\webmail_phish.py" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="modules\" />
