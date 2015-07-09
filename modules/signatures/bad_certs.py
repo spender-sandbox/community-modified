@@ -53,6 +53,8 @@ class BadCerts(Signature):
             "b7c646e3a433986e165ba45b209da4a2c4111939",
             "fdc9281ab92d4fb85a03254dcb62d1c29a803fb1",
             "2a1da6dc8635e6c725cccbe6c035eec813fbeb2e",
+            # Wild Neutron (Stolen Acer Incorporated cert)
+            "0d859141ee9a0c6e725ffe6bcfc99f3efcc3fc07",
             ]
         if "static" in self.results:
             if "digital_signers" in self.results["static"] and self.results["static"]["digital_signers"]:
