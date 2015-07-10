@@ -17,7 +17,7 @@ from lib.cuckoo.common.abstracts import Signature
 
 class Unhook(Signature):
     name = "antisandbox_unhook"
-    description = "Tries to unhook Windows functions monitored by Cuckoo"
+    description = "Tries to unhook or modify Windows functions monitored by Cuckoo"
     severity = 3
     confidence = 60
     categories = ["anti-sandbox"]
