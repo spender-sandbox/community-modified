@@ -19,6 +19,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="modules\signatures\bad_ssl_certs.py" />
+    <Compile Include="modules\signatures\disables_spdy.py" />
     <Compile Include="modules\signatures\ek_angler.py" />
     <Compile Include="modules\signatures\ek_gondad.py" />
     <Compile Include="modules\signatures\antiav_bitdefender_libs.py" />
