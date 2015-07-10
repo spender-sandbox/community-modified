@@ -42,10 +42,13 @@ class BuildLangID(Signature):
             if "pe_versioninfo" in self.results["static"]:
                 for info in self.results["static"]["pe_versioninfo"]:
                     if info["name"] == "Translation":
-                        lang, charset = info["value"].strip().split(" ")
-                        for language in languages:
-                            if language["code"] == lang:
-                                self.description += ": %s" % language["language"]
-                                return True
+                        try:
+                            lang, charset = info["value"].strip().split(" ")
+                            for language in languages:
+                                if language["code"] == lang:
+                                    self.description += ": %s" % language["language"]
+                                    return True
+                        except:
+                            pass
 
         return False
