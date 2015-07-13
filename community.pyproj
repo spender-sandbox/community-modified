@@ -18,6 +18,7 @@
     <PtvsTargetsFile>$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets</PtvsTargetsFile>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="modules\signatures\antisandbox_cuckoo.py" />
     <Compile Include="modules\signatures\antivm_vbox_provname.py" />
     <Compile Include="modules\signatures\bad_ssl_certs.py" />
     <Compile Include="modules\signatures\disables_spdy.py" />
