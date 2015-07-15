@@ -30,6 +30,7 @@ class SuricataAlert(Signature):
         whitelist = [
             "Application Crash Report Sent to Microsoft",
             "Outdated Windows Flash Version IE",
+            "JAVA - ClassID",
         ]
         if "suricata" in self.results:
             if "alerts" in self.results["suricata"]:
