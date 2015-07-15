@@ -1,4 +1,4 @@
-# Copyright (C) 2013 Claudio "nex" Guarnieri (@botherder)
+# Copyright (C) 2013,2015 Claudio "nex" Guarnieri (@botherder), Accuvant, Inc. (bspengler@accuvant.com)
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -20,12 +20,15 @@ class GetProductID(Signature):
     description = "Retrieves Windows ProductID, probably to fingerprint the sandbox"
     severity = 3
     categories = ["anti-sandbox"]
-    authors = ["nex"]
-    minimum = "1.0"
-    evented = True
+    authors = ["nex", "Accuvant"]
+    minimum = "1.2"
 
-    filter_apinames = set(["RegQueryValueExA","RegQueryValueExW","NtQueryValueKey"])
-
-    def on_call(self, call, process):
-        if self.get_argument(call, "ValueName") == "ProductId":
-            return True
+    def run(self):
+        indicators = [
+            ".*\\\\Microsoft\\\\Windows\\ NT\\\\CurrentVersion\\\\ProductId$",
+            ".*\\\\Microsoft\\\\Internet\\ Explorer\\\\Registration\\\\ProductId$",
+        ]
+        for indicator in indicators:
+            if self.check_read_key(pattern=indicator, regex=True):
+                return True
+        return False

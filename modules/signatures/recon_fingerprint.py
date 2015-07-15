@@ -1,4 +1,4 @@
-# Copyright (C) 2012 Claudio "nex" Guarnieri (@botherder)
+# Copyright (C) 2012,2015 Claudio "nex" Guarnieri (@botherder), Accuvant, Inc. (bspengler@accuvant.com)
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -20,29 +20,23 @@ class Fingerprint(Signature):
     description = "Collects information to fingerprint the system (MachineGuid, DigitalProductId, SystemBiosDate)"
     severity = 3
     categories = ["recon"]
-    authors = ["nex"]
-    minimum = "1.0"
-    evented = True
+    authors = ["nex", "Accuvant"]
+    minimum = "1.2"
 
-    def __init__(self, *args, **kwargs):
-        Signature.__init__(self, *args, **kwargs)
-        self.threshold = 3
-        self.matches = 0
+    def run(self):
+        matches = 0
 
-    filter_categories = set(["registry"])
-
-    def on_call(self, call, process):
         indicators = [
-            "MachineGuid",
-            "DigitalProductId",
-            "SystemBiosDate"
+            ".*\\\\Microsoft\\\\Windows\\ NT\\\\CurrentVersion\\\\DigitalProductId$",
+            ".*\\\\Microsoft\\\\Cryptography\\\\MachineGuid$",
+            ".*\\\\HARDWARE\\\\DESCRIPTION\\\\System\\\\SystemBIOSDate$",
         ]
 
-        for argument in call["arguments"]:
-            for indicator in indicators:
-                if argument["value"] == indicator:
-                    indicators.remove(indicator)
-                    self.matches += 1
+        for indicator in indicators:
+            if self.check_read_key(pattern=indicator, regex=True):
+                matches += 1
 
-        if self.matches >= self.threshold:
+        if matches >= 2:
             return True
+
+        return False
