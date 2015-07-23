@@ -1,4 +1,4 @@
-This repository contains [Cuckoo Sandbox](http://www.cuckoosandbox.org) over 180 signature modules from the community, including
+This repository contains over 180 [Cuckoo Sandbox](http://www.cuckoosandbox.org) signature modules from the community, including
 those heavily modified by Accuvant for correctness, removal of false positives,
 and more detailed information.  It also includes over 70 new signature modules
 developed solely by Accuvant and provided under the GPL.
