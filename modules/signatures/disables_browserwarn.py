@@ -8,7 +8,7 @@ class DisablesBrowserWarn(Signature):
     name = "disables_browser_warn"
     description = "Attempts to disable browser security warnings"
     severity = 3
-    categories = ["generic", "banker"]
+    categories = ["generic", "banker", "clickfraud"]
     authors = ["Accuvant", "Kevin Ross"]
     minimum = "1.2"
 
@@ -19,6 +19,10 @@ class DisablesBrowserWarn(Signature):
             ".*\\\\SOFTWARE\\\\(Wow6432Node\\\\)?Microsoft\\\\Windows\\\\CurrentVersion\\\\Internet\\ Settings\\\\WarnOnHTTPSToHTTPRedirect$",
             ".*\\\\SOFTWARE\\\\(Wow6432Node\\\\)?Microsoft\\\\Windows\\\\CurrentVersion\\\\Internet\\ Settings\\\\WarnOnZoneCrossing$",
             ".*\\\\SOFTWARE\\\\(Wow6432Node\\\\)?Microsoft\\\\Windows\\\\CurrentVersion\\\\Internet\\ Settings\\\\WarnOnPostRedirect$",
+            ".*\\\\SOFTWARE\\\\(Wow6432Node\\\\)?Microsoft\\\\Windows\\\\CurrentVersion\\\\Internet\\ Settings\\\\IEHardenNoWarn$",
+            ".*\\\\SOFTWARE\\\\(Wow6432Node\\\\)?Microsoft\\\\Internet\\ Explorer\\\\Main\\\\NoProtectedModeBanner$",
+            ".*\\\\SOFTWARE\\\\(Wow6432Node\\\\)?Microsoft\\\\Internet\\ Explorer\\\\Main\\\\IE9RunOncePerInstallCompleted$",
+            ".*\\\\SOFTWARE\\\\(Wow6432Node\\\\)?Microsoft\\\\Internet\\ Explorer\\\\Main\\\\IE9TourShown$",
             ]
         found_match = False
         for indicator in indicators:

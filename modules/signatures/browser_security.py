@@ -1,4 +1,4 @@
-# Copyright (C) 2015 Kevin Ross
+# Copyright (C) 2015 Kevin Ross, Accuvant, Inc. (bspengler@accuvant.com)
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -19,8 +19,8 @@ class BrowserSecurity(Signature):
     name = "browser_security"
     description = "Attempts to modify browser security settings"
     severity = 3
-    categories = ["browser"]
-    authors = ["Kevin Ross"]
+    categories = ["browser", "clickfraud", "banker"]
+    authors = ["Kevin Ross", "Accuvant"]
     minimum = "1.2"
 
     def run(self):
@@ -31,6 +31,9 @@ class BrowserSecurity(Signature):
         ".*\\\\SOFTWARE\\\\(Wow6432Node\\\\)?Microsoft\\\\Windows\\\\CurrentVersion\\\\Internet\\ Settings\\\\ZoneMap\\\\Domains\\\\.*",
         ".*\\\\SOFTWARE\\\\(Wow6432Node\\\\)?Microsoft\\\\Windows\\\\CurrentVersion\\\\Internet\\ Settings\\\\ZoneMap\\\\EscDomains\\\\.*",
         ".*\\\\SOFTWARE\\\\(Wow6432Node\\\\)?Microsoft\\\\Windows\\\\CurrentVersion\\\\Internet\\ Settings\\\\ZoneMap\\\\EscRanges\\\\.*",
+        ".*\\\\SOFTWARE\\\\(Wow6432Node\\\\)?Microsoft\\\\Windows\\\\CurrentVersion\\\\Internet\\ Settings\\\\ZoneMap\\\\IEHarden$",
+        ".*\\\\SOFTWARE\\\\(Wow6432Node\\\\)?Microsoft\\\\Windows\\\\CurrentVersion\\\\Internet\\ Settings\\\\CertificateRevocation$",
+        ".*\\\\SOFTWARE\\\\(Wow6432Node\\\\)?Microsoft\\\\Internet\\ Explorer\\\\Main\\\\NoUpdateCheck$",
         ]
 
         for indicator in reg_indicators:
