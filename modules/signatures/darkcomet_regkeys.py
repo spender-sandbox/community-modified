@@ -37,5 +37,4 @@ class DarkCometRegkeys(Signature):
                 self.data.append({"Key": match})
                 dc_keys = True
 
-        print self.data
         return dc_keys
