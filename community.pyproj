@@ -21,6 +21,9 @@
     <Compile Include="modules\signatures\antisandbox_cuckoo.py" />
     <Compile Include="modules\signatures\clickfraud_cookies.py" />
     <Compile Include="modules\signatures\clickfraud_volume.py" />
+    <Compile Include="modules\signatures\darkcomet_regkeys.py" />
+    <Compile Include="modules\signatures\kazybot_apis.py" />
+    <Compile Include="modules\signatures\procmem_yara.py" />
     <Compile Include="modules\signatures\spoofs_procname.py" />
     <Compile Include="modules\signatures\antivm_vbox_provname.py" />
     <Compile Include="modules\signatures\bad_ssl_certs.py" />
