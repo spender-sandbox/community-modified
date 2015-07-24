@@ -44,18 +44,14 @@ class Multiple_UA(Signature):
 
         else:
             if ua not in self.useragents:
-                self.useragents.append(ua)
-                self.procs.append((process["process_name"], ua))
+                if self.results["target"]["category"] == "file" or proc != "iexplore.exe":
+                    self.useragents.append(ua)
+                    self.procs.append((process["process_name"], ua))
 
     def on_complete(self):
         if len(self.useragents) < 2:
             return False
-        if len(self.useragents) == 2:
-           tuple1 = ("iexplore.exe", "Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.1; Win64; x64; Trident/6.0)")
-           tuple2 = ("iexplore.exe", "Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.1; WOW64; Trident/6.0)")
-           if tuple1 in self.useragents and tuple2 in self.useragents:
-                return False
- 
+
         for item in self.procs:
             self.data.append({"Process" : item[0]})
             self.data.append({"User-Agent" : item[1]})
