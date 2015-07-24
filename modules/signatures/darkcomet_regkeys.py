@@ -1,4 +1,4 @@
-# Copyright (C) 2014 @threatlead
+# Copyright (C) 2015 KillerInstinct
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -15,23 +15,27 @@
 
 from lib.cuckoo.common.abstracts import Signature
 
-class FynloskiMutexes(Signature):
-    name = "rat_fynloski_mutexes"
-    description = "Creates known Fynloski/DarkComet mutexes"
+class DarkCometRegkeys(Signature):
+    name = "darkcomet_regkeys"
+    description = "Interacts with known DarkComet registry keys"
     severity = 3
     categories = ["rat"]
-    families = ["darkcomet", "fynloski"]
-    authors = ["threatlead"]
-    references = ["https://malwr.com/analysis/ODVlOWEyNDU3NzBhNDE3OWJkZjE0ZjIxNTdiMzU1YmM/"]
+    families = ["darkcomet"]
+    authors = ["KillerInstinct"]
     minimum = "0.5"
 
     def run(self):
+        dc_keys = False
         indicators = [
-            "DC_MUTEX-.*"
-        ]
-
+                ".*\\\\Software\\\\DC3_FEXEC$",
+                ".*\\\\Software\\\\DC3_FEXEC\\\\.*",
+                ".*\\\\Software\\\\DC2_USERS$",
+            ]
         for indicator in indicators:
-            if self.check_mutex(pattern=indicator, regex=True):
-                return True
+            match = self.check_key(pattern=indicator, regex=True)
+            if match:
+                self.data.append({"Key": match})
+                dc_keys = True
 
-        return False
+        print self.data
+        return dc_keys
