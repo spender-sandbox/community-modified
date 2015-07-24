@@ -26,10 +26,11 @@ class Procmem_Yara(Signature):
         hits = []
         # Define Yara rule names here and categorize appropriately
         suspicious = []
-        malicious = ["dyrecfgserverlist", "dyrecfginjectslist",
-                     "dridexcfgbotid", "dridexcfgnodelist", "dridexcfgkeylog",
-                     "kazybot_rat",
-                ]
+        malicious = [
+            "dyrecfgserverlist", "dyrecfginjectslist", "dyrecfgredirectlist",
+            "dridexcfgbotid", "dridexcfgnodelist", "dridexcfgkeylog",
+            "kazybot_rat", "darkcometconfig",
+        ]
         if "procmemory" in self.results and self.results["procmemory"]:
             for process in self.results["procmemory"]:
                 pid = process["pid"]
