@@ -31,6 +31,9 @@ class Unhook(Signature):
         Signature.__init__(self, *args, **kwargs)
         self.saw_unhook = False
         self.unhook_info = set()
+        self.is_url_analysis = False
+        if self.results["target"]["category"] != "file":
+            self.is_url_analysis = True
 
     def on_call(self, call, process):
         subcategory = self.check_argument_call(call,
@@ -40,9 +43,37 @@ class Unhook(Signature):
         if subcategory:
             self.saw_unhook = True
             funcname = self.get_argument(call, "FunctionName")
+            unhooktype = self.get_argument(call, "UnhookType")
             if funcname != "":
-                if (funcname != "SetUnhandledExceptionFilter" and funcname != "SetWindowsHookExW" and funcname != "UnhookWindowsHookEx" and
-                    funcname != "CoCreateInstance") or self.get_argument(call, "UnhookType") != "modification":
+                addit = True
+                if (funcname == "SetUnhandledExceptionFilter" or funcname == "SetWindowsHookExW" or funcname == "UnhookWindowsHookEx" and
+                    funcname == "CoCreateInstance") and unhooktype == "modification":
+                    addit = False
+                # exempt IE behavior
+                if self.is_url_analysis and unhooktype == "removal":
+                    allowed = [
+                        "SetupDiGetDeviceRegistryPropertyA",
+                        "SetupDiGetDeviceRegistryPropertyW",
+                        "WinHttpSendRequest"
+                        "WinHttpGetProxyForUrl",
+                        "SetupDiGetClassDevsW",
+                        "WinHttpSetTimeouts",
+                        "SetupDiGetClassDevsA",
+                        "WinHttpSetOption",
+                        "WinHttpOpenRequest",
+                        "WinHttpGetIEProxyConfigForCurrentUser",
+                        "WinHttpConnect",
+                        "WinHttpReceiveResponse",
+                        "WinHttpQueryHeaders",
+                    ]
+                    for name in allowed:
+                        if funcname == name:
+                            addit = False
+                            break
+                if self.is_url_analysis and unhooktype == "modification" and funcname == "WinHttpGetIEProxyConfigForCurrentUser":
+                    addit = False
+
+                if addit:
                     self.unhook_info.add("function_name: " + funcname + ", type: " + self.get_argument(call, "UnhookType"))
     
     def on_complete(self):

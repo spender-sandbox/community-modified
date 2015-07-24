@@ -1,4 +1,4 @@
-# Copyright (C) 2012 Claudio "nex" Guarnieri (@botherder)
+# Copyright (C) 2012,2015 Claudio "nex" Guarnieri (@botherder), Accuvant, Inc. (bspengler@accuvant.com)
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -13,6 +13,11 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+try:
+    import re2 as re
+except ImportError:
+    import re
+    
 from lib.cuckoo.common.abstracts import Signature
 
 class ADS(Signature):
@@ -20,7 +25,7 @@ class ADS(Signature):
     description = "Attempts to interact with an Alternate Data Stream (ADS)"
     severity = 3
     categories = ["persistence", "ads"]
-    authors = ["nex"]
+    authors = ["nex", "Accuvant"]
     minimum = "0.5"
 
     def run(self):
@@ -32,7 +37,7 @@ class ADS(Signature):
             if ":" in file_path.split("\\")[-1]:
                 if not file_path.lower().startswith("c:\\dosdevices\\") and not file_path[-1] == ":":
                     # we have a different signature to deal with removal of Zone.Identifier
-                    if not file_path.endswith(":Zone.Identifier"):
+                    if not file_path.endswith(":Zone.Identifier") and not re.match(r'^[A-Z]?:\\Users\\[^\\]+\\Favorites\\Links\\Suggested Sites\.url:favicon$', file_path, re.IGNORECASE):
                         self.data.append({"file" : file_path})
                         result = True
 
