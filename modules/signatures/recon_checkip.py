@@ -38,6 +38,7 @@ class CheckIP(Signature):
             "api.ipify.org",
             "ipinfo.info",
             "myexternalip.com",
+            "curlmyip.com",
             "ip4.telize.com",
             "ip.xss.ru",
 
