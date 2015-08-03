@@ -1,4 +1,4 @@
-# Copyright (C) 2015 Kevin Ross, Accuvant, Inc. (bspengler@accuvant.com)
+# Copyright (C) 2015 Kevin Ross, Optiv, Inc. (brad.spengler@optiv.com)
 # This file is part of Cuckoo Sandbox - http://www.cuckoosandbox.org
 # See the file 'docs/LICENSE' for copying permission.
 
@@ -9,7 +9,7 @@ class BitcoinWallet(Signature):
     description = "Attempts to access Bitcoin/ALTCoin wallets"
     severity = 3
     categories = ["infostealer"]
-    authors = ["Kevin Ross", "Accuvant"]
+    authors = ["Kevin Ross", "Optiv"]
     minimum = "1.2"
 
     def run(self):

@@ -1,4 +1,4 @@
-# Copyright (C) 2012,2015 Thomas "stacks" Birn (@stacksth), Accuvant, Inc. (bspengler@accuvant.com)
+# Copyright (C) 2012,2015 Thomas "stacks" Birn (@stacksth), Optiv, Inc. (brad.spengler@optiv.com)
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -20,7 +20,7 @@ class DisableRegedit(Signature):
     description = "Disables Windows' Registry Editor"
     severity = 3
     categories = ["locker"]
-    authors = ["Thomas Birn", "nex", "Accuvant"]
+    authors = ["Thomas Birn", "nex", "Optiv"]
     minimum = "1.2"
 
     def run(self):

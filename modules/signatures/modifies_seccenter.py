@@ -1,4 +1,4 @@
-# Copyright (C) 2015 Kevin Ross, Accuvant, Inc. (bspengler@accuvant.com)
+# Copyright (C) 2015 Kevin Ross, Optiv, Inc. (brad.spengler@optiv.com)
 # This file is part of Cuckoo Sandbox - http://www.cuckoosandbox.org
 # See the file 'docs/LICENSE' for copying permission.
 
@@ -9,7 +9,7 @@ class ModifySecurityCenterWarnings(Signature):
     description = "Attempts to modify or disable Security Center warnings"
     severity = 3
     categories = ["stealth"]
-    authors = ["Kevin Ross", "Accuvant"]
+    authors = ["Kevin Ross", "Optiv"]
     minimum = "1.2"
 
     def run(self):

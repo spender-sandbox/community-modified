@@ -1,4 +1,4 @@
-# Copyright (C) 2014 Claudio "nex" Guarnieri (@botherder), Accuvant, Inc. (bspengler@accuvant.com)
+# Copyright (C) 2014 Claudio "nex" Guarnieri (@botherder), Optiv, Inc. (brad.spengler@optiv.com)
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -21,7 +21,7 @@ class Unhook(Signature):
     severity = 3
     confidence = 60
     categories = ["anti-sandbox"]
-    authors = ["nex","Accuvant"]
+    authors = ["nex","Optiv"]
     minimum = "1.2"
     evented = True
 

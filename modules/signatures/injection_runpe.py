@@ -1,4 +1,4 @@
-# Copyright (C) 2014 glysbays, Accuvant, Inc. (bspengler@accuvant.com)
+# Copyright (C) 2014 glysbays, Optiv, Inc. (brad.spengler@optiv.com)
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
@@ -19,7 +19,7 @@ class InjectionRUNPE(Signature):
     description = "Executed a process and injected code into it, probably while unpacking"
     severity = 3
     categories = ["injection"]
-    authors = ["glysbaysb", "Accuvant"]
+    authors = ["glysbaysb", "Optiv"]
     minimum = "1.2"
     evented = True
 

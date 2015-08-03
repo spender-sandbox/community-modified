@@ -1,4 +1,4 @@
-# Copyright (C) 2015 Accuvant, Inc. (bspengler@accuvant.com), KillerInstinct
+# Copyright (C) 2015 Optiv, Inc. (brad.spengler@optiv.com), KillerInstinct
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -27,7 +27,7 @@ class Dyre_APIs(Signature):
     severity = 3
     categories = ["banker", "trojan"]
     families = ["dyre"]
-    authors = ["Accuvant", "KillerInstinct"]
+    authors = ["Optiv", "KillerInstinct"]
     minimum = "1.3"
     evented = True
 

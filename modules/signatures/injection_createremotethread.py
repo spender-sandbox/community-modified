@@ -1,4 +1,4 @@
-# Copyright (C) 2012-2015 JoseMi "h0rm1" Holguin (@j0sm1), Accuvant, Inc. (bspengler@accuvant.com)
+# Copyright (C) 2012-2015 JoseMi "h0rm1" Holguin (@j0sm1), Optiv, Inc. (brad.spengler@optiv.com)
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -20,7 +20,7 @@ class InjectionCRT(Signature):
     description = "Code injection with CreateRemoteThread in a remote process"
     severity = 3
     categories = ["injection"]
-    authors = ["JoseMi Holguin", "nex", "Accuvant"]
+    authors = ["JoseMi Holguin", "nex", "Optiv"]
     minimum = "1.0"
     evented = True
 

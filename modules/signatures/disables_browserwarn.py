@@ -1,4 +1,4 @@
-# Copyright (C) 2015 Accuvant, Inc. (bspengler@accuvant.com), Kevin Ross
+# Copyright (C) 2015 Optiv, Inc. (brad.spengler@optiv.com), Kevin Ross
 # This file is part of Cuckoo Sandbox - http://www.cuckoosandbox.org
 # See the file 'docs/LICENSE' for copying permission.
 
@@ -9,7 +9,7 @@ class DisablesBrowserWarn(Signature):
     description = "Attempts to disable browser security warnings"
     severity = 3
     categories = ["generic", "banker", "clickfraud"]
-    authors = ["Accuvant", "Kevin Ross"]
+    authors = ["Optiv", "Kevin Ross"]
     minimum = "1.2"
 
     def run(self):

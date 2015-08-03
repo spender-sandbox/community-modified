@@ -1,4 +1,4 @@
-# Copyright (C) 2014 Accuvant, Inc. (bspengler@accuvant.com)
+# Copyright (C) 2014 Optiv, Inc. (brad.spengler@optiv.com)
 # This file is part of Cuckoo Sandbox - http://www.cuckoosandbox.org
 # See the file 'docs/LICENSE' for copying permission.
 
@@ -9,7 +9,7 @@ class InjectionExtension(Signature):
     description = "Attempted to execute a copy of itself but requires an .exe extension to work"
     severity = 3
     categories = ["injection"]
-    authors = ["Accuvant"]
+    authors = ["Optiv"]
     minimum = "1.0"
     evented = True
 

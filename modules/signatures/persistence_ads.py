@@ -1,4 +1,4 @@
-# Copyright (C) 2012,2015 Claudio "nex" Guarnieri (@botherder), Accuvant, Inc. (bspengler@accuvant.com)
+# Copyright (C) 2012,2015 Claudio "nex" Guarnieri (@botherder), Optiv, Inc. (brad.spengler@optiv.com)
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -25,7 +25,7 @@ class ADS(Signature):
     description = "Attempts to interact with an Alternate Data Stream (ADS)"
     severity = 3
     categories = ["persistence", "ads"]
-    authors = ["nex", "Accuvant"]
+    authors = ["nex", "Optiv"]
     minimum = "0.5"
 
     def run(self):

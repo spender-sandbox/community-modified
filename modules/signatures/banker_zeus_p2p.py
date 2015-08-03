@@ -1,4 +1,4 @@
-# Copyright (C) 2014,2015 Robby Zeitfuchs (@robbyFux) Accuvant, Inc. (bspengler@accuvant.com)
+# Copyright (C) 2014,2015 Robby Zeitfuchs (@robbyFux) Optiv, Inc. (brad.spengler@optiv.com)
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -21,7 +21,7 @@ class ZeusP2P(Signature):
     severity = 3
     categories = ["banker"]
     families = ["zeus"]
-    authors = ["Robby Zeitfuchs", "Accuvant"]
+    authors = ["Robby Zeitfuchs", "Optiv"]
     minimum = "1.2"
     references = ["https://malwr.com/analysis/NmNhODg5ZWRkYjc0NDY0M2I3YTJhNDRlM2FlOTZiMjA/", 
                   "https://malwr.com/analysis/MmMwNDJlMTI0MTNkNGFjNmE0OGY3Y2I5MjhiMGI1NzI/",

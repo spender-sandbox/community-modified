@@ -1,4 +1,4 @@
-# Copyright (C) 2015 Kevin Ross, Accuvant, Inc. (bspengler@accuvant.com)
+# Copyright (C) 2015 Kevin Ross, Optiv, Inc. (brad.spengler@optiv.com)
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -26,7 +26,7 @@ class Flash_JS(Signature):
     weight = 3
     severity = 3
     categories = ["exploit_kit", "flash"]
-    authors = ["Kevin Ross", "Accuvant"]
+    authors = ["Kevin Ross", "Optiv"]
     minimum = "1.3"
     evented = True
 

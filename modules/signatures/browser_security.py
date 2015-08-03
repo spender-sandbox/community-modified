@@ -1,4 +1,4 @@
-# Copyright (C) 2015 Kevin Ross, Accuvant, Inc. (bspengler@accuvant.com)
+# Copyright (C) 2015 Kevin Ross, Optiv, Inc. (brad.spengler@optiv.com)
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -20,7 +20,7 @@ class BrowserSecurity(Signature):
     description = "Attempts to modify browser security settings"
     severity = 3
     categories = ["browser", "clickfraud", "banker"]
-    authors = ["Kevin Ross", "Accuvant"]
+    authors = ["Kevin Ross", "Optiv"]
     minimum = "1.2"
 
     def run(self):

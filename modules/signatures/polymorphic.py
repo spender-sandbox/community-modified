@@ -1,4 +1,4 @@
-# Copyright (C) 2013-2014 Lord Alfred Remorin, Accuvant Inc. (bspengler@accuvant.com)
+# Copyright (C) 2013-2014 Lord Alfred Remorin, Optiv Inc. (brad.spengler@optiv.com)
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -28,7 +28,7 @@ class Polymorphic(Signature):
     description = "Creates a slightly modified copy of itself"
     severity = 3
     categories = ["persistence"]
-    authors = ["lordr", "Accuvant"]
+    authors = ["lordr", "Optiv"]
     minimum = "1.2"
 
     filter_analysistypes = set(["file"])

@@ -1,4 +1,4 @@
-# Copyright (C) 2015 Accuvant, Inc. (bspengler@accuvant.com)
+# Copyright (C) 2015 Optiv, Inc. (brad.spengler@optiv.com)
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -22,7 +22,7 @@ class FleerCivetMutexes(Signature):
     weight = 5
     categories = ["trojan"]
     families = ["fleercivet"]
-    authors = ["Accuvant"]
+    authors = ["Optiv"]
     minimum = "0.5"
 
     def run(self):

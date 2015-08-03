@@ -1,4 +1,4 @@
-# Copyright (C) 2014,2015 Robby Zeitfuchs (@robbyFux), Accuvant, Inc. (bspengler@accuvant.com)
+# Copyright (C) 2014,2015 Robby Zeitfuchs (@robbyFux), Optiv, Inc. (brad.spengler@optiv.com)
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -20,7 +20,7 @@ class PackerEntropy(Signature):
     description = "The binary likely contains encrypted or compressed data."
     severity = 2
     categories = ["packer"]
-    authors = ["Robby Zeitfuchs", "nex", "Accuvant"]
+    authors = ["Robby Zeitfuchs", "nex", "Optiv"]
     minimum = "0.6"
     references = ["http://www.forensickb.com/2013/03/file-entropy-explained.html", 
                   "http://virii.es/U/Using%20Entropy%20Analysis%20to%20Find%20Encrypted%20and%20Packed%20Malware.pdf"]
