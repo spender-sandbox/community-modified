@@ -33,8 +33,12 @@ class NetworkHTTP(Signature):
 
     def run(self):
         whitelist = [
-            "^http://crl.microsoft.com/.*",
+            "^http://crl\.microsoft\.com/.*",
             ]
+        if "file" in self.results["target"]:
+            if "PDF" in self.results["target"]["file"]["type"]:
+                whitelist.append("^http://.*\.adobe.com/.*")
+
         if "network" in self.results:
             if "http" in self.results["network"]:
                 for req in self.results["network"]["http"]:

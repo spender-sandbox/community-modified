@@ -47,6 +47,11 @@ class ModifyProxy(Signature):
         ".*\\\\SOFTWARE\\\\(Wow6432Node\\\\)?Microsoft\\\\Windows\\\\CurrentVersion\\\\Internet\\ Settings\\\\Wpad\\\\[^\\\\]*\\\\WpadDecision$",
         ".*\\\\SOFTWARE\\\\(Wow6432Node\\\\)?Microsoft\\\\Windows\\\\CurrentVersion\\\\Internet\\ Settings\\\\Wpad\\\\[^\\\\]*\\\\WpadNetworkName$",
         ]
+        # Get rid of a PDF false positive
+        if "file" in self.results["target"]:
+            if "PDF" in self.results["target"]["file"]["type"]:
+                del reg_indicators[0]
+
         for indicator in reg_indicators:
             matches = self.check_write_key(pattern=indicator, regex=True, all=True)
             if matches:
@@ -58,6 +63,5 @@ class ModifyProxy(Signature):
                     if not foundwhite:
                         return True
 
-        return False 
-
+        return False
 
