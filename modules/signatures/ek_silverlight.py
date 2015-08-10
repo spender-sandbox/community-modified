@@ -25,9 +25,8 @@ class Silverlight_JS(Signature):
     def on_call(self, call, process):
         if call["api"] == "JsEval":
             buf = self.get_argument(call, "Javascript")
-            if re.match(".*\<object.*application\/x\-silverlight.*\<param name[ ]*=.*value[ ]*=.*\<\/object\>.*", buf, re.IGNORECASE):
-                return True
         else:
             buf = self.get_argument(call, "Script")
-            if re.match(".*\<object.*application\/x\-silverlight.*\<param name[ ]*=.*value[ ]*=.*\<\/object\>.*", buf, re.IGNORECASE):
-                return True
+
+        if re.match(".*\<object.*application\/x\-silverlight.*\<param name[ ]*=.*value[ ]*=.*\<\/object\>.*", buf, re.IGNORECASE):
+            return True

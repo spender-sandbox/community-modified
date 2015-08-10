@@ -22,6 +22,8 @@
     <Compile Include="modules\signatures\clickfraud_cookies.py" />
     <Compile Include="modules\signatures\clickfraud_volume.py" />
     <Compile Include="modules\signatures\darkcomet_regkeys.py" />
+    <Compile Include="modules\signatures\ek_javaapplet.py" />
+    <Compile Include="modules\signatures\ek_silverlight.py" />
     <Compile Include="modules\signatures\kazybot_apis.py" />
     <Compile Include="modules\signatures\procmem_yara.py" />
     <Compile Include="modules\signatures\spoofs_procname.py" />

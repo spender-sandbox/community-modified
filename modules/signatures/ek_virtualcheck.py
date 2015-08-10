@@ -54,11 +54,9 @@ class Virtualcheck_JS(Signature):
 
         if call["api"] == "JsEval":
             buf = self.get_argument(call, "Javascript")
-            for indicator in indicators:
-               if indicator in buf.lower():
-                return True
         else:
             buf = self.get_argument(call, "Script")
-            for indicator in indicators:
-               if indicator in buf.lower():
+
+        for indicator in indicators:
+            if indicator in buf.lower():
                 return True

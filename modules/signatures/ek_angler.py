@@ -36,9 +36,8 @@ class Angler_JS(Signature):
     def on_call(self, call, process):
         if call["api"] == "JsEval":
             buf = self.get_argument(call, "Javascript")
-            if "/malware.dontneedcoffee.com/.test()" in buf:
-                return True
         else:
             buf = self.get_argument(call, "Script")
-            if "/malware.dontneedcoffee.com/.test()" in buf:
-                return True
+
+        if "/malware.dontneedcoffee.com/.test()" in buf:
+            return True
