@@ -55,6 +55,8 @@ class BadCerts(Signature):
             "2a1da6dc8635e6c725cccbe6c035eec813fbeb2e",
             # Wild Neutron (Stolen Acer Incorporated cert)
             "0d859141ee9a0c6e725ffe6bcfc99f3efcc3fc07",
+            # Used in Dridex, BIZNES AVTOMATYKA
+            "9a9c618cc8f50e9ffb24b6cc8b34858fa65e778c",
             ]
         if "static" in self.results:
             if "digital_signers" in self.results["static"] and self.results["static"]["digital_signers"]:
