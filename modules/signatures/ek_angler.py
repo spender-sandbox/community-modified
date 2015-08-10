@@ -31,7 +31,7 @@ class Angler_JS(Signature):
 
     filter_categories = set(["browser"])
     # backward compat
-    filter_apinames = set(["JsEval", "COleScript_Compile"])
+    filter_apinames = set(["JsEval", "COleScript_Compile", "COleScript_ParseScriptText"])
 
     def on_call(self, call, process):
         if call["api"] == "JsEval":
