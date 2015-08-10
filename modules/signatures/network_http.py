@@ -37,7 +37,7 @@ class NetworkHTTP(Signature):
             ]
         if "file" in self.results["target"]:
             if "PDF" in self.results["target"]["file"]["type"]:
-                whitelist.append("^http://.*\.adobe.com/.*")
+                whitelist.append("^http://.*\.adobe\.com/.*")
 
         if "network" in self.results:
             if "http" in self.results["network"]:
