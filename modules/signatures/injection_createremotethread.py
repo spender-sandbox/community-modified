@@ -64,7 +64,7 @@ class InjectionCRT(Signature):
         elif (call["api"] == "CreateRemoteThread" or call["api"].startswith("NtCreateThread")) and self.sequence == 2:
             if self.get_argument(call, "ProcessHandle") in self.process_handles:
                 return True
-        elif call["api"] == "NtQueueApcThread" and self.sequence == 2:
+        elif call["api"].startswith("NtQueueApcThread") and self.sequence == 2:
             if self.get_argument(call, "ProcessId") in self.process_pids:
                 self.description = "Code injection with NtQueueApcThread in a remote process"
                 return True
