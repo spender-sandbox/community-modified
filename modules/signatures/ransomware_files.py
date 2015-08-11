@@ -27,18 +27,20 @@ class RansomwareFiles(Signature):
     def run(self):
         # Lower-case file names
         file_list = [
-            ".*\\\\help_decrypt.html$",
-            ".*\\\\decrypt_instruction.html$",
-            ".*\\\\decrypt_instructions.txt$",
-            ".*\\\\vault.key$",
-            ".*\\\\vault.txt$",
-            ".*\\\\!Decrypt-All-Files.*.txt$",
-            ".*\\\\!Decrypt-All-Files.*.bmp$",
-            ".*\\\\help_restore_files.txt$",
-            ".*\\\\help_to_save_files.txt$",
-            ".*\\\\help_to_save_files.bmp$",
-            ".*\\\\recovery_file.txt$",
-            ".*\\\\recovery_key.txt$",
+            ".*\\\\help_decrypt\.html$",
+            ".*\\\\decrypt_instruction\.html$",
+            ".*\\\\decrypt_instructions\.txt$",
+            ".*\\\\vault\.key$",
+            ".*\\\\vault\.txt$",
+            ".*\\\\!Decrypt-All-Files.*\.txt$",
+            ".*\\\\!Decrypt-All-Files.*\.bmp$",
+            ".*\\\\help_restore_files\.txt$",
+            ".*\\\\help_to_save_files\.txt$",
+            ".*\\\\help_to_save_files\.bmp$",
+            ".*\\\\recovery_file\.txt$",
+            ".*\\\\recovery_key\.txt$",
+            ".*\\\\restore_files_.*\.txt$",
+            ".*\\\\restore_files_.*\.html$",
         ]
 
         for file in file_list:
