@@ -1,4 +1,4 @@
-# Copyright (C) 2012 Claudio "nex" Guarnieri (@botherder)
+# Copyright (C) 2012 Claudio "nex" Guarnieri (@botherder), Optiv, Inc. (brad.spengler@optiv.com)
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -20,59 +20,11 @@ class VBoxDetectACPI(Signature):
     description = "Detects VirtualBox using ACPI tricks"
     severity = 3
     categories = ["anti-vm"]
-    authors = ["nex"]
-    minimum = "1.0"
-    evented = True
+    authors = ["nex", "Optiv"]
+    minimum = "1.2"
 
-    def __init__(self, *args, **kwargs):
-        Signature.__init__(self, *args, **kwargs)
-        self.lastprocess = None
+    def run(self):
+        if self.check_key(pattern=".*\\\\HARDWARE\\\\ACPI\\\\(DSDT|FADT|RSDT)\\\\VBOX__$", regex=True):
+            return True
 
-    filter_apinames = set(["RegOpenKeyExA", "RegOpenKeyExW", "RegEnumKeyExA", "RegEnumKeyExW"])
-
-    def on_call(self, call, process):
-        if process is not self.lastprocess:
-            self.opened = False
-            self.handle = ""
-            self.lastprocess = process
-
-        # First I check if the malware opens the releavant registry key.
-        if call["api"].startswith("RegOpenKeyEx"):
-            # Store the number of arguments matched.
-            args_matched = 0
-            # Store the handle used to open the key.
-            self.handle = ""
-            # Check if the registry is HKEY_LOCAL_MACHINE.
-            if self.get_argument(call,"Registry") == "0x80000002":
-                args_matched += 1
-            # Check if the subkey opened is the correct one.
-            elif self.get_argument(call,"SubKey")[:14].upper() == "HARDWARE\\ACPI\\":
-                # Since it could appear under different paths, check for all of them.
-                if self.get_argument(call,"SubKey")[14:18] in ["DSDT", "FADT", "RSDT"]:
-                    if self.get_argument(call,"SubKey")[18:] == "\\VBOX__":
-                        return True
-                    else:
-                        args_matched += 1
-            # Store the generated handle.
-            else:
-                self.handle = self.get_argument(call,"Handle")
-            
-            # If both arguments are matched, I consider the key to be successfully opened.
-            if args_matched == 2:
-                self.opened = True
-        # Now I check if the malware verified the value of the key.
-        elif call["api"].startswith("RegEnumKeyEx"):
-            # Verify if the key was actually opened.
-            if not self.opened:
-                return
-
-            # Verify the arguments.
-            args_matched = 0
-            if self.get_argument(call,"Handle") == self.handle:
-                args_matched += 1
-            elif self.get_argument(call,"Name") == "VBOX__":
-                args_matched += 1
-
-            # Finally, if everything went well, I consider the signature as matched.
-            if args_matched == 2:
-                return True
+        return False
