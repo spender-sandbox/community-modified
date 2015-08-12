@@ -32,7 +32,7 @@ class Modifies_HostFile(Signature):
             data = ""
             if "dropped" in self.results:
                 for dfile in self.results["dropped"]:
-                    if hfile in map(str.lower, dfile["guests_paths"]):
+                    if hfile in map(str.lower, dfile["guest_paths"]):
                         with open(dfile["path"], "r") as rfile:
                             data = rfile.read()
                         break
