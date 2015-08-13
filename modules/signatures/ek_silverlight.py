@@ -28,5 +28,5 @@ class Silverlight_JS(Signature):
         else:
             buf = self.get_argument(call, "Script")
 
-        if re.match(".*\<object.*application\/x\-silverlight.*\<param name[ ]*=.*value[ ]*=.*\<\/object\>.*", buf, re.IGNORECASE):
+        if re.search(".*\<object.*application\/x\-silverlight.*\<param name[ \t\n]*=.*value[ \t\n]*=.*\<\/object\>.*", buf, re.IGNORECASE|re.DOTALL):
             return True
