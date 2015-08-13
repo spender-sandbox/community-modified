@@ -6,7 +6,7 @@ from lib.cuckoo.common.abstracts import Signature
 
 class VersionInfoAnomaly(Signature):
     name = "static_versioninfo_anomaly"
-    description = "Inconsistent version info supplied for binary"
+    description = "Unusual version info supplied for binary"
     severity = 3
     categories = ["static"]
     authors = ["Optiv"]
