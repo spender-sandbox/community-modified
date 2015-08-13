@@ -25,7 +25,7 @@ class AntiSandboxSuspend(Signature):
     minimum = "1.3"
     evented = True
 
-    filter_apis = set(["NtSuspendThread"])
+    filter_apinames = set(["NtSuspendThread"])
 
     def __init__(self, *args, **kwargs):
         Signature.__init__(self, *args, **kwargs)
