@@ -70,7 +70,7 @@ class PEAnomaly(Signature):
                 if eprva >= secstart and eprva < secend:
                     foundsec = section
                 if secstart < lowrva:
-                    lowrva = rva
+                    lowrva = secstart
             if unprint:
                 self.data.append({"anomaly" : "Unprintable characters found in section name"})
                 self.weight += 1
