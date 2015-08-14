@@ -15,7 +15,7 @@ class MimicsIcon(Signature):
     def run(self):
         badhashes = [
             # newer word doc icon
-            "6fb768befd0b459a8025c73d6c783861",
+            "2cb4608608d5540769db4ce210cbdb9a",
         ]
 
         if "static" in self.results and "pe_icon_fuzzy" in self.results["static"]:
