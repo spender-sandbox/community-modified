@@ -46,7 +46,7 @@ class Unhook(Signature):
             unhooktype = self.get_argument(call, "UnhookType")
             if funcname != "":
                 addit = True
-                if (funcname == "SetUnhandledExceptionFilter" or funcname == "SetWindowsHookExW" or funcname == "UnhookWindowsHookEx" and
+                if (funcname == "SetUnhandledExceptionFilter" or funcname == "SetWindowsHookExW" or funcname == "UnhookWindowsHookEx" or
                     funcname == "CoCreateInstance") and unhooktype == "modification":
                     addit = False
                 # exempt IE behavior
