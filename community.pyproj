@@ -25,6 +25,7 @@
     <Compile Include="modules\signatures\ek_javaapplet.py" />
     <Compile Include="modules\signatures\ek_silverlight.py" />
     <Compile Include="modules\signatures\kazybot_apis.py" />
+    <Compile Include="modules\signatures\mimics_icon.py" />
     <Compile Include="modules\signatures\origin_resource_langid.py" />
     <Compile Include="modules\signatures\procmem_yara.py" />
     <Compile Include="modules\signatures\spoofs_procname.py" />
