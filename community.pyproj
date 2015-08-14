@@ -141,6 +141,7 @@
     </Compile>
     <Compile Include="modules\signatures\persistence_service.py" />
     <Compile Include="modules\signatures\ransomware_files.py" />
+    <Compile Include="modules\signatures\static_pe_anomaly.py" />
     <Compile Include="modules\signatures\static_versioninfo_anomaly.py" />
     <Compile Include="modules\signatures\trojan_fleercivet_mutex.py" />
     <Compile Include="modules\signatures\recon_beacon.py" />

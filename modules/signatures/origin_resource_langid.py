@@ -26,6 +26,7 @@ class ResourceLangID(Signature):
     def run(self):
         safe_langs = [
             "SYS",
+            "INVARIANT",
             "NEUTRAL",
             "DEFAULT",
             "ENGLISH",
