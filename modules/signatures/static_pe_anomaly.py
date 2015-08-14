@@ -78,10 +78,7 @@ class PEAnomaly(Signature):
                 # we check for code sections to not FP on resource-only DLLs where the EP RVA will be 0
                 self.data.append({"anomaly" : "Entrypoint of binary is located outside of any mapped sections"})
                 self.weight += 1
-            if foundsec and "IMAGE_SCN_CNT_CODE" not in foundsec["characteristics"]:
-                self.data.append({"anomaly" : "Entrypoint of binary points to a data section"})
-                self.weight += 1
-            elif foundsec and "IMAGE_SCN_MEM_EXECUTE" not in foundsec["characteristics"]:
+            if foundsec and "IMAGE_SCN_MEM_EXECUTE" not in foundsec["characteristics"]:
                 # Windows essentially turns DEP off in this case, but it was only seen (as far as named packers go) in
                 # one instance I could think of years ago in a rare packer
                 self.data.append({"anomaly" : "Entrypoint of binary points to a non-executable code section"})
