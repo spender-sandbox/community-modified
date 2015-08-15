@@ -42,7 +42,7 @@ class PEAnomaly(Signature):
             self.weight += 1
                            
         # throw out empty timestamps
-        if compiletime.year != 1970 or osver not in bad_date_map:
+        if compiletime.year > 1970 and osver in bad_date_map:
             if compiletime.year < bad_date_map[osver][0] or (compiletime.year == bad_date_map[osver][0] and compiletime.month < bad_date_map[osver][1]):
                 self.data.append({"anomaly" : "Timestamp on binary predates the release date of the OS version it requires by at least a year"})
                 self.weight += 1
