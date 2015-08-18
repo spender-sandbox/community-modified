@@ -110,7 +110,6 @@
     <Compile Include="modules\signatures\modifies_uac_notify.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="modules\signatures\poweliks_apis.py" />
     <Compile Include="modules\signatures\process_interest.py" />
     <Compile Include="modules\signatures\process_needed.py" />
     <Compile Include="modules\signatures\driver_load.py" />
