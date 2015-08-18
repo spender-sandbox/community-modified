@@ -87,6 +87,11 @@ class PEAnomaly(Signature):
                 # used to blow up memory dumpers
                 self.data.append({"anomaly" : "Contains a section with a virtual size >= 100MB"})
                 self.weight += 1
+        if "pe_resources" in self.results["static"]:
+            for resource in self.results["static"]["pe_resources"]:
+                if int(resource["size"], 16) >= 100 * 1024 * 1024:
+                    self.data.append({"anomaly" : "Contains a resource with a size >= 100MB"})
+                    self.weight += 1
 
         if self.weight:
             return True
