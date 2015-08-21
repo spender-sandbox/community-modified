@@ -18,6 +18,7 @@ class MimicsIcon(Signature):
             "ec7e6f5458456dddb2d826bf1b8b03a2",
             # PDF icon
             "6890c8a40c2eb5ff973159eca0428d6e",
+            "2c45339aea71418c49248aa88ffb2378",
         ]
 
         if "static" in self.results and "pe_icon_fuzzy" in self.results["static"]:
