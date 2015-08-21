@@ -17,14 +17,15 @@ from lib.cuckoo.common.abstracts import Signature
 
 class KnownVirustotal(Signature):
     name = "antivirus_virustotal"
-    description = "File has been identified by at least one Antivirus on VirusTotal as malicious"
+    description = " has been identified by at least one Antivirus on VirusTotal as malicious"
     confidence = 50
     severity = 2
     categories = ["antivirus"]
-    authors = ["Michael Boman", "nex"]
+    authors = ["Michael Boman", "nex", "Optiv"]
     minimum = "0.5"
 
     def run(self):
+
         if "virustotal" in self.results:
             if "positives" in self.results["virustotal"]:
                 positives = self.results["virustotal"]["positives"]
@@ -33,13 +34,17 @@ class KnownVirustotal(Signature):
                         self.confidence = 75
                         self.weight = positives - 4
                     if positives > 10:
-                        self.description = "File has been identified by at least ten Antiviruses on VirusTotal as malicious"
+                        self.description = " has been identified by at least ten Antiviruses on VirusTotal as malicious"
                         self.severity = 3
                         self.confidence = 100
                         self.weight = positives
                     for engine, signature in self.results["virustotal"]["scans"].items():
                         if signature["detected"]:
                             self.data.append({engine : signature["result"]})
+                    if self.results["info"]["category"] == "file":
+                        self.description = "File" + self.description
+                    else:
+                        self.description = "URL" + self.description
                     return True
 
         return False
