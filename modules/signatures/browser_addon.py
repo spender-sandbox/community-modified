@@ -15,6 +15,11 @@
 
 from lib.cuckoo.common.abstracts import Signature
 
+try:
+    import re2 as re
+except ImportError:
+    import re
+
 class BrowserAddon(Signature):
     name = "browser_addon"
     description = "Installs a browser addon or extension"
@@ -30,11 +35,20 @@ class BrowserAddon(Signature):
         ".*\\\\SOFTWARE\\\\(Wow6432Node\\\\)?MozillaPlugins\\\\.*",
         ".*\\\\SOFTWARE\\\\(Wow6432Node\\\\)?Google\\\\Chrome\\\\Extensions\\\\.*",
         ]
+        whitelist = [
+        ".*\\\\SOFTWARE\\\\(Wow6432Node\\\\)?Microsoft\\\\Internet\\ Explorer\\\\Toolbar\\\\Locked$",
+        ]
         found = False
         for indicator in reg_indicators:
             reg_match = self.check_write_key(pattern=indicator, regex=True, all=True)
             if reg_match:
                 for match in reg_match:
-                    self.data.append({"key" : match })
-                found = True
+                    addit = True
+                    for white in whitelist:
+                        if not re.match(white, match, re.IGNORECASE):
+                            addit = False
+                            break
+                    if addit:
+                        self.data.append({"key" : match })
+                        found = True
         return found
