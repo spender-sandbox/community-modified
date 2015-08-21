@@ -70,7 +70,7 @@ class Unhook(Signature):
                         if funcname == name:
                             addit = False
                             break
-                if self.is_url_analysis and unhooktype == "modification" and funcname == "WinHttpGetIEProxyConfigForCurrentUser":
+                if self.is_url_analysis and unhooktype == "modification" and (funcname == "WinHttpGetIEProxyConfigForCurrentUser" or funcname == "CreateWindowExW"):
                     addit = False
 
                 if addit:
