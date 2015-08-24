@@ -42,7 +42,9 @@ class ResourceLangID(Signature):
                 for resource in self.results["static"]["pe_resources"]:
                     splitlangs = []
                     splitlangs.append(resource["sublanguage"].split("_"))
-                    splitlangs.append(resource["language"].split("_"))
+                    buf = resource["language"]
+                    if buf:
+                        splitlangs.append(buf.split("_"))
                     for splitlang in splitlangs:
                         if len(splitlang) > 1 and splitlang[1] not in safe_langs:
                             lang = ""
