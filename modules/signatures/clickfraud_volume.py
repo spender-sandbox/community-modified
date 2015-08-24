@@ -20,7 +20,11 @@ class ClickfraudVolume(Signature):
 
     def on_call(self, call, process):
         entry = int(self.get_argument(call, "FeatureEntry"), 10)
-        enable = int(self.get_argument(call, "Enabled"), 10)
+        buf = self.get_argument(call, "Enabled")
+        if buf:
+            enable = int(buf, 10)
+        else:
+            enable = None
 
         # FEATURE_DISABLE_NAVIGATION_SOUNDS
         if entry == 21 and enable:
