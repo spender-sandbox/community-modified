@@ -41,11 +41,16 @@ class Dyre_APIs(Signature):
                            "NtCreateNamedPipeFile"])
 
     def on_call(self, call, process):
-        iocs = ["J7dnlDvybciDvu8d46D\\x00",
-                "qwererthwebfsdvjaf+\\x00",
-               ]
-        pipe = ["\\??\\pipe\\3obdw5e5w4",
-               ]
+        # Legacy, modern Dyre doesn't have hardcoded hashes in
+        # CryptHashData anymore
+        iocs = [
+            "J7dnlDvybciDvu8d46D\\x00",
+            "qwererthwebfsdvjaf+\\x00",
+        ]
+        pipe = [
+            "\\??\\pipe\\3obdw5e5w4",
+            "\\??\\pipe\\g2fabg5713",
+        ]
         if call["api"] == "CryptHashData":
             buf = self.get_argument(call, "Buffer")
             if buf in iocs:
@@ -66,9 +71,14 @@ class Dyre_APIs(Signature):
     def on_complete(self):
         networkret = False
         campaign = set()
-        
-        if self.check_mutex(pattern="^(Global|Local)\\\\pen3j3832h$", regex=True):
-            self.syncapis = True
+        mutexs = [
+            "^(Global|Local)\\\\pen3j3832h$",
+            "^(Global|Local)\\\\u1nyj3rt20",
+        ]
+        for mutex in mutexs:
+            if self.check_mutex(pattern=mutex, regex=True):
+                self.syncapis = True
+                break
 
         # C2 Beacon check
         if self.networkapis:
@@ -79,6 +89,7 @@ class Dyre_APIs(Signature):
                 indicators = [
                     "/(\d{4}[a-z]{2}\d{2})/" + compname + "_",
                     "/([^/]+)/" + compname + "/\d+/\d+/\d+/$",
+                    "/([^/]+)/" + compname + "_W\d{6}\.[0-9A-F]{32}",
                 ]
                 for indicator in indicators:
                     buf = re.match(indicator, httpreq)
