@@ -41,6 +41,7 @@ class CheckIP(Signature):
             "curlmyip.com",
             "ip4.telize.com",
             "ip.xss.ru",
+            "ipinfo.io",
 
             # public stun server list, from http://olegh.ftp.sh/public-stun.txt (could make this a feed I suppose)
             # all servers not matching our generic stun[0-9]?.* pattern below
