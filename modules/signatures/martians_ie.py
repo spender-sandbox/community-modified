@@ -37,8 +37,8 @@ class MartiansIE(Signature):
 
     def find_martians(self,ptree,pwlist):
        result = []
-       if ptree[0]["children"]:
-           children = self.go_deeper(ptree[0])
+       if ptree["children"]:
+           children = self.go_deeper(ptree)
            for child in children:
                match_found = False
                for entry in pwlist:
@@ -49,6 +49,9 @@ class MartiansIE(Signature):
        return result
 
     def run(self):
+        if self.results["target"]["category"] == "file":
+            return False
+ 
         self.ie_paths_re = re.compile(r"^c:\\program files(?:\s\(x86\))?\\internet explorer\\iexplore.exe$",re.I)
         #run through re.escape()
         self.white_list_re = ["^C\\:\\\\Program Files(?:\s\\(x86\\))?\\\\Adobe\\\\Reader\\ \\d+\\.\\d+\\\\Reader\\\\AcroRd32\\.exe$",
@@ -62,15 +65,17 @@ class MartiansIE(Signature):
             self.white_list_re_compiled.append(re.compile(entry,re.I))
         self.white_list_re_compiled.append(self.ie_paths_re)
 
-        # get the path of the initial monitored executable
+        # Sometimes if we get a service loaded we get out of order processes in tree need iterate over IE processes get the path of the initial monitored executable
         self.initialpath = None
         processes = self.results["behavior"]["processtree"]
         if len(processes):
-            self.initialpath = processes[0]["module_path"].lower()
-        if self.initialpath and self.ie_paths_re.match(self.initialpath) and processes[0].has_key("children"):
-           self.martians = self.find_martians(processes,self.white_list_re_compiled)
-           if len(self.martians) > 0:
-               for martian in self.martians:
-                   self.data.append({"ie_martian": martian})
-               return True 
+            for p in processes:
+                initialpath = p["module_path"].lower()
+                print initialpath 
+                if initialpath and self.ie_paths_re.match(initialpath) and p.has_key("children"):
+                    self.martians = self.find_martians(p,self.white_list_re_compiled)
+                    if len(self.martians) > 0:
+                        for martian in self.martians:
+                            self.data.append({"ie_martian": martian})
+                        return True 
         return False
