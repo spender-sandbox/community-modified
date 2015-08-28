@@ -1,4 +1,4 @@
-# Copyright (C) 2015 Optiv, Inc. (brad.spengler@optiv.com)
+﻿# Copyright (C) 2015 Optiv, Inc. (brad.spengler@optiv.com)
 # This file is part of Cuckoo Sandbox - http://www.cuckoosandbox.org
 # See the file 'docs/LICENSE' for copying permission.
 
@@ -92,6 +92,12 @@ class PEAnomaly(Signature):
                 if int(resource["size"], 16) >= 100 * 1024 * 1024:
                     self.data.append({"anomaly" : "Contains a resource with a size >= 100MB"})
                     self.weight += 1
+        if "pe_reported_checksum" in self.results["static"] and "pe_actual_checksum" in self.results["static"]:
+            reported = int(self.results["static"]["pe_reported_checksum"], 16)
+            actual = int(self.results["static"]["pe_actual_checksum"], 16)
+            if report and reported != actual:
+                self.data.append({"anomaly" : "Actual checksum does not match that reported in PE header"})
+                self.weight += 1
 
         if self.weight:
             return True
