@@ -95,7 +95,7 @@ class PEAnomaly(Signature):
         if "pe_reported_checksum" in self.results["static"] and "pe_actual_checksum" in self.results["static"]:
             reported = int(self.results["static"]["pe_reported_checksum"], 16)
             actual = int(self.results["static"]["pe_actual_checksum"], 16)
-            if report and reported != actual:
+            if reported and reported != actual:
                 self.data.append({"anomaly" : "Actual checksum does not match that reported in PE header"})
                 self.weight += 1
 
