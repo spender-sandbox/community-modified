@@ -22,8 +22,13 @@
     <Compile Include="modules\signatures\clickfraud_cookies.py" />
     <Compile Include="modules\signatures\clickfraud_volume.py" />
     <Compile Include="modules\signatures\darkcomet_regkeys.py" />
+    <Compile Include="modules\signatures\ek_heapsray.py" />
     <Compile Include="modules\signatures\ek_javaapplet.py" />
     <Compile Include="modules\signatures\ek_silverlight.py" />
+    <Compile Include="modules\signatures\generic_phish.py" />
+    <Compile Include="modules\signatures\hawkeye_apis.py" />
+    <Compile Include="modules\signatures\internet_dropper.py" />
+    <Compile Include="modules\signatures\js_phish.py" />
     <Compile Include="modules\signatures\kazybot_apis.py" />
     <Compile Include="modules\signatures\mimics_icon.py" />
     <Compile Include="modules\signatures\origin_resource_langid.py" />
@@ -143,6 +148,7 @@
     <Compile Include="modules\signatures\ransomware_files.py" />
     <Compile Include="modules\signatures\static_pe_anomaly.py" />
     <Compile Include="modules\signatures\static_versioninfo_anomaly.py" />
+    <Compile Include="modules\signatures\tinba_apis.py" />
     <Compile Include="modules\signatures\trojan_fleercivet_mutex.py" />
     <Compile Include="modules\signatures\recon_beacon.py" />
     <Compile Include="modules\signatures\stealth_timelimit.py" />
