@@ -71,7 +71,6 @@ class MartiansIE(Signature):
         if len(processes):
             for p in processes:
                 initialpath = p["module_path"].lower()
-                print initialpath 
                 if initialpath and self.ie_paths_re.match(initialpath) and p.has_key("children"):
                     self.martians = self.find_martians(p,self.white_list_re_compiled)
                     if len(self.martians) > 0:
