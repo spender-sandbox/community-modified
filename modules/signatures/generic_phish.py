@@ -22,8 +22,9 @@ from lib.cuckoo.common.abstracts import Signature
 
 class Generic_Phish(Signature):
     name = "generic_phish"
-    description = "Network activity contains generic phishing indicators."
-    severity = 3
+    description = "Network activity contains generic phishing indicators indicative of a website clone."
+    severity = 2
+    weight = 2
     categories = ["network"]
     authors = ["KillerInstinct"]
     minimum = "1.0"
