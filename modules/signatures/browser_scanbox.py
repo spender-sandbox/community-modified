@@ -1,10 +1,10 @@
-from lib.cuckoo.common.abstracts import Signature
+﻿from lib.cuckoo.common.abstracts import Signature
 
-class HeapSpray_JS(Signature):
+class BrowserScanbox(Signature):
     name = "browser_scanbox"
     description = "Scanbox Activity in Browser"
     weight = 3
-    severity = 5 
+    severity = 3
     categories = ["exploit"]
     authors = ["Will Metcalf"]
     minimum = "1.3"
