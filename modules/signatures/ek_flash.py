@@ -43,5 +43,5 @@ class Flash_JS(Signature):
         else:
             buf = self.get_argument(call, "Script")
 
-        if re.search(".*allowscriptaccess[ \t\n]*=[ \t\n]*['\"]?always.*", buf, re.IGNORECASE):
+        if re.search("allowscriptaccess\s*?=\s*?[\x22\x27]?always", buf, re.I|re.M):
             return True
