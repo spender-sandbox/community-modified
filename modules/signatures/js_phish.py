@@ -17,7 +17,7 @@ from lib.cuckoo.common.abstracts import Signature
 
 class JS_Phish(Signature):
     name = "js_phish"
-    description = "Executes JavaScript with known phishing lures."
+    description = "Executes JavaScript with known {0} related phishing lures."
     weight = 2
     severity = 3
     categories = ["phishing"]
@@ -28,10 +28,12 @@ class JS_Phish(Signature):
     def __init__(self, *args, **kwargs):
         Signature.__init__(self, *args, **kwargs)
         self.lures = [
-            "debug malware error",
-            "contact microsoft certified",
-            "non bootable situation",
+            ("debug malware error", "Malware/Infection"),
+            ("contact microsoft certified", "Malware/Infection"),
+            ("non bootable situation", "Malware/Infection"),
+            ("your paypal id or password was entered incorrectly", "PayPal"),
         ]
+        self.totalhits = 0
 
     filter_categories = set(["browser"])
     # backward compat
@@ -44,5 +46,13 @@ class JS_Phish(Signature):
             buf = self.get_argument(call, "Script")
 
         for lure in self.lures:
-            if lure in buf.lower():
-                return True
+            if lure[0].lower() in buf.lower():
+                self.description = self.description.format(lure[1])
+                self.totalhits += 1
+
+    def on_complete(self):
+        if self.totalhits:
+            self.weight += self.totalhits
+            return True
+
+        return False
