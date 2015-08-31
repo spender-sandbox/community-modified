@@ -1,4 +1,4 @@
-This repository contains over 190 [Cuckoo Sandbox](http://www.cuckoosandbox.org) signature modules from the community, including
+This repository contains over 200 [Cuckoo Sandbox](http://www.cuckoosandbox.org) signature modules from the community, including
 those heavily modified by Optiv for correctness, removal of false positives,
 and more detailed information.  It also includes over 70 new signature modules
 developed solely by Optiv and provided under the GPL.
