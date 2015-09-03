@@ -1,4 +1,4 @@
-# Copyright (C) 2014 Optiv, Inc. (brad.spengler@optiv.com)
+﻿# Copyright (C) 2014 Optiv, Inc. (brad.spengler@optiv.com)
 # This file is part of Cuckoo Sandbox - http://www.cuckoosandbox.org
 # See the file 'docs/LICENSE' for copying permission.
 
@@ -14,6 +14,7 @@ class StealthFile(Signature):
     name = "stealth_file"
     description = "Creates a hidden or system file"
     severity = 3
+    confidence = 50
     categories = ["stealth"]
     authors = ["Optiv"]
     minimum = "1.2"
