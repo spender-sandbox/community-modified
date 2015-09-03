@@ -45,7 +45,6 @@ class CheckIP(Signature):
             "ipinfo.io",
             "myip.ru",
             "myip.com.ua",
-            "myip.com.ua",
             "myip.com.br",
             "showmyip.gr",
             "trackip.net",
