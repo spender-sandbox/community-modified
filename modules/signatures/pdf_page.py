@@ -28,8 +28,9 @@ class PDF_Page(Signature):
     def run(self):
         if "static" in self.results:
             if "PDF" in self.results["target"]["file"]["type"]:
-                if "/Page" in self.results["static"]["Streams"]:
-                    if self.results["static"]["Streams"]["/Page"] == 1:
-                        return True
+                if "Keywords" in self.results["static"]:
+                    if "/Page" in self.results["static"]["Keywords"]:
+                        if self.results["static"]["Keywords"]["/Page"] == 1:
+                            return True
 
         return False
