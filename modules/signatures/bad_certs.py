@@ -57,6 +57,8 @@ class BadCerts(Signature):
             "0d859141ee9a0c6e725ffe6bcfc99f3efcc3fc07",
             # Used in Dridex, BIZNES AVTOMATYKA
             "9a9c618cc8f50e9ffb24b6cc8b34858fa65e778c",
+            # Stolen ThreatTrack cert
+            "8138b44330354e413dc52af1dbfca8ba1c0f6c0a",
             ]
         if "static" in self.results:
             if "digital_signers" in self.results["static"] and self.results["static"]["digital_signers"]:
