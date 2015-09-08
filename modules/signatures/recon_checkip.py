@@ -64,6 +64,7 @@ class CheckIP(Signature):
             "ip-tracker.org",
             "ip.samuraj-cz.com",
             "ipleak.net",
+            "myip.dnsomatic.com",
 
             # public stun server list, from http://olegh.ftp.sh/public-stun.txt (could make this a feed I suppose)
             # all servers not matching our generic stun[0-9]?.* pattern below
