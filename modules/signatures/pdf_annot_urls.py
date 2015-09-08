@@ -1,4 +1,4 @@
-﻿# Copyright (C) 2012-2014 Cuckoo Foundation.
+﻿# Copyright (C) 2015 Optiv, Inc. (brad.spengler@optiv.com)
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -15,22 +15,24 @@
 
 from lib.cuckoo.common.abstracts import Signature
 
-class PDF_Page(Signature):
-    name = "pdf_page"
-    description = "The PDF has one page. Many malicious PDFs only have one page."
-    severity = 2
+class PDF_Annot_URLs(Signature):
+    name = "pdf_annot_urls"
+    description = "The PDF contains a Link Annotation to a compressed archive or executable file"
+    severity = 3
     categories = ["pdf"]
-    authors = ["KillerInstinct"]
+    authors = ["Optiv"]
     minimum = "1.2"
 
     filter_analysistypes = set(["file"])
 
     def run(self):
+        found_URLs = False
         if "static" in self.results:
             if "PDF" in self.results["target"]["file"]["type"]:
-                if "Keywords" in self.results["static"]:
-                    if "/Page" in self.results["static"]["Keywords"]:
-                        if self.results["static"]["Keywords"]["/Page"] == 1:
-                            return True
-
-        return False
+                if "Annot_URLs" in self.results["static"]:
+                    for entry in self.results["static"]["Annot_URLs"]:
+                        entrylower = entry.lower()
+                        if entrylower.endswith((".zip", ".exe", ".msi", ".bat", ".scr", ".rar")):
+                            self.data.append({"URL":entry})
+                            found_URLs = True
+        return found_URLs

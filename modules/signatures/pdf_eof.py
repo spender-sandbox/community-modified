@@ -1,4 +1,4 @@
-# Copyright (C) 2012-2014 Cuckoo Foundation.
+﻿# Copyright (C) 2012-2014 Cuckoo Foundation.
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -21,7 +21,7 @@ class PDF_EOF(Signature):
     severity = 3
     categories = ["pdf"]
     authors = ["KillerInstinct"]
-    minimum = "0.5"
+    minimum = "1.2"
 
     filter_analysistypes = set(["file"])
 
