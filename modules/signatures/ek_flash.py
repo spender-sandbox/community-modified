@@ -1,4 +1,4 @@
-# Copyright (C) 2015 Kevin Ross, Optiv, Inc. (brad.spengler@optiv.com)
+﻿# Copyright (C) 2015 Kevin Ross, Optiv, Inc. (brad.spengler@optiv.com)
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -22,9 +22,9 @@ from lib.cuckoo.common.abstracts import Signature
 
 class Flash_JS(Signature):
     name = "flash_js"
-    description = "Executes obfuscated JavaScript containing allowScriptAccess=always indicative of a Flash exploit attempt"
-    weight = 3
-    severity = 3
+    description = "Executes JavaScript containing allowScriptAccess=always, possibly indicative of a Flash exploit attempt"
+    severity = 2
+    confidence = 50
     categories = ["exploit_kit", "flash"]
     authors = ["Kevin Ross", "Optiv"]
     minimum = "1.3"
