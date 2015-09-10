@@ -45,7 +45,7 @@ class Upatre_APIs(Signature):
         self.first_pid = 0
         self.first_path = ""
         if "behavior" in self.results.keys():
-            if "processtree" in self.results["behavior"].keys():
+            if "processtree" in self.results["behavior"].keys() and self.results["behavior"]["processtree"]:
                 first_process = self.results["behavior"]["processtree"][0]
                 self.first_pid = first_process["pid"]
                 self.first_path = str(first_process["module_path"])
