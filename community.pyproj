@@ -34,7 +34,9 @@
     <Compile Include="modules\signatures\mimics_icon.py" />
     <Compile Include="modules\signatures\origin_resource_langid.py" />
     <Compile Include="modules\signatures\pdf_annot_urls.py" />
+    <Compile Include="modules\signatures\pony_apis.py" />
     <Compile Include="modules\signatures\procmem_yara.py" />
+    <Compile Include="modules\signatures\ransomware_fileextensions.py" />
     <Compile Include="modules\signatures\secure_login_phish.py" />
     <Compile Include="modules\signatures\spoofs_procname.py" />
     <Compile Include="modules\signatures\antivm_vbox_provname.py" />
@@ -167,6 +169,7 @@
     <Compile Include="modules\signatures\suricata_alert.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="modules\signatures\upatre_apis.py" />
     <Compile Include="modules\signatures\vawtrak_apis.py" />
     <Compile Include="modules\signatures\virus.py" />
     <Compile Include="modules\signatures\bot_athenahttp.py" />

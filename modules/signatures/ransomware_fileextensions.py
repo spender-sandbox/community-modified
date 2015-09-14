@@ -1,4 +1,4 @@
-from lib.cuckoo.common.abstracts import Signature
+﻿from lib.cuckoo.common.abstracts import Signature
 
 class RansomwareExtensions(Signature):
     name = "ransomware_extensions"
@@ -18,7 +18,8 @@ class RansomwareExtensions(Signature):
         ]
 
         for indicator in indicators:
-            if self.check_file(pattern=indicator, regex=True) > 15:
+            results = self.check_write_file(pattern=indicator, regex=True, all=True)
+            if results and len(results) > 15:
                 return True
 
         return False
