@@ -20,7 +20,8 @@ class EmailStealer(Signature):
             ".*\\\\Microsoft\\\\Outlook\\ Express\\\\.*\.dbx$",
             ".*\\\\Foxmail\\\\mail\\\\.*\\\\Account\.stg$",
             ".*\\\\Foxmail.*\\\\Accounts\.tdat$",
-            ".*\\\\Thunderbird\\\\Profiles\\\\.*\.default$"
+            ".*\\\\Thunderbird\\\\Profiles\\\\.*\.default$",
+            ".*\\\\AppData\\\\Roaming\\\\Thunderbird\\\\profiles.ini$",
         ]
         registry_indicators = [
             ".*\\\\Software\\\\(Wow6432Node\\\\)?Clients\\\\Mail.*",
@@ -31,6 +32,7 @@ class EmailStealer(Signature):
             ".*\\\\Microsoft\\\\Office\\\\Outlook\\\\OMI\\ Account\\ Manager\\\\Accounts.*",
             ".*\\\\Microsoft\\\\Internet\\ Account\\ Manager\\\\Accounts.*",
             ".*\\\\Software\\\\(Wow6432Node\\\\)?IncrediMail.*"
+            ".*\\\\Software\\\\(Wow6432Node\\\\)?Microsoft\\\\Windows\\ Live\\ Mail.*",
         ]
         found_stealer = False
         for indicator in file_indicators:
