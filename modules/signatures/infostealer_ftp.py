@@ -33,8 +33,8 @@ class FTPStealer(Signature):
             ".*\\\\FTPRush\\\\RushSite\.xml$",
             ".*\\\\VanDyke\\\\Config\\\\Sessions\\\\.*",
             ".*\\\\Far\\ Manager\\\\.*",
-            ".*\\\\FTP\\ Explorer\\\\.*"
-            ".*\\\\FTP\\ Commander.*"
+            ".*\\\\FTP\\ Explorer\\\\.*",
+            ".*\\\\FTP\\ Commander.*",
             ".*\\\\SmartFTP\\\\.*",
             ".*\\\\TurboFTP\\\\.*",
             ".*\\\\FTPRush\\\\.*",
@@ -42,6 +42,7 @@ class FTPStealer(Signature):
             ".*\\\\FTPGetter\\\\.*",
             ".*\\\\ALFTP\\\\.*",
             ".*\\\\Ipswitch\\\\WS_FTP\\\\.*",
+            ".*\\\\cftp\\\\ftplist.txt$",
         ]
         registry_indicators = [
             ".*\\\\Software\\\\(Wow6432Node\\\\)?Far.*\\\\Hosts$",
