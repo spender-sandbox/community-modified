@@ -21,6 +21,8 @@ class IMStealer(Signature):
             ".*\\\\Miranda\\\\.*\.dat$",
             ".*\\\\MySpace\\\\IM\\\\users\.txt$",
             ".*\\\\\.purple\\\\Accounts\.xml$",
+            ".*\\\\Application\\ Data\\\\Miranda\\\\.*",
+            ".*\\\\AppData\\\\Roaming\\\\Miranda\\\\.*",
             ".*\\\\Skype\\\\.*\\\\config\.xml$",
             ".*\\\\Tencent\\ Files\\\\.*\\\\QQ\\\\Registry\.db$",
             ".*\\\\Trillian\\\\users\\\\global\\\\accounts\.ini$",
@@ -32,10 +34,10 @@ class IMStealer(Signature):
             ".*\\\\Software\\\\(Wow6432Node\\\\)?Beyluxe\\ Messenger\\\\.*",
             ".*\\\\Software\\\\(Wow6432Node\\\\)?BigAntSoft\\\\BigAntMessenger\\\\.*",
             ".*\\\\Software\\\\(Wow6432Node\\\\)?Camfrog\\\\Client\\\\.*",
-            ".*\\\\Software\\\\(Wow6432Node\\\\)?Google\\\\Google\\ Talk\\\\Accounts\\\\.*",
+            ".*\\\\Software\\\\(Wow6432Node\\\\)?Google\\\\Google\\ Talk\\\\Accounts.*",
             ".*\\\\Software\\\\(Wow6432Node\\\\)?IMVU\\\\.*",
             ".*\\\\Software\\\\(Wow6432Node\\\\)?Nimbuzz\\\\PCClient\\\\Application\\\\.*",
-            ".*\\\\Software\\\\(Wow6432Node\\\\)?Paltalk\\\\.*",
+            ".*\\\\Software\\\\(Wow6432Node\\\\)?Paltalk.*",
             ".*\\\\Software\\\\(Wow6432Node\\\\)?Yahoo\\\\Pager\\\\.*"
         ]
         found_stealer = False
