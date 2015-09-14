@@ -30,6 +30,9 @@ class Dyre_APIs(Signature):
     authors = ["Optiv", "KillerInstinct"]
     minimum = "1.3"
     evented = True
+    # Try to parse a process memory dump to extract regex extract C2 nodes.
+    extract_c2s = True
+
 
     def __init__(self, *args, **kwargs):
         Signature.__init__(self, *args, **kwargs)
@@ -69,6 +72,7 @@ class Dyre_APIs(Signature):
         return None
 
     def on_complete(self):
+        ret = False
         networkret = False
         campaign = set()
         mutexs = [
@@ -99,23 +103,44 @@ class Dyre_APIs(Signature):
 
         # Check if there are any winners
         if self.cryptoapis or self.syncapis or networkret:
+            ret = True
             if (self.cryptoapis or self.syncapis) and networkret:
                 self.confidence = 100
                 self.description = "Exhibits behaviorial and network characteristics of Upatre+Dyre/Mini-Dyre malware"
                 for camp in campaign:
                     self.data.append({"Campaign": camp})
-                return True
 
             elif networkret:
                 self.description = "Exhibits network behavior characteristic of Upatre+Dyre/Mini-Dyre malware"
                 for camp in campaign:
                     self.data.append({"Campaign": camp})
-                return True
 
-            elif self.cryptoapis:
-                return True
-                
-            elif self.syncapis:
-                return True
+            if self.extract_c2s:
+                dump_pid = 0
+                for proc in self.results["behavior"]["processtree"]:
+                    for child in proc["children"]:
+                        # Look for lowest PID svchost.exe
+                        if not dump_pid or child["pid"] < dump_pid:
+                            if child["name"] == "svchost.exe":
+                                dump_pid = child["pid"]
+                if dump_pid:
+                    dump_path = ""
+                    if len(self.results["procmemory"]):
+                        for memdump in self.results["procmemory"]:
+                            if dump_pid == memdump["pid"]:
+                                dump_path = memdump["file"]
+                    if dump_path:
+                        whitelist = [
+                            "1.2.3.4",
+                            "0.0.0.0",
+                        ]
+                        with open(dump_path, "rb") as dump_file:
+                            dump_data = dump_file.read()
+                        ippat = "\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}:\d{2,5}"
+                        ips = re.findall(ippat, dump_data)
+                        for ip in set(ips):
+                            for item in whitelist:
+                                if not ip.startswith(item):
+                                    self.data.append({"C2": ip})
 
-        return False
+        return ret
