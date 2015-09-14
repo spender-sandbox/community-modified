@@ -44,14 +44,22 @@ class BrowserStealer(Signature):
         re.compile(".*\\\\Cookies\\\\.*", re.I),
         re.compile(".*\\\\Temporary\\ Internet\\ Files\\\\Content\.IE5\\\\index\.dat$", re.I),
         re.compile(".*\\\\Application\\ Data\\\\Google\\\\Chrome\\\\.*", re.I),
+        re.compile(".*\\\\Local\\\\Google\\\\Chrome\\\\User\\ Data\\\\Default\\\\.*", re.I),
         re.compile(".*\\\\Application\\ Data\\\\Mozilla\\\\Firefox\\\\.*", re.I),
+        re.compile(".*\\\\AppData\\\\Roaming\\\\Mozilla\\\\Firefox\\\\.*", re.I),
         re.compile(".*\\\\Application\\ Data\\\\Opera\\\\.*", re.I),
+        re.compile(".*\\\\AppData\\\\Roaming\\\\Opera\\\\Opera\\\\.*", re.I),
         re.compile(".*\\\\Application\\ Data\\\\Chromium\\\\.*", re.I),
+        re.compile(".*\\\\AppData\\\\Local\\\\Chromium\\\\.*" re.I),
         re.compile(".*\\\\Application\\ Data\\\\ChromePlus\\\\.*", re.I),
+        re.compile(".*\\\\AppData\\\\Local\\\\MapleStudio\\\\ChromePlus\\\\.*", re.I),
         re.compile(".*\\\\Application\\ Data\\\\Nichrome\\\\.*", re.I),
         re.compile(".*\\\\Application\\ Data\\\\Bromium\\\\.*", re.I),
-        re.compile(".*\\\\Application\\ Data\\\\RockMelt\\\\.*", re.I)
-
+        re.compile(".*\\\\Application\\ Data\\\\RockMelt\\\\.*", re.I),
+        re.compile(".*\\\\Application\\ Data\\\\Flock\\\\.*", re.I),
+        re.compile(".*\\\\AppData\\\\Local\\\\Flock\\\\.*", re.I),
+        re.compile(".*\\\\Application\\ Data\\\\Comodo\\\\Dragon\\\\.*", re.I),
+        re.compile(".*\\\\AppData\\\\Local\\\\Comodo\\\\Dragon\\\\.*", re.I),
     ]
     filter_apinames = set(["NtReadFile", "CopyFileA", "CopyFileW", "CopyFileExW"])
 
