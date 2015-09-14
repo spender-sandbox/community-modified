@@ -50,7 +50,7 @@ class BrowserStealer(Signature):
         re.compile(".*\\\\Application\\ Data\\\\Opera\\\\.*", re.I),
         re.compile(".*\\\\AppData\\\\Roaming\\\\Opera\\\\Opera\\\\.*", re.I),
         re.compile(".*\\\\Application\\ Data\\\\Chromium\\\\.*", re.I),
-        re.compile(".*\\\\AppData\\\\Local\\\\Chromium\\\\.*" re.I),
+        re.compile(".*\\\\AppData\\\\Local\\\\Chromium\\\\.*", re.I),
         re.compile(".*\\\\Application\\ Data\\\\ChromePlus\\\\.*", re.I),
         re.compile(".*\\\\AppData\\\\Local\\\\MapleStudio\\\\ChromePlus\\\\.*", re.I),
         re.compile(".*\\\\Application\\ Data\\\\Nichrome\\\\.*", re.I),
