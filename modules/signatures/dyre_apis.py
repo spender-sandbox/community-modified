@@ -139,8 +139,11 @@ class Dyre_APIs(Signature):
                         ippat = "\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}:\d{2,5}"
                         ips = re.findall(ippat, dump_data)
                         for ip in set(ips):
+                            addit = True
                             for item in whitelist:
-                                if not ip.startswith(item):
-                                    self.data.append({"C2": ip})
+                                if ip.startswith(item):
+                                    addit = False
+                            if addit:
+                                self.data.append({"C2": ip})
 
         return ret
