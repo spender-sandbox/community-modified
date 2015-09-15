@@ -21,6 +21,8 @@ class MimicsIcon(Signature):
             "2c45339aea71418c49248aa88ffb2378",
             "059dcdf32e800b5f2fe2aea2d5f045d8",
             "9334967a316ffffd255aaf9224a7da5e",
+            "e52d1e9d64fd9535bf10f6da1091df9d",
+            
         ]
 
         if "static" in self.results and "pe_icon_fuzzy" in self.results["static"]:
