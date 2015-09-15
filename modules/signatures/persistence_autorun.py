@@ -1,4 +1,4 @@
-# Copyright (C) 2012,2014,2015 Michael Boman (@mboman), Optiv, Inc. (brad.spengler@optiv.com)
+﻿# Copyright (C) 2012,2014,2015 Michael Boman (@mboman), Optiv, Inc. (brad.spengler@optiv.com)
 #
 # This program is free Software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -113,7 +113,7 @@ class Autorun(Signature):
                     self.data.append({"file" : match})
                 self.found_autorun = True
 
-        taskpat = ".*schtasks(\.exe)?.*/CREATE.*/SC\s+(ONLOGON|ONSTART).*"
+        taskpat = ".*schtasks(\.exe)?.*/CREATE.*/SC\s+.*"
         tasked = self.check_executed_command(pattern=taskpat, regex=True)
         if tasked:
             self.found_autorun = True
