@@ -1,4 +1,4 @@
-# Copyright (C) 2015 KillerInstinct
+﻿# Copyright (C) 2015 KillerInstinct
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -26,7 +26,7 @@ class Kibex_APIs(Signature):
     categories = ["spyware", "keylogger"]
     families = ["kibex"]
     authors = ["KillerInstinct"]
-    minimum = "1.0"
+    minimum = "1.3"
     evented = True
 
     def __init__(self, *args, **kwargs):
@@ -65,14 +65,13 @@ class Kibex_APIs(Signature):
             if match:
                 bad_score += 1
 
-        if "behavior" in self.results and self.results["behavior"]:
-            services = [
-                "ProtectedStorage",
-                "VaultSvc",
-            ]
-            for service in services:
-                if service in self.results["behavior"]["summary"]["started_services"]:
-                    bad_score += 1
+        services = [
+            "ProtectedStorage",
+            "VaultSvc",
+        ]
+        for service in services:
+            if self.check_started_service(service):
+                bad_score += 1
 
         if bad_score >= 10:
             return True
