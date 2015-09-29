@@ -13,7 +13,22 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+try:
+    import re2 as re
+except:
+    import re
+
 from lib.cuckoo.common.abstracts import Signature
+
+def unbuffered_b64decode(data):
+    data = data.replace("\r", "").replace("\n","")
+    data += "=" * ((4 - len(data) % 4) % 4)
+    try:
+        data = data.decode("base64")
+    except Exception as e:
+        pass
+
+    return data
 
 class HawkEye_APIs(Signature):
     name = "hawkeye_behavior"
@@ -26,7 +41,8 @@ class HawkEye_APIs(Signature):
     minimum = "1.3"
     evented = True
 
-    filter_apinames = set(["send", "WSAConnect", "getaddrinfo"])
+    filter_apinames = set(["send", "WSAConnect", "getaddrinfo",
+                           "NtCreateEvent", "NtCreateSection"])
 
     def __init__(self, *args, **kwargs):
         Signature.__init__(self, *args, **kwargs)
@@ -43,6 +59,14 @@ class HawkEye_APIs(Signature):
                 # FTP Keywords
                 "USER"
         ]
+        self.emailterms = [
+                "hawkeye keylogger",
+                "dear hawkeye customers",
+                "dear invisiblesoft users",
+        ]
+        self.guidpat = "([0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{13})\.\d+Event"
+        self.evguid = str()
+        self.evmatch = False
 
     def on_call(self, call, process):
         if call["api"] == "getaddrinfo":
@@ -64,14 +88,26 @@ class HawkEye_APIs(Signature):
         elif call["api"] == "send":
             buf = self.get_argument(call, "buffer")
             sock = self.get_argument(call, "socket")
-            if "hawkeye keylogger" in buf.lower():
-                self.badness += 10
-            if "dear hawkeye customers" in buf.lower():
-                self.badness += 10
+            tmp = unbuffered_b64decode(buf)
+            for term in self.emailterms:
+                if term in buf.lower() or term in tmp.lower():
+                    self.badness += 10
             for word in self.keywords:
                 if buf.startswith(word):
                     self.sockets[sock]["data"].append(buf)
                     self.badsocks.add(sock)
+
+        elif call["api"] == "NtCreateEvent":
+            evname = self.get_argument(call, "EventName")
+            check = re.match(self.guidpat, evname)
+            if check:
+                self.evguid = check.group(1)
+
+        elif call["api"] == "NtCreateSection":
+            if self.evguid:
+                buf = self.get_argument(call, "ObjectAttributes")
+                if self.evguid in buf:
+                    self.evmatch = True
 
         self.lastcall = call["api"]
 
@@ -83,6 +119,8 @@ class HawkEye_APIs(Signature):
             self.badness += 2
         if self.check_file(pattern=".*\\\\holdermail.txt$", regex=True):
             self.badness += 4
+        if self.evmatch:
+            self.badness += 5
         if self.badness > 5:
             # Delete the non-malicious related sockets
             for sock in self.sockets.keys():
@@ -117,6 +155,7 @@ class HawkEye_APIs(Signature):
                         ioc = {"FTP_User": buf}
                         if ioc not in self.data:
                             self.data.append(ioc)
+
             return True
 
         return False
