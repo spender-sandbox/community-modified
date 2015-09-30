@@ -45,13 +45,13 @@ class PowershellCommand(Signature):
 
         if call["api"] == "CreateProcessInternalW":
             cmdline = self.get_argument(call, "CommandLine").lower()
-            if "powershell.exe" in cmdline and "-w hidden" in cmdline:
+            if "powershell.exe" in cmdline and "-w hidden" in cmdline "-windowstyle hidden" in cmdline:
                 self.data.append({"hidden_window" : "Attempts to execute command with a hidden window"})
                 self.weight += 1
         elif call["api"] == "ShellExecuteExW":
             filepath = self.get_argument(call, "FilePath").lower()
             params = self.get_argument(call, "Parameters").lower()
-            if "powershell.exe" in filepath and "-w hidden" in params:
+            if "powershell.exe" in filepath and "-w hidden" in params or "-windowstyle hidden" in params:
                 self.data.append({"hidden_window" : "Attempts to execute command with a hidden window"})
                 self.weight += 1
 
