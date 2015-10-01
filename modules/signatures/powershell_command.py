@@ -4,6 +4,8 @@ class PowershellCommand(Signature):
     name = "powershell_command"
     description = "Attempts to execute a powershell command with suspicious parameter/s"
     severity = 2
+    confidence = 70
+    weight = 0
     categories = ["generic"]
     authors = ["Kevin Ross"]
     minimum = "1.2"
