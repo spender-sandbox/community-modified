@@ -12,6 +12,7 @@ class RansomwareExtensions(Signature):
         indicators = [
             ".*\.aaa$",
             ".*\.abc$",
+            ".*\.ccc$",
             ".*\.ecc$",
             ".*\.exx$",
             ".*\.ezz$",
