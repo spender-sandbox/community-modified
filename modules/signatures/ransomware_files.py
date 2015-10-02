@@ -41,6 +41,8 @@ class RansomwareFiles(Signature):
             ".*\\\\recovery_key\.txt$",
             ".*\\\\restore_files_.*\.txt$",
             ".*\\\\restore_files_.*\.html$",
+            ".*\\\\howto_restore_files_.*\.txt$",
+            ".*\\\\howto_restore_files_.*\.html$",
         ]
 
         for file in file_list:
