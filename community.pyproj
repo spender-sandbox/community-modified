@@ -33,9 +33,11 @@
     <Compile Include="modules\signatures\kazybot_apis.py" />
     <Compile Include="modules\signatures\kibex_apis.py" />
     <Compile Include="modules\signatures\mimics_icon.py" />
+    <Compile Include="modules\signatures\office_security.py" />
     <Compile Include="modules\signatures\origin_resource_langid.py" />
     <Compile Include="modules\signatures\pdf_annot_urls.py" />
     <Compile Include="modules\signatures\pony_apis.py" />
+    <Compile Include="modules\signatures\powershell_command.py" />
     <Compile Include="modules\signatures\procmem_yara.py" />
     <Compile Include="modules\signatures\ransomware_fileextensions.py" />
     <Compile Include="modules\signatures\secure_login_phish.py" />
