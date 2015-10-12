@@ -33,7 +33,10 @@ class Generic_Phish(Signature):
     def __init__(self, *args, **kwargs):
         Signature.__init__(self, *args, **kwargs)
         # Named group to extract the URL of the cloned website.
-        self.rex = re.compile(r"\<!--\ssaved\sfrom\surl=\(\d+\)(?P<url>https?://[^\s]+)")
+        self.rex = {
+            "saved from url": re.compile(r"\<!--\ssaved\sfrom\surl=\(\d+\)(?P<url>[^\s]+)", re.I),
+            "mirrored from": re.compile(r"<!--\smirrored\sfrom\s(?P<url>[^\s]+)\sby\sHTTrack", re.I),
+        }
         self.hits = set()
 
     # Observed with IE8
@@ -41,13 +44,15 @@ class Generic_Phish(Signature):
 
     def on_call(self, call, process):
         data = self.get_argument(call, "Buffer")
-        if data and "<!-- saved from url" in data:
-            buf = self.rex.search(data)
-            if buf:
-                if "-->" in data:
-                    self.hits.add((buf.group("url"), "ok"))
-                else:
-                    self.hits.add((buf.group("url"), "truncated"))
+        if data and "<!--" in data:
+            for regex in self.rex.keys():
+                if regex in data.lower():
+                    buf = self.rex[regex].search(data)
+                    if buf:
+                        if "-->" in data:
+                            self.hits.add((buf.group("url"), "ok"))
+                        else:
+                            self.hits.add((buf.group("url"), "truncated"))
 
     def on_complete(self):
         ret = False
