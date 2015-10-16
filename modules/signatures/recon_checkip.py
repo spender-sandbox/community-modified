@@ -34,6 +34,7 @@ class CheckIP(Signature):
             "getmyip.co.uk",
             "icanhazip.com",
             "whatismyipaddress.com",
+            "bot.whatismyipaddress.com",
             "myipaddress.com",
             "ip-addr.es",
             "api.ipify.org",
