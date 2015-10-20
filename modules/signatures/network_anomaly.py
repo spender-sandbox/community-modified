@@ -31,7 +31,7 @@ class NetworkAnomaly(Signature):
 
     def __init__(self, *args, **kwargs):
         Signature.__init__(self, *args, **kwargs)
-        self.ipWhitelist = set("127.0.0.1")
+        self.ipWhitelist = set(["127.0.0.1"])
         self.ipBuffer = list()
         self.ipRex = (r"^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.)"
                        "{3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$")
