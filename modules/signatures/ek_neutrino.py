@@ -1,4 +1,4 @@
-﻿# Copyright (C) 2015 Will Metcalf william.metcalf@gmail.com 
+# Copyright (C) 2015 Will Metcalf william.metcalf@gmail.com 
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -15,12 +15,13 @@
 
 from lib.cuckoo.common.abstracts import Signature
 
-class BrowserScanbox(Signature):
-    name = "browser_scanbox"
-    description = "Scanbox Activity in Browser"
+class Neutrino_JS(Signature):
+    name = "Neutrino_js"
+    description = "Executes obfuscated JavaScript indicative of Neutrino Exploit Kit"
     weight = 3
     severity = 3
-    categories = ["exploit"]
+    categories = ["exploit_kit"]
+    families = ["neutrino"]
     authors = ["Will Metcalf"]
     minimum = "1.3"
     evented = True
@@ -37,7 +38,6 @@ class BrowserScanbox(Signature):
             buf = self.get_argument(call, "Javascript")
         else:
             buf = self.get_argument(call, "Script")
-            if 'softwarelist.push(' in buf.lower() and 'indexof("-2147023083")' in buf.lower():
-                return True
-            elif 'var logger' in buf.lower() and 'document.onkeypress = keypress;' in buf.lower() and 'setinterval(sendchar,' in buf.lower():
-                return True
+
+        if ".SetReturnValue(__flash__toXML(function" in buf and ("MOV%20%5BECX+0C%5D%2CEAX" in buf or "chrw%2801%29%26chrw%282176%29%26chrw%2801%29%26chrw%2800%29%26chrw%2800%29%26chrw%2800%29%26chrw%2800%29%26chrw%2800%29" in buf or "dashstyle.array.length%20%3D%200%20-%201%3B" in buf) and "unescape" in buf:
+            return True

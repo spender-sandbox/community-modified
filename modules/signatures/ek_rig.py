@@ -1,4 +1,4 @@
-﻿# Copyright (C) 2015 Kevin Ross, Optiv, Inc. (brad.spengler@optiv.com)
+# Copyright (C) 2015 Will Metcalf william.metcalf@gmail.com 
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -13,20 +13,16 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-try:
-    import re2 as re
-except ImportError:
-    import re
-
 from lib.cuckoo.common.abstracts import Signature
 
-class Flash_JS(Signature):
-    name = "flash_js"
-    description = "Executes JavaScript containing allowScriptAccess=always, possibly indicative of a Flash exploit attempt"
-    severity = 2
-    confidence = 50
-    categories = ["exploit_kit", "flash"]
-    authors = ["Kevin Ross", "Optiv"]
+class RIG_JS(Signature):
+    name = "rig_js"
+    description = "Executes obfuscated JavaScript indicative of RIG Exploit Kit"
+    weight = 3
+    severity = 3
+    categories = ["exploit_kit"]
+    families = ["RIG"]
+    authors = ["Will Metcalf"]
     minimum = "1.3"
     evented = True
 
@@ -43,5 +39,10 @@ class Flash_JS(Signature):
         else:
             buf = self.get_argument(call, "Script")
 
-        if re.search("allowscriptaccess\s*?=\s*?[\x22\x27]?always", buf, re.I|re.M):
+        str1=["Y2hydygyMTc2K","NocncoMjE3Ni","jaHJ3KDIxNzYp"]
+        str2=["Y2hydygzMjc2Ny","NocncoMzI3Njcp","jaHJ3KDMyNzY3K"]
+        str3=["Y2hydygwMS","NocncoMDEp","jaHJ3KDAxK"]
+        str4=["Y2hydygwMC","NocncoMDAp","jaHJ3KDAwK"]
+
+        if "VBscript" in buf and "String.fromCharCode" in buf and "window.execScript" in buf and any(e in buf for e in str1) and any(e in buf for e in str2) and any(e in buf for e in str3) and any(e in buf for e in str4):
             return True

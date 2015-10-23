@@ -25,6 +25,15 @@
     <Compile Include="modules\signatures\darkcomet_regkeys.py" />
     <Compile Include="modules\signatures\ek_heapsray.py" />
     <Compile Include="modules\signatures\ek_javaapplet.py" />
+    <Compile Include="modules\signatures\ek_neutrino.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="modules\signatures\ek_nuclear.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="modules\signatures\ek_rig.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="modules\signatures\ek_silverlight.py" />
     <Compile Include="modules\signatures\generic_phish.py" />
     <Compile Include="modules\signatures\hawkeye_apis.py" />
@@ -46,9 +55,6 @@
     <Compile Include="modules\signatures\bad_ssl_certs.py" />
     <Compile Include="modules\signatures\disables_spdy.py" />
     <Compile Include="modules\signatures\ek_angler.py" />
-    <Compile Include="modules\signatures\ek_flash.py">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="modules\signatures\ek_gondad.py" />
     <Compile Include="modules\signatures\antiav_bitdefender_libs.py" />
     <Compile Include="modules\signatures\antianalysis_detectreg.py" />
