@@ -13,10 +13,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-try:
-    import re2 as re
-except ImportError:
-    import re
+import re
 
 from lib.cuckoo.common.abstracts import Signature
 
@@ -30,6 +27,7 @@ class Pony_APIs(Signature):
     authors = ["KillerInstinct"]
     minimum = "1.2"
     evented = True
+    carve_mem = True
 
     def __init__(self, *args, **kwargs):
         Signature.__init__(self, *args, **kwargs)
@@ -56,9 +54,31 @@ class Pony_APIs(Signature):
 
     def on_complete(self):
         if self.badpid:
+            if self.carve_mem:
+                if "procmemory" in self.results and self.results["procmemory"]:
+                    for process in self.results["procmemory"]:
+                        if process["pid"] == int(self.badpid):
+                            dump_path = process["file"]
+                            break
+                    with open(dump_path, "rb") as dump_file:
+                        cData = dump_file.read()
+                    # Get the aPLib header + data
+                    buf = re.findall(r"aPLib .*PWDFILE", cData,
+                                     re.DOTALL|re.MULTILINE)
+                    # Strip out the header
+                    if buf and len(buf[0]) > 200:
+                        data = buf[0][200:]
+                        output = re.findall("(https?:\/\/.+?(?:\.php|\.exe))",
+                                            data)
+                        if output:
+                            for ioc in output:
+                                self.data.append({"C2": ioc})
+
             if self.urls:
                 for url in self.urls:
-                    self.data.append({"C2": url})
+                    insert = {"C2": url}
+                    if insert not in self.data:
+                        self.data.append(insert)
             return True
 
         return False
