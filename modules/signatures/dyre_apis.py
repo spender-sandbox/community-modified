@@ -62,7 +62,8 @@ class Dyre_APIs(Signature):
                 self.cryptoapis = True
             tmp = re.sub(r"\\x[0-9A-Fa-f]{2}", "", buf)
             if self.compname in tmp:
-                self.cryptoapis = True
+                if re.match("^" + self.compname + "[0-9 ]+$", tmp):
+                    self.cryptoapis = True
         elif call["api"] == "HttpOpenRequestA":
             buf = self.get_argument(call, "Path")
             if len(buf) > 10:
