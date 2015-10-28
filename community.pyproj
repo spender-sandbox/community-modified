@@ -23,6 +23,7 @@
     <Compile Include="modules\signatures\antisandbox_sboxie_mutex.py" />
     <Compile Include="modules\signatures\antisandbox_sboxie_objects.py" />
     <Compile Include="modules\signatures\antivm_dirobjects.py" />
+    <Compile Include="modules\signatures\antivm_vmware_libs.py" />
     <Compile Include="modules\signatures\antivm_vpc_mutex.py" />
     <Compile Include="modules\signatures\browser_scanbox.py" />
     <Compile Include="modules\signatures\clickfraud_cookies.py" />

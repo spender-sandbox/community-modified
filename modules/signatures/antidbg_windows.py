@@ -21,7 +21,7 @@ class AntiDBGWindows(Signature):
     severity = 3
     categories = ["anti-debug"]
     authors = ["nex", "KillerInstinct"]
-    minimum = "1.2"
+    minimum = "1.3"
     evented = True
 
     filter_categories = set(["windows"])
@@ -48,7 +48,7 @@ class AntiDBGWindows(Signature):
         ]
 
         for indicator in indicators:
-            if self.check_argument_call(call, pattern=indicator, category="windows"):
+            if self.check_argument_call(call, pattern=indicator, ignorecase=True):
                 if process["process_name"] not in self.ret.keys():
                     self.ret[process["process_name"]] = list()
                 window = self.get_argument(call, "ClassName")

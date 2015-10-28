@@ -21,7 +21,7 @@ class VBoxDetectLibs(Signature):
     severity = 3
     categories = ["anti-vm"]
     authors = ["nex"]
-    minimum = "1.0"
+    minimum = "1.3"
     evented = True
 
     filter_apinames = set(["LdrLoadDll"])
@@ -43,5 +43,6 @@ class VBoxDetectLibs(Signature):
         for indicator in indicators:
             if self.check_argument_call(call,
                                         pattern=indicator,
-                                        name="FileName"):
+                                        name="FileName",
+                                        ignorecase=True):
                 return True
