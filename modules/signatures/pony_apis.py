@@ -14,6 +14,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import re
+import string
 
 from lib.cuckoo.common.abstracts import Signature
 
@@ -34,6 +35,9 @@ class Pony_APIs(Signature):
         self.urls = set()
         self.badpid = str()
         self.guidpat = "\{[0-9A-F]{8}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{12}\}"
+        self.whitelist = [
+            "http://download.oracle.com/",
+        ]
 
     filter_apinames = set(["RegSetValueExA", "InternetCrackUrlA"])
 
@@ -72,7 +76,12 @@ class Pony_APIs(Signature):
                                             data)
                         if output:
                             for ioc in output:
-                                self.data.append({"C2": ioc})
+                                if all(z in string.printable for z in ioc):
+                                    for item in self.whitelist:
+                                        if item not in ioc:
+                                            tmp = {"C2": ioc}
+                                            if tmp not in self.data:
+                                                self.data.append(tmp)
 
             if self.urls:
                 for url in self.urls:
