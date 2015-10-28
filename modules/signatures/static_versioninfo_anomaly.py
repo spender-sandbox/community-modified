@@ -10,12 +10,12 @@ class VersionInfoAnomaly(Signature):
     severity = 3
     categories = ["static"]
     authors = ["Optiv"]
-    minimum = "1.2"
+    minimum = "1.3"
 
     def run(self):
         found_sig = False
 
-        if not "static" in self.results or not "pe_versioninfo" in self.results["static"]:
+        if not "static" in self.results or not "pe" in self.results["static"] or not "versioninfo" in self.results["static"]["pe"]:
             return False
 
         msincopyright = None
@@ -25,7 +25,7 @@ class VersionInfoAnomaly(Signature):
         # Microsoft Corporation sorted
         mscorpsorted = " CMacfiinoooooprrrstt"
 
-        for info in self.results["static"]["pe_versioninfo"]:
+        for info in self.results["static"]["pe"]["versioninfo"]:
             if info["name"] == "LegalCopyright":
                 if "microsoft" in info["value"].lower():
                     msincopyright = True

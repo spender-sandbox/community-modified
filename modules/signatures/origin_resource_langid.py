@@ -21,7 +21,7 @@ class ResourceLangID(Signature):
     severity = 2
     authors = ["Optiv"]
     categories = ["origin"]
-    minimum = "1.0"
+    minimum = "1.3"
 
     def run(self):
         safe_langs = [
@@ -37,9 +37,9 @@ class ResourceLangID(Signature):
             "SWEDISH",
         ]
 
-        if "static" in self.results:
-            if "pe_resources" in self.results["static"]:
-                for resource in self.results["static"]["pe_resources"]:
+        if "static" in self.results and "pe" in self.results["static"]:
+            if "resources" in self.results["static"]["pe"]:
+                for resource in self.results["static"]["pe"]["resources"]:
                     splitlangs = []
                     splitlangs.append(resource["sublanguage"].split("_"))
                     buf = resource["language"]

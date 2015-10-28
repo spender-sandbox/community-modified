@@ -21,15 +21,15 @@ class PDF_EOF(Signature):
     severity = 3
     categories = ["pdf"]
     authors = ["KillerInstinct"]
-    minimum = "1.2"
+    minimum = "1.3"
 
     filter_analysistypes = set(["file"])
 
     def run(self):
-        if "static" in self.results:
+        if "static" in self.results and "pdf" in self.results["static"]:
             if "PDF" in self.results["target"]["file"]["type"]:
-                if "Data After EOF" in self.results["static"]["Info"]:
-                    if self.results["static"]["Info"]["Data After EOF"] != "0":
+                if "Data After EOF" in self.results["static"]["pdf"]["Info"]:
+                    if self.results["static"]["pdf"]["Info"]["Data After EOF"] != "0":
                         return True
 
         return False

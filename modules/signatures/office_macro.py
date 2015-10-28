@@ -21,16 +21,16 @@ class Office_Macro(Signature):
     severity = 2
     categories = ["office"]
     authors = ["KillerInstinct"]
-    minimum = "0.5"
+    minimum = "1.3"
 
     def run(self):
         ret = False
-        if "static" in self.results:
+        if "static" in self.results and "office" in self.results["static"]:
             # 97-2003 OLE and 2007+ XML macros
-            if "Macro" in self.results["static"]:
-                if "Code" in self.results["static"]["Macro"]:
+            if "Macro" in self.results["static"]["office"]:
+                if "Code" in self.results["static"]["office"]["Macro"]:
                     ret = True
-                    total = len(self.results["static"]["Macro"]["Code"])
+                    total = len(self.results["static"]["office"]["Macro"]["Code"])
                     if total > 1:
                         self.description = "The office file has %s macros." % str(total)
             # 97-2003 XML macros
@@ -68,10 +68,10 @@ class Office_Macro(Signature):
                     self.data.append({"Lure": positive})
 
         # Increase severity on empty documents with macros
-        if ret and "static" in self.results:
-            if "Metadata" in self.results["static"]:
-                if "SummaryInformation" in self.results["static"]["Metadata"]:
-                    words = self.results["static"]["Metadata"]["SummaryInformation"]["num_words"]
+        if ret and "static" in self.results and "office" in self.results["static"]:
+            if "Metadata" in self.results["static"]["office"]:
+                if "SummaryInformation" in self.results["static"]["office"]["Metadata"]:
+                    words = self.results["static"]["office"]["Metadata"]["SummaryInformation"]["num_words"]
                     if words == "0":
                         self.severity = 3
                         self.weight += 2

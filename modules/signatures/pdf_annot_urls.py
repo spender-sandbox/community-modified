@@ -21,16 +21,16 @@ class PDF_Annot_URLs(Signature):
     severity = 3
     categories = ["pdf"]
     authors = ["Optiv"]
-    minimum = "1.2"
+    minimum = "1.3"
 
     filter_analysistypes = set(["file"])
 
     def run(self):
         found_URLs = False
-        if "static" in self.results:
+        if "static" in self.results and "pdf" in self.results["static"]:
             if "PDF" in self.results["target"]["file"]["type"]:
-                if "Annot_URLs" in self.results["static"]:
-                    for entry in self.results["static"]["Annot_URLs"]:
+                if "Annot_URLs" in self.results["static"]["pdf"]:
+                    for entry in self.results["static"]["pdf"]["Annot_URLs"]:
                         entrylower = entry.lower()
                         if entrylower.endswith((".zip", ".exe", ".msi", ".bat", ".scr", ".rar")):
                             self.data.append({"URL":entry})

@@ -22,14 +22,14 @@ class Office_Suspicious(Signature):
     severity = 3
     categories = ["office"]
     authors = ["KillerInstinct"]
-    minimum = "0.5"
+    minimum = "1.3"
 
     def run(self):
         ret = False
 
-        if "static" in self.results:
-            if "Metadata" in self.results["static"]:
-                if self.results["static"]["Metadata"]["HasMacros"] == "Yes":
+        if "static" in self.results and "office" in self.results["static"]:
+            if "Metadata" in self.results["static"]["office"]:
+                if self.results["static"]["office"]["Metadata"]["HasMacros"] == "Yes":
                     if "behavior" in self.results:
                         if "processtree" in self.results["behavior"] and len(self.results["behavior"]["processtree"]):
                             parent = self.results["behavior"]["processtree"][0]

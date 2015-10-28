@@ -21,16 +21,16 @@ class PDF_Page(Signature):
     severity = 2
     categories = ["pdf"]
     authors = ["KillerInstinct"]
-    minimum = "1.2"
+    minimum = "1.3"
 
     filter_analysistypes = set(["file"])
 
     def run(self):
-        if "static" in self.results:
+        if "static" in self.results and "pdf" in self.results["static"]:
             if "PDF" in self.results["target"]["file"]["type"]:
-                if "Keywords" in self.results["static"]:
-                    if "/Page" in self.results["static"]["Keywords"]:
-                        if self.results["static"]["Keywords"]["/Page"] == 1:
+                if "Keywords" in self.results["static"]["pdf"]:
+                    if "/Page" in self.results["static"]["pdf"]["Keywords"]:
+                        if self.results["static"]["pdf"]["Keywords"]["/Page"] == 1:
                             return True
 
         return False

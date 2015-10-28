@@ -60,9 +60,9 @@ class BadCerts(Signature):
             # Stolen ThreatTrack cert
             "8138b44330354e413dc52af1dbfca8ba1c0f6c0a",
             ]
-        if "static" in self.results:
-            if "digital_signers" in self.results["static"] and self.results["static"]["digital_signers"]:
-                for sign in self.results["static"]["digital_signers"]:
+        if "static" in self.results and "pe" in self.results["static"]:
+            if "digital_signers" in self.results["static"]["pe"] and self.results["static"]["pe"]["digital_signers"]:
+                for sign in self.results["static"]["pe"]["digital_signers"]:
                     for md5 in md5_indicators:
                         if md5 == sign["md5_fingerprint"]:
                             self.data.append(sign)

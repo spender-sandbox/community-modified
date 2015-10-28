@@ -18,7 +18,12 @@
     <PtvsTargetsFile>$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets</PtvsTargetsFile>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="modules\signatures\antianalysis_detectfile.py" />
     <Compile Include="modules\signatures\antisandbox_cuckoo.py" />
+    <Compile Include="modules\signatures\antisandbox_sboxie_mutex.py" />
+    <Compile Include="modules\signatures\antisandbox_sboxie_objects.py" />
+    <Compile Include="modules\signatures\antivm_dirobjects.py" />
+    <Compile Include="modules\signatures\antivm_vpc_mutex.py" />
     <Compile Include="modules\signatures\browser_scanbox.py" />
     <Compile Include="modules\signatures\clickfraud_cookies.py" />
     <Compile Include="modules\signatures\clickfraud_volume.py" />
@@ -42,6 +47,7 @@
     <Compile Include="modules\signatures\kazybot_apis.py" />
     <Compile Include="modules\signatures\kibex_apis.py" />
     <Compile Include="modules\signatures\mimics_icon.py" />
+    <Compile Include="modules\signatures\network_anomaly.py" />
     <Compile Include="modules\signatures\office_security.py" />
     <Compile Include="modules\signatures\origin_resource_langid.py" />
     <Compile Include="modules\signatures\pdf_annot_urls.py" />
@@ -50,6 +56,7 @@
     <Compile Include="modules\signatures\procmem_yara.py" />
     <Compile Include="modules\signatures\ransomware_fileextensions.py" />
     <Compile Include="modules\signatures\secure_login_phish.py" />
+    <Compile Include="modules\signatures\shifu_apis.py" />
     <Compile Include="modules\signatures\spoofs_procname.py" />
     <Compile Include="modules\signatures\antivm_vbox_provname.py" />
     <Compile Include="modules\signatures\bad_ssl_certs.py" />
@@ -180,6 +187,7 @@
     </Compile>
     <Compile Include="modules\signatures\upatre_apis.py" />
     <Compile Include="modules\signatures\vawtrak_apis.py" />
+    <Compile Include="modules\signatures\vawtrak_dll_apis.py" />
     <Compile Include="modules\signatures\virus.py" />
     <Compile Include="modules\signatures\bot_athenahttp.py" />
     <Compile Include="modules\signatures\bot_dirtjumper.py" />

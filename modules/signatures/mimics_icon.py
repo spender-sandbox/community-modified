@@ -25,7 +25,7 @@ class MimicsIcon(Signature):
             
         ]
 
-        if "static" in self.results and "pe_icon_fuzzy" in self.results["static"]:
-            if self.results["static"]["pe_icon_fuzzy"] in badhashes:
+        if "static" in self.results and "pe" in self.results["static"]  and "icon_fuzzy" in self.results["static"]["pe"]:
+            if self.results["static"]["pe"]["icon_fuzzy"] in badhashes:
                 return True
         return False

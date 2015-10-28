@@ -21,12 +21,12 @@ class UPXCompressed(Signature):
     severity = 2
     categories = ["packer"]
     authors = ["Michael Boman", "nex", "Optiv"]
-    minimum = "1.2"
+    minimum = "1.3"
 
     def run(self):
-        if "static" in self.results:
-            if "pe_sections" in self.results["static"]:
-                for section in self.results["static"]["pe_sections"]:
+        if "static" in self.results and "pe" in self.results["static"]:
+            if "sections" in self.results["static"]["pe"]:
+                for section in self.results["static"]["pe"]["sections"]:
                     if section["name"].startswith("UPX"):
                         descmsg = "name: {0}, entropy: {1}, characteristics: {2}, raw_size: {3}, virtual_size: {4}".format(section["name"],
                             section["entropy"], section["characteristics"], section["size_of_data"], section["virtual_size"])
