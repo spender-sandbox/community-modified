@@ -37,6 +37,8 @@ class TorGateway(Signature):
             ".*\.torexplorer\.com$",
             ".*\.onion\.to$",
             ".*\.onion\.cab$",
+            ".*\.onion\.city$",
+            ".*\.tor\-gateways\.de$",
             ".*\.tor2web\.blutmagie\.de$",
             ".*\.torpaycash\.com$",
             ".*\.torconnectpay\.com$",
