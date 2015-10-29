@@ -22,6 +22,7 @@ class MimicsIcon(Signature):
             "059dcdf32e800b5f2fe2aea2d5f045d8",
             "9334967a316ffffd255aaf9224a7da5e",
             "e52d1e9d64fd9535bf10f6da1091df9d",
+            "b686a61a6fbd20073faf430128597795",
             
         ]
 
