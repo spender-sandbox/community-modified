@@ -47,6 +47,7 @@ class VBoxDetectFiles(Signature):
             ".*VBoxVideo\.[a-zA-Z]{3}$",
             ".*\\\\VirtualBox\\ Guest\\ Additions\\\\uninst\.exe$",
             ".*\\\\VirtualBox\\ Guest\\ Additions\\\\uninst\.exe\.dll$",
+            ".*\\\\vboxmrxnp.dll$"
         ]
 
         for indicator in indicators:
