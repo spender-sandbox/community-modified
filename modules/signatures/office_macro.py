@@ -93,6 +93,6 @@ class Office_Macro(Signature):
                     if author == "1" or author == "Alex" or author == "Microsoft Office":
                         self.severity = 3
                         self.weight += 2
-                        self.data.append({"author" : "The file appears to have been created by a fake author indicative of an automated document creation kit."})
+                        self.data.append({"author" : "The file appears to have been created by a known fake author indicative of an automated document creation kit."})
 
         return ret
