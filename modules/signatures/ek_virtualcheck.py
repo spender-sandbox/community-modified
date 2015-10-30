@@ -50,7 +50,13 @@ class Virtualcheck_JS(Signature):
                 "prl_prl_strg",
                 "prl_tg",
                 "prl_time",
-                "Kaspersky.IeVirtualKeyboardPlugin"
+                "Kaspersky.IeVirtualKeyboardPlugin",
+                "isPhantom",
+                "isNodeJs",
+                "isCouchJs",
+                "isRhino",
+                "isDebugger"
+                
             ]
 
         if call["api"] == "JsEval":
