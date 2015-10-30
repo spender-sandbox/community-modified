@@ -56,7 +56,6 @@ class Virtualcheck_JS(Signature):
                 "isCouchJs",
                 "isRhino",
                 "isDebugger"
-                
             ]
 
         if call["api"] == "JsEval":
