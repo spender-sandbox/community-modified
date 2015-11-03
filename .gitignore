@@ -1,2 +1,5 @@
 community.v12.suo
 UpgradeLog.htm
+
+# Ignore Python byte code
+*.pyc
