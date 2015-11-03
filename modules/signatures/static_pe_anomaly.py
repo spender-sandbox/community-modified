@@ -52,10 +52,15 @@ class PEAnomaly(Signature):
             unprint = False
             foundsec = None
             foundcodesec = False
+            foundnamedupe = False
             lowrva = 0xffffffff
             imagebase = int(self.results["static"]["pe"]["imagebase"], 16)
             eprva = int(self.results["static"]["pe"]["entrypoint"], 16) - imagebase
+            seennames = set()
             for section in self.results["static"]["pe"]["sections"]:
+                if section["name"] in seennames:
+                    foundnamedupe = True
+                seennames.add(section["name"])
                 if "IMAGE_SCN_CNT_CODE" in section["characteristics"]:
                     foundcodesec = True
                 if "\\x" in section["name"]:
@@ -71,6 +76,9 @@ class PEAnomaly(Signature):
                     foundsec = section
                 if secstart < lowrva:
                     lowrva = secstart
+            if foundnamedupe:
+                self.data.append({"anomaly" : "Found duplicated section names"})
+                self.weight += 1
             if unprint:
                 self.data.append({"anomaly" : "Unprintable characters found in section name"})
                 self.weight += 1
