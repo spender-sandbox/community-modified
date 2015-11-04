@@ -28,6 +28,7 @@ class RansomwareFiles(Signature):
         # Lower-case file names
         file_list = [
             ".*\\\\help_decrypt\.html$",
+            ".*\\\\help_your_files\.html$",
             ".*\\\\decrypt_instruction\.html$",
             ".*\\\\decrypt_instructions\.txt$",
             ".*\\\\vault\.key$",
