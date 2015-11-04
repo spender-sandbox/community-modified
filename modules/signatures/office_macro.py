@@ -67,7 +67,7 @@ class Office_Macro(Signature):
                 for positive in positives:
                     self.data.append({"Lure": positive})
 
-        # Increase severity on empty documents with macros
+        # Increase severity on office documents with suspicious characteristics
         if ret and "static" in self.results and "office" in self.results["static"]:
             if "Metadata" in self.results["static"]["office"]:
                 if "SummaryInformation" in self.results["static"]["office"]["Metadata"]:
@@ -75,6 +75,24 @@ class Office_Macro(Signature):
                     if words == "0":
                         self.severity = 3
                         self.weight += 2
-                        self.description += " The file also appears to have no content."
+                        self.data.append({"content" : "The file appears to have no content."})
+
+        if ret and "static" in self.results and "office" in self.results["static"]:
+            if "Metadata" in self.results["static"]["office"]:
+                if "SummaryInformation" in self.results["static"]["office"]["Metadata"]:
+                    time = self.results["static"]["office"]["Metadata"]["SummaryInformation"]["total_edit_time"]
+                    if time == "0":
+                        self.severity = 3
+                        self.weight += 2
+                        self.data.append({"edit_time" : "The file appears to have no edit time."})
+
+        if ret and "static" in self.results and "office" in self.results["static"]:
+            if "Metadata" in self.results["static"]["office"]:
+                if "SummaryInformation" in self.results["static"]["office"]["Metadata"]:
+                    author = self.results["static"]["office"]["Metadata"]["SummaryInformation"]["author"]
+                    if author == "1" or author == "Alex" or author == "Microsoft Office":
+                        self.severity = 3
+                        self.weight += 2
+                        self.data.append({"author" : "The file appears to have been created by a known fake author indicative of an automated document creation kit."})
 
         return ret
