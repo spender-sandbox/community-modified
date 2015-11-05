@@ -60,28 +60,31 @@ class Pony_APIs(Signature):
         if self.badpid:
             if self.carve_mem:
                 if "procmemory" in self.results and self.results["procmemory"]:
+                    dump_path = str()
                     for process in self.results["procmemory"]:
                         if process["pid"] == int(self.badpid):
                             dump_path = process["file"]
                             break
-                    with open(dump_path, "rb") as dump_file:
-                        cData = dump_file.read()
-                    # Get the aPLib header + data
-                    buf = re.findall(r"aPLib .*PWDFILE", cData,
-                                     re.DOTALL|re.MULTILINE)
-                    # Strip out the header
-                    if buf and len(buf[0]) > 200:
-                        data = buf[0][200:]
-                        output = re.findall("(https?:\/\/.+?(?:\.php|\.exe))",
-                                            data)
-                        if output:
-                            for ioc in output:
-                                if all(z in string.printable for z in ioc):
-                                    for item in self.whitelist:
-                                        if item not in ioc:
-                                            tmp = {"C2": ioc}
-                                            if tmp not in self.data:
-                                                self.data.append(tmp)
+
+                    if dump_path:
+                        with open(dump_path, "rb") as dump_file:
+                            cData = dump_file.read()
+                        # Get the aPLib header + data
+                        buf = re.findall(r"aPLib .*PWDFILE", cData,
+                                         re.DOTALL|re.MULTILINE)
+                        # Strip out the header
+                        if buf and len(buf[0]) > 200:
+                            data = buf[0][200:]
+                            output = re.findall("(https?:\/\/.+?(?:\.php|\.exe))",
+                                                data)
+                            if output:
+                                for ioc in output:
+                                    if all(z in string.printable for z in ioc):
+                                        for item in self.whitelist:
+                                            if item not in ioc:
+                                                tmp = {"C2": ioc}
+                                                if tmp not in self.data:
+                                                    self.data.append(tmp)
 
             if self.urls:
                 for url in self.urls:
