@@ -17,7 +17,7 @@ from lib.cuckoo.common.abstracts import Signature
 
 class RansomwareFiles(Signature):
     name = "ransomware_files"
-    description = "Created known ransomware decryption instruction / key file."
+    description = "Creates a known ransomware decryption instruction / key file."
     weight = 3
     severity = 3
     categories = ["ransomware"]
@@ -25,29 +25,35 @@ class RansomwareFiles(Signature):
     minimum = "1.2"
 
     def run(self):
-        # Lower-case file names
+        # List of tuples with a regex pattern for the file name and a list of
+        # family names correlating to the ransomware. If the family is unknown
+        # just use [""].
         file_list = [
-            ".*\\\\help_decrypt\.html$",
-            ".*\\\\help_your_files\.html$",
-            ".*\\\\decrypt_instruction\.html$",
-            ".*\\\\decrypt_instructions\.txt$",
-            ".*\\\\vault\.key$",
-            ".*\\\\vault\.txt$",
-            ".*\\\\!Decrypt-All-Files.*\.txt$",
-            ".*\\\\!Decrypt-All-Files.*\.bmp$",
-            ".*\\\\help_restore_files\.txt$",
-            ".*\\\\help_to_save_files\.txt$",
-            ".*\\\\help_to_save_files\.bmp$",
-            ".*\\\\recovery_file\.txt$",
-            ".*\\\\recovery_key\.txt$",
-            ".*\\\\restore_files_.*\.txt$",
-            ".*\\\\restore_files_.*\.html$",
-            ".*\\\\howto_restore_files_.*\.txt$",
-            ".*\\\\howto_restore_files_.*\.html$",
+            (".*\\\\help_decrypt\.html$", ["CryptoWall"]),
+            (".*\\\\decrypt_instruction\.html$", ["CryptoWall"]),
+            (".*\\\\decrypt_instructions\.txt$", ["CryptoLocker"]),
+            (".*\\\\vault\.key$", ["CrypVault"]),
+            (".*\\\\vault\.txt$", ["CrypVault"]),
+            (".*\\\\!Decrypt-All-Files.*\.txt$", ["CTB-Locker"]),
+            (".*\\\\!Decrypt-All-Files.*\.bmp$", ["CTB-Locker"]),
+            (".*\\\\help_restore_files\.txt$", ["AlphaCrypt", "TeslaCrypt"]),
+            (".*\\\\help_to_save_files\.txt$", ["AlphaCrypt", "TeslaCrypt"]),
+            (".*\\\\help_to_save_files\.bmp$", ["AlphaCrypt", "TeslaCrypt"]),
+            (".*\\\\recovery_file\.txt$", ["AlphaCrypt"]),
+            (".*\\\\recovery_key\.txt$", ["AlphaCrypt"]),
+            (".*\\\\restore_files_.*\.txt$", ["AlphaCrypt", "TeslaCrypt"]),
+            (".*\\\\restore_files_.*\.html$", ["AlphaCrypt", "TeslaCrypt"]),
+            (".*\\\\howto_restore_files_.*\.txt$", ["TeslaCrypt"]),
+            (".*\\\\howto_restore_files_.*\.html$", ["TeslaCrypt"]),
         ]
 
-        for file in file_list:
-            if self.check_write_file(pattern=file, regex=True):
+        for ioc in file_list:
+            if self.check_write_file(pattern=ioc[0], regex=True):
+                if ioc[1] != "":
+                    self.families = ioc[1]
+                    self.description = ("Creates a known {0} ransomware "
+                                        "decryption instruction / key file."
+                                        "".format("/".join(ioc[1])))
                 return True
 
         return False
