@@ -51,6 +51,9 @@ class Secure_Login_Phish(Signature):
                     elif re.search("<title>Google\sDoc.*</t", buf, re.I):
                         self.phishurls.add(self.lasturl)
                         self.description = self.description.format("Google Doc")
+                    elif re.search("<title>\s*Dropbox.*</t", buf, re.I):
+                        self.phishurls.add(self.lasturl)
+                        self.description = self.description.format("Dropbox")
 
     def on_complete(self):
         if self.phishurls:
