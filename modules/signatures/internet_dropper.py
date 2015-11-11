@@ -17,7 +17,7 @@ from lib.cuckoo.common.abstracts import Signature
 
 class Internet_Dropper(Signature):
     name = "internet_dropper"
-    description = "Behavior consistant with a dropper attempting to download the next stage."
+    description = "Behavior consistent with a dropper attempting to download the next stage."
     severity = 3
     categories = ["network"]
     authors = ["KillerInstinct"]
@@ -73,6 +73,11 @@ class Internet_Dropper(Signature):
                 for host in self.dropper.keys():
                     if uri in self.dropper[host]["uris"]:
                         buf["hosts"].append(host)
+
+        if buf["uri"].endswith("/rdr/ENU/win/nooem/none/message.zip") and \
+            set(["acroipm.adobe.com", "acroipm2.adobe.com"]) == set(buf["hosts"]):
+            return False
+
         if "hosts" in buf and len(buf["hosts"]) > 1:
             ret = True
             self.data.append({"File": "%s was requested from hosts: %s" %
