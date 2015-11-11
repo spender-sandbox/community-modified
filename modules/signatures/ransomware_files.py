@@ -45,6 +45,7 @@ class RansomwareFiles(Signature):
             (".*\\\\restore_files_.*\.html$", ["AlphaCrypt", "TeslaCrypt"]),
             (".*\\\\howto_restore_files_.*\.txt$", ["TeslaCrypt"]),
             (".*\\\\howto_restore_files_.*\.html$", ["TeslaCrypt"]),
+            (".*\\\\YOUR_FILES_ARE_ENCRYPTED\.HTML$", ["Chimera"]),
         ]
 
         for ioc in file_list:
