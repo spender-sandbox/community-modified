@@ -14,7 +14,7 @@ class InstalledApps(Signature):
     minimum = "1.2"
 
     def run(self):
-        office_pkgs = ["ppt","doc","xls","eml"]
+        office_pkgs = ["ppt","doc","xls","eml","pdf"]
         if any(e in self.results["info"]["package"] for e in office_pkgs):
             return False
 
