@@ -24,6 +24,9 @@ class BrowserSecurity(Signature):
     minimum = "1.2"
 
     def run(self):
+        if self.results["info"]["package"] in ["pdf"]:
+            return False
+
         reg_indicators = [
         ".*\\\\SOFTWARE\\\\(Wow6432Node\\\\)?Microsoft\\\\Internet\\ Explorer\\\\Privacy\\\\EnableInPrivateMode$",
         ".*\\\\SOFTWARE\\\\(Wow6432Node\\\\)?Microsoft\\\\Internet\\ Explorer\\\\PhishingFilter\\\\.*",
