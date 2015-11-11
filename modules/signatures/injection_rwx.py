@@ -16,11 +16,18 @@ class InjectionRWX(Signature):
 
     def __init__(self, *args, **kwargs):
         Signature.__init__(self, *args, **kwargs)
+        self.dont_check = False
+
+        if self.results["info"]["package"] not in ["exe", "rar", "zip", "dll", "regsvr"]:
+            self.dont_check = True
 
     filter_apinames = set(["NtAllocateVirtualMemory","NtProtectVirtualMemory","VirtualProtectEx"])
     filter_analysistypes = set(["file"])
 
     def on_call(self, call, process):
+        if self.dont_check:
+            return False
+
         if call["api"] == "NtAllocateVirtualMemory" or call["api"] == "VirtualProtectEx":
             protection = self.get_argument(call, "Protection")
             # PAGE_EXECUTE_READWRITE

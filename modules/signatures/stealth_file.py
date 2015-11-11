@@ -27,6 +27,10 @@ class StealthFile(Signature):
         self.handles = dict()
         self.lastprocess = 0
         self.stealth_files = []
+        self.is_office = False
+        office_pkgs = ["ppt","doc","xls","eml"]
+        if any(e in self.results["info"]["package"] for e in office_pkgs):
+            self.is_office = True
 
     filter_apinames = set(["NtCreateFile", "NtDuplicateObject", "NtOpenFile", "NtClose", "NtSetInformationFile"])
 
@@ -113,7 +117,7 @@ class StealthFile(Signature):
         saw_stealth = False
         target_name = None
 
-        if "file" in self.results["target"] and "PE32" not in self.results["target"]["file"]["type"]:
+        if self.is_office and "file" in self.results["target"]:
             target_name = self.results["target"]["file"]["name"]
             
         for hfile in self.stealth_files:
@@ -122,8 +126,8 @@ class StealthFile(Signature):
                 if re.match(entry, hfile, re.IGNORECASE):
                     addit = False
 
-            if target_name and not hfile.endswith("\\"):
-                fname = hfile.split("\\")[-1][2:]
+            if self.is_office and target_name and not hfile.endswith("\\"):
+                fname = hfile.split("\\")[-1][2:].replace("(", "_").replace(")", "_")
                 if fname == target_name or fname in target_name:
                     addit = False
 
