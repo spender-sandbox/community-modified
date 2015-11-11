@@ -15,6 +15,8 @@ class MimicsIcon(Signature):
     def run(self):
         # Alphanumerica hash list by category
         badhashes = [
+            # outlook 2013? icon
+            "94c2270400f0e96be89d6d909c8e2485",
             # Office 365 Application Logo
             "4e623298caf36bc642543408fee2fd10",
             # Word 2007+ Application Logo
