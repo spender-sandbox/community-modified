@@ -26,6 +26,9 @@
     <Compile Include="modules\signatures\antivm_vmware_libs.py" />
     <Compile Include="modules\signatures\antivm_vpc_mutex.py" />
     <Compile Include="modules\signatures\browser_scanbox.py" />
+    <Compile Include="modules\signatures\chimera_apis.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="modules\signatures\clickfraud_cookies.py" />
     <Compile Include="modules\signatures\clickfraud_volume.py" />
     <Compile Include="modules\signatures\darkcomet_regkeys.py" />
