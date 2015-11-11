@@ -13,17 +13,21 @@ class MimicsIcon(Signature):
     minimum = "1.3"
 
     def run(self):
+        # Alphanumerica hash list by category
         badhashes = [
             # newer word doc icon
             "ec7e6f5458456dddb2d826bf1b8b03a2",
             # PDF icon
-            "6890c8a40c2eb5ff973159eca0428d6e",
-            "2c45339aea71418c49248aa88ffb2378",
             "059dcdf32e800b5f2fe2aea2d5f045d8",
+            "2c45339aea71418c49248aa88ffb2378",
+            "6890c8a40c2eb5ff973159eca0428d6e",
+            "6b0de9fbca602a637b0580b879904d61",
             "9334967a316ffffd255aaf9224a7da5e",
-            "e52d1e9d64fd9535bf10f6da1091df9d",
             "b686a61a6fbd20073faf430128597795",
-            
+            "d05e789cb57b150c4315acd350fce088",
+            "db2d2c31f0c651217a0ef11aaf8c7796",
+            "e52d1e9d64fd9535bf10f6da1091df9d",
+            "f25d6693364cba910762c7e1d5149c21",
         ]
 
         if "static" in self.results and "pe" in self.results["static"]  and "icon_fuzzy" in self.results["static"]["pe"]:
