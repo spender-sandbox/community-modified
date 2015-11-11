@@ -14,6 +14,10 @@ class InstalledApps(Signature):
     minimum = "1.2"
 
     def run(self):
+        office_pkgs = ["ppt","doc","xls","eml"]
+        if any(e in self.results["info"]["package"] for e in office_pkgs):
+            return False
+
         if self.check_read_key(pattern= ".*\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\Uninstall.*", regex=True):
             return True
 

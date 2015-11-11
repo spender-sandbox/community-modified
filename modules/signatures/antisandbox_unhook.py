@@ -70,6 +70,20 @@ class Unhook(Signature):
                         if funcname == name:
                             addit = False
                             break
+
+                office_pkgs = ["ppt","doc","xls","eml"]
+                if any(e in self.results["info"]["package"] for e in office_pkgs):
+                    allowed = [
+                        "SetupDiGetDeviceRegistryPropertyA",
+                        "SetupDiGetDeviceRegistryPropertyW",
+                        "SetupDiGetClassDevsA",
+                        "SetupDiGetClassDevsW",
+                    ]
+                    for name in allowed:
+                        if funcname == name:
+                            addit = False
+                            break
+
                 if self.is_url_analysis and unhooktype == "modification" and (funcname == "WinHttpGetIEProxyConfigForCurrentUser" or funcname == "CreateWindowExW"):
                     addit = False
 
