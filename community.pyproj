@@ -32,6 +32,7 @@
     <Compile Include="modules\signatures\clickfraud_cookies.py" />
     <Compile Include="modules\signatures\clickfraud_volume.py" />
     <Compile Include="modules\signatures\darkcomet_regkeys.py" />
+    <Compile Include="modules\signatures\dead_link.py" />
     <Compile Include="modules\signatures\ek_heapsray.py" />
     <Compile Include="modules\signatures\ek_javaapplet.py" />
     <Compile Include="modules\signatures\ek_neutrino.py">
