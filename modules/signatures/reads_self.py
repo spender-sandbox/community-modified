@@ -81,10 +81,18 @@ class ReadsSelf(Signature):
         self.lastprocess = 0
         self.lastres = None
         self.processes = []
+        self.is_office = False
+        office_pkgs = ["ppt","doc","xls","eml"]
+        if any(e in self.results["info"]["package"] for e in office_pkgs):
+            self.is_office = True
+
 
     filter_apinames = set(["NtOpenFile","NtCreateFile","NtClose","NtReadFile","NtSetInformationFile"])
 
     def on_call(self, call, process):
+        if self.is_office:
+            return False
+
         if process is not self.lastprocess:
             self.lastprocess = process
             self.lastres = ProcResults(process)
