@@ -82,7 +82,7 @@ class ReadsSelf(Signature):
         self.lastres = None
         self.processes = []
         self.is_office = False
-        office_pkgs = ["ppt","doc","xls","eml"]
+        office_pkgs = ["ppt","doc","xls","eml","js"]
         if any(e in self.results["info"]["package"] for e in office_pkgs):
             self.is_office = True
 
