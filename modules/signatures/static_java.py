@@ -67,7 +67,8 @@ class Static_Java(Signature):
 
             # http://malware.dontneedcoffee.com/2013/08/cve-2013-2465-integrating-exploit-kits.html
             if "SinglePixelPackedSampleModel" in decompiled or "MultiPixelPackedSampleModel" in decompiled:
-                self.description += " and contains possible exploit code."
+                if "exploit code" not in self.description:
+                    self.description += " and contains possible exploit code."
                 self.data.append({"cve_2013-2465" : "storeImageArray Invalid Array Indexing exploit code" })
                 self.severity = 3
                 self.weight += 1
