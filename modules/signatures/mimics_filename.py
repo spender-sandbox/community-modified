@@ -1,4 +1,4 @@
-# Copyright (C) 2015 Optiv, Inc. (brad.spengler@optiv.com)
+# Copyright (C) 2015 KillerInstinct
 # This file is part of Cuckoo Sandbox - http://www.cuckoosandbox.org
 # See the file 'docs/LICENSE' for copying permission.
 
@@ -22,7 +22,7 @@ class MimicsExtension(Signature):
         # There are more, but these are the only ones I've observed
         execs = [
             "exe",
-            "src",
+            "scr",
         ]
         exts = {
             "doc": "Word 97-2003 document",
