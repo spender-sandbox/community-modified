@@ -34,6 +34,7 @@
     <Compile Include="modules\signatures\darkcomet_regkeys.py" />
     <Compile Include="modules\signatures\dead_link.py" />
     <Compile Include="modules\signatures\critical_process.py" />
+    <Compile Include="modules\signatures\stack_pivot.py" />
     <Compile Include="modules\signatures\dep_bypass.py" />
     <Compile Include="modules\signatures\dep_disable.py">
       <SubType>Code</SubType>
