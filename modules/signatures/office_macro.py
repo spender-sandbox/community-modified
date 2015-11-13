@@ -72,7 +72,7 @@ class Office_Macro(Signature):
             if "Metadata" in self.results["static"]["office"]:
                 if "SummaryInformation" in self.results["static"]["office"]["Metadata"]:
                     words = self.results["static"]["office"]["Metadata"]["SummaryInformation"]["num_words"]
-                    if words == "0":
+                    if words == "0" or words == "None":
                         self.severity = 3
                         self.weight += 2
                         self.data.append({"content" : "The file appears to have no content."})
@@ -81,10 +81,19 @@ class Office_Macro(Signature):
             if "Metadata" in self.results["static"]["office"]:
                 if "SummaryInformation" in self.results["static"]["office"]["Metadata"]:
                     time = self.results["static"]["office"]["Metadata"]["SummaryInformation"]["total_edit_time"]
-                    if time == "0":
+                    if time == "0" or time == "None":
                         self.severity = 3
                         self.weight += 2
                         self.data.append({"edit_time" : "The file appears to have no edit time."})
+                        
+        if ret and "static" in self.results and "office" in self.results["static"]:
+            if "Metadata" in self.results["static"]["office"]:
+                if "SummaryInformation" in self.results["static"]["office"]["Metadata"]:
+                    pages = self.results["static"]["office"]["Metadata"]["SummaryInformation"]["num_pages"]
+                    if pages == "0" or pages == "None":
+                        self.severity = 3
+                        self.weight += 2
+                        self.data.append({"no_pages" : "The file appears to have no pages potentially caused by it being malformed or intentionally corrupted"})
 
         if ret and "static" in self.results and "office" in self.results["static"]:
             if "Metadata" in self.results["static"]["office"]:
