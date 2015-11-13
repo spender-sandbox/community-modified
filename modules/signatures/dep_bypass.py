@@ -27,6 +27,7 @@ class DEPBypass(Signature):
     def __init__(self, *args, **kwargs):
         Signature.__init__(self, *args, **kwargs)
         self.ignore_it = True
+        self.procs = set()
         if self.results["target"]["category"] != "file" or self.results["info"]["package"] not in ["exe", "rar", "zip", "dll", "regsvr"]:
             self.ignore_it = False
 
@@ -57,9 +58,12 @@ class DEPBypass(Signature):
             newprotect = int(self.get_argument(call, "Protection"), 16)
 
         if oldprotect == 4 and newprotect == 0x40:
-            self.data.append({"process" : process["process_name"] + ":" + str(process["process_id"])})
+            self.procs.add(process["process_name"] + ":" + str(process["process_id"]))
 
     def on_complete(self):
-         if self.data:
-             return True
-         return False
+        for proc in self.procs:
+            self.data.append({"process" : proc})
+
+        if self.procs:
+            return True
+        return False
