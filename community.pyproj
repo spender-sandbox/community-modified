@@ -33,6 +33,9 @@
     <Compile Include="modules\signatures\clickfraud_volume.py" />
     <Compile Include="modules\signatures\darkcomet_regkeys.py" />
     <Compile Include="modules\signatures\dead_link.py" />
+    <Compile Include="modules\signatures\dep_disable.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="modules\signatures\ek_heapsray.py" />
     <Compile Include="modules\signatures\ek_javaapplet.py" />
     <Compile Include="modules\signatures\ek_neutrino.py">
