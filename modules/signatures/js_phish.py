@@ -32,6 +32,7 @@ class JS_Phish(Signature):
             ("contact microsoft certified", "Malware/Infection"),
             ("non bootable situation", "Malware/Infection"),
             ("your paypal id or password was entered incorrectly", "PayPal"),
+            ("your customer number is made up of your date of birth", "NatWest"),
         ]
         self.totalhits = 0
 
