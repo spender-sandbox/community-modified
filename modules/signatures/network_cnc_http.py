@@ -48,9 +48,6 @@ class NetworkCnCHTTP(Signature):
                 if not is_whitelisted and req["version"] == "1.0":
                     version1 += 1
 
-                if not is_whitelisted and len(req["path"]) > 150:
-                    long_uri += 1
-                           
         if post_noreferer > 0:
             self.data.append({"post_no_referer" : "HTTP traffic contains a POST request with no referer header" })
             self.severity = 3
@@ -68,10 +65,6 @@ class NetworkCnCHTTP(Signature):
 
         if version1 > 0:
             self.data.append({"http_version_old" : "HTTP traffic uses version 1.0" })
-            self.weight += 1
-
-        if long_uri > 0:
-            self.data.append({"long_uri" : "HTTP traffic has a long URI string" })
             self.weight += 1
 
         if self.weight:
