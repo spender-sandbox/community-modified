@@ -35,11 +35,11 @@ class OfficeDLWritesEXE(Signature):
         if pname in self.office_proc_list:
             if call["api"] == "NtWriteFile":
                 buff = self.get_raw_argument(call, "Buffer")
-                if buff[0]+buff[1] == "MZ" and "This program" in buff:
+                if buff and len(buff) > 2 and buff[0]+buff[1] == "MZ" and "This program" in buff:
                     self.data.append({"office_dl_write_exe": "%s_NtWriteFile_%s" % (pname,self.get_argument(call, "HandleName"))})
             if call["api"] == "InternetReadFile":
                 buff = self.get_raw_argument(call, "Buffer")
-                if buff[0]+buff[1] == "MZ" and "This program" in buff:
+                if buff and len(buff) > 2 and buff[0]+buff[1] == "MZ" and "This program" in buff:
                     self.data.append({"office_dl_write_exe": "%s_InternetReadFile" % (pname)})
             if call["api"] == "URLDownloadToFileW":
                 buff = self.get_argument(call, "FileName").lower()
