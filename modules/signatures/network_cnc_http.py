@@ -10,6 +10,7 @@ class NetworkCnCHTTP(Signature):
     description = "HTTP traffic contains features indicative of potential command and control activity"
     severity = 2
     confidence = 30
+    weight = 0
     categories = ["http", "cnc"]
     authors = ["Kevin Ross"]
     minimum = "1.3"
