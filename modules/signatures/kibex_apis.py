@@ -17,14 +17,15 @@ from lib.cuckoo.common.abstracts import Signature
 
 class Kibex_APIs(Signature):
     name = "kibex_behavior"
-    description = "Exhibits behavior characteristic of Kibex Spyware"
+    description = "Exhibits behavior characteristic of Kibex Spyware/KeyBase Keylogger"
     severity = 3
     references = [
         "http://www.trendmicro.com/vinfo/us/threat-encyclopedia/malware/tspy_kibex.a",
         "http://www.trendmicro.com/vinfo/us/threat-encyclopedia/malware/tspy_kibex.i",
+        "http://researchcenter.paloaltonetworks.com/2015/06/keybase-keylogger-malware-family-exposed/"
     ]
     categories = ["spyware", "keylogger"]
-    families = ["kibex"]
+    families = ["kibex", "keybase"]
     authors = ["KillerInstinct"]
     minimum = "1.3"
     evented = True
