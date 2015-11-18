@@ -31,6 +31,7 @@
     </Compile>
     <Compile Include="modules\signatures\clickfraud_cookies.py" />
     <Compile Include="modules\signatures\clickfraud_volume.py" />
+    <Compile Include="modules\signatures\creates_largekey.py" />
     <Compile Include="modules\signatures\darkcomet_regkeys.py" />
     <Compile Include="modules\signatures\dead_link.py" />
     <Compile Include="modules\signatures\critical_process.py" />
