@@ -17,7 +17,7 @@ from lib.cuckoo.common.abstracts import Signature
 
 class CreatesLargeKey(Signature):
     name = "creates_largekey"
-    description = "Creates or sets a registry key to a long series of bytes, possibly to store a binary"
+    description = "Creates or sets a registry key to a long series of bytes, possibly to store a binary or malware config"
     severity = 3
     confidence = 80
     categories = ["stealth"]
