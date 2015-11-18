@@ -100,6 +100,14 @@ class PEAnomaly(Signature):
                 if int(resource["size"], 16) >= 100 * 1024 * 1024:
                     self.data.append({"anomaly" : "Contains a resource with a size >= 100MB"})
                     self.weight += 1
+
+        if "versioninfo" in self.results["static"]["pe"]:
+            for ver in self.results["static"]["pe"]["versioninfo"]:
+                if ver["name"] == "OriginalFilename" and ver["value"].endswith(".dll") and \
+                    "PE32" in self.results["target"]["file"]["type"] and "DLL" not in self.results["target"]["file"]["type"]:
+                    self.data.append({"anomaly" : "OriginalFilename version info claims file is a DLL but binary is a main executable"})
+                    self.weight += 1
+
         if "reported_checksum" in self.results["static"]["pe"] and "actual_checksum" in self.results["static"]["pe"]:
             reported = int(self.results["static"]["pe"]["reported_checksum"], 16)
             actual = int(self.results["static"]["pe"]["actual_checksum"], 16)
