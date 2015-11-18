@@ -31,6 +31,8 @@ class JS_Phish(Signature):
             ("debug malware error", "Malware/Infection"),
             ("contact microsoft certified", "Malware/Infection"),
             ("non bootable situation", "Malware/Infection"),
+            ("windows system alert", "Malware/Infection"),
+            ("your browser has been infected", "Malware/Infection"),
             ("your paypal id or password was entered incorrectly", "PayPal"),
             ("your customer number is made up of your date of birth", "NatWest"),
         ]
