@@ -31,6 +31,7 @@ class RansomwareFiles(Signature):
         file_list = [
             (".*\\\\help_decrypt\.html$", ["CryptoWall"]),
             (".*\\\\decrypt_instruction\.html$", ["CryptoWall"]),
+            (".*\\\\help_your_files\.png$", ["CryptoWall"]),
             (".*\\\\decrypt_instructions\.txt$", ["CryptoLocker"]),
             (".*\\\\vault\.(key|txt)$", ["CrypVault"]),
             (".*\\\\!Decrypt-All-Files.*\.(txt|bmp)$", ["CTB-Locker"]),
