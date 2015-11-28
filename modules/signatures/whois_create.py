@@ -43,12 +43,18 @@ class WHOIS_Create(Signature):
         if timestrs:
             earliest = None
             for time in timestrs:
+                if time == "None":
+                    continue
                 buf = datetime.strptime(time, "%Y-%m-%d")
                 if not earliest:
                     earliest = buf
                     continue
                 if buf < earliest:
                     earliest = buf
+
+            if not earliest:
+                return False
+                
             earliest = earliest.date()
 
             # Some oddities observed, try/except to find a valid time
