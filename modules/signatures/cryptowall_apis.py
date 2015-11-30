@@ -28,7 +28,7 @@ class CryptoWall_APIs(Signature):
     categories = ["ransomware"]
     families = ["cryptowall"]
     authors = ["KillerInstinct"]
-    minimum = "1.2"
+    minimum = "1.3"
     evented = True
 
     def __init__(self, *args, **kwargs):
