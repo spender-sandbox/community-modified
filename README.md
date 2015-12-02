@@ -7,5 +7,4 @@ Please note that many of these signature modules make use of Optiv's extensive
 improvements to both Cuckoo and cuckoomon and are noted accordingly as requiring
 Cuckoo version "1.2".
 
-If you have signature modules to contribute, feel free to submit pull requests or
-email brad.spengler@optiv.com.
+If you have signature modules to contribute, feel free to submit a pull request.
