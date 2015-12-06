@@ -6,7 +6,7 @@ from lib.cuckoo.common.abstracts import Signature
 
 class DisablesAppLaunch(Signature):
     name = "disables_app_launch"
-    description = "Modifies system policies to prevent launch of specific applications or executables"
+    description = "Modifies system policies to prevent the launching of specific applications or executables"
     severity = 3
     categories = ["stealth"]
     authors = ["Kevin Ross"]
