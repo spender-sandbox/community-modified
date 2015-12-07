@@ -36,15 +36,19 @@ class CryptoWall_APIs(Signature):
         self.cryptInfo = False
         self.campaign = str()
         self.buffers = set()
+        self.lastLargeBuf = str()
         self.compname = self.get_environ_entry(self.get_initial_process(),
                                                "ComputerName")
 
-    filter_apinames = set(["CryptHashData", "RtlDecompressBuffer"])
+    filter_apinames = set(["CryptHashData", "RtlDecompressBuffer",
+                           "NtOpenEvent"])
 
     def on_call(self, call, process):
         if call["api"] == "CryptHashData":
             buf = self.get_argument(call, "Buffer")
             if buf:
+                if len(buf) > 512:
+                    self.lastLargeBuf = buf
                 if self.cryptInfo and buf.startswith("crypt"):
                     if not self.campaign:
                         self.campaign = buf.split("00")[0]
@@ -60,6 +64,14 @@ class CryptoWall_APIs(Signature):
                 buf = self.get_argument(call, "UncompressedBuffer")
                 if buf:
                     self.buffers.add(buf)
+
+        elif call["api"] == "NtOpenEvent":
+            eventName = self.get_argument(call, "EventName")
+            if eventName and eventName.startswith("\\BaseNamedObjects\\"):
+                bno = eventName.split("\\")[-1]
+                if bno and bno in self.lastLargeBuf:
+                    idx = self.lastLargeBuf.find(bno)
+                    self.campaign = self.lastLargeBuf[0:idx]
 
     def on_complete(self):
         if self.campaign:
