@@ -39,7 +39,7 @@ class RansomwareFiles(Signature):
             (".*\\\\help_to_save_files\.(txt|bmp)$", ["AlphaCrypt", "TeslaCrypt"]),
             (".*\\\\recovery_(file|key)\.txt$", ["AlphaCrypt"]),
             (".*\\\\restore_files_.*\.(txt|html)$", ["AlphaCrypt", "TeslaCrypt"]),
-            (".*\\\\howto_restore_files_.*\.(txt|html)$", ["TeslaCrypt"]),
+            (".*\\\\howto_restore_files.*\.(txt|html)$", ["AlphaCrypt", "TeslaCrypt"]),
             (".*\\\\YOUR_FILES_ARE_ENCRYPTED\.HTML$", ["Chimera"]),
             (".*\\\\_?how_recover.*\.(txt|html)$", ["AlphaCrypt"]),
         ]
