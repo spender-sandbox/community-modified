@@ -60,7 +60,7 @@ class NetworkCnCHTTP(Signature):
             self.weight += 1
 
         if get_nouseragent > 0:
-            self.data.append({"post_no_useragent" : "HTTP traffic contains a GET request with no user-agent header" })
+            self.data.append({"get_no_useragent" : "HTTP traffic contains a GET request with no user-agent header" })
             self.severity = 3
             self.weight += 1
 
