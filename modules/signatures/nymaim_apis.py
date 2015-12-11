@@ -41,7 +41,7 @@ class Nymaim_APIs(Signature):
 
         elif call["api"] == "NtSetValueKey":
             if self.keyname:
-                buflen = self.get_argument(call, "BufferLength")
+                buflen = int(self.get_argument(call, "BufferLength"))
                 key = self.get_argument(call, "FullName")
                 if buflen > 1024 and key.startswith(self.keyname):
                     self.regkey = True
