@@ -43,7 +43,7 @@ class Nymaim_APIs(Signature):
             if self.keyname:
                 buflen = int(self.get_argument(call, "BufferLength"))
                 key = self.get_argument(call, "FullName")
-                if buflen > 1024 and key.startswith(self.keyname):
+                if buflen and buflen > 1024 and key.startswith(self.keyname):
                     self.regkey = True
 
     def on_complete(self):
