@@ -25,7 +25,7 @@ class Troldesh_APIs(Signature):
 
     def run(self):
         keypat = r".*\\SOFTWARE\\System32\\Configuration\\i$"
-        if (self.check_write_key(pattern=keypat, regex=True)
+        if self.check_write_key(pattern=keypat, regex=True):
             return True
 
         return False
