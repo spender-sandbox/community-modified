@@ -31,6 +31,7 @@ class SuricataAlert(Signature):
             "Application Crash Report Sent to Microsoft",
             "Outdated Windows Flash Version IE",
             "JAVA - ClassID",
+            "Lets Encrypt Free SSL Cert",
         ]
         if "suricata" in self.results:
             if "alerts" in self.results["suricata"]:
