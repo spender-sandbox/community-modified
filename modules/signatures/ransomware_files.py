@@ -43,6 +43,7 @@ class RansomwareFiles(Signature):
             (".*\\\\YOUR_FILES_ARE_ENCRYPTED\.HTML$", ["Chimera"]),
             (".*\\\\_?how_recover.*\.(txt|html)$", ["AlphaCrypt"]),
             (".*\\\\cl_data.*\.bak$", ["WinPlock"]),
+            (".*\\\\READ\ ME\ FOR\ DECRYPT\.txt$", ["Fakben"]),
         ]
 
         for ioc in file_list:
