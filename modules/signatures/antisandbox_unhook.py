@@ -65,6 +65,9 @@ class Unhook(Signature):
                         "WinHttpConnect",
                         "WinHttpReceiveResponse",
                         "WinHttpQueryHeaders",
+                        "NetUserGetInfo",
+                        "NetGetJoinInformation",
+                        "NetUserGetLocalGroups",
                     ]
                     for name in allowed:
                         if funcname == name:
