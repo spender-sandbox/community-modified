@@ -35,7 +35,10 @@ class JS_Phish(Signature):
             ("your browser has been infected", "Malware/Infection"),
             ("your paypal id or password was entered incorrectly", "PayPal"),
             ("your customer number is made up of your date of birth", "NatWest"),
+            ("alert(\"Invalid Card Number\")", "Banking"),
+            ("alert(\"Invalid Card Verification Number\")", "Banking"),
         ]
+        self.lurehits = set()
         self.totalhits = 0
 
     filter_categories = set(["browser"])
@@ -50,12 +53,13 @@ class JS_Phish(Signature):
 
         for lure in self.lures:
             if lure[0].lower() in buf.lower():
-                self.description = self.description.format(lure[1])
+                self.lurehits.add(lure[1])
                 self.totalhits += 1
 
     def on_complete(self):
         if self.totalhits:
             self.weight += self.totalhits
+            self.description = self.description.format("/".join(self.lurehits))
             return True
 
         return False
