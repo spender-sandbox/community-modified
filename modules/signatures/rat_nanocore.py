@@ -17,7 +17,7 @@ from lib.cuckoo.common.abstracts import Signature
 
 class NanocoreRAT(Signature):
     name = "rat_nanocore"
-    desctipnion = "Exhibits behavior characteristic of Nanocore RAT"
+    description = "Exhibits behavior characteristic of Nanocore RAT"
     weight = 3
     severity = 3
     categories = ["rat"]
