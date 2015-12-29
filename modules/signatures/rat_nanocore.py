@@ -29,7 +29,7 @@ class NanocoreRAT(Signature):
     def __init__(self, *args, **kwargs):
         Signature.__init__(self, *args, **kwargs)
         self.cryptcalls = 0
-        self.cryptmz = False
+        self.cryptmz = 0
 
     filter_apinames = set(["CryptHashData"])
 
@@ -41,7 +41,7 @@ class NanocoreRAT(Signature):
                 if buf.endswith(tail):
                     self.cryptcalls += 1
                 if buf.startswith("MZ"):
-                    self.cryptmz = True
+                    self.cryptmz += 1
 
     def on_complete(self):
         badness = 0
@@ -61,7 +61,9 @@ class NanocoreRAT(Signature):
         if self.check_mutex(pattern=mutex, regex=True):
             badness += 1
 
-        if self.cryptmz and self.cryptcalls:
+        if self.cryptmz >= 2 and self.cryptcalls:
+            if self.cryptcalls > 4:
+                self.cryptcalls = 4
             badness += self.cryptcalls
 
         if badness >= 5:
