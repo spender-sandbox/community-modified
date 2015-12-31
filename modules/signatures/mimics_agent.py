@@ -18,6 +18,7 @@ class MimicsAgent(Signature):
         self.useragent = None
 
     filter_apinames = set(["ObtainUserAgentString","InternetOpenA","InternetOpenW"])
+    filter_analysistypes = set(["file"])
 
     def on_call(self, call, process):
         if call["api"] == "ObtainUserAgentString":
