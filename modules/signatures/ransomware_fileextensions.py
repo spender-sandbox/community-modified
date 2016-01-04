@@ -17,6 +17,8 @@ class RansomwareExtensions(Signature):
             ".*\.exx$",
             ".*\.ezz$",
             ".*\.vvv$",
+            ".*\.rdm$",
+            ".*\.rrk$",
         ]
 
         for indicator in indicators:
