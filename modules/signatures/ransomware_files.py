@@ -44,6 +44,7 @@ class RansomwareFiles(Signature):
             (".*\\\\_?how_recover.*\.(txt|html)$", ["AlphaCrypt"]),
             (".*\\\\cl_data.*\.bak$", ["WinPlock"]),
             (".*\\\\READ\ ME\ FOR\ DECRYPT\.txt$", ["Fakben"]),
+            (".*\\\\YOUR_FILES.url$", ["Radamant"]),
         ]
 
         for ioc in file_list:
