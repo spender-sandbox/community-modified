@@ -20,7 +20,7 @@ class FamilyRadamant(Signature):
                 return True
 
         # Check for creation of Autorun
-        if self.check_write_key(pattern=".*\\\\SOFTWARE\\\\(Wow6432Node\\\\)?Microsoft\\\\Windows\\\\CurrentVersion\\\\Run\\\\svchost$", regex=True) and self.check_write_file(pattern=".*\\\\Windows\\\\dirextx.exe$", regex=True):
+        if self.check_write_key(pattern=".*\\\\SOFTWARE\\\\(Wow6432Node\\\\)?Microsoft\\\\Windows\\\\CurrentVersion\\\\Run\\\\(svchost|DirectX)$", regex=True) and self.check_write_file(pattern=".*\\\\Windows\\\\dirextx.exe$", regex=True):
             return True
 
         # Check for creation of ransom message file
