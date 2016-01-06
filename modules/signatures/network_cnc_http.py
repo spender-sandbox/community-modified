@@ -18,7 +18,8 @@ class NetworkCnCHTTP(Signature):
     def run(self):
 
         whitelist = [
-            "^http://crl\.microsoft\.com/.*",
+            "^http://.*\.microsoft\.com/.*",
+            "^http://.*\.windowsupdate\.com/.*",
             "http://.*\.adobe\.com/.*",
             ]
 
@@ -51,17 +52,14 @@ class NetworkCnCHTTP(Signature):
 
         if post_noreferer > 0:
             self.data.append({"post_no_referer" : "HTTP traffic contains a POST request with no referer header" })
-            self.severity = 3
             self.weight += 1
 
         if post_nouseragent > 0:
             self.data.append({"post_no_useragent" : "HTTP traffic contains a POST request with no user-agent header" })
-            self.severity = 3
             self.weight += 1
 
         if get_nouseragent > 0:
             self.data.append({"get_no_useragent" : "HTTP traffic contains a GET request with no user-agent header" })
-            self.severity = 3
             self.weight += 1
 
         if version1 > 0:
