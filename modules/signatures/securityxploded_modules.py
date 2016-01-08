@@ -31,6 +31,7 @@ class SecurityXploded_Modules(Signature):
             ("Browser Password Recovery Report", "BrowserPasswordDecryptor"),
             ("FTP Password Recovery Report", "FTPPasswordDecryptor"),
             ("Email Password Recovery Report", "MailPasswordDecryptor"),
+            ("Outlook Password Recovery Report", "OutlookPasswordDecryptor"),
             ("Instant Messengers Password Recovery", "IMPasswordDump"),
             ("Windows License Key Recovery Report", "ProductKeyDecryptor"),
         ]
