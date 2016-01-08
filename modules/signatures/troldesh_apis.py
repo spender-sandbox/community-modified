@@ -20,7 +20,8 @@ class Troldesh_APIs(Signature):
     description = "Exhibits behavior characteristic of Troldesh ransomware"
     severity = 3
     categories = ["ransomware"]
-    authors = ["Troldesh"]
+    authors = ["KillerInstinct"]
+    families = ["Troldesh"]
     minimum = "1.0"
 
     def run(self):
