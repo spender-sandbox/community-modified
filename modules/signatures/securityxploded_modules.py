@@ -17,7 +17,7 @@ from lib.cuckoo.common.abstracts import Signature
 
 class SecurityXploded_Modules(Signature):
     name = "securityxploded_modules"
-    description = "Sample executed known SecurityXploded programs."
+    description = "Sample executed known SecurityXploded programs"
     severity = 3
     categories = ["stealer"]
     authors = ["KillerInstinct"]
