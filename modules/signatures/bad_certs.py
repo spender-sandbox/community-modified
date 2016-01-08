@@ -61,6 +61,8 @@ class BadCerts(Signature):
             "8138b44330354e413dc52af1dbfca8ba1c0f6c0a",
             # eDellRoot Signed File http://en.community.dell.com/dell-blogs/direct2dell/b/direct2dell/archive/2015/11/23/response-to-concerns-regarding-edellroot-certificate
             "98a04e4163357790c4a79e6d713ff0af51fe6927",
+            # Spymel Cert (SBO INVEST)
+            "3a8412582563f43dd28aa1f31cdd0d0c6d78fd60",
             ]
         if "static" in self.results and "pe" in self.results["static"]:
             if "digital_signers" in self.results["static"]["pe"] and self.results["static"]["pe"]["digital_signers"]:
