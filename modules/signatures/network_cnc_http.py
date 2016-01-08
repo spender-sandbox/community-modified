@@ -31,7 +31,6 @@ class NetworkCnCHTTP(Signature):
         get_nouseragent = 0
         version1 = 0
         iphost = 0
-        offport = 0
 
         # Scoring
         cnc_score = 0
@@ -66,10 +65,6 @@ class NetworkCnCHTTP(Signature):
                     iphost += 1
                     cnc_score += 1
 
-                if not is_whitelisted and req["port"] != "80":
-                    offport += 1
-                    cnc_score += 1
-
                 if not is_whitelisted and cnc_score > 0:
                     if suspectrequest.count(request) == 0:
                         suspectrequest.append(request)
@@ -92,10 +87,6 @@ class NetworkCnCHTTP(Signature):
 
         if iphost > 0:
             self.data.append({"ip_hostname" : "HTTP connection was made to an IP address rather than domain name" })
-            self.weight += 1
-
-        if offport > 0:
-            self.data.append({"non_standard_port" : "HTTP connection was made to port other than port 80" })
             self.weight += 1
 
         if self.weight and len(suspectrequest) > 0:
