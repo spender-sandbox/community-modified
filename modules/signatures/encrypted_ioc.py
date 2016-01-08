@@ -39,6 +39,8 @@ class EncryptedIOC(Signature):
         whitelist = [
             "http://crl.microsoft.com",
             "http://www.microsoft.com",
+            "asm.v1",
+            "asm.v3",
         ]
         dedup = list()
         extracted_data= False
