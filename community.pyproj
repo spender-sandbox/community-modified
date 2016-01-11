@@ -18,6 +18,7 @@
     <PtvsTargetsFile>$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets</PtvsTargetsFile>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="modules\feeds\punch_plus_plus_pcres.py" />
     <Compile Include="modules\signatures\alphacrypt_apis.py" />
     <Compile Include="modules\signatures\antianalysis_detectfile.py" />
     <Compile Include="modules\signatures\antisandbox_cuckoo.py" />
@@ -304,6 +305,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="modules\" />
+    <Folder Include="modules\feeds\" />
     <Folder Include="modules\signatures" />
   </ItemGroup>
   <Import Project="$(PtvsTargetsFile)" Condition="Exists($(PtvsTargetsFile))" />

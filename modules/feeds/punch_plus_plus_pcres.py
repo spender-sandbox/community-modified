@@ -17,7 +17,7 @@ from lib.cuckoo.common.abstracts import Feed
 
 class Punch_Plus_Plus_PCREs(Feed):
     name = "Punch_Plus_Plus_PCREs"
-    enabled = True
+    enabled = False
 
     def __init__(self):
         Feed.__init__(self)
