@@ -18,6 +18,7 @@
     <PtvsTargetsFile>$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets</PtvsTargetsFile>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="modules\signatures\alphacrypt_apis.py" />
     <Compile Include="modules\signatures\antianalysis_detectfile.py" />
     <Compile Include="modules\signatures\antisandbox_cuckoo.py" />
     <Compile Include="modules\signatures\antisandbox_sboxie_mutex.py" />
@@ -31,11 +32,27 @@
     </Compile>
     <Compile Include="modules\signatures\clickfraud_cookies.py" />
     <Compile Include="modules\signatures\clickfraud_volume.py" />
+    <Compile Include="modules\signatures\codelux_apis.py" />
     <Compile Include="modules\signatures\creates_largekey.py" />
+    <Compile Include="modules\signatures\cryptowall_apis.py" />
     <Compile Include="modules\signatures\darkcomet_regkeys.py" />
     <Compile Include="modules\signatures\dead_link.py" />
     <Compile Include="modules\signatures\critical_process.py" />
+    <Compile Include="modules\signatures\disables_app.py" />
+    <Compile Include="modules\signatures\dropper_js.py" />
+    <Compile Include="modules\signatures\family_proxyback.py" />
+    <Compile Include="modules\signatures\family_radamant.py" />
+    <Compile Include="modules\signatures\gootkit_apis.py" />
+    <Compile Include="modules\signatures\js_suspicious_redirect.py" />
     <Compile Include="modules\signatures\mimics_filename.py" />
+    <Compile Include="modules\signatures\network_cnc_http.py" />
+    <Compile Include="modules\signatures\nymaim_apis.py" />
+    <Compile Include="modules\signatures\packer_confuser.py" />
+    <Compile Include="modules\signatures\packer_smartassembly.py" />
+    <Compile Include="modules\signatures\ppp_pcre.py" />
+    <Compile Include="modules\signatures\rat_luminosity.py" />
+    <Compile Include="modules\signatures\rat_nanocore.py" />
+    <Compile Include="modules\signatures\securityxploded_modules.py" />
     <Compile Include="modules\signatures\setsautoconfigurl.py" />
     <Compile Include="modules\signatures\stack_pivot.py" />
     <Compile Include="modules\signatures\dep_bypass.py" />
@@ -184,7 +201,9 @@
     </Compile>
     <Compile Include="modules\signatures\persistence_service.py" />
     <Compile Include="modules\signatures\ransomware_files.py" />
+    <Compile Include="modules\signatures\static_dotnet_anomaly.py" />
     <Compile Include="modules\signatures\static_java.py" />
+    <Compile Include="modules\signatures\static_pdf.py" />
     <Compile Include="modules\signatures\static_rat_config.py" />
     <Compile Include="modules\signatures\static_pe_anomaly.py" />
     <Compile Include="modules\signatures\static_versioninfo_anomaly.py" />
@@ -204,6 +223,7 @@
     <Compile Include="modules\signatures\suricata_alert.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="modules\signatures\troldesh_apis.py" />
     <Compile Include="modules\signatures\upatre_apis.py" />
     <Compile Include="modules\signatures\vawtrak_apis.py" />
     <Compile Include="modules\signatures\vawtrak_dll_apis.py" />
@@ -277,6 +297,7 @@
     <Compile Include="modules\signatures\targeted_flame.py" />
     <Compile Include="modules\signatures\volatility_sig.py" />
     <Compile Include="modules\signatures\webmail_phish.py" />
+    <Compile Include="modules\signatures\whois_create.py" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="modules\" />

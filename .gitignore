@@ -3,3 +3,4 @@ UpgradeLog.htm
 
 # Ignore Python byte code
 *.pyc
+*.suo
