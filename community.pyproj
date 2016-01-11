@@ -30,6 +30,9 @@
     <Compile Include="modules\signatures\chimera_apis.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="modules\signatures\clamav.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="modules\signatures\clickfraud_cookies.py" />
     <Compile Include="modules\signatures\clickfraud_volume.py" />
     <Compile Include="modules\signatures\codelux_apis.py" />
