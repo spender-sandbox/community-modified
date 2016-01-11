@@ -40,7 +40,7 @@ class PackerEntropy(Signature):
                         self.data.append({"section" : descmsg})
                         total_compressed += int(section["size_of_data"], 16)
                 
-                if ((1.0 * total_compressed) / total_pe_data) > .2:
+                if total_pe_data and ((1.0 * total_compressed) / total_pe_data) > .2:
                     return True
 
         return False
