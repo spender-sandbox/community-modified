@@ -35,6 +35,8 @@ class NetworkHTTP(Signature):
         urls = []
         whitelist = [
             "^http://(crl|ctldl)\.microsoft\.com/.*",
+            "^http://www\.microsoft\.com/.*\.crl$",
+            "^http://ctldl\.windowsupdate\.com/.*",
             ]
         if "file" in self.results["target"]:
             if "PDF" in self.results["target"]["file"]["type"] or self.results["info"]["package"] == "pdf":
