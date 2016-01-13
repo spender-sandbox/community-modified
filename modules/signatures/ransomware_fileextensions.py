@@ -20,6 +20,7 @@ class RansomwareExtensions(Signature):
             ".*\.rdm$",
             ".*\.rrk$",
             ".*\.toxcrypt$",
+            ".*\.vault$",
         ]
 
         for indicator in indicators:
