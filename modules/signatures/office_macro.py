@@ -99,7 +99,7 @@ class Office_Macro(Signature):
             if "Metadata" in self.results["static"]["office"]:
                 if "SummaryInformation" in self.results["static"]["office"]["Metadata"]:
                     author = self.results["static"]["office"]["Metadata"]["SummaryInformation"]["author"]
-                    if author == "1" or author == "Alex" or author == "Microsoft Office":
+                    if author == "1" or author == "Alex" or author == "Microsoft Office" or author == "Adder":
                         self.severity = 3
                         self.weight += 2
                         self.data.append({"author" : "The file appears to have been created by a known fake author indicative of an automated document creation kit."})
