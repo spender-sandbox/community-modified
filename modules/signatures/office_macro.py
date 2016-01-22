@@ -103,15 +103,6 @@ class Office_Macro(Signature):
         if ret and "static" in self.results and "office" in self.results["static"]:
             if "Metadata" in self.results["static"]["office"]:
                 if "SummaryInformation" in self.results["static"]["office"]["Metadata"]:
-                    creating_app = self.results["static"]["office"]["Metadata"]["SummaryInformation"]["creating_application"]
-                    if creating_app == "None":
-                        self.severity = 3
-                        self.weight += 2
-                        self.data.append({"no_creating_app" : "The file appears to have no creating application indicative of it being malformed or created by an automated document creation kit"})
-
-        if ret and "static" in self.results and "office" in self.results["static"]:
-            if "Metadata" in self.results["static"]["office"]:
-                if "SummaryInformation" in self.results["static"]["office"]["Metadata"]:
                     author = self.results["static"]["office"]["Metadata"]["SummaryInformation"]["author"]
                     lastauthor = self.results["static"]["office"]["Metadata"]["SummaryInformation"]["last_saved_by"]
                     known_authors = ["Alex","Microsoft Office","Adder"]
