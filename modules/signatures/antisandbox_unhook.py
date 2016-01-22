@@ -46,28 +46,11 @@ class Unhook(Signature):
             unhooktype = self.get_argument(call, "UnhookType")
             if funcname != "":
                 addit = True
-                if (funcname == "SetUnhandledExceptionFilter" or funcname == "SetWindowsHookExW" or funcname == "UnhookWindowsHookEx" or
-                    funcname == "CoCreateInstance") and unhooktype == "modification":
+                if funcname == "SetUnhandledExceptionFilter" and unhooktype == "modification":
                     addit = False
                 # exempt IE behavior
                 if self.is_url_analysis and unhooktype == "removal":
                     allowed = [
-                        "SetupDiGetDeviceRegistryPropertyA",
-                        "SetupDiGetDeviceRegistryPropertyW",
-                        "WinHttpSendRequest"
-                        "WinHttpGetProxyForUrl",
-                        "SetupDiGetClassDevsW",
-                        "WinHttpSetTimeouts",
-                        "SetupDiGetClassDevsA",
-                        "WinHttpSetOption",
-                        "WinHttpOpenRequest",
-                        "WinHttpGetIEProxyConfigForCurrentUser",
-                        "WinHttpConnect",
-                        "WinHttpReceiveResponse",
-                        "WinHttpQueryHeaders",
-                        "NetUserGetInfo",
-                        "NetGetJoinInformation",
-                        "NetUserGetLocalGroups",
                     ]
                     for name in allowed:
                         if funcname == name:
@@ -77,18 +60,11 @@ class Unhook(Signature):
                 office_pkgs = ["ppt","doc","xls","eml"]
                 if any(e in self.results["info"]["package"] for e in office_pkgs):
                     allowed = [
-                        "SetupDiGetDeviceRegistryPropertyA",
-                        "SetupDiGetDeviceRegistryPropertyW",
-                        "SetupDiGetClassDevsA",
-                        "SetupDiGetClassDevsW",
                     ]
                     for name in allowed:
                         if funcname == name:
                             addit = False
                             break
-
-                if self.is_url_analysis and unhooktype == "modification" and (funcname == "WinHttpGetIEProxyConfigForCurrentUser" or funcname == "CreateWindowExW"):
-                    addit = False
 
                 if addit:
                     self.unhook_info.add("function_name: " + funcname + ", type: " + self.get_argument(call, "UnhookType"))
