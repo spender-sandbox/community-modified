@@ -45,6 +45,7 @@ class RansomwareFiles(Signature):
             (".*\\\\cl_data.*\.bak$", ["WinPlock"]),
             (".*\\\\READ\ ME\ FOR\ DECRYPT\.txt$", ["Fakben"]),
             (".*\\\\YOUR_FILES.url$", ["Radamant"]),
+            (".*\\\\_How\ to\ decrypt\ LeChiffre\ files\.html$", ["LeChiffre"]),
         ]
 
         for ioc in file_list:
