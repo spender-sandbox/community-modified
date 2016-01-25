@@ -38,8 +38,8 @@ class ClamAV(Signature):
                     entry = "%s, type:%s" % (entry,self.results["target"]["file"]["type"])
                 self.data.append({"target":entry})
 
-        if "suricata" in self.results.keys():
-            if "files" in self.results["suricata"].keys():
+        if "suricata" in self.results and self.results["suricata"]:
+            if "files" in self.results["suricata"]:
                 for entry in self.results["suricata"]["files"]:
                     proto = entry["protocol"]
                     if "clamav" in entry["file_info"].keys() and entry["file_info"]["clamav"] and "sha256" in entry["file_info"].keys():
