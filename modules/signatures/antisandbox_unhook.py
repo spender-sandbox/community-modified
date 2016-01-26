@@ -45,11 +45,19 @@ class Unhook(Signature):
             funcname = self.get_argument(call, "FunctionName")
             unhooktype = self.get_argument(call, "UnhookType")
             if funcname != "":
+                allowed_mods = [
+                    # done by IE
+                    "SetUnhandledExceptionFilter",
+                    "SetWindowsHookExW",
+                    "UnhookWindowsHookExW",
+                    "CreateWindowExW",
+                    "CoCreateInstance",
+                ]
                 addit = True
-                if funcname == "SetUnhandledExceptionFilter" and unhooktype == "modification":
+                if unhooktype == "modification" and funcname in allowed_mods:
                     addit = False
                 # exempt IE behavior
-                if self.is_url_analysis and unhooktype == "removal":
+                if self.is_url_analysis:
                     allowed = [
                     ]
                     for name in allowed:
