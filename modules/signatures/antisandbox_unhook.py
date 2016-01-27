@@ -49,7 +49,7 @@ class Unhook(Signature):
                     # done by IE
                     "SetUnhandledExceptionFilter",
                     "SetWindowsHookExW",
-                    "UnhookWindowsHookExW",
+                    "UnhookWindowsHookEx",
                     "CreateWindowExW",
                     "CoCreateInstance",
                 ]
