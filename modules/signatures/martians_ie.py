@@ -58,7 +58,12 @@ class MartiansIE(Signature):
         self.white_list_re = ["^C\\:\\\\Program Files(?:\s\\(x86\\))?\\\\Adobe\\\\Reader\\ \\d+\\.\\d+\\\\Reader\\\\AcroRd32\\.exe$",
                          "^C\\:\\\\Program Files(?:\s\\(x86\\))?\\\\Java\\\\jre\\d+\\\\bin\\\\j(?:avaw?|p2launcher)\\.exe$",
                          "^C\\:\\\\Program Files(?:\s\\(x86\\))?\\\\Microsoft SilverLight\\\\(?:\\d+\\.)+\\d\\\\agcp.exe$",
-                         "^C\\:\\\\Windows\\\\System32\\\\ntvdm.exe$",
+                         "^C\\:\\\\Windows\\\\System32\\\\ntvdm\\.exe$",
+                         "^C\\:\\\\Windows\\\\system32\\\\rundll32\\.exe$",
+                         "^C\\:\\\\Windows\\\\syswow64\\\\rundll32\\.exe$",
+                         "^C\\:\\\\Windows\\\\system32\\\\drwtsn32\\.exe$",
+                         "^C\\:\\\\Windows\\\\syswow64\\\\drwtsn32\\.exe$",
+                         "^C\\:\\\\Windows\\\\system32\\\\dwwin\\.exe$"
                         ]
         #means we can be evaded but also means we can have relatively tight paths between 32-bit and 64-bit
         self.white_list_re_compiled = []
