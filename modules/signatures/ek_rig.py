@@ -44,5 +44,9 @@ class RIG_JS(Signature):
         str3=["Y2hydygwMS","NocncoMDEp","jaHJ3KDAxK"]
         str4=["Y2hydygwMC","NocncoMDAp","jaHJ3KDAwK"]
 
+        str5=["IklJbGwiOiJNT1YgW0VDWCswQ10sRUFYI","JJSWxsIjoiTU9WIFtFQ1grMENdLEVBWC","iSUlsbCI6Ik1PViBbRUNYKzBDXSxFQVgi"]
+        str6=["TjNOTlhRWGlXUFdOV2VYaVhpVzNOTllNWGhYaF","4zTk5YUVhpV1BXTldlWGlYaVczTk5ZTVhoWGhY","OM05OWFFYaVdQV05XZVhpWGlXM05OWU1YaFhoW"]
         if "VBscript" in buf and "String.fromCharCode" in buf and "window.execScript" in buf and any(e in buf for e in str1) and any(e in buf for e in str2) and any(e in buf for e in str3) and any(e in buf for e in str4):
+            return True
+        if any(e in buf for e in str5) or any(e in buf for e in str6):
             return True
