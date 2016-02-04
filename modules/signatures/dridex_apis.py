@@ -1,4 +1,4 @@
-# Copyright (C) 2015 KillerInstinct
+# Copyright (C) 2015-2016 KillerInstinct
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -113,6 +113,10 @@ class Dridex_APIs(Signature):
             for item in self.crypted:
                 if buf in item:
                     ret = True
+        
+        pattern = r".*\\CurrentVersion\\Explorer\\CLSID\\\{[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}\}\\ShellFolder\\[0-9A-Fa-f]{8,24}"
+        if self.check_write_key(pattern=pattern, regex=True):
+            ret = True
 
         if self.extract and ret and self.payloadip and "recv" in self.payloadip:
             if "suricata" in self.results and "files" in self.results["suricata"]:
