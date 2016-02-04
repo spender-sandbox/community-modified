@@ -55,6 +55,7 @@ class BadSSLCerts(Signature):
 
         if matches:
             for item in matches.keys():
+                self.families.append(matches[item].split(" ")[0])
                 self.data.append({matches[item]:item})
             return True
 
