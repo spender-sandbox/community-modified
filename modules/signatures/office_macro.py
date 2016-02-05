@@ -122,7 +122,7 @@ class Office_Macro(Signature):
                         if len(author) < 6 and re.match("^[a-zA-Z0-9]{1,5}$", author):
                             self.severity = 3
                             self.weight += 2
-                            self.data.append({"short_author_format" : "The file author has little text yet contains numerical and upper case characters in it indicative of an automated document creation kit."})
+                            self.data.append({"short_author_format" : "The file author is a short text string yet contains numerical and upper case characters in it indicative of an automated document creation kit."})
                         if len(author) > 5 and re.match("^[a-zA-Z0-9].*[A-Z].*$", author):
                            if re.match("^[a-zA-Z0-9]{6,}$", author):
                                self.data.append({"author_format" : "The file author contains a mix of numerical and upper case characters in an unlikely pattern indicative of an automated document creation kit."})
@@ -136,7 +136,7 @@ class Office_Macro(Signature):
                         if len(lastauthor) < 6 and re.match("^[a-zA-Z0-9]{1,5}$", lastauthor):
                             self.severity = 3
                             self.weight += 2
-                            self.data.append({"short_last_saved_format" : "The file was last saved by an author with little text yet contains numerical and upper case characters in it indicative of an automated document creation kit."})
+                            self.data.append({"short_last_saved_format" : "The file was last saved by an author with short text string containing numerical and upper case characters in it indicative of an automated document creation kit."})
 
                         if len(lastauthor) > 5 and re.match("^[a-zA-Z0-9].*[A-Z].*$", lastauthor):
                            if re.match("^[a-zA-Z0-9]{6,}$", lastauthor):
