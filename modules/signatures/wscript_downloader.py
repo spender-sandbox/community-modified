@@ -22,7 +22,7 @@ except ImportError:
 
 class WscriptDownloaderHTTP(Signature):
     name = "wscript_downloader_http"
-    description = "A wscript.exe process initiated network activity used commonly in script or document file downloaders indicative of a connectivity test payload download"
+    description = "A wscript.exe process initiated network activity used commonly in script or document file downloaders and is indicative of a connectivity test payload download"
     severity = 3
     confidence = 50
     categories = ["downloader"]
