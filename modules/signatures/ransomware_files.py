@@ -46,6 +46,7 @@ class RansomwareFiles(Signature):
             (".*\\\\READ\ ME\ FOR\ DECRYPT\.txt$", ["Fakben"]),
             (".*\\\\YOUR_FILES.url$", ["Radamant"]),
             (".*\\\\_How\ to\ decrypt\ LeChiffre\ files\.html$", ["LeChiffre"]),
+            (".*\\\\cryptinfo\.txt$", ["DMALocker"]),
         ]
 
         for ioc in file_list:
