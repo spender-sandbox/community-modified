@@ -48,14 +48,17 @@
     <Compile Include="modules\signatures\family_radamant.py" />
     <Compile Include="modules\signatures\gootkit_apis.py" />
     <Compile Include="modules\signatures\js_suspicious_redirect.py" />
+    <Compile Include="modules\signatures\martians_office.py" />
     <Compile Include="modules\signatures\mimics_filename.py" />
     <Compile Include="modules\signatures\network_cnc_http.py" />
     <Compile Include="modules\signatures\nymaim_apis.py" />
+    <Compile Include="modules\signatures\office_codepage.py" />
     <Compile Include="modules\signatures\packer_confuser.py" />
     <Compile Include="modules\signatures\packer_smartassembly.py" />
     <Compile Include="modules\signatures\ppp_pcre.py" />
     <Compile Include="modules\signatures\rat_luminosity.py" />
     <Compile Include="modules\signatures\rat_nanocore.py" />
+    <Compile Include="modules\signatures\reads_self.py" />
     <Compile Include="modules\signatures\securityxploded_modules.py" />
     <Compile Include="modules\signatures\setsautoconfigurl.py" />
     <Compile Include="modules\signatures\stack_pivot.py" />
@@ -257,8 +260,6 @@
     <Compile Include="modules\signatures\bootkit.py" />
     <Compile Include="modules\signatures\antiav_srp.py" />
     <Compile Include="modules\signatures\copies_self.py" />
-    <Compile Include="modules\signatures\pdf_eof.py" />
-    <Compile Include="modules\signatures\pdf_page.py" />
     <Compile Include="modules\signatures\stealth_childproc.py" />
     <Compile Include="modules\signatures\mimics_agent.py" />
     <Compile Include="modules\signatures\stealth_file.py" />
@@ -269,7 +270,6 @@
     <Compile Include="modules\signatures\locker_regedit.py" />
     <Compile Include="modules\signatures\locker_taskmgr.py" />
     <Compile Include="modules\signatures\polymorphic.py" />
-    <Compile Include="modules\signatures\reads_self.py" />
     <Compile Include="modules\signatures\mimics_filetime.py" />
     <Compile Include="modules\signatures\network_bind.py" />
     <Compile Include="modules\signatures\network_http.py" />
