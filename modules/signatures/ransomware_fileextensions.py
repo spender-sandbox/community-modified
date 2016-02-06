@@ -21,6 +21,7 @@ class RansomwareExtensions(Signature):
             ".*\.rrk$",
             ".*\.toxcrypt$",
             ".*\.vault$",
+            ".*\.hydracrypt_ID_[a-zA-Z0-9]{8}$",
         ]
 
         for indicator in indicators:
