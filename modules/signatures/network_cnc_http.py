@@ -56,6 +56,7 @@ class NetworkCnCHTTP(Signature):
 
                 if not is_whitelisted and req["method"] == "GET" and "User-Agent:" not in req["data"]:
                     get_nouseragent += 1
+                    cnc_score += 1
 
                 if not is_whitelisted and req["version"] == "1.0":
                     version1 += 1
