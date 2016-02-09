@@ -77,9 +77,9 @@ class StealthFile(Signature):
                     if handle in self.handles:
                         if self.handles[handle] not in self.stealth_files:
                             self.stealth_files.append(self.handles[handle])
-                    else:
-                        if "UNKNOWN" not in self.stealth_files:
-                            self.stealth_files.append("UNKNOWN")
+                    #else:
+                    #    if "UNKNOWN" not in self.stealth_files:
+                    #        self.stealth_files.append("UNKNOWN")
 
         return None
 
