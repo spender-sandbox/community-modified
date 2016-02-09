@@ -22,6 +22,7 @@
     <Compile Include="modules\signatures\alphacrypt_apis.py" />
     <Compile Include="modules\signatures\antianalysis_detectfile.py" />
     <Compile Include="modules\signatures\antisandbox_cuckoo.py" />
+    <Compile Include="modules\signatures\antisandbox_restart.py" />
     <Compile Include="modules\signatures\antisandbox_sboxie_mutex.py" />
     <Compile Include="modules\signatures\antisandbox_sboxie_objects.py" />
     <Compile Include="modules\signatures\antivm_dirobjects.py" />
