@@ -96,6 +96,8 @@ class StealthFile(Signature):
             r'^[A-Z]?:\\Documents and Settings\\[^\\]+\\Cookies\\$',
             r'^[A-Z]?:\\Documents and Settings\\[^\\]+\\PrivacIE\\$',
             r'^[A-Z]?:\\Documents and Settings\\[^\\]+\\Local Settings\\Application Data\\Microsoft\\Feeds Cache\\$',
+            r'^[A-Z]?:\\Documents and Settings\\[^\\]+\\IETldCache\\$',
+            r'^[A-Z]?:\\Documents and Settings\\[^\\]+\\IETldCache\\index.dat$',
             r'^[A-Z]?:\\Users\\[^\\]+\\AppData\\Local\\Microsoft\\Windows\\Temporary Internet Files\\Content\.IE5\\$',
             r'^[A-Z]?:\\Users\\[^\\]+\\AppData\\Roaming\\Microsoft\\Windows\\Cookies\\$',
             r'^[A-Z]?:\\Users\\[^\\]+\\Favorites\\Links\\.*',
