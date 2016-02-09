@@ -51,7 +51,9 @@ class Unhook(Signature):
                     "SetWindowsHookExW",
                     "UnhookWindowsHookEx",
                     "CreateWindowExW",
+                    "CreateWindowExA",
                     "CoCreateInstance",
+                    "CreateThread",
                 ]
                 addit = True
                 if unhooktype == "modification" and funcname in allowed_mods:
