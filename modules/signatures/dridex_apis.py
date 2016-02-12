@@ -41,8 +41,15 @@ class Dridex_APIs(Signature):
         self.extract = True
         self.sockmon = dict()
         self.payloadip = dict()
+        self.decompMZ = False
+        self.ip_check = str()
+        self.port_check = str()
+        self.post_check = False
+        self.ret = False
 
-    filter_apinames = set(["RegQueryValueExA", "CryptHashData", "connect", "send", "recv"])
+    filter_apinames = set(["RegQueryValueExA", "CryptHashData", "connect", "send", "recv",
+                           "RtlDecompressBuffer", "InternetConnectW", "HttpOpenRequestW",
+                           "InternetCrackUrlA"])
 
     def on_call(self, call, process):
         if call["api"] == "RegQueryValueExA":
@@ -61,10 +68,10 @@ class Dridex_APIs(Signature):
                 else:
                     self.is_xp = True
 
-        if call["api"] == "CryptHashData":
+        elif call["api"] == "CryptHashData":
             self.crypted.append(self.get_argument(call, "Buffer").lower())
 
-        if call["api"] == "connect":
+        elif call["api"] == "connect":
             if not self.extract:
                 return None
 
@@ -75,7 +82,7 @@ class Dridex_APIs(Signature):
             lastip = self.get_argument(call, "ip")
             self.sockmon[socknum] = lastip
 
-        if call["api"] == "send":
+        elif call["api"] == "send":
             if not self.extract:
                 return None
 
@@ -86,7 +93,7 @@ class Dridex_APIs(Signature):
                 if buf and buf[:4] == "POST":
                     self.payloadip["send"] = self.sockmon[socknum]
 
-        if call["api"] == "recv":
+        elif call["api"] == "recv":
             if not self.extract:
                 return None
 
@@ -103,22 +110,45 @@ class Dridex_APIs(Signature):
                                 # since this is a primitive send/recv monitor
                                 self.payloadip["recv"] = self.sockmon[socknum]
 
+        elif call["api"] == "RtlDecompressBuffer":
+            buf = self.get_argument(call, "UncompressedBuffer")
+            if buf.startswith("MZ"):
+                self.decompMZ = True
+
+        elif call["api"] == "InternetConnectW":
+            if self.decompMZ:
+                ip = self.get_argument(call, "ServerName")
+                if not any(char.isalpha() for char in ip):
+                    self.ip_check = ip
+                    self.port_check = str(self.get_argument(call, "ServerPort"))
+
+        elif call["api"] == "HttpOpenRequestW":
+            if self.ip_check and self.port_check:
+                if self.get_argument(call, "Verb") == "POST":
+                    self.post_check = True
+
+        elif call["api"] == "InternetCrackUrlA":
+            if self.post_check:
+                buf = self.get_argument(call, "Url")
+                if buf.lower().startswith("https") and self.port_check != "443":
+                    if buf.lower().split("/")[-1] == self.ip_check:
+                        self.ret = True
+
         return None
 
 
     def on_complete(self):
-        ret = False
         if self.compname and (self.username or self.is_xp) and self.crypted:
             buf = self.compname + self.username
             for item in self.crypted:
                 if buf in item:
-                    ret = True
-        
+                    self.ret = True
+
         pattern = r".*\\CurrentVersion\\Explorer\\CLSID\\\{[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}\}\\ShellFolder\\[0-9A-Fa-f]{8,24}"
         if self.check_write_key(pattern=pattern, regex=True):
-            ret = True
+            self.ret = True
 
-        if self.extract and ret and self.payloadip and "recv" in self.payloadip:
+        if self.extract and self.ret and self.payloadip and "recv" in self.payloadip:
             if "suricata" in self.results and "files" in self.results["suricata"]:
                 for sfile in self.results["suricata"]["files"]:
                     if int(sfile["size"]) > 100000 and sfile["srcip"] == self.payloadip["recv"]:
@@ -132,5 +162,4 @@ class Dridex_APIs(Signature):
                                         self.data.append({"ioc": ip})
                                 break
 
-
-        return ret
+        return self.ret
