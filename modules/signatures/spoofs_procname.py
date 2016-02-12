@@ -29,6 +29,7 @@ class SpoofsProcname(Signature):
     def __init__(self, *args, **kwargs):
         Signature.__init__(self, *args, **kwargs)
         self.saw_spoof = False
+        self.spoof_sets = []
 
     def on_call(self, call, process):
         procname = self.check_argument_call(call,
@@ -41,7 +42,11 @@ class SpoofsProcname(Signature):
             origpath = self.get_argument(call, "OriginalProcessPath")
             modname = self.get_argument(call, "ModifiedProcessName")
             modpath = self.get_argument(call, "ModifiedProcessPath")
-            self.data.append({"original_name" :  origname, "original_path" : origpath, "modified_name" : modname, "modified_path" : modpath})
+            newentry = {"original_name" :  origname, "original_path" : origpath, "modified_name" : modname, "modified_path" : modpath}
+            if newentry not in self.spoof_sets:
+                self.spoof_sets.append(newentry)
     
     def on_complete(self):
+        for spoof in self.spoof_sets:
+            self.data.append(spoof)
         return self.saw_spoof
