@@ -47,6 +47,7 @@ class RansomwareFiles(Signature):
             (".*\\\\YOUR_FILES.url$", ["Radamant"]),
             (".*\\\\_How\ to\ decrypt\ LeChiffre\ files\.html$", ["LeChiffre"]),
             (".*\\\\cryptinfo\.txt$", ["DMALocker"]),
+            (".*\\\\HELP_RECOVER_instructions\+.*\.(txt|html)$", ["TeslaCrypt"]),
         ]
 
         for ioc in file_list:
