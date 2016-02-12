@@ -50,6 +50,11 @@ class PunchPlusPlusPCREs(Signature):
             "orange",
             "rig",
         ]
+        office = [
+            "doc",
+            "xls",
+            "ppt",
+        ]
         if "feeds" in self.results and self.results["feeds"]:
             if "Punch_Plus_Plus_PCREs" in self.results["feeds"]:
                 with open(self.results["feeds"]["Punch_Plus_Plus_PCREs"], "r") as feedfile:
@@ -78,6 +83,9 @@ class PunchPlusPlusPCREs(Signature):
                                 if check1 in desc or check2 in desc:
                                     if ek not in self.families:
                                         self.families.insert(0, ek)
+                                if self.results["info"]["package"] in office:
+                                    if "dridex" in regex[1].lower() and "dridex" not in self.families:
+                                        self.families.insert(0, "dridex")
 
         if ret:
             return True
