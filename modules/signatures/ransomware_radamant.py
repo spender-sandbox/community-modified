@@ -15,8 +15,8 @@
 
 from lib.cuckoo.common.abstracts import Signature
 
-class FamilyRadamant(Signature):
-    name = "family_radamant"
+class RansomwareRadamant(Signature):
+    name = "ransomware_radamant"
     description = "Exhibits behavior characteristic of Radamant ransomware"
     severity = 3
     families = ["radamant"]

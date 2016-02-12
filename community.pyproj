@@ -45,6 +45,7 @@
     <Compile Include="modules\signatures\critical_process.py" />
     <Compile Include="modules\signatures\disables_app.py" />
     <Compile Include="modules\signatures\dropper_js.py" />
+    <Compile Include="modules\signatures\family_dmalocker.py" />
     <Compile Include="modules\signatures\family_proxyback.py" />
     <Compile Include="modules\signatures\family_radamant.py" />
     <Compile Include="modules\signatures\gootkit_apis.py" />
@@ -52,6 +53,7 @@
     <Compile Include="modules\signatures\martians_office.py" />
     <Compile Include="modules\signatures\mimics_filename.py" />
     <Compile Include="modules\signatures\network_cnc_http.py" />
+    <Compile Include="modules\signatures\network_docfile_http.py" />
     <Compile Include="modules\signatures\nymaim_apis.py" />
     <Compile Include="modules\signatures\office_codepage.py" />
     <Compile Include="modules\signatures\packer_confuser.py" />
@@ -303,6 +305,7 @@
     <Compile Include="modules\signatures\volatility_sig.py" />
     <Compile Include="modules\signatures\webmail_phish.py" />
     <Compile Include="modules\signatures\whois_create.py" />
+    <Compile Include="modules\signatures\wscript_downloader.py" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="modules\" />

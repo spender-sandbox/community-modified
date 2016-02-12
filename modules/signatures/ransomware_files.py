@@ -48,6 +48,7 @@ class RansomwareFiles(Signature):
             (".*\\\\_How\ to\ decrypt\ LeChiffre\ files\.html$", ["LeChiffre"]),
             (".*\\\\cryptinfo\.txt$", ["DMALocker"]),
             (".*\\\\HELP_RECOVER_instructions\+.*\.(txt|html)$", ["TeslaCrypt"]),
+            (".*\\\\README_DECRYPT_HYDRA_ID_.*(\.txt|\.jpg)$", ["HydraCrypt"]),
         ]
 
         for ioc in file_list:

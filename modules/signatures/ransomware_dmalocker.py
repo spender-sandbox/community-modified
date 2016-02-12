@@ -20,8 +20,8 @@ try:
 except ImportError:
     import re
 
-class FamilyDMALocker(Signature):
-    name = "family_dmalocker"
+class RansomwareDMALocker(Signature):
+    name = "ransomware_dmalocker"
     description = "Exhibits behavior characteristic of DMALocker ransomware"
     weight = 3
     severity = 3
