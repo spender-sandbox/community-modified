@@ -1,4 +1,4 @@
-# Copyright (C) 2015 KillerInstinct
+# Copyright (C) 2015-2016 KillerInstinct
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -38,10 +38,10 @@ class NetworkAnomaly(Signature):
 
     filter_apinames = set(["getaddrinfo", "InternetConnectA",
                            "InternetConnectW", "connect",
-                           "WSAConnect"])
+                           "WSAConnect", "GetAddrInfoW"])
 
     def on_call(self, call, process):
-        if call["api"] == "getaddrinfo":
+        if call["api"] == "getaddrinfo" or call["api"] == "GetAddrInfoW":
             node = self.get_argument(call, "NodeName")
             if node and node not in self.ipBuffer:
                 if re.match(self.ipRex, node) and node not in self.ipWhitelist:
