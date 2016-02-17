@@ -24,6 +24,7 @@ class RansomwareExtensions(Signature):
             ".*\.hydracrypt_ID_[a-z0-9]{8}$",
             ".*\.hydracrypttmp_ID_[a-z0-9]{8}$",
             ".*\.micro$",
+            ".*\.locky$",
         ]
 
         for indicator in indicators:
