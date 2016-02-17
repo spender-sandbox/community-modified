@@ -49,7 +49,7 @@ class RansomwareFiles(Signature):
             (".*\\\\cryptinfo\.txt$", ["DMALocker"]),
             (".*\\\\HELP_RECOVER_instructions\+.*\.(txt|html)$", ["TeslaCrypt"]),
             (".*\\\\README_DECRYPT_HYDRA_ID_.*(\.txt|\.jpg)$", ["HydraCrypt"]),
-            (".*\\\\_Locky_recover_instructions.txt$", ["Locky"]),
+            (".*\\\\_Locky_recover_instructions\.txt$", ["Locky"]),
         ]
 
         for ioc in file_list:
