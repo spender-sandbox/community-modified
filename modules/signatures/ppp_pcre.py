@@ -43,7 +43,6 @@ class PunchPlusPlusPCREs(Signature):
             "dotcachef",
             "fiesta",
             "goon",
-            "hunter",
             "magnitude",
             "neutrino",
             "nuclear",
@@ -85,7 +84,8 @@ class PunchPlusPlusPCREs(Signature):
                                         self.families.insert(0, ek)
                                 if self.results["info"]["package"] in office:
                                     if "dridex" in regex[1].lower() and "dridex" not in self.families:
-                                        self.families.insert(0, "dridex")
+                                        if not self.families:
+                                            self.families = ["dridex"]
 
         if ret:
             return True
