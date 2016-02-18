@@ -27,12 +27,16 @@ class SuricataAlert(Signature):
 
     def run(self):
         sigset = set()
+        familylist = [
+            "locky",
+        ]
         whitelist = [
             "Application Crash Report Sent to Microsoft",
             "Outdated Windows Flash Version IE",
             "JAVA - ClassID",
             "Lets Encrypt Free SSL Cert",
         ]
+
         if "suricata" in self.results:
             if "alerts" in self.results["suricata"]:
                 for alert in self.results["suricata"]["alerts"]:
@@ -44,9 +48,15 @@ class SuricataAlert(Signature):
                                 break
                         if addsig:
                             sigset.add(alert["signature"])
+
         for sig in sigset:
             self.data.append({"signature" : sig})
             self.weight += 1
+            for family in familylist:
+                if family in sig.lower():
+                    self.families.insert(0, family)
+
         if len(sigset):
             return True
+
         return False
