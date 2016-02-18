@@ -23,7 +23,7 @@ class Ursnif_APIs(Signature):
     categories = ["spyware", "keylogger"]
     families = ["ursnif"]
     authors = ["KillerInstinct"]
-    minimum = "0.5"
+    minimum = "1.3"
 
     def run(self):
         badness = 0
