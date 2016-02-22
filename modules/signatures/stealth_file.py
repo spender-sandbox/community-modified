@@ -33,6 +33,7 @@ class StealthFile(Signature):
             self.is_office = True
 
     filter_apinames = set(["NtCreateFile", "NtDuplicateObject", "NtOpenFile", "NtClose", "NtSetInformationFile"])
+    filter_analysistypes = set(["file"])
 
     def on_call(self, call, process):
         if process is not self.lastprocess:
@@ -97,6 +98,7 @@ class StealthFile(Signature):
             r'^[A-Z]?:\\Documents and Settings\\[^\\]+\\PrivacIE\\$',
             r'^[A-Z]?:\\Documents and Settings\\[^\\]+\\PrivacIE\\index\.dat$',
             r'^[A-Z]?:\\Documents and Settings\\[^\\]+\\Local Settings\\Application Data\\Microsoft\\Feeds\\.*',
+            r'^[A-Z]?:\\Documents and Settings\\[^\\]+\\Local Settings\\Application Data\\Microsoft\\Internet Explorer\\DOMStore\\$',
             r'^[A-Z]?:\\Documents and Settings\\[^\\]+\\Local Settings\\Application Data\\Microsoft\\Feeds Cache\\$',
             r'^[A-Z]?:\\Documents and Settings\\[^\\]+\\Local Settings\\Application Data\\Microsoft\\Feeds Cache\\index\.dat$',
             r'^[A-Z]?:\\Documents and Settings\\[^\\]+\\IETldCache\\$',
