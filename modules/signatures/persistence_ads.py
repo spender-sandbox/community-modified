@@ -37,7 +37,8 @@ class ADS(Signature):
             if ":" in file_path.split("\\")[-1]:
                 if not file_path.lower().startswith("c:\\dosdevices\\") and not file_path[-1] == ":":
                     # we have a different signature to deal with removal of Zone.Identifier
-                    if not file_path.startswith("\\??\\http://") and not file_path.endswith(":Zone.Identifier") and not re.match(r'^[A-Z]?:\\Users\\[^\\]+\\Favorites\\Links\\Suggested Sites\.url:favicon$', file_path, re.IGNORECASE):
+                    if not file_path.startswith("\\??\\http://") and not file_path.endswith(":Zone.Identifier") \
+                       and not re.match(r'^[A-Z]?:\\(Users|Documents and Settings)\\[^\\]+\\Favorites\\Links\\Suggested Sites\.url:favicon$', file_path, re.IGNORECASE):
                         self.data.append({"file" : file_path})
                         result = True
 
