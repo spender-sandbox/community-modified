@@ -19,6 +19,7 @@ class StealthTimeout(Signature):
         Signature.__init__(self, *args, **kwargs)
         self.lastprocess = 0
         self.systimeidx = 0
+        self.getsystimeidx = 0
         self.exitidx = 0
         self.curidx = 0
 
@@ -31,8 +32,15 @@ class StealthTimeout(Signature):
 
         self.curidx += 1
 
-        if call["api"] == "GetSystemTimeAsFileTime" or call["api"] == "GetSystemTime" or call["api"] == "GetLocalTime" or call["api"] == "NtQuerySystemTime":
+        if call["api"] == "GetSystemTimeAsFileTime":
             self.systimeidx = self.curidx
+            self.getsystimeidx = self.curidx
+        elif call["api"] == "GetSystemTime" or call["api"] == "GetLocalTime" or call["api"] == "NtQuerySystemTime":
+            self.systimeidx = self.curidx
+        elif call["api"] == "NtDelayExecution":
+            # If we see a sleep sequence, invalidate it as a time check
+            if self.curidx == self.getsystimeidx + 1:
+                self.systimeidx = 0
         elif call["api"] == "NtTerminateProcess":
             handle = self.get_argument(call, "ProcessHandle")
             if handle == "0xffffffff" or handle == "0x00000000":
