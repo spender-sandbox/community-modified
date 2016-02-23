@@ -126,12 +126,18 @@ class StealthFile(Signature):
             r'^[A-Z]?:\\Users\\[^\\]+\\AppData\\Local\\Microsoft\\Windows\\History\\History\.IE5\\MSHist[0-9]+\\$',
             r'^[A-Z]?:\\Users\\[^\\]+\\AppData\\Local\\Microsoft\\Windows\\History\\History\.IE5\\MSHist[0-9]+\\index\.dat$',
         ]
+        url_whitelist = [
+            r'^[A-Z]?:\\Users\\[^\\]+\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\CustomDestinations\\.*\.customDestinations.*\.TMP$',
+        ]
         saw_stealth = False
         target_name = None
 
         if self.is_office and "file" in self.results["target"]:
             target_name = self.results["target"]["file"]["name"]
-            
+
+        if "url" in self.results["target"]:
+            whitelist.extend(url_whitelist)
+
         for hfile in self.stealth_files:
             addit = True
             for entry in whitelists:
