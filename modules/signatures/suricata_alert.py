@@ -32,6 +32,10 @@ class SuricataAlert(Signature):
             "Outdated Windows Flash Version IE",
             "JAVA - ClassID",
             "Lets Encrypt Free SSL Cert",
+            "ET INFO",
+            "ETPRO INFO",
+            "ET POLICY",
+            "ETPRO POLICY"
         ]
 
         if "suricata" in self.results:
