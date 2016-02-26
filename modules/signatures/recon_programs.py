@@ -18,7 +18,10 @@ class InstalledApps(Signature):
         if any(e in self.results["info"]["package"] for e in office_pkgs):
             return False
 
-        if self.check_read_key(pattern= ".*\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\Uninstall.*", regex=True):
+        tmp = self.check_read_key(pattern= ".*\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\Uninstall.*", regex=True, all=True)
+        if tmp:
+            for item in tmp:
+                self.data.append({"Key": item})
             return True
 
         return False
