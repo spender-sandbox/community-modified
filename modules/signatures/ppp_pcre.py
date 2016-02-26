@@ -81,7 +81,7 @@ class PunchPlusPlusPCREs(Signature):
                                 desc = regex[1].lower()
                                 if check1 in desc or check2 in desc:
                                     if ek not in self.families:
-                                        self.families.insert(0, ek)
+                                        self.families = [ek]
                                 if self.results["info"]["package"] in office:
                                     if "dridex" in regex[1].lower() and "dridex" not in self.families:
                                         if not self.families:

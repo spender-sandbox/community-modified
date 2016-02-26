@@ -10,7 +10,7 @@ class InjectionExtension(Signature):
     severity = 3
     categories = ["injection"]
     authors = ["Optiv"]
-    minimum = "1.0"
+    minimum = "1.3"
     evented = True
 
     def __init__(self, *args, **kwargs):
@@ -26,4 +26,9 @@ class InjectionExtension(Signature):
                 apiarg1 = self.get_argument(call, "ApplicationName")
                 apiarg2 = self.get_argument(call, "CommandLine")
                 if apiarg1.endswith(procname) or apiarg2.endswith(procname):
+                    createdpid = str(self.get_argument(call, "ProcessId"))
+                    desc = "{0}({1}) -> ".format(process["process_name",
+                        process["process_id"], self.get_name_from_pid(createdpid),
+                        createdpid)
+                    self.data.append({"Injection": desc})
                     return True

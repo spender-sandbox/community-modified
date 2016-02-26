@@ -15,11 +15,6 @@
 
 from lib.cuckoo.common.abstracts import Signature
 
-try:
-    import re2 as re
-except ImportError:
-    import re
-
 class NetworkDocumentHTTP(Signature):
     name = "network_document_http"
     description = "A document file initiated network communications indicative of a potential exploit or payload download"
@@ -34,7 +29,7 @@ class NetworkDocumentHTTP(Signature):
     def __init__(self, *args, **kwargs):
         Signature.__init__(self, *args, **kwargs)
         self.data = []
-        self.office_proc_list =["wordview.exe","winword.exe","excel.exe","powerpnt.exe","outlook.exe","acrord32.exe","acrord64.exe"]     
+        self.office_proc_list =["wordview.exe","winword.exe","excel.exe","powerpnt.exe","outlook.exe","acrord32.exe","acrord64.exe"]
 
     filter_apinames = set(["InternetCrackUrlW","InternetCrackUrlA","URLDownloadToFileW","HttpOpenRequestW","InternetReadFile"])
     filter_analysistypes = set(["file"])
@@ -42,22 +37,26 @@ class NetworkDocumentHTTP(Signature):
     def on_call(self, call, process):
         pname = process["process_name"].lower()
         if pname in self.office_proc_list:
+            addit = None
             if call["api"] == "URLDownloadToFileW":
                 buff = self.get_argument(call, "FileName").lower()
-                self.data.append({"http_filename": "%s_URLDownloadToFileW_%s" % (pname,buff)})
+                addit = {"http_filename": "%s_URLDownloadToFileW_%s" % (pname,buff)}
             if call["api"] == "HttpOpenRequestW":
                 buff = self.get_argument(call, "Path").lower()
-                self.data.append({"http_request_path": "%s_HttpOpenRequestW_%s" % (pname,buff)})
+                addit = {"http_request_path": "%s_HttpOpenRequestW_%s" % (pname,buff)}
             if call["api"] == "InternetCrackUrlW":
                 buff = self.get_argument(call, "Url").lower()
-                self.data.append({"http_request": "%s_InternetCrackUrlW_%s" % (pname,buff)})
+                addit = {"http_request": "%s_InternetCrackUrlW_%s" % (pname,buff)}
             if call["api"] == "InternetCrackUrlA":
                 buff = self.get_argument(call, "Url").lower()
-                self.data.append({"http_request": "%s_InternetCrackUrlA_%s" % (pname,buff)})
+                addit = {"http_request": "%s_InternetCrackUrlA_%s" % (pname,buff)}
+            if addit and addit not in self.data:
+                self.data.append(addit)
+
         return None
 
     def on_complete(self):
         if self.data:
             return True
-        else:
-            return False
+
+        return False

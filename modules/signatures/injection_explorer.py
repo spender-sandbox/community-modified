@@ -21,12 +21,14 @@ class InjectionExplorer(Signature):
     severity = 3
     categories = ["injection"]
     authors = ["Optiv"]
-    minimum = "1.2"
+    minimum = "1.3"
     evented = True
 
     def __init__(self, *args, **kwargs):
         Signature.__init__(self, *args, **kwargs)
         self.lastprocess = None
+        self.parent = (str(), int())
+        self.injected = (str(), int())
         self.sharedsections = ["\\basenamedobjects\\shimsharedmemory",
                                 "\\basenamedobjects\\windows_shell_global_counters",
                                 "\\basenamedobjects\\msctf.shared.sfm.mih",
@@ -47,6 +49,9 @@ class InjectionExplorer(Signature):
                 self.sequence = 1
         elif self.sequence == 1 and call["api"] == "NtOpenProcess":
             self.sequence = 2
+            self.parent = (process["process_name"], process["process_id"])
+            pid = str(self.get_argument(call, "ProcessIdentifier"))
+            self.injected = (self.get_name_from_pid(pid), pid)
         elif self.sequence == 2 and (call["api"] == "ReadProcessMemory" or call["api"] == "NtReadVirtualMemory"):
             self.sequence = 3
         elif self.sequence == 3 and call["api"].startswith("FindWindow"):
@@ -56,4 +61,7 @@ class InjectionExplorer(Signature):
         elif self.sequence == 4 and call["api"].startswith("SetWindowLong"):
             self.sequence = 5
         elif self.sequence == 5 and call["api"].startswith("SendNotifyMessage"):
+            desc = "{0}({1}) -> {2}({3})".format(self.parent[0], self.parent[1],
+                                                 self.injected[0], self.injected[1])
+            self.data.append({"Injection": desc})
             return True
