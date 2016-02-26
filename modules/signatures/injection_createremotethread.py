@@ -82,7 +82,7 @@ class InjectionCRT(Signature):
                 self.data.append({"Injection": desc})
                 return True
         elif call["api"].startswith("NtQueueApcThread") and self.sequence == 2:
-            if self.get_argument(call, "ProcessId") in self.process_pids:
+            if str(self.get_argument(call, "ProcessId")) in self.process_pids:
                 self.description = "Code injection with NtQueueApcThread in a remote process"
                 desc = "{0}({1}) -> {2}({3})".format(self.lastprocess["process_name"], str(self.lastprocess["process_id"]),
                                                      process["process_name"], str(process["process_id"]))
