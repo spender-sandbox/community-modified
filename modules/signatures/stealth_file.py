@@ -136,7 +136,7 @@ class StealthFile(Signature):
             target_name = self.results["target"]["file"]["name"]
 
         if "url" in self.results["target"]:
-            whitelist.extend(url_whitelist)
+            whitelists.extend(url_whitelist)
 
         for hfile in self.stealth_files:
             addit = True
