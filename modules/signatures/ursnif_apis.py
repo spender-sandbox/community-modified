@@ -60,7 +60,6 @@ class Ursnif_APIs(Signature):
 
             if arg1 in self.decompMZ:
                 badness += 4
-                print "Hit decompMZ"
 
         keypat = r".*\\Software\\Microsoft\\Windows\\CurrentVersion\\Internet Settings\\EnableSPDY3_0$"
         if self.check_write_key(pattern=keypat, regex=True):
