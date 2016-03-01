@@ -41,6 +41,9 @@ class EncryptedIOC(Signature):
             "http://www.microsoft.com",
             "asm.v1",
             "asm.v3",
+            "verisign.com",
+            "symantec.com",
+            "thawte.com",
         ]
         dedup = list()
         extracted_data= False
