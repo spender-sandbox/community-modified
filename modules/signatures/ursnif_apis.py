@@ -24,10 +24,25 @@ class Ursnif_APIs(Signature):
     families = ["ursnif"]
     authors = ["KillerInstinct"]
     minimum = "1.3"
+    evented = True
 
-    def run(self):
+    def __init__(self, *args, **kwargs):
+        Signature.__init__(self, *args, **kwargs)
+        self.decompMZ = set()
+
+    filter_apinames = set(["RtlDecompressBuffer"])
+
+    def on_call(self, call, process):
+        buf = self.get_argument(call, "UncompressedBuffer")
+        if buf.startswith("MZ"):
+            try:
+                self.decompMZ.add(str(process["module_path"]))
+            except:
+                pass
+
+    def on_complete(self):
         badness = 0
-        cmdpat = r"^[A-Za-z]:\\.*\\[0-9A-Fa-f]{4}\\[0-9A-Fa-f]{4}\.bat\s"
+        cmdpat = r"^[A-Za-z]:\\.*\\[0-9A-Fa-f]{2,4}\\[0-9A-Fa-f]{1,4}\.bat\s"
         if self.check_executed_command(pattern=cmdpat, regex=True):
             arg1, arg2 = None, None
             for command in self.results["behavior"]["summary"]["executed_commands"]:
@@ -35,12 +50,16 @@ class Ursnif_APIs(Signature):
                     _, arg1, arg2 = command.split()
                 else:
                     if command.replace(" ", "").lower().startswith("cmd/c") and arg1 and arg2:
-                        buf = command.split()
-                        if len(buf) == 4:
-                            if arg1 in buf[2] and arg2 in buf[3]:
-                                badness += 8
+                        buf = command.split("\"")
+                        arg1 = arg1.replace("\"", "")
+                        arg2 = arg2.replace("\"", "")
+                        if arg1 in buf and arg2 in buf:
+                            badness += 8
                     else:
                         pass
+
+            if arg1 in self.decompMZ:
+                badness += 4
 
         keypat = r".*\\Software\\Microsoft\\Windows\\CurrentVersion\\Internet Settings\\EnableSPDY3_0$"
         if self.check_write_key(pattern=keypat, regex=True):
@@ -55,7 +74,7 @@ class Ursnif_APIs(Signature):
             else:
                 badness += mutex_count
 
-        if badness >= 10:
+        if badness >= 13:
             return True
 
         return False
