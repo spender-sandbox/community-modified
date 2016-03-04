@@ -32,6 +32,7 @@ class PowershellCommand(Signature):
         self.user_profile = False
         self.hidden_window = False
         self.b64_encoded = False
+        self.filedownload = False
 
     filter_apinames = set(["CreateProcessInternalW","ShellExecuteExW"])
 
@@ -55,6 +56,9 @@ class PowershellCommand(Signature):
         if "powershell.exe" in cmdline and "-enc" in cmdline:
             self.b64_encoded = True
 
+        if "powershell.exe" in cmdline and "downloadfile(" in cmdline:
+            self.filedownload = True
+
     def on_complete(self):
         if self.exec_policy:
             self.data.append({"execution_policy" : "Attempts to bypass execution policy"})
@@ -72,6 +76,11 @@ class PowershellCommand(Signature):
 
         if self.b64_encoded:
             self.data.append({"b64_encoded" : "Uses a Base64 encoded command value"})
+            self.weight += 1
+
+        if self.filedownload:
+            self.data.append({"file_download" : "Uses powershell to execute a file download from the command line"})
+            self.severity = 3
             self.weight += 1
 
         if self.weight:
