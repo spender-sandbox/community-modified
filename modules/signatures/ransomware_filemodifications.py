@@ -70,7 +70,7 @@ class RansomwareFileModifications(Signature):
             newcount = len(self.newextensions)
             if newcount > 15:
                 self.data.append({"appends_new_extension" : "Appended %s unique file extensions to multiple modified files" % (newcount)})
-            if newcount < 15:           
+            if newcount < 16:           
                 self.data.append({"appends_new_extension" : "Appends a new file extension to multiple modified files" })
                 for newextension in self.newextensions:
                     self.data.append({"new_appended_file_extension" : newextension})
