@@ -1,4 +1,4 @@
-# Copyright (C) 2015 Optiv, Inc. (brad.spengler@optiv.com)
+# Copyright (C) 2015 Will Metcalf william.metcalf@gmail.com 
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -15,14 +15,14 @@
 
 from lib.cuckoo.common.abstracts import Signature
 
-class Angler_JS(Signature):
-    name = "angler_js"
-    description = "Executes obfuscated JavaScript indicative of Angler Exploit Kit"
+class CVE_2014_6332(Signature):
+    name = "cve_2014_6332"
+    description = "Executes obfuscated JavaScript Indicitive of CVE 2014-6332 Exploit"
     weight = 3
     severity = 3
     categories = ["exploit_kit"]
-    families = ["angler"]
-    authors = ["Optiv"]
+    families = ["CVE-2014-6332"]
+    authors = ["Will Metcalf"]
     minimum = "1.3"
     evented = True
 
@@ -39,12 +39,8 @@ class Angler_JS(Signature):
         else:
             buf = self.get_argument(call, "Script")
 
-        if "/malware.dontneedcoffee.com/.test()" in buf:
+        if "chrw(01)&chrw(2176)&chrw(01)&chrw(00)" in buf and "chrw(00)&chrw(32767)&chrw(00)&chrw(0)" in buf:
             return True
-        if "Kaspersky.IeVir' + " in buf:
-            return True
-        if "+'%u0000')" in buf and "Math.floor(Math.random() * (6 -3) +3);" in buf and "{return 'Accept: ' +'*' +'/' +'*' +'" in buf:
-            return True
-        if "2830293d2668364336343734364526" in buf.lower() and "2831293d2668364336343245364326" in buf.lower() and "2832293d2668373236393536373426" in buf.lower():
+        if "function setnotsafemode" in buf and "function runmumaa" in buf:
             return True
 

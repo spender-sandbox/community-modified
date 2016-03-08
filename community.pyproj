@@ -28,6 +28,7 @@
     <Compile Include="modules\signatures\antivm_dirobjects.py" />
     <Compile Include="modules\signatures\antivm_vmware_libs.py" />
     <Compile Include="modules\signatures\antivm_vpc_mutex.py" />
+    <Compile Include="modules\signatures\browser_needed.py" />
     <Compile Include="modules\signatures\browser_scanbox.py" />
     <Compile Include="modules\signatures\chimera_apis.py">
       <SubType>Code</SubType>
@@ -40,11 +41,13 @@
     <Compile Include="modules\signatures\codelux_apis.py" />
     <Compile Include="modules\signatures\creates_largekey.py" />
     <Compile Include="modules\signatures\cryptowall_apis.py" />
+    <Compile Include="modules\signatures\cve_2014_6332.py" />
     <Compile Include="modules\signatures\darkcomet_regkeys.py" />
     <Compile Include="modules\signatures\dead_link.py" />
     <Compile Include="modules\signatures\critical_process.py" />
     <Compile Include="modules\signatures\disables_app.py" />
     <Compile Include="modules\signatures\dropper_js.py" />
+    <Compile Include="modules\signatures\ek_cve2015_2419.py" />
     <Compile Include="modules\signatures\family_dmalocker.py" />
     <Compile Include="modules\signatures\family_proxyback.py" />
     <Compile Include="modules\signatures\family_radamant.py" />
@@ -56,11 +59,15 @@
     <Compile Include="modules\signatures\network_docfile_http.py" />
     <Compile Include="modules\signatures\nymaim_apis.py" />
     <Compile Include="modules\signatures\office_codepage.py" />
+    <Compile Include="modules\signatures\office_write_exe.py" />
     <Compile Include="modules\signatures\packer_confuser.py" />
     <Compile Include="modules\signatures\packer_smartassembly.py" />
     <Compile Include="modules\signatures\ppp_pcre.py" />
+    <Compile Include="modules\signatures\ransomware_dmalocker.py" />
+    <Compile Include="modules\signatures\ransomware_radamant.py" />
     <Compile Include="modules\signatures\rat_luminosity.py" />
     <Compile Include="modules\signatures\rat_nanocore.py" />
+    <Compile Include="modules\signatures\rat_quasar.py" />
     <Compile Include="modules\signatures\reads_self.py" />
     <Compile Include="modules\signatures\securityxploded_modules.py" />
     <Compile Include="modules\signatures\setsautoconfigurl.py" />
@@ -235,6 +242,7 @@
     </Compile>
     <Compile Include="modules\signatures\troldesh_apis.py" />
     <Compile Include="modules\signatures\upatre_apis.py" />
+    <Compile Include="modules\signatures\ursnif_apis.py" />
     <Compile Include="modules\signatures\vawtrak_apis.py" />
     <Compile Include="modules\signatures\vawtrak_dll_apis.py" />
     <Compile Include="modules\signatures\virus.py" />
