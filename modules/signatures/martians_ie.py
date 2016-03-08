@@ -63,7 +63,9 @@ class MartiansIE(Signature):
                          "^C\\:\\\\Windows\\\\syswow64\\\\rundll32\\.exe$",
                          "^C\\:\\\\Windows\\\\system32\\\\drwtsn32\\.exe$",
                          "^C\\:\\\\Windows\\\\syswow64\\\\drwtsn32\\.exe$",
-                         "^C\\:\\\\Windows\\\\system32\\\\dwwin\\.exe$"
+                         "^C\\:\\\\Windows\\\\system32\\\\dwwin\\.exe$",
+                         "^C\\:\\\\Windows\\\\system32\\\\WerFault\\.exe$",
+                         "^C\\:\\\\Windows\\\\syswow64\\\\WerFault\\.exe$"
                         ]
         #means we can be evaded but also means we can have relatively tight paths between 32-bit and 64-bit
         self.white_list_re_compiled = []

@@ -72,8 +72,11 @@ class MartiansOffice(Signature):
                          "C\\:\\\\Windows\\\\System32\\\\rundll32\\.exe$",
                          "C\\:\\\\Windows\\\\System32\\\\drwtsn32\\.exe$",
                          "C\\:\\\\Windows\\\\splwow64\\.exe$",
-                         "C\\:\\\\Program Files(?:\s\\(x86\\))?\\\\Common Files\\\\Microsoft Shared\\\\office1[1-5]\\\\offlb\\.exe$",
-                         "C\\:\\\\Program Files(?:\s\\(x86\\))?\\\\Common Files\\\\Microsoft Shared\\\\dw\\\\dw(?:20)?\\.exe$"
+                         "C\\:\\\\Program Files(?:\s\\(x86\\))?\\\\Common Files\\\\Microsoft Shared\\\\office1[1-6]\\\\off(?:lb|diag)\\.exe$",
+                         "C\\:\\\\Program Files(?:\s\\(x86\\))?\\\\Common Files\\\\Microsoft Shared\\\\dw\\\\dw(?:20)?\\.exe$",
+                         "C\\:\\\\Windows\\\\system32\\\\dwwin\\.exe$",
+                         "C\\:\\\\Windows\\\\system32\\\\WerFault\\.exe$",
+                         "C\\:\\\\Windows\\\\syswow64\\\\WerFault\\.exe$"
                         ]
         #means we can be evaded but also means we can have relatively tight paths between 32-bit and 64-bit
         self.white_list_re_compiled = []
