@@ -74,6 +74,6 @@ class RansomwareFileModifications(Signature):
                 self.data.append({"appends_new_extension" : "Appends a new file extension to multiple modified files" })
                 for newextension in self.newextensions:
                     self.data.append({"new_appended_file_extension" : newextension})
-                ret = True
+            ret = True
 
         return ret
