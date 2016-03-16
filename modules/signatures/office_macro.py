@@ -29,6 +29,8 @@ class Office_Macro(Signature):
     minimum = "1.3"
 
     def run(self):
+        package = self.results["info"]["package"]
+
         ret = False
         if "static" in self.results and "office" in self.results["static"]:
             # 97-2003 OLE and 2007+ XML macros
@@ -73,7 +75,7 @@ class Office_Macro(Signature):
                     self.data.append({"Lure": positive})
 
         # Increase severity on office documents with suspicious characteristics
-        if ret and "static" in self.results and "office" in self.results["static"]:
+        if ret and package != "xls" and "static" in self.results and "office" in self.results["static"]:
             if "Metadata" in self.results["static"]["office"]:
                 if "SummaryInformation" in self.results["static"]["office"]["Metadata"]:
                     words = self.results["static"]["office"]["Metadata"]["SummaryInformation"]["num_words"]
@@ -82,7 +84,7 @@ class Office_Macro(Signature):
                         self.weight += 2
                         self.data.append({"content" : "The file appears to have no content."})
 
-        if ret and "static" in self.results and "office" in self.results["static"]:
+        if ret and package != "xls" and "static" in self.results and "office" in self.results["static"]:
             if "Metadata" in self.results["static"]["office"]:
                 if "SummaryInformation" in self.results["static"]["office"]["Metadata"]:
                     time = self.results["static"]["office"]["Metadata"]["SummaryInformation"]["total_edit_time"]
@@ -91,7 +93,7 @@ class Office_Macro(Signature):
                         self.weight += 2
                         self.data.append({"edit_time" : "The file appears to have no edit time."})
                         
-        if ret and "static" in self.results and "office" in self.results["static"]:
+        if ret and package != "xls" and "static" in self.results and "office" in self.results["static"]:
             if "Metadata" in self.results["static"]["office"]:
                 if "SummaryInformation" in self.results["static"]["office"]["Metadata"]:
                     pages = self.results["static"]["office"]["Metadata"]["SummaryInformation"]["num_pages"]

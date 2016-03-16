@@ -34,6 +34,8 @@ class Polymorphic(Signature):
     filter_analysistypes = set(["file"])
 
     def run(self):
+        package = self.results["info"]["package"]
+
         found_polymorphic = False
         target_ssdeep = self.results["target"]["file"]["ssdeep"]
         target_sha1 = self.results["target"]["file"]["sha1"]
@@ -43,6 +45,8 @@ class Polymorphic(Signature):
             return False
 
         for drop in self.results["dropped"]:
+            if package == "xls" and len(drop["guest_paths"]) == 1 and drop["guest_paths"][0].endswith("\\Temp\\" + self.results["target"]["file"]["name"]):
+                continue
             if drop["sha1"] == target_sha1:
                 continue
             if fabs(target_size - drop["size"]) >= 1024:
