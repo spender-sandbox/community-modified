@@ -1,4 +1,4 @@
-﻿# Copyright (C) 2015 KillerInstinct
+# Copyright (C) 2015-2016 KillerInstinct
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -33,14 +33,21 @@ class Kibex_APIs(Signature):
     def __init__(self, *args, **kwargs):
         Signature.__init__(self, *args, **kwargs)
         self.keylog_inits = 0
+        self.c2s = set()
 
-    filter_apinames = set(["SetWindowsHookExA"])
+    filter_apinames = set(["SetWindowsHookExA", "WinHttpGetProxyForUrl"])
 
     def on_call(self, call, process):
-        hid = int(self.get_argument(call, "HookIdentifier"), 10)
-        tid = int(self.get_argument(call, "ThreadId"), 10)
-        if tid == 0 and hid == 13:
-            self.keylog_inits += 1
+        if call["api"] == "SetWindowsHookExA":
+            hid = int(self.get_argument(call, "HookIdentifier"), 10)
+            tid = int(self.get_argument(call, "ThreadId"), 10)
+            if tid == 0 and hid == 13:
+                self.keylog_inits += 1
+
+        elif call["api"] == "WinHttpGetProxyForUrl":
+            url = self.get_argument(call, "Url")
+            if url and "&machine" in url.lower():
+                self.c2s.add(url)
 
         return None
 
@@ -75,6 +82,9 @@ class Kibex_APIs(Signature):
                 bad_score += 1
 
         if bad_score >= 10:
+            for c2 in self.c2s:
+                self.data.append({"C2": c2})
+
             return True
 
         return False
