@@ -83,15 +83,6 @@ class Office_Macro(Signature):
                         self.severity = 3
                         self.weight += 2
                         self.data.append({"content" : "The file appears to have no content."})
-
-        if ret and package != "xls" and "static" in self.results and "office" in self.results["static"]:
-            if "Metadata" in self.results["static"]["office"]:
-                if "SummaryInformation" in self.results["static"]["office"]["Metadata"]:
-                    time = self.results["static"]["office"]["Metadata"]["SummaryInformation"]["total_edit_time"]
-                    if time == "0" or time == "None":
-                        self.severity = 3
-                        self.weight += 2
-                        self.data.append({"edit_time" : "The file appears to have no edit time."})
                         
         if ret and package != "xls" and "static" in self.results and "office" in self.results["static"]:
             if "Metadata" in self.results["static"]["office"]:
