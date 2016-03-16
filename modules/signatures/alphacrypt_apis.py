@@ -1,4 +1,4 @@
-# Copyright (C) 2015 KillerInstinct
+# Copyright (C) 2015-2016 KillerInstinct
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -36,8 +36,7 @@ class Alphacrypt_APIs(Signature):
         self.extcount = 0
         self.c2s = set()
         self.uristruct = False
-        self.urivars = ["sub", "key", "addr", "size", "version", "os","id",
-                        "gate", "ip", "inst_id"]
+        self.urivars = ["sub", "addr", "size", "version", "os", "id", "inst_id"]
         self.pat = r"(?:https?:\/\/)?(?:[\da-z\.-]+)\.(?:[0-9a-z\.]{2,6})" \
                    r"(?:\d{1,5})?(?:[\/\w\.-]*)\/?"
 
