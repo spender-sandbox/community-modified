@@ -39,7 +39,7 @@ class LuminosityRAT(Signature):
     def on_call(self, call, process):
         if call["api"] == "CryptHashData":
             buf = self.get_argument(call, "Buffer")
-            if buf and len(buf) <= 64:
+            if buf and len(buf) <= 64 and len(buf) >= 32:
                 if all((c in self.chars) for c in buf):
                     self.crypthash = buf
 
