@@ -65,6 +65,7 @@
     <Compile Include="modules\signatures\packer_smartassembly.py" />
     <Compile Include="modules\signatures\ppp_pcre.py" />
     <Compile Include="modules\signatures\ransomware_dmalocker.py" />
+    <Compile Include="modules\signatures\ransomware_filemodifications.py" />
     <Compile Include="modules\signatures\ransomware_radamant.py" />
     <Compile Include="modules\signatures\rat_luminosity.py" />
     <Compile Include="modules\signatures\rat_nanocore.py" />

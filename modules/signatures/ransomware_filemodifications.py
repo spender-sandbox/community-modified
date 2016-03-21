@@ -41,26 +41,28 @@ class RansomwareFileModifications(Signature):
     filter_apinames = set(["MoveFileWithProgressW"])
 
     def on_call(self, call, process):
-
-        if call["api"] == "MoveFileWithProgressW":
-            origfile = self.get_argument(call, "ExistingFileName")
-            newfile = self.get_argument(call, "NewFileName")
-            self.movefilecount += 1
-            if origfile != newfile:
-                origextextract = re.search("^.*(\.[a-zA-Z0-9_\-]{1,}$)", origfile)
-                origextension = origextextract.group(1)
-                newextextract = re.search("^.*(\.[a-zA-Z0-9_\-]{1,}$)", newfile)
-                newextension = newextextract.group(1)
-                if newextension != ".tmp":
-                    if origextension != newextension:
-                        self.appendcount += 1
-                        if self.newextensions.count(newextension) == 0:
-                            self.newextensions.append(newextension)               
+        origfile = self.get_argument(call, "ExistingFileName")
+        newfile = self.get_argument(call, "NewFileName")
+        self.movefilecount += 1
+        if origfile != newfile:
+            origextextract = re.search("^.*(\.[a-zA-Z0-9_\-]{1,}$)", origfile)
+            if not origextextract:
+                return None
+            origextension = origextextract.group(1)
+            newextextract = re.search("^.*(\.[a-zA-Z0-9_\-]{1,}$)", newfile)
+            if not newextextract:
+                return None
+            newextension = newextextract.group(1)
+            if newextension != ".tmp":
+                if origextension != newextension:
+                    self.appendcount += 1
+                    if self.newextensions.count(newextension) == 0:
+                        self.newextensions.append(newextension)
 
     def on_complete(self):
         ret = False
 
-        if self.movefilecount > 100:
+        if self.movefilecount > 60:
             self.data.append({"file_modifications" : "Performs %s file moves indicative of a potential file encryption process" % (self.movefilecount)})
             ret = True
 
