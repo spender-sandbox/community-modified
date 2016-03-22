@@ -36,7 +36,7 @@ class Ursnif_APIs(Signature):
         buf = self.get_argument(call, "UncompressedBuffer")
         if buf.startswith("MZ"):
             try:
-                self.decompMZ.add(str(process["module_path"]))
+                self.decompMZ.add(str(process["module_path"]).lower())
             except:
                 pass
 
@@ -46,10 +46,11 @@ class Ursnif_APIs(Signature):
         if self.check_executed_command(pattern=cmdpat, regex=True):
             arg1, arg2 = None, None
             for command in self.results["behavior"]["summary"]["executed_commands"]:
+                command = command.lower()
                 if len(command.split()) == 3 and ".bat" in command.split()[0][-5:]:
                     _, arg1, arg2 = command.split()
                 else:
-                    if command.replace(" ", "").lower().startswith("cmd/c") and arg1 and arg2:
+                    if command.replace(" ", "").startswith("cmd/c") and arg1 and arg2:
                         buf = command.split("\"")
                         arg1 = arg1.replace("\"", "")
                         arg2 = arg2.replace("\"", "")
