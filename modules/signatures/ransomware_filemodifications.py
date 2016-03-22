@@ -20,8 +20,6 @@ try:
 except ImportError:
     import re
 
-from lib.cuckoo.common.abstracts import Signature
-
 class RansomwareFileModifications(Signature):
     name = "ransomware_file_modifications"
     description = "Exhibits possible ransomware file modification behavior"
