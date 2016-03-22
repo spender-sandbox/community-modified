@@ -53,8 +53,14 @@ class Ursnif_APIs(Signature):
                         buf = command.split("\"")
                         arg1 = arg1.replace("\"", "")
                         arg2 = arg2.replace("\"", "")
-                        if arg1 in buf and arg2 in buf:
-                            badness += 8
+                        if arg2 in buf:
+                            if arg1 in buf:
+                                badness += 8
+                            # Handle shortnames
+                            elif "~1" in arg1:
+                                tmp = arg1.split("~1")
+                                if all(z in buf for z in tmp):
+                                    badness += 8
                     else:
                         pass
 
