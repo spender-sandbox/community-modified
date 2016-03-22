@@ -70,8 +70,10 @@ class Ursnif_APIs(Signature):
             # Handle shortnames
             elif "~1" in arg1:
                 tmp = arg1.split("~1")
-                if all(z in self.decompMZ for z in tmp):
-                    badness += 4
+                for mpath in self.decompMZ:
+                    if all(z in mpath for z in tmp):
+                        badness += 4
+                        break
 
         keypat = r".*\\Software\\Microsoft\\Windows\\CurrentVersion\\Internet Settings\\EnableSPDY3_0$"
         if self.check_write_key(pattern=keypat, regex=True):
