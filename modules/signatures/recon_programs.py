@@ -1,6 +1,10 @@
-# Copyright (C) 2014 Optiv, Inc. (brad.spengler@optiv.com)
+# Copyright (C) 2014-2016 Optiv, Inc. (brad.spengler@optiv.com), KillerInstinct
 # This file is part of Cuckoo Sandbox - http://www.cuckoosandbox.org
 # See the file 'docs/LICENSE' for copying permission.
+try:
+    import re2 as re
+except ImportError:
+    import re
 
 from lib.cuckoo.common.abstracts import Signature
 
@@ -12,16 +16,37 @@ class InstalledApps(Signature):
     categories = ["recon"]
     authors = ["Optiv"]
     minimum = "1.2"
+    evented = True
 
-    def run(self):
+    def __init__(self, *args, **kwargs):
+        Signature.__init__(self, *args, **kwargs)
+        self.programs = set()
+        self.check = True
         office_pkgs = ["ppt","doc","xls","eml","pdf"]
         if any(e in self.results["info"]["package"] for e in office_pkgs):
-            return False
+            self.check = False
 
-        tmp = self.check_read_key(pattern= ".*\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\Uninstall.*", regex=True, all=True)
-        if tmp:
-            for item in tmp:
-                self.data.append({"Key": item})
+    filter_apinames = set(["RegQueryValueExA", "RegQueryValueExW"])
+
+    def on_call(self, call, process):
+        if not self.check:
+            return None
+
+        if call["api"].startswith("RegQueryValueEx"):
+            keyname = self.get_argument(call, "FullName")
+            uninstall = "\\microsoft\\windows\\currentversion\\uninstall"
+            if (keyname and uninstall in keyname.lower() and
+                keyname.lower().endswith("displayname")):
+                app = self.get_argument(call, "Data")
+                if app:
+                    # Ignore language/architecture name segments
+                    buf = re.sub(r"\([^\)]+\)", "", app).strip()
+                    self.programs.add(buf)
+
+    def on_complete(self):
+        if self.programs:
+            for program in self.programs:
+                self.data.append({"Program": program})
             return True
 
         return False
