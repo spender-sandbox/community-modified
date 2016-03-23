@@ -37,7 +37,7 @@ class StealthTimeout(Signature):
             self.getsystimeidx = self.curidx
         elif call["api"] == "GetSystemTime" or call["api"] == "GetLocalTime" or call["api"] == "NtQuerySystemTime":
             self.systimeidx = self.curidx
-        elif call["api"] == "NtDelayExecution":
+        elif call["api"] == "NtDelayExecution" or call["api"] == "NtWaitForSingleObject":
             # If we see a sleep sequence, invalidate it as a time check
             if self.curidx == self.getsystimeidx + 1:
                 self.systimeidx = 0
