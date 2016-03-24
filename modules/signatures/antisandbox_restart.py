@@ -24,7 +24,7 @@ class AntiSandboxRestart(Signature):
     minimum = "1.3"
     evented = True
 
-    filter_apinames = set(["NtShutdownSystem", "NtSetSystemPowerState", "ExitWindowsEx", "InitiateShutdownW", "InitiateSystemShutdownW", "InititateSystemShutdownExW"])
+    filter_apinames = set(["NtShutdownSystem", "NtSetSystemPowerState", "ExitWindowsEx", "InitiateShutdownW", "InitiateSystemShutdownW", "InititateSystemShutdownExW", "NtRaiseHardError"])
 
     def on_call(self, call, process):
         return True

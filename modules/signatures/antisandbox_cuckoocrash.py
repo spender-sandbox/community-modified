@@ -19,7 +19,6 @@ class CuckooCrash(Signature):
     name = "antisandbox_cuckoocrash"
     description = "Crashed cuckoomon during analysis.  Report this error to the Github repo."
     severity = 3
-    weight = 3
     categories = ["anti-sandbox"]
     authors = ["Brad Spengler"]
     minimum = "1.3"
