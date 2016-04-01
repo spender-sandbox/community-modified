@@ -36,7 +36,7 @@ class RansomwareFileModifications(Signature):
         self.appendcount = 0
         self.newextensions = []
      
-    filter_apinames = set(["MoveFileWithProgressW"])
+    filter_apinames = set(["MoveFileWithProgressW","MoveFileWithProgressTransactedW"])
 
     def on_call(self, call, process):
         origfile = self.get_argument(call, "ExistingFileName")
