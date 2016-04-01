@@ -32,13 +32,13 @@ class DeletesSelf(Signature):
         if initialproc:
             self.initialpath = initialproc["module_path"].lower()
 
-    filter_apinames = set(["NtDeleteFile","DeleteFileA", "DeleteFileW", "MoveFileWithProgressW"])
+    filter_apinames = set(["NtDeleteFile","DeleteFileA", "DeleteFileW", "MoveFileWithProgressW","MoveFileWithProgressTransactedW"])
 
     def on_call(self, call, process):
         if not call["status"]:
             return None
 
-        if call["api"] != "MoveFileWithProgressW":
+        if call["api"] != "MoveFileWithProgressW" and call["api"] != "MoveFileWithProgressTransactedW":
             filename = self.get_argument(call, "FileName").lower()
             if filename == self.initialpath:
                 return True
