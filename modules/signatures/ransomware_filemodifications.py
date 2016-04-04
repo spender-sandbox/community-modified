@@ -63,6 +63,16 @@ class RansomwareFileModifications(Signature):
         if self.movefilecount > 60:
             self.data.append({"file_modifications" : "Performs %s file moves indicative of a potential file encryption process" % (self.movefilecount)})
             ret = True
+            
+        if "dropped" in self.results:
+            droppedunknowncount = 0
+            for dropped in self.results["dropped"]:
+                mimetype = dropped["type"]
+                if mimetype == "data":
+                    droppedunknowncount += 1  
+            if droppedunknowncount > 500:
+                self.data.append({"drops_unknown_mimetypes" : "Drops %s unknown file mime types which may be indicative of encrypted files being written back to disk" % (droppedunknowncount)})
+                ret = True   
 
         # Note: Always make sure this check is at bottom so that appended file extensions are underneath behavior alerts
         if self.appendcount > 40:
