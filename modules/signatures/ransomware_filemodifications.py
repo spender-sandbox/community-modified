@@ -71,7 +71,7 @@ class RansomwareFileModifications(Signature):
                 if mimetype == "data":
                     droppedunknowncount += 1  
             if droppedunknowncount > 500:
-                self.data.append({"drops_unknown_mimetypes" : "Drops %s unknown file mime types which may be indicative of encrypted files being written back to disk" % (droppedunknowncount)})
+                self.data.append({"drops_unknown_mimetypes" : "Drops %s files with an unknown mime type which may be indicative of encrypted files being written back to disk" % (droppedunknowncount)})
                 ret = True   
 
         # Note: Always make sure this check is at bottom so that appended file extensions are underneath behavior alerts
