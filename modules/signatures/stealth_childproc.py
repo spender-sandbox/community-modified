@@ -20,5 +20,5 @@ class StealthChildProc(Signature):
 
     def on_call(self, call, process):
         parenthandle = self.get_argument(call, "ParentHandle")
-        if parenthandle and parenthandle != "0xffffffff":
+        if parenthandle and parenthandle != "0xffffffff" and parenthandle != "0xffffffffffffffff":
             return True
