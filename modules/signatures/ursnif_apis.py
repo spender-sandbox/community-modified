@@ -65,10 +65,10 @@ class Ursnif_APIs(Signature):
                     else:
                         pass
 
-            if arg1 in self.decompMZ:
+            if arg1 and arg1 in self.decompMZ:
                 badness += 4
             # Handle shortnames
-            elif "~1" in arg1:
+            elif arg1 and "~1" in arg1:
                 tmp = arg1.split("~1")
                 for mpath in self.decompMZ:
                     if all(z in mpath for z in tmp):
