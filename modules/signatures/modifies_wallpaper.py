@@ -24,7 +24,12 @@ class ModifiesDesktopWallpaper(Signature):
     minimum = "1.3"
 
     def run(self):
-        if self.check_write_key(pattern=".*\\\\Control\\ Panel\\\\Desktop\\\\Wallpaper$", regex=True):
-            return True
+        reg_indicators = [
+            ".*\\\\Control\\ Panel\\\\Desktop\\\\Wallpaper$",
+            ".*\\\\Internet\\ Explorer\\\\Desktop\\\\General\\\\Wallpaper$",
+        ]
+        for indicator in reg_indicators:
+            if self.check_write_key(pattern=indicator, regex=True):
+                return True
 
         return False
