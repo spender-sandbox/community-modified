@@ -75,7 +75,7 @@ class Vawtrak_APIs(Signature):
         if self.malscore >= 10:
             uri_indicators = [
                 ".*\/rss\/feed\/stream",
-                ".*\/modules\/[a-f0-9]{32}","
+                ".*\/modules\/[a-f0-9]{32}",
             ]
             for ioc in uri_indicators:
                 match = self.check_url(pattern=ioc, regex=True)
