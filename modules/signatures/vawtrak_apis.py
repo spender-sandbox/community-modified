@@ -73,6 +73,17 @@ class Vawtrak_APIs(Signature):
         if self.check_mutex(pattern=r"^\{[0-9A-F]{8}(-[0-9A-F]{4}){3}-[0-9A-F]{12}\}$", regex=True):
             self.malscore += 2
         if self.malscore >= 10:
+            uri_indicators = [
+                ".*\/rss\/feed\/stream",
+                ".*\/modules\/[a-f0-9]{32}","
+            ]
+            for ioc in uri_indicators:
+                match = self.check_url(pattern=ioc, regex=True)
+                if match:
+                    buf = {"C2": match}
+                    if buf not in self.data:
+                        self.data.append(buf)
+
             return True
 
         return False
