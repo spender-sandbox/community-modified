@@ -66,8 +66,14 @@ class IPC_NamedPipe(Signature):
 
     def on_complete(self):
         ret = False
-        if self.ipc:
-            for ipc in self.ipc:
+        ipcs = list()
+        if self.ipc and self.created:
+            for ipc in self.created.keys():
+                if ipc in self.ipc:
+                    ipcs.append(ipc)
+
+        if ipcs:
+            for ipc in ipcs:
                 # Check if more than one pid interacted with a pipe
                 if len(self.ipc[ipc]) > 1:
                     ret = True
