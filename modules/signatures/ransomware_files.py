@@ -52,6 +52,7 @@ class RansomwareFiles(Signature):
             (".*\\\\README_DECRYPT_HYDRA_ID_.*(\.txt|\.jpg)$", ["HydraCrypt"]),
             (".*\\\\_Locky_recover_instructions\.txt$", ["Locky"]),
             (".*\\\\_DECRYPT_INFO_[a-z]{4,6}\.html$", ["Maktub"]),
+            (".*\\\\de_crypt_readme\.(html|txt|bmp)$", ["CryptXXX"]),
         ]
 
         for ioc in file_list:
