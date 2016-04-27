@@ -34,7 +34,7 @@ class DebugsSelf(Signature):
        applicationname = self.get_argument(call, "ApplicationName").lower()
        pid = self.get_argument(call, "ProcessId")
        if createflags & 1:
-           for proc in results["behavior"]["processes"]:
+           for proc in self.results["behavior"]["processes"]:
                if proc["process_id"] == pid and proc["module_path"].lower() == process["module_path"].lower():
                    # DEBUG_PROCESS on a copy of ourselves
                    return True
