@@ -53,6 +53,8 @@ class RansomwareFiles(Signature):
             (".*\\\\_Locky_recover_instructions\.txt$", ["Locky"]),
             (".*\\\\_DECRYPT_INFO_[a-z]{4,6}\.html$", ["Maktub"]),
             (".*\\\\de_crypt_readme\.(html|txt|bmp)$", ["CryptXXX"]),
+            (".*\\\\HELP_YOUR_FILES\.(html|txt)$", ["CryptFile2"]),
+            (".*\\\\READ_IT\.txt$", ["MMLocker"]),
         ]
 
         for ioc in file_list:
