@@ -27,6 +27,7 @@ class RansomwareExtensions(Signature):
             ".*\.locky$",
             ".*\.xtbl$",
             ".*\.crypt$",
+            ".*\.locked$",
         ]
 
         for indicator in indicators:
