@@ -20,7 +20,7 @@ class NetworkDocumentHTTP(Signature):
     description = "A document file initiated network communications indicative of a potential exploit or payload download"
     severity = 3
     confidence = 20
-    categories = ["virus", "exploit"]
+    categories = ["virus", "exploit", "downloader"]
     authors = ["Kevin Ross", "Will Metcalf"]
     minimum = "1.2"
     evented = True
@@ -31,7 +31,7 @@ class NetworkDocumentHTTP(Signature):
         self.data = []
         self.office_proc_list =["wordview.exe","winword.exe","excel.exe","powerpnt.exe","outlook.exe","acrord32.exe","acrord64.exe"]
 
-    filter_apinames = set(["InternetCrackUrlW","InternetCrackUrlA","URLDownloadToFileW","HttpOpenRequestW","InternetReadFile"])
+    filter_apinames = set(["InternetCrackUrlW","InternetCrackUrlA","URLDownloadToFileW","HttpOpenRequestW","InternetReadFile","WSASend"])
     filter_analysistypes = set(["file"])
 
     def on_call(self, call, process):
@@ -50,6 +50,9 @@ class NetworkDocumentHTTP(Signature):
             if call["api"] == "InternetCrackUrlA":
                 buff = self.get_argument(call, "Url").lower()
                 addit = {"http_request": "%s_InternetCrackUrlA_%s" % (pname,buff)}
+            if call["api"] == "WSASend":
+                buff = self.get_argument(call, "Buffer").lower()
+                addit = {"http_request": "%s_WSASend_%s" % (pname,buff)}
             if addit and addit not in self.data:
                 self.data.append(addit)
 
