@@ -55,6 +55,7 @@ class RansomwareFiles(Signature):
             (".*\\\\de_crypt_readme\.(html|txt|bmp)$", ["CryptXXX"]),
             (".*\\\\HELP_YOUR_FILES\.(html|txt)$", ["CryptFile2"]),
             (".*\\\\READ_IT\.txt$", ["MMLocker"]),
+            (".*\\\\#\ DECRYPT\ MY\ FILES\ #\.(txt|html|vbs)$", ["Cerber"]),
         ]
 
         for ioc in file_list:
