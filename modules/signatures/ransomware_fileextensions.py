@@ -30,6 +30,8 @@ class RansomwareExtensions(Signature):
             ".*\.locked$",
             ".*\.cerber$",
             ".*\.encrypt$",
+            ".*\.R5A$",
+            ".*\.R4A$",
         ]
 
         for indicator in indicators:
