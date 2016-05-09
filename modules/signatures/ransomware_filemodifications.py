@@ -73,7 +73,7 @@ class RansomwareFileModifications(Signature):
                 filename = dropped["name"]
                 if mimetype == "data" and ".tmp" not in filename:
                     droppedunknowncount += 1            
-            if droppedunknowncount > 50:
+            if droppedunknowncount > 50 and self.results["info"]["package"] != "pdf":
                 self.data.append({"drops_unknown_mimetypes" : "Drops %s unknown file mime types which may be indicative of encrypted files being written back to disk" % (droppedunknowncount)})
                 ret = True 
 
