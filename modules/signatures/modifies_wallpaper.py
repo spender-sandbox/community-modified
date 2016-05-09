@@ -1,4 +1,4 @@
-# Copyright (C) 2016 Kevin Ross
+# Copyright (C) 2016 Kevin Ross, Brad Spengler
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -20,10 +20,21 @@ class ModifiesDesktopWallpaper(Signature):
     description = "Attempts to modify desktop wallpaper"
     severity = 3
     categories = ["ransomware"]
-    authors = ["Kevin Ross"]
+    authors = ["Kevin Ross","Brad Spengler"]
     minimum = "1.3"
+    evented = True
 
-    def run(self):
+    filter_apinames = set(["SystemParametersInfoA", "SystemParametersInfoW"])
+
+    def __init__(self, *args, **kwargs):
+        Signature.__init__(self, *args, **kwargs)
+
+    def on_call(self, call, process):
+        action = int(self.get_argument(call, "Action"), 16)
+        if action == 0x14:
+            return True
+
+    def on_complete(self):
         reg_indicators = [
             ".*\\\\Control\\ Panel\\\\Desktop\\\\Wallpaper$",
             ".*\\\\Internet\\ Explorer\\\\Desktop\\\\General\\\\Wallpaper$",
