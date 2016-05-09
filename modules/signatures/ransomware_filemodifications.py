@@ -39,6 +39,8 @@ class RansomwareFileModifications(Signature):
     filter_apinames = set(["MoveFileWithProgressW","MoveFileWithProgressTransactedW"])
 
     def on_call(self, call, process):
+        if not call["status"]:
+            return None
         origfile = self.get_argument(call, "ExistingFileName")
         newfile = self.get_argument(call, "NewFileName")
         self.movefilecount += 1
