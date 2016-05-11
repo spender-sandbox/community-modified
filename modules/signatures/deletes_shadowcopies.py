@@ -23,8 +23,12 @@ class DeletesShadowCopies(Signature):
             cmdline = self.get_argument(call, "CommandLine").lower()
             if "vssadmin" in cmdline and "delete" in cmdline and "shadows" in cmdline:
                 return True
+            elif "wmic" in cmdline and "shadowcopy" in cmdline and "delete" in cmdline:
+                return True
         elif call["api"] == "ShellExecuteExW":
             filepath = self.get_argument(call, "FilePath").lower()
             params = self.get_argument(call, "Parameters").lower()
             if "vssadmin" in filepath and "delete" in params and "shadows" in params:
+                return True
+            elif "wmic" in cmdline and "shadowcopy" in params and "delete" in params:
                 return True
