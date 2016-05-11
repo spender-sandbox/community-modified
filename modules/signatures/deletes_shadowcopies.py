@@ -30,5 +30,5 @@ class DeletesShadowCopies(Signature):
             params = self.get_argument(call, "Parameters").lower()
             if "vssadmin" in filepath and "delete" in params and "shadows" in params:
                 return True
-            elif "wmic" in cmdline and "shadowcopy" in params and "delete" in params:
+            elif "wmic" in filepath and "shadowcopy" in params and "delete" in params:
                 return True
