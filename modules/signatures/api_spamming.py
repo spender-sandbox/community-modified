@@ -1,4 +1,4 @@
-# Copyright (C) 2016 KillerInstinct
+# Copyright (C) 2016 KillerInstinct, Brad Spengler
 # This file is part of Cuckoo Sandbox - http://www.cuckoosandbox.org
 # See the file 'docs/LICENSE' for copying permission.
 
@@ -9,16 +9,42 @@ class APISpamming(Signature):
     description = "Attempts to repeatedly call a single API many times in order to delay analysis time"
     severity = 3
     categories = ["anti-analysis"]
-    authors = ["KillerInstinct"]
+    authors = ["KillerInstinct", "Brad Spengler"]
     minimum = "1.3"
+    evented = True
 
-    def run(self):
+    def __init__(self, *args, **kwargs):
+        Signature.__init__(self, *args, **kwargs)
+        self.spam = dict()
+        self.spam_limit = 10000
+ 
+    def on_call(self, call, process):
+        if call["repeated"] < self.spam_limit:
+            return None
+        if process not in self.spam:
+            self.spam[process] = {}
+        if call["api"] not in self.spam[process]:
+            self.spam[process][call["api"]] = call["repeated"]
+        else:
+            self.spam[process][call["api"]] += call["repeated"]
+
+    def on_complete(self):
+        spam_apis_whitelist = {
+             "c:\\program files\\internet explorer\\iexplore.exe": ["NtQuerySystemTime", "GetSystemTimeAsFileTime", "GetSystemTime"],
+             "c:\\program files\\microsoft office\\office14\\winword.exe": ["GetLocalTime"],
+             "c:\\windows\\system32\\wbem\\wmiprvse.exe": ["GetSystemTimeAsFileTime"],
+             "c:\\windows\\system32\\wscript.exe": ["GetLocalTime", "NtQuerySystemTime"],
+        }
         ret = False
-        if self.results.get("behavior", {}).get("processes", []):
-            for process in self.results["behavior"]["processes"]:
-                if process.get("spam_apis", []):
+        for proc, apis in self.spam.items():
+            modulepathlower = proc["module_path"].lower()
+            do_check = False
+            if modulepathlower in spam_apis_whitelist:
+                do_check = True
+            for apiname, count in apis.items():
+                if not do_check or apiname not in spam_apis_whitelist[modulepathlower]:
+                    self.data.append({"Spam": "{0} ({1}) called API {2} {3} times".format(
+                            spam["process_name"], proc["process_id"], apiname, count)})
                     ret = True
-                    for spam in process["spam_apis"]:
-                        self.data.append({"Spam": "{0} ({1}) called API {2} {3} times".format(
-                            spam["name"], spam["pid"], spam["api"], spam["count"])})
+
         return ret
