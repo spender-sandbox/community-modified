@@ -44,7 +44,7 @@ class APISpamming(Signature):
             for apiname, count in apis.items():
                 if not do_check or apiname not in spam_apis_whitelist[modulepathlower]:
                     self.data.append({"Spam": "{0} ({1}) called API {2} {3} times".format(
-                            spam["process_name"], proc["process_id"], apiname, count)})
+                            proc["process_name"], proc["process_id"], apiname, count)})
                     ret = True
 
         return ret
