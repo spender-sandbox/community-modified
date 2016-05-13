@@ -29,8 +29,11 @@
     <Compile Include="modules\signatures\antivm_dirobjects.py" />
     <Compile Include="modules\signatures\antivm_vmware_libs.py" />
     <Compile Include="modules\signatures\antivm_vpc_mutex.py" />
+    <Compile Include="modules\signatures\api_spamming.py" />
+    <Compile Include="modules\signatures\bcdedit_command.py" />
     <Compile Include="modules\signatures\browser_needed.py" />
     <Compile Include="modules\signatures\browser_scanbox.py" />
+    <Compile Include="modules\signatures\cerber_apis.py" />
     <Compile Include="modules\signatures\chimera_apis.py">
       <SubType>Code</SubType>
     </Compile>
@@ -53,9 +56,13 @@
     <Compile Include="modules\signatures\family_proxyback.py" />
     <Compile Include="modules\signatures\family_radamant.py" />
     <Compile Include="modules\signatures\gootkit_apis.py" />
+    <Compile Include="modules\signatures\h1n1_apis.py" />
+    <Compile Include="modules\signatures\ipc_namedpipe.py" />
     <Compile Include="modules\signatures\js_suspicious_redirect.py" />
+    <Compile Include="modules\signatures\locky_apis.py" />
     <Compile Include="modules\signatures\martians_office.py" />
     <Compile Include="modules\signatures\mimics_filename.py" />
+    <Compile Include="modules\signatures\modifies_wallpaper.py" />
     <Compile Include="modules\signatures\network_cnc_http.py" />
     <Compile Include="modules\signatures\network_docfile_http.py" />
     <Compile Include="modules\signatures\nymaim_apis.py" />
