@@ -38,6 +38,7 @@ class MimicsIcon(Signature):
             "f042192565667b350a5056af6ce01d5c",
             # Fake Acrobat icon
             "1b9754b01e9b521215f8fd8b0367c116",
+            "71d44c1d6e7048dc72c3b507d14deaa8",
         ]
 
         if "static" in self.results and "pe" in self.results["static"]  and "icon_fuzzy" in self.results["static"]["pe"]:
