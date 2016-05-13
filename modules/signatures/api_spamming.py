@@ -40,7 +40,7 @@ class APISpamming(Signature):
         }
         ret = False
         for pid, apis in self.spam.iteritems():
-            modulepathlower = proc["module_path"].lower()
+            modulepathlower = self.processes[pid]["module_path"].lower()
             do_check = False
             if modulepathlower in spam_apis_whitelist:
                 do_check = True
