@@ -47,7 +47,7 @@ class ZeusP2P(Signature):
         # IP is really valid.
         count = 0
         if "network" in self.results:
-            for udp in self.results["network"]["udp"]:
+            for udp in self.results.get("network", {}).get("udp",[]):
                 if udp["dport"] > 1024:
                     count += 1
             
