@@ -53,7 +53,7 @@ class AntiSandboxSleep(Signature):
                     procs[pname]["Actual"] += int(sleep)
 
         for process in procs:
-            if procs[process]["Attempted"] >= 210000:
+            if procs[process]["Attempted"] >= 250000:
                 ret = True
                 actual = str(procs[process]["Actual"] / 1000)
                 attempted = str(procs[process]["Attempted"] / 1000)
