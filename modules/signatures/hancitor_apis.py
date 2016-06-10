@@ -28,7 +28,7 @@ def getWrittenUrls(data):
     return []
 
 class Hancitor_APIs(Signature):
-    name = "Hancitor_behavior"
+    name = "hancitor_behavior"
     description = "Exhibits behavior characteristic of Hancitor downloader"
     weight = 3
     severity = 3
@@ -51,32 +51,39 @@ class Hancitor_APIs(Signature):
     filter_apinames = set(["CreateProcessInternalW", "WriteProcessMemory",
                            "RtlDecompressBuffer", "InternetCrackUrlA",
                            "HttpOpenRequestA", "HttpSendRequestA",
-                           "InternetReadFile"])
+                           "InternetReadFile", "NtClose"])
 
     def on_call(self, call, process):
         if call["api"] == "CreateProcessInternalW":
             flags = int(self.get_argument(call, "CreationFlags"), 16)
             if flags & 0x4:
                 handle = self.get_argument(call, "ProcessHandle")
-                self.suspended[process["process_id"]] = handle
+                self.suspended[handle] = self.get_argument(call, "ProcessId")
 
         elif call["api"] == "WriteProcessMemory":
             buf = self.get_argument(call, "Buffer")
             if "Cookie:disclaimer_accepted=true" in buf:
                 handle = self.get_argument(call, "ProcessHandle")
-                if handle in self.suspended.values():
-                    for pid in self.suspended:
-                        if self.suspended[pid] == handle:
-                            self.badPid = pid
+                if handle in self.suspended:
+                    for pHandle in self.suspended:
+                        if pHandle == handle:
+                            self.badPid = self.suspended[pHandle]
                             break
+
                     check = getWrittenUrls(buf)
                     if len(check) >= 2:
                         self.c2s = check
 
+        elif call["api"] == "NtClose":
+            if call["status"]:
+                handle = self.get_argument(call, "Handle")
+                if handle in self.suspended:
+                    del self.suspended[handle]
+
         elif call["api"] == "RtlDecompressBuffer":
             buf = self.get_argument(call, "UncompressedBuffer")
             if "Cookie:disclaimer_accepted=true" in buf:
-                self.badPid = process["process_id"]
+                self.badPid = str(process["process_id"])
                 check = getWrittenUrls(buf)
                 if len(check) >= 2:
                     self.c2s = check
@@ -99,13 +106,13 @@ class Hancitor_APIs(Signature):
                 pData = self.get_argument(call, "PostData")
                 if pData and all(word in pData for word in self.keywords):
                     self.found = True
-                c2 = {"C2": self.currentUrl}
-                if c2 not in self.data:
-                    self.data.append(c2)
+                    c2 = {"C2": self.currentUrl}
+                    if c2 not in self.data:
+                        self.data.append(c2)
                 self.netSequence = 0
 
         elif call["api"] == "InternetReadFile":
-            if call["status"] and process["process_id"] == self.badPid and self.found:
+            if call["status"] and str(process["process_id"]) == self.badPid:
                 buf = self.get_argument(call, "Buffer")
                 if buf and buf.startswith("{") and buf.strip().endswith("}"):
                     check = re.findall(":(?P<url>https?://[^\}]+)\}", buf)
