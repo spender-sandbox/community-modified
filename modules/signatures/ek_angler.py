@@ -47,4 +47,7 @@ class Angler_JS(Signature):
             return True
         if "2830293d2668364336343734364526" in buf.lower() and "2831293d2668364336343245364326" in buf.lower() and "2832293d2668373236393536373426" in buf.lower():
             return True
-
+        if "value='\" +url" in buf.lower() and "<param name='play' value='true'>\" + \"<param name='flashvars'" in buf.lower():
+            return True
+        if "getkolaio()" in buf.lower():
+            return True
