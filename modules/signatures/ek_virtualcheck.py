@@ -17,7 +17,7 @@ from lib.cuckoo.common.abstracts import Signature
 
 class Virtualcheck_JS(Signature):
     name = "virtualcheck_js"
-    description = "Executes obfuscated JavaScript checking for sandbox or VM environment"
+    description = "Executes obfuscated JavaScript checking for analysis tools or sandbox/VM environment"
     weight = 3
     severity = 3
     categories = ["exploit_kit", "evasion"]
@@ -53,9 +53,11 @@ class Virtualcheck_JS(Signature):
                 "Kaspersky.IeVirtualKeyboardPlugin",
                 "isPhantom",
                 "isNodeJs",
-                "isCouchJs",
+                "iscouchJs",
                 "isRhino",
                 "isDebugger"
+                "IE_DEVTOOLBAR_CONSOLE_COMMAND_LINE"
+                "BROWSERTOOLS_CONSOLE_SAFEFUNC"
             ]
 
         if call["api"] == "JsEval":
@@ -63,6 +65,9 @@ class Virtualcheck_JS(Signature):
         else:
             buf = self.get_argument(call, "Script")
 
+        # As second test we bring everything together to remove split string obfuscation and see if we have any in remaining buffer too
+        buf2 = buf.translate(None, " \"+'")
+
         for indicator in indicators:
-            if indicator in buf.lower():
+            if indicator.lower() in buf.lower() or indicator.lower() in buf2.lower():
                 return True
