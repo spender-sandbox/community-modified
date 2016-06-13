@@ -63,6 +63,8 @@ class BadCerts(Signature):
             "98a04e4163357790c4a79e6d713ff0af51fe6927",
             # Spymel Cert (SBO INVEST)
             "3a8412582563f43dd28aa1f31cdd0d0c6d78fd60",
+            # DIDZHITAL ART cert used for Kovter
+            "a286affc5f6e92bdc93374646676ebc49e21bcae",
             ]
         if "static" in self.results and "pe" in self.results["static"]:
             if "digital_signers" in self.results["static"]["pe"] and self.results["static"]["pe"]["digital_signers"]:

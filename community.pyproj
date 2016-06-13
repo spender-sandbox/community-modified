@@ -52,9 +52,7 @@
     <Compile Include="modules\signatures\disables_app.py" />
     <Compile Include="modules\signatures\dropper_js.py" />
     <Compile Include="modules\signatures\ek_cve2015_2419.py" />
-    <Compile Include="modules\signatures\family_dmalocker.py" />
     <Compile Include="modules\signatures\family_proxyback.py" />
-    <Compile Include="modules\signatures\family_radamant.py" />
     <Compile Include="modules\signatures\gootkit_apis.py" />
     <Compile Include="modules\signatures\h1n1_apis.py" />
     <Compile Include="modules\signatures\ipc_namedpipe.py" />
@@ -105,9 +103,6 @@
     <Compile Include="modules\signatures\kibex_apis.py" />
     <Compile Include="modules\signatures\mimics_icon.py" />
     <Compile Include="modules\signatures\network_anomaly.py" />
-    <Compile Include="modules\signatures\office_dl_write_exe.py">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="modules\signatures\office_security.py" />
     <Compile Include="modules\signatures\origin_resource_langid.py" />
     <Compile Include="modules\signatures\pdf_annot_urls.py" />
@@ -135,7 +130,6 @@
     <Compile Include="modules\signatures\antiemu_wine_func.py" />
     <Compile Include="modules\signatures\antiemu_wine.py" />
     <Compile Include="modules\signatures\antisandbox_mouse_hook.py" />
-    <Compile Include="modules\signatures\antisandbox_productid.py" />
     <Compile Include="modules\signatures\antisandbox_joe_anubis_files.py" />
     <Compile Include="modules\signatures\antiav_avast_libs.py" />
     <Compile Include="modules\signatures\antisandbox_sleep.py" />
