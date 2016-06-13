@@ -53,7 +53,7 @@ class Virtualcheck_JS(Signature):
                 "Kaspersky.IeVirtualKeyboardPlugin",
                 "isPhantom",
                 "isNodeJs",
-                "iscouchJs",
+                "isCouchJs",
                 "isRhino",
                 "isDebugger"
                 "IE_DEVTOOLBAR_CONSOLE_COMMAND_LINE"
