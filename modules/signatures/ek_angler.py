@@ -51,3 +51,5 @@ class Angler_JS(Signature):
             return True
         if "getkolaio()" in buf.lower():
             return True
+        if "var cryptKey = " in buf.lower():
+            return True
