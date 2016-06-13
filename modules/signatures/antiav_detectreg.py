@@ -36,7 +36,7 @@ class AntiAVDetectReg(Signature):
             ".*\\\\Software\\\\(Wow6432Node\\\\)?Softed\\\\ViGUARD$",
             ".*\\\\Software\\\\(Wow6432Node\\\\)?Sophos$",
             ".*\\\\Software\\\\(Wow6432Node\\\\)?Sophos\\\\.*",
-            ".*\\\\Software\\\\(Wow6432Node\\\\)?TrendMicro$",
+            ".*\\\\Software\\\\(Wow6432Node\\\\)?TrendMicro.*",
             ".*\\\\Software\\\\(Wow6432Node\\\\)?VBA32$",
             ".*\\\\Software\\\\(Wow6432Node\\\\)?Zone\\ Labs\\\\ZoneAlarm$",
             ".*\\\\Software\\\\(Wow6432Node\\\\)?Microsoft\\\\Windows\\\\CurrentVersion\\\\App\\ Paths\\\\mbam.exe$",
