@@ -17,26 +17,24 @@ from lib.cuckoo.common.abstracts import Signature
 
 class Fingerprint(Signature):
     name = "recon_fingerprint"
-    description = "Collects information to fingerprint the system (MachineGuid, DigitalProductId, SystemBiosDate)"
+    description = "Collects information to fingerprint the system"
     severity = 3
+    confidence = 75
     categories = ["recon"]
     authors = ["nex", "Optiv"]
     minimum = "1.2"
 
     def run(self):
-        matches = 0
-
         indicators = [
             ".*\\\\Microsoft\\\\Windows\\ NT\\\\CurrentVersion\\\\DigitalProductId$",
+            ".*\\\\Microsoft\\\\Windows\\ NT\\\\CurrentVersion\\\\ProductId$",
+            ".*\\\\Microsoft\\\\Internet\\ Explorer\\\\Registration\\\\ProductId$",
             ".*\\\\Microsoft\\\\Cryptography\\\\MachineGuid$",
             ".*\\\\HARDWARE\\\\DESCRIPTION\\\\System\\\\SystemBIOSDate$",
         ]
 
         for indicator in indicators:
             if self.check_read_key(pattern=indicator, regex=True):
-                matches += 1
-
-        if matches >= 2:
-            return True
-
+                return True
+ 
         return False
