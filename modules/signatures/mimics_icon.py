@@ -34,6 +34,7 @@ class MimicsIcon(Signature):
             "db2d2c31f0c651217a0ef11aaf8c7796",
             "e52d1e9d64fd9535bf10f6da1091df9d",
             "f25d6693364cba910762c7e1d5149c21",
+            "b028e87be8035706c824434b691dba1b",
             # Fake PDF icon
             "f042192565667b350a5056af6ce01d5c",
             # Fake Acrobat icon
