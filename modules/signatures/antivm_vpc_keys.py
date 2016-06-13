@@ -24,4 +24,12 @@ class VPCDetectKeys(Signature):
     minimum = "1.2"
 
     def run(self):
-        return self.check_key(pattern=".*\\\\SYSTEM\\\\(CurrentControlSet|ControlSet001)\\\\Services\\\\vpc-s3$", regex=True)
+        indicators = [
+            ".*\\\\SYSTEM\\\\(CurrentControlSet|ControlSet001)\\\\Enum\\\\PCI\\\\VEN_5333&DEV_8811&SUBSYS_00000000&REV_00$",
+            ".*\\\\SYSTEM\\\\(CurrentControlSet|ControlSet001)\\\\Services\\\\vpc-s3$",
+        ]
+        for indicator in indicators:
+            if self.check_key(pattern=indicator, regex=True):
+                return True
+
+        return False

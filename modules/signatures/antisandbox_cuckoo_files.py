@@ -1,4 +1,4 @@
-# Copyright (C) 2015 Kevin Ross
+# Copyright (C) 2016 Brad Spengler
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -15,18 +15,18 @@
 
 from lib.cuckoo.common.abstracts import Signature
 
-class SunbeltDetectFiles(Signature):
-    name = "antisandbox_sunbelt_files"
-    description = "Detects Sunbelt Sandbox through the presence of a file"
+class CuckooDetectFiles(Signature):
+    name = "antisandbox_cuckoo_files"
+    description = "Attempts to detect Cuckoo Sandbox through the presence of a file"
     severity = 3
     categories = ["anti-sandbox"]
-    authors = ["Kevin Ross"]
+    authors = ["Brad Spengler"]
     minimum = "0.5"
 
     def run(self):
         indicators = [
-            ".*\\\\SandboxStarter\.exe$",
-            "^C\:\\\\analysis\\\\.*",
+            "C:\\\\agent\\\\agent\.pyw$",
+            "C:\\\\cuckoo\\\\dll$",
         ]
 
         for indicator in indicators:

@@ -1,4 +1,4 @@
-# Copyright (C) 2015 Kevin Ross
+# Copyright (C) 2016 Brad Spengler
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -15,22 +15,22 @@
 
 from lib.cuckoo.common.abstracts import Signature
 
-class SunbeltDetectFiles(Signature):
-    name = "antisandbox_sunbelt_files"
-    description = "Detects Sunbelt Sandbox through the presence of a file"
+class ParallelsDetectKeys(Signature):
+    name = "antivm_parallels_keys"
+    description = "Detects Parallels through the presence of a registry key"
     severity = 3
-    categories = ["anti-sandbox"]
-    authors = ["Kevin Ross"]
+    categories = ["anti-vm"]
+    authors = ["Brad Spengler"]
     minimum = "0.5"
 
     def run(self):
         indicators = [
-            ".*\\\\SandboxStarter\.exe$",
-            "^C\:\\\\analysis\\\\.*",
+            ".*\\\\SYSTEM\\\\(CurrentControlSet|ControlSet001)\\\\Enum\\\\PCI\\\\VEN_1AB8&DEV_4000&SUBSYS_04001AB8&REV_00$",
+            ".*\\\\SYSTEM\\\\(CurrentControlSet|ControlSet001)\\\\Enum\\\\PCI\\\\VEN_1AB8&DEV_4005&SUBSYS_04001AB8&REV_00$",
+            ".*\\\\SYSTEM\\\\(CurrentControlSet|ControlSet001)\\\\Enum\\\\PCI\\\\VEN_1AB8&DEV_4006&SUBSYS_04061AB8&REV_00$",
         ]
-
         for indicator in indicators:
-            if self.check_file(pattern=indicator, regex=True):
+            if self.check_key(pattern=indicator, regex=True):
                 return True
 
         return False

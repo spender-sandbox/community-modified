@@ -23,10 +23,17 @@
     <Compile Include="modules\signatures\antianalysis_detectfile.py" />
     <Compile Include="modules\signatures\antisandbox_cuckoocrash.py" />
     <Compile Include="modules\signatures\antisandbox_cuckoo.py" />
+    <Compile Include="modules\signatures\antisandbox_threattrack_files.py" />
+    <Compile Include="modules\signatures\antisandbox_fortinet_files.py" />
     <Compile Include="modules\signatures\antisandbox_restart.py" />
     <Compile Include="modules\signatures\antisandbox_sboxie_mutex.py" />
     <Compile Include="modules\signatures\antisandbox_sboxie_objects.py" />
+    <Compile Include="modules\signatures\antisandbox_cuckoo_files.py" />
     <Compile Include="modules\signatures\antivm_dirobjects.py" />
+    <Compile Include="modules\signatures\antivm_bochs_keys.py" />
+    <Compile Include="modules\signatures\antivm_xen_keys.py" />
+    <Compile Include="modules\signatures\antivm_hyperv_keys.py" />
+    <Compile Include="modules\signatures\antivm_parallels_keys.py" />
     <Compile Include="modules\signatures\antivm_vmware_libs.py" />
     <Compile Include="modules\signatures\antivm_vpc_mutex.py" />
     <Compile Include="modules\signatures\api_spamming.py" />
@@ -50,6 +57,7 @@
     <Compile Include="modules\signatures\dead_link.py" />
     <Compile Include="modules\signatures\critical_process.py" />
     <Compile Include="modules\signatures\disables_app.py" />
+    <Compile Include="modules\signatures\disables_windefender.py" />
     <Compile Include="modules\signatures\dropper_js.py" />
     <Compile Include="modules\signatures\ek_cve2015_2419.py" />
     <Compile Include="modules\signatures\family_proxyback.py" />
@@ -68,6 +76,7 @@
     <Compile Include="modules\signatures\office_write_exe.py" />
     <Compile Include="modules\signatures\packer_confuser.py" />
     <Compile Include="modules\signatures\packer_smartassembly.py" />
+    <Compile Include="modules\signatures\persistence_bootexecute.py" />
     <Compile Include="modules\signatures\ppp_pcre.py" />
     <Compile Include="modules\signatures\ransomware_dmalocker.py" />
     <Compile Include="modules\signatures\ransomware_filemodifications.py" />
@@ -146,7 +155,6 @@
     <Compile Include="modules\signatures\antivm_generic_diskreg.py" />
     <Compile Include="modules\signatures\antivm_generic_scsi.py" />
     <Compile Include="modules\signatures\antivm_generic_services.py" />
-    <Compile Include="modules\signatures\antivm_vbox_acpi.py" />
     <Compile Include="modules\signatures\antivm_vmware_devices.py" />
     <Compile Include="modules\signatures\antivm_vbox_devices.py" />
     <Compile Include="modules\signatures\antisandbox_sboxie_libs.py" />
