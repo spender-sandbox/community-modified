@@ -16,7 +16,7 @@ class DisablesWindowsDefender(Signature):
         keys = [
             ".*\\\\SOFTWARE\\\\(Wow6432Node\\\\)?Windows\\ Defender\\\\.*",
             ".*\\\\SOFTWARE\\\\(Wow6432Node\\\\)?Policies\\\\Microsoft\\\\Windows\\ Defender\\\\.*",
-            ".*\\\\SYSTEM\\\\\(CurrentControlSet|ControlSet001)\\\\services\\\\WinDefend\\\\.*",
+            ".*\\\\SYSTEM\\\\(CurrentControlSet|ControlSet001)\\\\services\\\\WinDefend\\\\.*",
         ]
         for check in keys:
             if self.check_write_key(pattern=check, regex=True):
