@@ -27,6 +27,7 @@ class VMwareDetectFiles(Signature):
         indicators = [
             ".*\\\\drivers\\\\vmmouse\.sys$",
             ".*\\\\drivers\\\\vmhgfs\.sys$",
+            ".*\\\\vmguestlib\.dll$",
             ".*\\\\VMware\\ Tools\\\\TPAutoConnSvc\.exe$",
             ".*\\\\VMware\\ Tools\\\\TPAutoConnSvc\.exe\.dll$",
             ".*\\\\Program\\ Files(\\ \(x86\))?\\\\VMware\\\\VMware\\ Tools.*",
