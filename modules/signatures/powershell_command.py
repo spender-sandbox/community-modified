@@ -44,7 +44,7 @@ class PowershellCommand(Signature):
             params = self.get_argument(call, "Parameters").lower()
             cmdline = filepath + " " + params
 
-        if "powershell.exe" in cmdline and "bypass" in cmdline:
+        if "powershell.exe" in cmdline and ("bypass" in cmdline or "unrestricted" in cmdline):
             self.exec_policy = True
 
         if "powershell.exe" in cmdline and "-nop" in cmdline:
