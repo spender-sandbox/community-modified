@@ -24,6 +24,7 @@ class MartiansOffice(Signature):
     name = "office_martian_children"
     description = "Martian Subprocess Started By Office Process"
     severity = 3
+    weight = 3
     categories = ["martians"]
     authors = ["Will Metcalf"]
     minimum = "1.3"
