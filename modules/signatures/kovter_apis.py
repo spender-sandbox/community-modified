@@ -22,7 +22,7 @@ from lib.cuckoo.common.abstracts import Signature
 
 class Kovter_APIs(Signature):
     name = "kovter_behavior"
-    description = "Exhibits behavior characteristics of Kovter malware"
+    description = "Exhibits behavior characteristic of Kovter malware"
     severity = 3
     weight = 3
     categories = ["clickfraud", "downloader"]
