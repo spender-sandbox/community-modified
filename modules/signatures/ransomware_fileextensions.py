@@ -35,6 +35,7 @@ class RansomwareExtensions(Signature):
             ".*\.herbst$",
             ".*\.CrySiS$",
             ".*\.bart\.zip$",
+            ".*\.zepto$",
         ]
 
         for indicator in indicators:
