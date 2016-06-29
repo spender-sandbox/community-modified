@@ -28,6 +28,8 @@ class CuckooCrash(Signature):
 
     def __init__(self, *args, **kwargs):
         Signature.__init__(self, *args, **kwargs)
+        self.found_crash = False
+        self.messages = []
 
     def on_call(self, call, process):
         subcategory = self.check_argument_call(call,
@@ -35,6 +37,12 @@ class CuckooCrash(Signature):
                                                name="Subcategory",
                                                pattern="cuckoocrash")
         if subcategory:
-            self.data.append({"pid" : process["process_id"]})
-            self.data.append({"message" : self.get_argument(call, "Message")})
-            return True
+            message = self.get_argument(call, "Message")
+            if message not in self.messages:
+                self.messages.append(message)
+                self.data.append({"pid" : process["process_id"]})
+                self.data.append({"message" : message})
+                self.found_crash = True
+
+    def on_complete(self):
+        return found_crash
