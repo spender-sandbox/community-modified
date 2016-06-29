@@ -34,6 +34,7 @@ class AntiAnalysisDetectFile(Signature):
             "^[A-Za-z]:\\\\vmremote\\\\vmremoteguest\.exe$",
             "^[A-Za-z]:\\\\Program\\ Files(\\ \(x86\))?\\\\Fiddler",
             "^[A-Za-z]:\\\\ComboFix",
+            "^[A-Za-z]:\\\\Program\\ Files(\\ \(x86\))?\\\\FFDec",
         ]
         ret = False
         for indicator in file_indicators:
