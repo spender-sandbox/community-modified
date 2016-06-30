@@ -57,6 +57,7 @@ class RansomwareFiles(Signature):
             (".*\\\\READ_IT\.txt$", ["MMLocker"]),
             (".*\\\\#\ DECRYPT\ MY\ FILES\ #\.(txt|html|vbs)$", ["Cerber"]),
             (".*\\\\_HELP_instructions\.html$", ["Locky"])
+            (".*\\\\!satana!.txt$", ["Satana"])
         ]
 
         for ioc in file_list:
