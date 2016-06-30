@@ -39,7 +39,12 @@ class RansomwareMessage(Signature):
             "your documents",
             "restore files",
             "restore data",
-            "restore your data",
+            "restore the files",
+            "restore the data",
+            "recover files",
+            "recover data"
+            "recover the files",
+            "recover the data",
             "has been locked",
             "pay fine",
             "pay a fine",
@@ -51,8 +56,6 @@ class RansomwareMessage(Signature):
             "recover them",
             "recover your",
             "recover personal",
-            "recover the files",
-            "recover the data",
             "bitcoin",
             "secret server",
             "secret internet server",
@@ -101,13 +104,25 @@ class RansomwareMessage(Signature):
         if call["api"] == "NtWriteFile":
             filescore = 0
             buff = self.get_raw_argument(call, "Buffer").lower()
+            filepath = self.get_raw_argument(call, "HandleName")
             patterns = "|".join(self.indicators)
-            if re.findall(patterns, buff):
-                filepath = self.get_raw_argument(call, "HandleName")
-                if filepath not in self.ransomfile:
-                    self.ransomfile.append(filepath)
+            if filepath.lower() == "\\??\\physicaldrive0" or filepath.lower().startswith("\\device\\harddisk"):
+                if re.findall(patterns, buff):   
+                    if filepath not in self.ransomfile:
+                        self.ransomfile.append(filepath)
 
     def on_complete(self):
+        if "dropped" in self.results:
+            for dropped in self.results["dropped"]:
+                mimetype = dropped["type"]
+                if "ASCII text" in mimetype:
+                    filename = dropped["name"]
+                    data = dropped["data"]
+                    patterns = "|".join(self.indicators)
+                    if re.findall(patterns, data):
+                        if filename not in self.ransomfile:
+                            self.ransomfile.append(filename)
+
         if len(self.ransomfile) > 0:
             for filename in self.ransomfile:
                 self.data.append({"ransom_file" : "%s" % (filename)})
