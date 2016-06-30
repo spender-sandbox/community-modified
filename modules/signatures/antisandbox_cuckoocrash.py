@@ -45,4 +45,4 @@ class CuckooCrash(Signature):
                 self.found_crash = True
 
     def on_complete(self):
-        return found_crash
+        return self.found_crash
