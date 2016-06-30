@@ -66,6 +66,8 @@ class RansomwareMessage(Signature):
             "torgateway",
             "torproject.org",
             "ransom",
+            "bootkit",
+            "rootkit",
             "payment",
             "AES128",
             "AES256",
@@ -84,7 +86,11 @@ class RansomwareMessage(Signature):
             "RSA-4096",
             "private key",
             "personal key",
-            "your key"
+            "your code",
+            "private code",
+            "personal code",
+            "enter code",
+            "your key",
             "unique key"
     ]
         
@@ -94,14 +100,12 @@ class RansomwareMessage(Signature):
     def on_call(self, call, process):
         if call["api"] == "NtWriteFile":
             filescore = 0
-            buff = self.get_raw_argument(call, "Buffer")
-            for indicator in self.indicators:
-                if indicator in buff.lower():
-                    filescore += 1
-                if filescore > 1:
-                    filepath = self.get_raw_argument(call, "HandleName")
-                    if filepath not in self.ransomfile:
-                        self.ransomfile.append(filepath)
+            buff = self.get_raw_argument(call, "Buffer").lower()
+            patterns = "|".join(self.indicators)
+            if re.findall(patterns, buff):
+                filepath = self.get_raw_argument(call, "HandleName")
+                if filepath not in self.ransomfile:
+                    self.ransomfile.append(filepath)
 
     def on_complete(self):
         if len(self.ransomfile) > 0:
