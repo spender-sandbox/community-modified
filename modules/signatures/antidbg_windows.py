@@ -66,7 +66,6 @@ class AntiDBGWindows(Signature):
             "ThunderRT6FormDC",
             "TfrmMain",
             "Afx:400000:b:10011:6:350167",
-            "TApplication",
             "SmartSniff",
             "ConsoleWindowClass",
             "18467-41",
