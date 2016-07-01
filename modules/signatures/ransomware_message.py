@@ -72,6 +72,7 @@ class RansomwareMessage(Signature):
             "bootkit",
             "rootkit",
             "payment",
+            "victim",
             "AES128",
             "AES256",
             "AES 128",
@@ -107,7 +108,7 @@ class RansomwareMessage(Signature):
             filepath = self.get_raw_argument(call, "HandleName")
             patterns = "|".join(self.indicators)
             if (filepath.lower() == "\\??\\physicaldrive0" or filepath.lower().startswith("\\device\\harddisk")) and len(buff) >= 128:
-                if re.findall(patterns, buff):   
+                if len(re.findall(patterns, buff)) > 1:   
                     if filepath not in self.ransomfile:
                         self.ransomfile.append(filepath)
 
@@ -120,7 +121,7 @@ class RansomwareMessage(Signature):
                     data = dropped["data"]
                     patterns = "|".join(self.indicators)
                     if len(data) >= 128:
-                        if re.findall(patterns, data):
+                        if len(re.findall(patterns, data)) > 1:
                             if filename not in self.ransomfile:
                                 self.ransomfile.append(filename)
 
