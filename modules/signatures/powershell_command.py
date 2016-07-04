@@ -44,7 +44,7 @@ class PowershellCommand(Signature):
             params = self.get_argument(call, "Parameters").lower()
             cmdline = filepath + " " + params
 
-        if "powershell.exe" in cmdline and ("bypass" in cmdline or "unrestricted" in cmdline):
+        if "powershell.exe" in cmdline and ("bypass" in cmdline or "unrestricted" in cmdline or "YnlwYXNz" in cmdline or "J5cGFzc" in cmdline or "ieXBhc3" in cmdline or "dW5yZXN0cmljdGVk" in cmdline or "VucmVzdHJpY3RlZ" in cmdline or "1bnJlc3RyaWN0ZW" in cmdline):
             self.exec_policy = True
 
         if "powershell.exe" in cmdline and "-nop" in cmdline:
@@ -53,10 +53,10 @@ class PowershellCommand(Signature):
         if "powershell.exe" in cmdline and "-w" in cmdline and "hidden" in cmdline:
             self.hidden_window = True
 
-        if "powershell.exe" in cmdline and "-enc" in cmdline:
+        if "powershell.exe" in cmdline and ("-enc" in cmdline or "-e "):
             self.b64_encoded = True
 
-        if "powershell.exe" in cmdline and "downloadfile(" in cmdline:
+        if "powershell.exe" in cmdline and ("downloadfile(" in cmdline or "ZG93bmxvYWRmaWxlK" in cmdline or "Rvd25sb2FkZmlsZS" in cmdline or "kb3dubG9hZGZpbGUo" in cmdline):
             self.filedownload = True
 
     def on_complete(self):
