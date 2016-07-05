@@ -102,7 +102,7 @@ class RansomwareMessage(Signature):
     filter_apinames = set(["NtWriteFile"])
 
     def on_call(self, call, process):
-        if call["api"] == "NtWriteFile" and self.results["info"]["package"] != "pdf":
+        if call["api"] == "NtWriteFile":
             filescore = 0
             buff = self.get_raw_argument(call, "Buffer").lower()
             filepath = self.get_raw_argument(call, "HandleName")
@@ -113,7 +113,7 @@ class RansomwareMessage(Signature):
                         self.ransomfile.append(filepath)
 
     def on_complete(self):
-        if "dropped" in self.results and self.results["info"]["package"] != "pdf":
+        if "dropped" in self.results:
             for dropped in self.results["dropped"]:
                 mimetype = dropped["type"]
                 if "ASCII text" in mimetype:
