@@ -58,10 +58,10 @@ class InjectionCRT(Signature):
         elif (call["api"] == "VirtualAllocEx" or call["api"] == "NtAllocateVirtualMemory") and self.sequence == 0:
             if self.get_argument(call, "ProcessHandle") in self.process_handles:
                 self.sequence = 1
-        elif (call["api"] == "NtWriteVirtualMemory" or call["api"] == "WriteProcessMemory") and self.sequence == 1:
+        elif (call["api"] == "NtWriteVirtualMemory" or call["api"] == "NtWow64WriteVirtualMemory64" or call["api"] == "WriteProcessMemory") and self.sequence == 1:
             if self.get_argument(call, "ProcessHandle") in self.process_handles:
                 self.sequence = 2
-        elif (call["api"] == "NtWriteVirtualMemory" or call["api"] == "WriteProcessMemory") and self.sequence == 2:
+        elif (call["api"] == "NtWriteVirtualMemory" or call["api"] == "NtWow64WriteVirtualMemory64"  or call["api"] == "WriteProcessMemory") and self.sequence == 2:
             handle = self.get_argument(call, "ProcessHandle")
             if handle in self.process_handles:
                 addr = int(self.get_argument(call, "BaseAddress"), 16)

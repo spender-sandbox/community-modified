@@ -36,7 +36,7 @@ class InjectionExplorer(Signature):
                                 "\\basenamedobjects\\urlzonessm_administrator",
                                 "\\basenamedobjects\\urlzonessm_system"]
 
-    filter_apinames = set(["NtOpenSection", "NtCreateSection", "NtOpenProcess", "ReadProcessMemory", "NtReadVirtualMemory", "FindWindowA", "FindWindowW", "FindWindowExA", "FindWindowExW", "SendNotifyMessageA", "SendNotifyMessageW", "SetWindowLongA", "SetWindowLongW", "SetWindowLongPtrA", "SetWindowLongPtrW"])
+    filter_apinames = set(["NtOpenSection", "NtCreateSection", "NtOpenProcess", "ReadProcessMemory", "NtReadVirtualMemory", "NtWow64ReadVirtualMemory64", "FindWindowA", "FindWindowW", "FindWindowExA", "FindWindowExW", "SendNotifyMessageA", "SendNotifyMessageW", "SetWindowLongA", "SetWindowLongW", "SetWindowLongPtrA", "SetWindowLongPtrW"])
 
     def on_call(self, call, process):
         if process is not self.lastprocess:
@@ -52,7 +52,7 @@ class InjectionExplorer(Signature):
             self.parent = (process["process_name"], process["process_id"])
             pid = str(self.get_argument(call, "ProcessIdentifier"))
             self.injected = (self.get_name_from_pid(pid), pid)
-        elif self.sequence == 2 and (call["api"] == "ReadProcessMemory" or call["api"] == "NtReadVirtualMemory"):
+        elif self.sequence == 2 and (call["api"] == "ReadProcessMemory" or call["api"] == "NtReadVirtualMemory" or call["api"] == "NtWow64ReadVirtualMemory64"):
             self.sequence = 3
         elif self.sequence == 3 and call["api"].startswith("FindWindow"):
             classname = self.get_argument(call, "ClassName")

@@ -32,7 +32,7 @@ class StackPivot(Signature):
         if self.results["target"]["category"] != "file" or self.results["info"]["package"] not in ["exe", "rar", "zip", "dll", "regsvr"]:
             self.ignore_it = False
 
-    filter_apinames = set(["NtCreateFile", "NtAllocateVirtualMemory", "NtProtectVirtualMemory", "VirtualProtectEx", "NtWriteVirtualMemory", "WriteProcessMemory", "NtMapViewOfSection", "CreateProcessInternalW", "URLDownloadToFileW"])
+    filter_apinames = set(["NtCreateFile", "NtAllocateVirtualMemory", "NtProtectVirtualMemory", "VirtualProtectEx", "NtWriteVirtualMemory", "NtWow64WriteVirtualMemory64", "WriteProcessMemory", "NtMapViewOfSection", "CreateProcessInternalW", "URLDownloadToFileW"])
 
     def on_call(self, call, process):
         if self.ignore_it:
