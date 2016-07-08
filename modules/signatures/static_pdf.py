@@ -21,15 +21,6 @@ class Static_PDF(Signature):
                         self.weight += 1
                         self.severity = 3
 
-                # For this we also check for only a few pages as a small document with high entropy is more reliable and avoids a lot of FPs
-                if "Total Entropy" in self.results["static"]["pdf"]["Info"]:
-                    if "Keywords" in self.results["static"]["pdf"]:
-                        num_pages = self.results["static"]["pdf"]["Keywords"]["/Page"]
-                        if num_pages < 3:
-                            if self.results["static"]["pdf"]["Info"]["Total Entropy"] > 7.5:
-                                self.data.append({"total_entropy" : "The PDF contains a high level of overall entropy for a %s page document" % (num_pages)})
-                                self.weight += 1
-
                 if "Keywords" in self.results["static"]["pdf"]:
                     if "/Page" in self.results["static"]["pdf"]["Keywords"]:
                         num_pages = self.results["static"]["pdf"]["Keywords"]["/Page"]
