@@ -59,6 +59,9 @@ class NetworkDocumentHTTP(Signature):
         return None
 
     def on_complete(self):
+        if len(self.data) == 1 and "http_request" in self.data[0] and self.data[0]["http_request"].starts_with("acrord32.exe_WSASend_get /10/rdr/enu/win/nooem/none/message.zip") and self.check_url("http://acroipm.adobe.com/10/rdr/ENU/win/nooem/none/message.zip"):
+            return False
+
         if self.data:
             return True
 
