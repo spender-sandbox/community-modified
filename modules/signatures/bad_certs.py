@@ -65,6 +65,8 @@ class BadCerts(Signature):
             "3a8412582563f43dd28aa1f31cdd0d0c6d78fd60",
             # DIDZHITAL ART cert used for Kovter
             "a286affc5f6e92bdc93374646676ebc49e21bcae",
+            # Tiks IT cert used for Kovter
+            "78d98ccccc41e0dea1791d24595c2e90f796fd48",
             ]
         if "static" in self.results and "pe" in self.results["static"]:
             if "digital_signers" in self.results["static"]["pe"] and self.results["static"]["pe"]["digital_signers"]:
