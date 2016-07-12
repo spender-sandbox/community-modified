@@ -35,6 +35,7 @@ class AntiAnalysisDetectFile(Signature):
             "^[A-Za-z]:\\\\Program\\ Files(\\ \(x86\))?\\\\Fiddler",
             "^[A-Za-z]:\\\\ComboFix",
             "^[A-Za-z]:\\\\Program\\ Files(\\ \(x86\))?\\\\FFDec",
+            "^[A-Za-z]:\\\\Program\\ Files(\\ \(x86\))?\\\\Wireshark",
         ]
         ret = False
         for indicator in file_indicators:

@@ -24,7 +24,7 @@ class VBoxDetectFiles(Signature):
     minimum = "0.5"
 
     def run(self):
-        indicators = [
+        file_indicators = [
             ".*\\\\VBoxDisp\.dll$",
             ".*\\\\VBoxHook\.dll$",
             ".*\\\\VBoxMRXNP\.dll$",
@@ -34,7 +34,7 @@ class VBoxDetectFiles(Signature):
             ".*\\\\VBoxOGLerrorspu\.dll$",
             ".*\\\\VBoxOGLfeedbackspu\.dll$",
             ".*\\\\VBoxOGLpackspu\.dll$",
-            ".*\\\\VBoxOGLpassthroughspu\.dll$"
+            ".*\\\\VBoxOGLpassthroughspu\.dll$",
             ".*\\\\VBoxSF\.sys$",
             ".*\\\\VBoxControl\.exe$",
             ".*\\\\VBoxService\.exe$",
@@ -44,12 +44,14 @@ class VBoxDetectFiles(Signature):
             ".*\\\\VBoxGuest\.[a-zA-Z]{3}$",
             ".*\\\\VBoxMouse\.[a-zA-Z]{3}$",
             ".*\\\\VBoxVideo\.[a-zA-Z]{3}$",
-            ".*\\\\VirtualBox\\ Guest\\ Additions\\\\uninst\.exe$",
-            ".*\\\\VirtualBox\\ Guest\\ Additions\\\\uninst\.exe\.dll$",
+            ".*\\\\VirtualBox\\ Guest\\ Additions\\\\.+\\.(exe|dll)$",
+            ".*\\\\drivers\\\\vboxdrv\\.sys$"
         ]
-
-        for indicator in indicators:
-            if self.check_file(pattern=indicator, regex=True):
-                return True
-
-        return False
+        found = False
+        for indicator in file_indicators:
+            file_match = self.check_file(pattern=indicator, regex=True, all=True)
+            if file_match:
+                for match in file_match:
+                    self.data.append({"file" : match })
+                found = True
+        return found
