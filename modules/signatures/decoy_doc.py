@@ -24,7 +24,6 @@ class DecoyDocument(Signature):
     authors = ["Kevin Ross"]
     minimum = "1.2"
     evented = True
-    match = True
 
     def __init__(self, *args, **kwargs):
         Signature.__init__(self, *args, **kwargs)
