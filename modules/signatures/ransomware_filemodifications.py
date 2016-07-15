@@ -34,7 +34,7 @@ class RansomwareFileModifications(Signature):
         Signature.__init__(self, *args, **kwargs)
         self.movefilecount = 0
         self.appendcount = 0
-        self.appendemail = False
+        self.appendemailcount = 0
         self.newextensions = []
      
     filter_apinames = set(["MoveFileWithProgressW","MoveFileWithProgressTransactedW"])
@@ -60,7 +60,7 @@ class RansomwareFileModifications(Signature):
                     if self.newextensions.count(newextension) == 0:
                         self.newextensions.append(newextension)
         if origfile != newfile and "@" in newfile:
-            self.appendemail = True
+            self.appendemailcount += 1
 
     def on_complete(self):
         ret = False
@@ -69,8 +69,8 @@ class RansomwareFileModifications(Signature):
             self.data.append({"file_modifications" : "Performs %s file moves indicative of a potential file encryption process" % (self.movefilecount)})
             ret = True
 
-        if self.appendemail:
-            self.data.append({"appends_email" : "Appears to have appended an email address onto a file. This is used by malware in messages which require the user to email the attacker for the decryption key" })
+        if self.appendemailcount > 60:
+            self.data.append({"appends_email" : "Appears to have appended an email address onto %s files. This is used by ransomware which require the user to email the attacker for recovery actions/payment" % (self.appendemailcount)})
 
         if "dropped" in self.results:
             droppedunknowncount = 0
