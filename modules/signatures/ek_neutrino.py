@@ -41,3 +41,7 @@ class Neutrino_JS(Signature):
 
         if ".SetReturnValue(__flash__toXML(function" in buf and ("MOV%20%5BECX+0C%5D%2CEAX" in buf or "chrw%2801%29%26chrw%282176%29%26chrw%2801%29%26chrw%2800%29%26chrw%2800%29%26chrw%2800%29%26chrw%2800%29%26chrw%2800%29" in buf or "dashstyle.array.length%20%3D%200%20-%201%3B" in buf) and "unescape" in buf:
             return True
+        # https://www.fireeye.com/blog/threat-research/2016/07/exploit_kits_quickly.html, http://malware.dontneedcoffee.com/2016/07/cve-2016-0189-internet-explorer-and.html, https://github.com/theori-io/cve-2016-0189
+        if "valueOf\": function" in buf and "triggerBug()" in buf and "exploit(" in buf:
+            self.data.append({"cve_2016-0189" : "Neutrino EK or proof of concept Internet Explorer scripting engine memory corruption exploit code seen"})
+            return True
