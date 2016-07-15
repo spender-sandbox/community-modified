@@ -70,7 +70,7 @@ class RansomwareFileModifications(Signature):
             ret = True
 
         if self.appendemailcount > 60:
-            self.data.append({"appends_email" : "Appears to have appended an email address onto %s files. This is used by ransomware which require the user to email the attacker for recovery actions/payment" % (self.appendemailcount)})
+            self.data.append({"appends_email" : "Appears to have appended an email address onto %s files. This is used by ransomware which requires the user to email the attacker for payment/recovery actions" % (self.appendemailcount)})
 
         if "dropped" in self.results:
             droppedunknowncount = 0
