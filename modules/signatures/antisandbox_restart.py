@@ -27,4 +27,9 @@ class AntiSandboxRestart(Signature):
     filter_apinames = set(["NtShutdownSystem", "NtSetSystemPowerState", "ExitWindowsEx", "InitiateShutdownW", "InitiateSystemShutdownW", "InitiateSystemShutdownExW", "NtRaiseHardError"])
 
     def on_call(self, call, process):
-        return True
+        if call["api"] == "NtRaiseHardError":
+            response = int(self.get_argument(call, "ResponseOptions"))
+            if response == 6:
+                return True
+        else:
+            return True
