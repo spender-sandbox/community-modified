@@ -29,6 +29,7 @@ class RansomwareExtensions(Signature):
             ".*\.crypt$",
             ".*\.locked$",
             ".*\.cerber$",
+            ".*\.cerber2$",
             ".*\.encrypt$",
             ".*\.R5A$",
             ".*\.R4A$",
