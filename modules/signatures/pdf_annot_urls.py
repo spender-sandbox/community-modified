@@ -32,7 +32,7 @@ class PDF_Annot_URLs(Signature):
                 if "Annot_URLs" in self.results["static"]["pdf"]:
                     for entry in self.results["static"]["pdf"]["Annot_URLs"]:
                         entrylower = entry.lower()
-                        if entrylower.endswith((".zip", ".exe", ".msi", ".bat", ".scr", ".rar")):
+                        if entrylower.endswith((".zip", ".exe", ".msi", ".bat", ".scr", ".rar", ".com")):
                             self.data.append({"URL":entry})
                             found_URLs = True
         return found_URLs
