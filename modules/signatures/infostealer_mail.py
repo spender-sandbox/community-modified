@@ -13,6 +13,10 @@ class EmailStealer(Signature):
     minimum = "1.2"
 
     def run(self):
+        office_pkgs = ["ppt","doc","xls","eml"]
+        if any(e in self.results["info"]["package"] for e in office_pkgs):
+            return False
+
         file_indicators = [
             ".*\.pst$",
             ".*\\\\Microsoft\\\\Windows\\ Live\\ Mail.*",
