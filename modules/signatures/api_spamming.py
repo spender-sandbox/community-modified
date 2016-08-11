@@ -33,8 +33,10 @@ class APISpamming(Signature):
 
     def on_complete(self):
         spam_apis_whitelist = {
+             "c:\\program files (x86)\\internet explorer\\iexplore.exe": ["NtQuerySystemTime", "GetSystemTimeAsFileTime", "GetSystemTime"],
              "c:\\program files\\internet explorer\\iexplore.exe": ["NtQuerySystemTime", "GetSystemTimeAsFileTime", "GetSystemTime"],
              "c:\\program files\\microsoft office\\office14\\winword.exe": ["GetLocalTime"],
+             "c:\\program files (x86)\\microsoft office\\office14\\winword.exe": ["GetLocalTime"],
              "c:\\windows\\system32\\wbem\\wmiprvse.exe": ["GetSystemTimeAsFileTime"],
              "c:\\windows\\system32\\wscript.exe": ["GetLocalTime", "NtQuerySystemTime"],
         }
