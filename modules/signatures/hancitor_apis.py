@@ -47,6 +47,10 @@ class Hancitor_APIs(Signature):
         self.keywords = ["guid", "build", "info", "ip", "type"]
         self.netSequence = 0
         self.suspended = dict()
+        self.bufContents = [
+            "Cookie:disclaimer_accepted=true",
+            "Content-Type: application/x-www-form-urlencoded",
+        ]
 
     filter_apinames = set(["CreateProcessInternalW", "WriteProcessMemory",
                            "RtlDecompressBuffer", "InternetCrackUrlA",
@@ -62,7 +66,7 @@ class Hancitor_APIs(Signature):
 
         elif call["api"] == "WriteProcessMemory":
             buf = self.get_argument(call, "Buffer")
-            if "Cookie:disclaimer_accepted=true" in buf:
+            if any(string in buf for string in self.bufContents):
                 handle = self.get_argument(call, "ProcessHandle")
                 if handle in self.suspended:
                     for pHandle in self.suspended:
