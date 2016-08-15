@@ -38,6 +38,9 @@ class RansomwareExtensions(Signature):
             ".*\.bart\.zip$",
             ".*\.zepto$",
             ".*\.wflx$",
+            ".*\.id_[^\/]*\.scl$",
+            ".*\.razy$",
+            ".*\.Venus[a-z]$",
         ]
 
         for indicator in indicators:
