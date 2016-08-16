@@ -40,11 +40,9 @@ class Dropper(Signature):
         for processpath in processpaths:
             for drop in self.results["dropped"]:
                 for path in drop["guest_paths"]:
-                    if path.lower() == processpath and self.results["info"]["package"] not in ["exe", "bin", "msi", "rar", "zip", "dll", "regsvr"]:
-                        self.severity = 3
+                    if path.lower() == processpath:
                         self.data.append({"binary" : path})
                         is_dropper = True
-                    elif path.lower() == processpath:
-                        self.data.append({"binary" : path})
-                        is_dropper = True
+                        if self.results["info"]["package"] not in ["exe", "bin", "msi", "rar", "zip", "dll", "regsvr"]:
+                            self.severity = 3
         return is_dropper
