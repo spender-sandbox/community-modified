@@ -41,6 +41,9 @@ class RansomwareExtensions(Signature):
             ".*\.id_[^\/]*\.scl$",
             ".*\.razy$",
             ".*\.Venus(f|p)$",
+            ".*\.crypz$",
+            ".*\.cryp1$",
+
         ]
 
         for indicator in indicators:
