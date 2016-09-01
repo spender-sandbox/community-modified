@@ -44,24 +44,25 @@ class Polymorphic(Signature):
         if target_ssdeep == "" or target_ssdeep == None:
             return False
 
-        for drop in self.results["dropped"]:
-            if package == "xls" and len(drop["guest_paths"]) == 1 and drop["guest_paths"][0].endswith("\\Temp\\" + self.results["target"]["file"]["name"]):
-                continue
-            if drop["sha1"] == target_sha1:
-                continue
-            if fabs(target_size - drop["size"]) >= 1024:
-                continue
-            drop_ssdeep = drop["ssdeep"]
-            if drop_ssdeep == "" or drop_ssdeep == None:
-                continue
-            try:
-                percent = pydeep.compare(target_ssdeep, drop_ssdeep)
-                if percent > 20:
-                    found_polymorphic = True
-                    for path in drop["guest_paths"]:
-                        self.data.append({"file" : path})
-                    self.data.append({"percent_match" : percent})
-            except:
-                continue
+        if self.results["dropped"]:
+            for drop in self.results["dropped"]:
+                if package == "xls" and len(drop["guest_paths"]) == 1 and drop["guest_paths"][0].endswith("\\Temp\\" + self.results["target"]["file"]["name"]):
+                    continue
+                if drop["sha1"] == target_sha1:
+                    continue
+                if fabs(target_size - drop["size"]) >= 1024:
+                    continue
+                drop_ssdeep = drop["ssdeep"]
+                if drop_ssdeep == "" or drop_ssdeep == None:
+                    continue
+                try:
+                    percent = pydeep.compare(target_ssdeep, drop_ssdeep)
+                    if percent > 20:
+                        found_polymorphic = True
+                        for path in drop["guest_paths"]:
+                            self.data.append({"file" : path})
+                        self.data.append({"percent_match" : percent})
+                except:
+                    continue
 
         return found_polymorphic
