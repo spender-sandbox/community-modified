@@ -39,16 +39,16 @@ class NetworkDocumentHTTP(Signature):
         if pname in self.office_proc_list:
             addit = None
             if call["api"] == "URLDownloadToFileW":
-                buff = self.get_argument(call, "FileName").lower()
-                addit = {"http_filename": "%s_URLDownloadToFileW_%s" % (pname,buff)}
+                buff = self.get_argument(call, "URL")
+                addit = {"http_downloadurl": "%s_URLDownloadToFileW_%s" % (pname,buff)}
             if call["api"] == "HttpOpenRequestW":
-                buff = self.get_argument(call, "Path").lower()
+                buff = self.get_argument(call, "Path")
                 addit = {"http_request_path": "%s_HttpOpenRequestW_%s" % (pname,buff)}
             if call["api"] == "InternetCrackUrlW":
-                buff = self.get_argument(call, "Url").lower()
+                buff = self.get_argument(call, "Url")
                 addit = {"http_request": "%s_InternetCrackUrlW_%s" % (pname,buff)}
             if call["api"] == "InternetCrackUrlA":
-                buff = self.get_argument(call, "Url").lower()
+                buff = self.get_argument(call, "Url")
                 addit = {"http_request": "%s_InternetCrackUrlA_%s" % (pname,buff)}
             if call["api"] == "WSASend":
                 buff = self.get_argument(call, "Buffer").lower()
