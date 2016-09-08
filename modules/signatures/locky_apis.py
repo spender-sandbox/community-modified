@@ -37,6 +37,8 @@ class Locky_APIs(Signature):
 
     def __init__(self, *args, **kwargs):
         Signature.__init__(self, *args, **kwargs)
+        self.checkEvent = False
+        self.lastapi = str()
         self.volumes = set()
         self.hashes = set()
         self.found = 0
@@ -46,16 +48,27 @@ class Locky_APIs(Signature):
         self.sigchanged = False
 
     filter_apinames = set(["GetVolumeNameForVolumeMountPointW",
-                           "InternetCrackUrlA", "CryptHashData"])
+                           "InternetCrackUrlA", "CryptHashData",
+                           "NtOpenEvent"])
 
     def on_call(self, call, process):
+        if self.checkEvent and self.lastapi == "CryptHashData":
+            if call["api"] == "NtOpenEvent":
+                event = self.get_argument(call, "EventName")
+                event = event.split("\\")
+                if len(event) == 2:
+                    if event[1] in self.hashes and event[0] in ["Global", "Local"]:
+                        self.found = True
+
         if call["api"] == "GetVolumeNameForVolumeMountPointW":
             if call["status"]:
                 name = self.get_argument(call, "VolumeName")
-                if name and len(name) > 10 and name not in self.volumes:
-                    self.volumes.add(name)
-                    md5 = hashlib.md5(name[10:-1]).hexdigest()[:16].upper()
-                    self.hashes.add(md5)
+                if name and len(name) > 10:
+                    name = name[10:-1]
+                    if name not in self.volumes:
+                        self.volumes.add(name)
+                        md5 = hashlib.md5(name).hexdigest()[:16].upper()
+                        self.hashes.add(md5)
 
         elif call["api"] == "CryptHashData":
             if self.hashes:
@@ -80,6 +93,10 @@ class Locky_APIs(Signature):
                             tmp = {"Affid": args["affid"][0]}
                             if tmp not in self.data:
                                 self.data.append(tmp)
+
+                elif buf in self.volumes and self.lastapi == "GetVolumeNameForVolumeMountPointW":
+                    checkEvent = True
+
                 else:
                     check = re.findall(r"\s((?:https?://)?\w+(?:\.onion|\.tor2web)[/.](?:\w+\/)?)",
                                        buf, re.I)
