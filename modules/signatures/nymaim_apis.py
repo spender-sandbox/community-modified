@@ -36,14 +36,14 @@ class Nymaim_APIs(Signature):
     def on_call(self, call, process):
         if call["api"] == "NtCreateKey":
             buf = self.get_argument(call, "ObjectAttributes")
-            if buf and buf.startswith("HKEY_CURRENT_USER\\Software\\Microsoft\\"):
+            if buf and buf.startswith("HKEY_CURRENT_USER\\Software\\Microsoft\\") and buf.count("\\") == 3:
                 self.keyname = buf
 
         elif call["api"] == "NtSetValueKey":
             if self.keyname:
                 buflen = int(self.get_argument(call, "BufferLength"))
                 key = self.get_argument(call, "FullName")
-                if buflen and buflen > 1024 and key.startswith(self.keyname):
+                if buflen and buflen > 2048 and key.startswith(self.keyname):
                     self.regkey = True
 
     def on_complete(self):
