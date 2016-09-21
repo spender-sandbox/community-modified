@@ -42,13 +42,18 @@ class RansomwareExtensions(Signature):
             ".*\.id_[^\/]*\.scl$",
             ".*\.razy$",
             ".*\.Venus(f|p)$",
+            ".*\.crypt$",
             ".*\.crypz$",
             ".*\.cryp1$",
+            ".*\.[0-9A-F]{32}\.[0-9A-F]{5}$",
             ".*\.fs0ciety",
             ".*\.cry",
             ".*\.locked",
             ".*\.locklock",
             ".*\.fantom",
+            ".*_nullbyte",
+            ".*\.purge$",
+            ".*\.domino",
         ]
 
         for indicator in indicators:
