@@ -47,6 +47,8 @@ class RansomwareExtensions(Signature):
             ".*\.fs0ciety",
             ".*\.cry",
             ".*\.locked",
+            ".*\.locklock",
+            ".*\.fantom",
         ]
 
         for indicator in indicators:
