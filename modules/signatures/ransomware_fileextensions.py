@@ -55,6 +55,7 @@ class RansomwareExtensions(Signature):
             ".*\.purge$",
             ".*\.domino",
             ".*\.odin",
+            ".*\.encrypted",
         ]
 
         for indicator in indicators:
