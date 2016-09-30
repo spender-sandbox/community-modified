@@ -20,6 +20,7 @@ class RansomwareFiles(Signature):
     description = "Creates a known ransomware decryption instruction / key file."
     weight = 3
     severity = 3
+    families = []
     categories = ["ransomware"]
     authors = ["KillerInstinct"]
     minimum = "1.2"
