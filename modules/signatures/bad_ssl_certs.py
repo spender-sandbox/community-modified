@@ -20,6 +20,7 @@ class BadSSLCerts(Signature):
     description = "A known bad/malicious SSL cert was accessed"
     severity = 3
     weight = 3
+    families = []
     categories = ["network"]
     authors = ["KillerInstinct"]
     minimum = "1.3"
