@@ -20,12 +20,15 @@ class BadSSLCerts(Signature):
     description = "A known bad/malicious SSL cert was accessed"
     severity = 3
     weight = 3
-    families = []
     categories = ["network"]
     authors = ["KillerInstinct"]
     minimum = "1.3"
 
     def run(self):
+        # so that we don't modify the base list of BadSSLCerts via the below append
+        # which would affect all future invocations of this signature
+        self.families = []
+
         # Add manual indicators here
         sha1_indicators = {
             "6fc7fe77aaac09d078cb50039ec507f964082583": "Dridex C&C",
