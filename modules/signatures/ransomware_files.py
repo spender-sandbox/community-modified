@@ -62,6 +62,11 @@ class RansomwareFiles(Signature):
             (".*\\\\HELP_DECRYPT_YOUR_FILES\.(html|txt)$", ["CryptFile2"]),
             (".*\\\\!!!\ Readme\ For\ Decrypt\ !!!\.txt$", ["MarsJoke"]),
             (".*_HOWDO_text\.(html|bmp)$", ["Locky"]),
+            (".*\\\\!!_RECOVERY_instructions_!!\.(html|txt)$", ["Nuke"]),
+            (".*\\\\DECRYPT_YOUR_FILES\.HTML$", ["Fantom"]),
+            (".*\\\\README_RECOVER_FILES_.*\.(html|txt|png)$", ["HadesLocker"]),
+            (".*\\\\README\.hta$", ["Cerber"]),
+            (".*\\\\RESTORE-FILES!.*txt$", ["Comrade-Circle"]),
         ]
 
         for ioc in file_list:
