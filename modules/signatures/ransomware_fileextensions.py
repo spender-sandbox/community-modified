@@ -63,7 +63,7 @@ class RansomwareExtensions(Signature):
                 if indicator[1]:
                     self.families = indicator[1]
                     self.description = (
-                        "Appends known %s ransomware file extensions to "
+                        "Appends known %s ransomware file extension to "
                         "files that have been encrypted" %
                         "/".join(indicator[1])
                     )
