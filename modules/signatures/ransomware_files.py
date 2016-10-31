@@ -68,6 +68,7 @@ class RansomwareFiles(Signature):
             (".*\\\\README\.hta$", ["Cerber"]),
             (".*\\\\RESTORE-FILES!.*txt$", ["Comrade-Circle"]),
             (".*_WHAT_is\.(html|bmp)$", ["Locky"]),
+            (".*\\\\decrypt\ explanations\.html$", ["n1n1n1"]),
         ]
 
         for ioc in file_list:
