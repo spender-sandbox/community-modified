@@ -20,12 +20,8 @@ except ImportError:
 
 from lib.cuckoo.common.abstracts import Signature
 
-def getWrittenUrls(data):
-    urls = re.findall("(?P<url>https?://[^\|]+)\|", data)
-    if urls:
-        return urls
-
-    return []
+struct_pat = re.compile(r"\\x11\"3D\d{2}\.\d{2}(?:[A-Za-z]|\\x00)(?:\\x00){2}(?:\d{4}|(?:\\x00){4})(?:\\x00){12}http")
+url_pat = re.compile(r"(https?://[^\|]+)(?:\||\\x00)")
 
 class Hancitor_APIs(Signature):
     name = "hancitor_behavior"
@@ -41,21 +37,26 @@ class Hancitor_APIs(Signature):
     def __init__(self, *args, **kwargs):
         Signature.__init__(self, *args, **kwargs)
         self.c2s = []
-        self.badPid = 0
-        self.currentUrl = str()
         self.found = False
-        self.keywords = ["guid", "build", "info", "ip", "type"]
-        self.netSequence = 0
+        self.lastapi = str()
         self.suspended = dict()
-        self.bufContents = [
-            "Cookie:disclaimer_accepted=true",
-            "Content-Type: application/x-www-form-urlencoded",
-        ]
 
-    filter_apinames = set(["CreateProcessInternalW", "WriteProcessMemory",
-                           "RtlDecompressBuffer", "InternetCrackUrlA",
-                           "HttpOpenRequestA", "HttpSendRequestA",
-                           "InternetReadFile", "NtClose"])
+    filter_apinames = set(["CreateProcessInternalW", "WriteProcessMemory", "NtClose"])
+
+    def getWrittenUrls(self, data):
+        memstruct = None
+        if not self.found:
+            memstruct = struct_pat.search(data)
+            if memstruct:
+                self.found = True
+        urls = url_pat.findall(data)
+        if memstruct and urls:
+            sanitized = list()
+            for url in urls:
+                sanitized.append(url.replace("\\x00", ""))
+            return sanitized
+
+        return []
 
     def on_call(self, call, process):
         if call["api"] == "CreateProcessInternalW":
@@ -65,18 +66,14 @@ class Hancitor_APIs(Signature):
                 self.suspended[handle] = self.get_argument(call, "ProcessId")
 
         elif call["api"] == "WriteProcessMemory":
-            buf = self.get_argument(call, "Buffer")
-            if any(string in buf for string in self.bufContents):
+            if self.lastapi == "WriteProcessMemory":
                 handle = self.get_argument(call, "ProcessHandle")
                 if handle in self.suspended:
-                    for pHandle in self.suspended:
-                        if pHandle == handle:
-                            self.badPid = self.suspended[pHandle]
-                            break
-
-                    check = getWrittenUrls(buf)
-                    if len(check) >= 2:
-                        self.c2s = check
+                    buf = self.get_argument(call, "Buffer")
+                    if buf:
+                        check = self.getWrittenUrls(buf)
+                        if len(check) >= 2:
+                            self.c2s = check
 
         elif call["api"] == "NtClose":
             if call["status"]:
@@ -84,51 +81,13 @@ class Hancitor_APIs(Signature):
                 if handle in self.suspended:
                     del self.suspended[handle]
 
-        elif call["api"] == "RtlDecompressBuffer":
-            buf = self.get_argument(call, "UncompressedBuffer")
-            if "Cookie:disclaimer_accepted=true" in buf:
-                self.badPid = str(process["process_id"])
-                check = getWrittenUrls(buf)
-                if len(check) >= 2:
-                    self.c2s = check
-
-        elif call["api"] == "InternetCrackUrlA":
-            if process["process_id"] == self.badPid and self.netSequence == 0:
-                if call["status"]:
-                    self.currentUrl = self.get_argument(call, "Url")
-                    self.netSequence += 1
-
-        elif call["api"] == "HttpOpenRequestA":
-            if process["process_id"] == self.badPid and self.netSequence == 1:
-                if call["status"]:
-                    method = self.get_argument(call, "Verb")
-                    if method and method == "POST":
-                        self.netSequence += 1
-
-        elif call["api"] == "HttpSendRequestA":
-            if process["process_id"] == self.badPid and self.netSequence == 2:
-                pData = self.get_argument(call, "PostData")
-                if pData and all(word in pData for word in self.keywords):
-                    self.found = True
-                    c2 = {"C2": self.currentUrl}
-                    if c2 not in self.data:
-                        self.data.append(c2)
-                self.netSequence = 0
-
-        elif call["api"] == "InternetReadFile":
-            if call["status"] and str(process["process_id"]) == self.badPid:
-                buf = self.get_argument(call, "Buffer")
-                if buf and buf.startswith("{") and buf.strip().endswith("}"):
-                    check = re.findall(":(?P<url>https?://[^\}]+)\}", buf)
-                    if check:
-                        self.c2s += check
+        self.lastapi = call["api"]
 
         return None
 
     def on_complete(self):
         ret = self.found
         if self.c2s:
-            ret = True
             for url in self.c2s:
                 c2 = {"C2": url}
                 if url not in self.data:
