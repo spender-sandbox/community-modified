@@ -40,8 +40,8 @@ class RansomwareExtensions(Signature):
             (".*\.globe$", ["Globe"]),
             (".*\.raid10$", ["Globe"]),
             (".*\.domino$", ["Domino"]),
+            (".*\.wflx$", ["WildFire-Locker"]),
             (".*\.locky$", ["Locky"]),
-            (".*\.wflx$", ["Locky"]),
             (".*\.zepto$", ["Locky"]),
             (".*\.odin$", ["Locky"]),
             (".*\.shit$", ["Locky"]),
@@ -57,6 +57,8 @@ class RansomwareExtensions(Signature):
             (".*\.nuclear55$", ["Nuke"]),
             (".*\.comrade$", ["Comrade-Circle"]),
             (".*\.rip$", ["KillerLocker"]),
+            (".*\.adk$", ["AngryDuck"]),
+            (".*\.lock93$", ["Lock93"]),
         ]
 
         for indicator in indicators:
