@@ -57,6 +57,8 @@ class RansomwareExtensions(Signature):
             (".*\.nuclear55$", ["Nuke"]),
             (".*\.comrade$", ["Comrade-Circle"]),
             (".*\.rip$", ["KillerLocker"]),
+            (".*\.adk$", ["AngryDuck"]),
+            (".*\.lock93$", ["Lock93"]),
         ]
 
         for indicator in indicators:
