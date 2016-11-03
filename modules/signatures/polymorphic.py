@@ -44,7 +44,7 @@ class Polymorphic(Signature):
         if target_ssdeep == "" or target_ssdeep == None:
             return False
 
-        if self.results["dropped"]:
+        if self.results.get("dropped", []):
             for drop in self.results["dropped"]:
                 if package == "xls" and len(drop["guest_paths"]) == 1 and drop["guest_paths"][0].endswith("\\Temp\\" + self.results["target"]["file"]["name"]):
                     continue
