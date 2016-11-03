@@ -28,7 +28,6 @@ class EmailStealer(Signature):
             ".*\\\\AppData\\\\Roaming\\\\Thunderbird\\\\profiles.ini$",
         ]
         registry_indicators = [
-            ".*\\\\Software\\\\(Wow6432Node\\\\)?Clients\\\\Mail.*",
             ".*\\\\Microsoft\\\\Windows\\ Messaging\\ Subsystem\\\\MSMapiApps.*",
             ".*\\\\Microsoft\\\\Windows\\ Messaging\\ Subsystem\\\\Profiles.*",
             ".*\\\\Microsoft\\\\Windows\\ NT\\\\CurrentVersion\\\\Windows\\ Messaging\\ Subsystem\\\\Profiles.*",
@@ -38,6 +37,9 @@ class EmailStealer(Signature):
             ".*\\\\Software\\\\(Wow6432Node\\\\)?IncrediMail.*"
             ".*\\\\Software\\\\(Wow6432Node\\\\)?Microsoft\\\\Windows\\ Live\\ Mail.*",
         ]
+        if self.results["target"]["category"] == "file":
+            registry_indicators.append(".*\\\\Software\\\\(Wow6432Node\\\\)?Clients\\\\Mail.*")
+            
         found_stealer = False
         for indicator in file_indicators:
             file_match = self.check_file(pattern=indicator, regex=True, all=True)
