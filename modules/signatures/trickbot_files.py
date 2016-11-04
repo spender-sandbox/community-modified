@@ -6,7 +6,7 @@ class TrickBotTaskDelete(Signature):
     severity = 3
     weight = 3
     categories = ["banking", "trojan"]
-    families = ["pony"]
+    families = ["TrickBot"]
     authors = ["Eoin Miller"]
     minimum = "1.0"
     evented = True
@@ -17,7 +17,7 @@ class TrickBotTaskDelete(Signature):
     filter_apinames = set(["DeleteFileW"])
 
     def on_call(self, call, process):
-        if call["api"] == ("DeleteFileW") and self.get_argument(call, "FileName").endswith("TrickBot.job"):
+        if call["api"] == ("DeleteFileW") and (self.get_argument(call, "FileName").endswith("TrickBot.job") or self.get_argument(call, "FileName").endswith("TrickBot")):
             self.data.append({"file" : self.get_argument(call, "FileName") })
             return True
 
