@@ -6,6 +6,7 @@ class TrickBotTaskDelete(Signature):
     severity = 3
     weight = 3
     categories = ["banking", "trojan"]
+    families = ["pony"]
     authors = ["Eoin Miller"]
     minimum = "1.0"
     evented = True
