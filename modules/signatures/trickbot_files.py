@@ -2,7 +2,7 @@ from lib.cuckoo.common.abstracts import Signature
 
 class TrickBotTaskDelete(Signature):
     name = "TrickBotTaskDelete"
-    description = "Attempts to delete Windows tasks associated with TrickBot"
+    description = "Exhibits behavior characteristic of TrickBot banking trojan"
     severity = 3
     weight = 3
     categories = ["banking", "trojan"]
