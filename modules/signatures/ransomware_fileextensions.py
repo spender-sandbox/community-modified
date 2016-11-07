@@ -59,6 +59,10 @@ class RansomwareExtensions(Signature):
             (".*\.rip$", ["KillerLocker"]),
             (".*\.adk$", ["AngryDuck"]),
             (".*\.lock93$", ["Lock93"]),
+            (".*\.Alcatraz$", ["Alcatraz-Locker"]),
+            (".*\.dCrypt$", ["DummyLocker"]),
+            (".*\.enc$", ["encryptJJS"]),
+            (".*\.rnsmwr$", ["Gremit"]),
         ]
 
         for indicator in indicators:
