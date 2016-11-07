@@ -11,7 +11,7 @@ class TrickBotMutexes(Signature):
     minimum = "0.5"
 
     def run(self):
-        if self.check_mutex(pattern="^Global\\\\TrickBot$", regex=True):
+        if self.check_mutex("Global\\TrickBot"):
             return True
 
         return False
