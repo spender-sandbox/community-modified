@@ -47,6 +47,7 @@ class RansomwareExtensions(Signature):
             (".*\.odin$", ["Locky"]),
             (".*\.shit$", ["Locky"]),
             (".*\.thor$", ["Locky"]),
+            (".*\.aesir$", ["Locky"]),
             (".*\.locked$", ["multi-family"]),
             (".*\.encrypted$", ["multi-family"]),
             (".*dxxd$", ["DXXD"]),
