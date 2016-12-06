@@ -49,6 +49,7 @@ class RansomwareExtensions(Signature):
             (".*\.thor$", ["Locky"]),
             (".*\.aesir$", ["Locky"]),
             (".*\.zzzzz$", ["Locky"]),
+            (".*\.osiris$", ["Locky"]),
             (".*\.locked$", ["multi-family"]),
             (".*\.encrypted$", ["multi-family"]),
             (".*dxxd$", ["DXXD"]),
@@ -68,6 +69,7 @@ class RansomwareExtensions(Signature):
             (".*\.rnsmwr$", ["Gremit"]),
             (".*\.da_vinci_code$", ["Troldesh"]),
             (".*\.magic_software_syndicate$", ["Troldesh"]),
+            (".*\.no_more_ransom$", ["Troldesh"]),
             (".*_luck$", ["CryptoLuck"]),
             (".*\.CHIP$", ["CHIP"]),
         ]
