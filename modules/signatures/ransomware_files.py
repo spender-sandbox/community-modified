@@ -72,6 +72,9 @@ class RansomwareFiles(Signature):
             (".*\\\\ransomed\.html$", ["Alcatraz-Locker"]),
             (".*\\\\CHIP_FILES\.txt$", ["CHIP"]),
             (".*\\\\(?:|_\d\-|\-)INSTRUCTION\.(html|bmp)$", ["Locky"]),
+            (".*\\\\_README\.hta$", ["Cerber"]),
+            (".*\\\\DesktopOSIRIS\.(bmp|htm)$", ["Locky"]),
+            (".*\\\\OSIRIS\-[a-f0-9]{4}\.htm$", ["Locky"]),
         ]
 
         for ioc in file_list:
