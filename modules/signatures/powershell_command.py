@@ -53,7 +53,7 @@ class PowershellCommand(Signature):
         if "powershell.exe" in cmdline and "-w" in cmdline and "hidden" in cmdline:
             self.hidden_window = True
 
-        if "powershell.exe" in cmdline and ("-enc" in cmdline or "-e "):
+        if "powershell.exe" in cmdline and ("-enc" in cmdline or "-e " in cmdline):
             self.b64_encoded = True
 
         if "powershell.exe" in cmdline and ("downloadfile(" in cmdline or "ZG93bmxvYWRmaWxlK" in cmdline or "Rvd25sb2FkZmlsZS" in cmdline or "kb3dubG9hZGZpbGUo" in cmdline):
