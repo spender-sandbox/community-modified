@@ -72,7 +72,7 @@ class RansomwareFiles(Signature):
             (".*\\\\ransomed\.html$", ["Alcatraz-Locker"]),
             (".*\\\\CHIP_FILES\.txt$", ["CHIP"]),
             (".*\\\\(?:|_\d\-|\-)INSTRUCTION\.(html|bmp)$", ["Locky"]),
-            (".*\\\\_README\.hta$", ["Cerber"]),
+            (".*\\\\_README(\.hta|_.*_\.hta)$", ["Cerber"]),
             (".*\\\\DesktopOSIRIS\.(bmp|htm)$", ["Locky"]),
             (".*\\\\OSIRIS\-[a-f0-9]{4}\.htm$", ["Locky"]),
         ]
