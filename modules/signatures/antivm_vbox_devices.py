@@ -33,7 +33,7 @@ class VBoxDetectDevices(Signature):
         ]
 
         for indicator in indicators:
-            if self.check_file(pattern=indicator):
+            if self.check_file(pattern=indicator, regex=True):
                 return True
 
         return False
