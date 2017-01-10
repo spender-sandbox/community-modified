@@ -17,7 +17,7 @@ from lib.cuckoo.common.abstracts import Signature
 
 class CVE_2016_0189(Signature):
     name = "cve_2016-0189"
-    description = "Executes obfuscated JavaScript indicitive of CVE 2016-0189 Exploit"
+    description = "Executes obfuscated JavaScript indicative of CVE 2016-0189 Exploit"
     weight = 3
     severity = 3
     categories = ["exploit_kit"]
