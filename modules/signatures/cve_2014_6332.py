@@ -17,7 +17,7 @@ from lib.cuckoo.common.abstracts import Signature
 
 class CVE_2014_6332(Signature):
     name = "cve_2014_6332"
-    description = "Executes obfuscated JavaScript Indicitive of CVE 2014-6332 Exploit"
+    description = "Executes obfuscated JavaScript Indicative of CVE 2014-6332 Exploit"
     weight = 3
     severity = 3
     categories = ["exploit_kit"]
