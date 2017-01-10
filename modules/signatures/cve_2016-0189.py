@@ -1,4 +1,4 @@
-# Copyright (C) 2015 Will Metcalf william.metcalf@gmail.com 
+# Copyright (C) 2016 Kevin Ross
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -15,16 +15,18 @@
 
 from lib.cuckoo.common.abstracts import Signature
 
-class Neutrino_JS(Signature):
-    name = "Neutrino_js"
-    description = "Executes obfuscated JavaScript indicative of Neutrino Exploit Kit"
+class CVE_2016_0189(Signature):
+    name = "cve_2016-0189"
+    description = "Executes obfuscated JavaScript indicative of CVE 2016-0189 Exploit"
     weight = 3
     severity = 3
     categories = ["exploit_kit"]
-    families = ["neutrino"]
-    authors = ["Will Metcalf"]
+    families = ["CVE-2016-0189"]
+    authors = ["Kevin Ross"]
     minimum = "1.3"
     evented = True
+    references = ["https://www.fireeye.com/blog/threat-research/2016/07/exploit_kits_quickly.html"]
+
 
     def __init__(self, *args, **kwargs):
         Signature.__init__(self, *args, **kwargs)
@@ -39,5 +41,6 @@ class Neutrino_JS(Signature):
         else:
             buf = self.get_argument(call, "Script")
 
-        if ".SetReturnValue(__flash__toXML(function" in buf and ("MOV%20%5BECX+0C%5D%2CEAX" in buf or "chrw%2801%29%26chrw%282176%29%26chrw%2801%29%26chrw%2800%29%26chrw%2800%29%26chrw%2800%29%26chrw%2800%29%26chrw%2800%29" in buf or "dashstyle.array.length%20%3D%200%20-%201%3B" in buf) and "unescape" in buf:
+        if "valueOf\": function" in buf and "triggerBug()" in buf and "exploit(" in buf:
+            self.data.append({"cve_2016-0189_poc" : "Proof of concept exploit code used. Seen in Sundown & Neutrino exploit kits"})
             return True
