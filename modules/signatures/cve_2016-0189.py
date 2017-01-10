@@ -25,6 +25,8 @@ class CVE_2016_0189(Signature):
     authors = ["Kevin Ross"]
     minimum = "1.3"
     evented = True
+    references = ["https://www.fireeye.com/blog/threat-research/2016/07/exploit_kits_quickly.html"]
+
 
     def __init__(self, *args, **kwargs):
         Signature.__init__(self, *args, **kwargs)
