@@ -78,6 +78,7 @@ class RansomwareExtensions(Signature):
             (".*\.kraken$", ["Kraken"]),
             (".*\.lesli$", ["CryptoMix"]),
             (".*\.sage$", ["Sage"]),
+            (".*\.CRYPTOSHIELD$", ["CryptoShield"]),
         ]
 
         for indicator in indicators:
