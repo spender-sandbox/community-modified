@@ -79,7 +79,7 @@ class PowershellCommand(Signature):
             self.weight += 1
 
         if self.filedownload:
-            self.data.append({"file_download" : "Uses powershell to execute a file download from the command line"})
+            self.data.append({"file_download" : "Uses powershell to download a file"})
             self.severity = 3
             self.weight += 1
 
