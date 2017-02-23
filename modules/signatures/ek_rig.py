@@ -50,3 +50,6 @@ class RIG_JS(Signature):
             return True
         if any(e in buf for e in str5) or any(e in buf for e in str6):
             return True
+        # Rig-V Browser Fingerprinting
+        if "if(\'getBoxObjectFor\'" in buf and "mozInnerScreenX" in buf and "isFirefox++" and "if(\'WebKitCSSMatrix\'" in buf and "webkitStorageInfo" in buf and "isChrome++" in buf and "=\'sandbox\'" in buf and "createElement(\'iframe\')" in buf and "history.pushState" in buf and "documentElement.webkitRequestFullScreen" in buf and "isIE++" in buf and "\'FileReader\'" in buf:
+            return True
