@@ -17,7 +17,7 @@ from lib.cuckoo.common.abstracts import Signature
 
 class Sundown_JS(Signature):
     name = "sundown_js"
-    description = "Executes obfuscated JavaScript indicative of Sundown Exploit Kit"
+    description = "Executes obfuscated JavaScript indicative of Sundown/Nebula Exploit Kit"
     weight = 3
     severity = 3
     categories = ["exploit_kit"]
@@ -29,15 +29,23 @@ class Sundown_JS(Signature):
     def __init__(self, *args, **kwargs):
         Signature.__init__(self, *args, **kwargs)
 
+        self.payloadRC4keys = [
+            ("key=\\\"gexywoaxor\\\"", "Uses the key gexywoaxor associated with the Sundown exploit kit"),
+            ("key=\\\"galiut\\\"", "Uses the key galiut associated with the Nebula exploit kit"),
+        ]
+
     filter_categories = set(["browser"])
     # backward compat
     filter_apinames = set(["JsEval", "COleScript_Compile", "COleScript_ParseScriptText"])
 
     def on_call(self, call, process):
         if call["api"] == "JsEval":
-            buf = self.get_argument(call, "Javascript")
+            buf = self.get_argument(call, "Javascript").lower()
         else:
-            buf = self.get_argument(call, "Script")
+            buf = self.get_argument(call, "Script").lower()
 
-        if "key=\\\"gexywoaxor\\\"" in buf:
+        if "ie=emulateie" in buf and "vbscript" in buf and "key=\\\"" in buf and "url=\\\"http" in buf:
+            for key in self.payloadRC4keys:
+                if key[0] in buf:
+                    self.data.append({"Known RC4 Payload Key" : "%s" % (key[1])})
             return True
