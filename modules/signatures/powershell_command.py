@@ -34,6 +34,7 @@ class PowershellCommand(Signature):
         self.b64_encoded = False
         self.filedownload = False
         self.noninteractive = False
+        self.startprocess = False
 
     filter_apinames = set(["CreateProcessInternalW","ShellExecuteExW"])
 
@@ -59,6 +60,9 @@ class PowershellCommand(Signature):
             
         if "powershell.exe" in cmdline and "-noni":
             self.noninteractive = True
+            
+        if "powershell.exe" in cmdline and "start-process":
+            self.startprocess = True
 
         if "powershell.exe" in cmdline and ("downloadfile(" in cmdline or "ZG93bmxvYWRmaWxlK" in cmdline or "Rvd25sb2FkZmlsZS" in cmdline or "kb3dubG9hZGZpbGUo" in cmdline):
             self.filedownload = True
@@ -86,6 +90,10 @@ class PowershellCommand(Signature):
             self.data.append({"noninteractive" : "Creates a non-interactive prompt"})
             self.weight += 1
 
+        if self.startprocess:
+            self.data.append({"starts_process" : "Creates a new process"})
+            self.weight += 1
+        
         if self.filedownload:
             self.data.append({"file_download" : "Uses powershell to download a file"})
             self.severity = 3
