@@ -34,7 +34,6 @@ class PowershellCommand(Signature):
         self.b64_encoded = False
         self.filedownload = False
         self.noninteractive = False
-        self.unrestricted = False
 
     filter_apinames = set(["CreateProcessInternalW","ShellExecuteExW"])
 
