@@ -33,6 +33,8 @@ class PowershellCommand(Signature):
         self.hidden_window = False
         self.b64_encoded = False
         self.filedownload = False
+        self.noninteractive = False
+        self.unrestricted = False
 
     filter_apinames = set(["CreateProcessInternalW","ShellExecuteExW"])
 
@@ -55,6 +57,9 @@ class PowershellCommand(Signature):
 
         if "powershell.exe" in cmdline and ("-enc" in cmdline or "-e " in cmdline):
             self.b64_encoded = True
+            
+        if "powershell.exe" in cmdline and "-noni":
+            self.noninteractive = True
 
         if "powershell.exe" in cmdline and ("downloadfile(" in cmdline or "ZG93bmxvYWRmaWxlK" in cmdline or "Rvd25sb2FkZmlsZS" in cmdline or "kb3dubG9hZGZpbGUo" in cmdline):
             self.filedownload = True
@@ -76,6 +81,10 @@ class PowershellCommand(Signature):
 
         if self.b64_encoded:
             self.data.append({"b64_encoded" : "Uses a Base64 encoded command value"})
+            self.weight += 1
+            
+        if self.noninteractive:
+            self.data.append({"noninteractive" : "Creates a non-interactive prompt"})
             self.weight += 1
 
         if self.filedownload:
