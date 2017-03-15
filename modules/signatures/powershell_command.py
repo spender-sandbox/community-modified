@@ -58,10 +58,10 @@ class PowershellCommand(Signature):
         if "powershell.exe" in cmdline and ("-enc" in cmdline or "-e " in cmdline):
             self.b64_encoded = True
             
-        if "powershell.exe" in cmdline and "-noni":
+        if "powershell.exe" in cmdline and "-noni" in cmdline:
             self.noninteractive = True
             
-        if "powershell.exe" in cmdline and "start-process":
+        if "powershell.exe" in cmdline and "start-process" in cmdline:
             self.startprocess = True
 
         if "powershell.exe" in cmdline and ("downloadfile(" in cmdline or "ZG93bmxvYWRmaWxlK" in cmdline or "Rvd25sb2FkZmlsZS" in cmdline or "kb3dubG9hZGZpbGUo" in cmdline):
