@@ -80,6 +80,7 @@ class RansomwareExtensions(Signature):
             (".*\.sage$", ["Sage"]),
             (".*\.CRYPTOSHIELD$", ["CryptoShield"]),
             (".*\.serpent$", ["Serpent"]),
+            (".*\.REVENGE$", ["Revenge"]),
         ]
 
         for indicator in indicators:
