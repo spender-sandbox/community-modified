@@ -70,7 +70,7 @@ class PowershellCommand(Signature):
         if "powershell.exe" in cmdline and ("downloadfile(" in cmdline or "ZG93bmxvYWRmaWxlK" in cmdline or "Rvd25sb2FkZmlsZS" in cmdline or "kb3dubG9hZGZpbGUo" in cmdline):
             self.filedownload = True
 
-        if "powershell.exe" in cmdline and "System.Net.WebRequest" in cmdline and "Create(" in cmdline and "GetResponse" in cmdline:
+        if "powershell.exe" in cmdline and "system.net.webrequest" in cmdline and "create(" in cmdline and "getresponse" in cmdline:
             self.webrequest = True
 
         if "powershell.exe" in cmdline and "start-bitstransfer" in cmdline:
