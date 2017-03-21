@@ -35,6 +35,9 @@ class PowershellCommand(Signature):
         self.filedownload = False
         self.noninteractive = False
         self.startprocess = False
+        self.webrequest = False
+        self.bitstransfer = False
+        self.invokeitem = False
 
     filter_apinames = set(["CreateProcessInternalW","ShellExecuteExW"])
 
@@ -67,6 +70,15 @@ class PowershellCommand(Signature):
         if "powershell.exe" in cmdline and ("downloadfile(" in cmdline or "ZG93bmxvYWRmaWxlK" in cmdline or "Rvd25sb2FkZmlsZS" in cmdline or "kb3dubG9hZGZpbGUo" in cmdline):
             self.filedownload = True
 
+        if "powershell.exe" in cmdline and "System.Net.WebRequest" in cmdline and "Create(" in cmdline and "GetResponse" in cmdline:
+            self.webrequest = True
+
+        if "powershell.exe" in cmdline and "start-bitstransfer" in cmdline:
+            self.bitstransfer = True
+
+        if "powershell.exe" in cmdline and "invoke-item" in cmdline:
+            self.invokeitem = True
+
     def on_complete(self):
         if self.exec_policy:
             self.data.append({"execution_policy" : "Attempts to bypass execution policy"})
@@ -97,6 +109,20 @@ class PowershellCommand(Signature):
         if self.filedownload:
             self.data.append({"file_download" : "Uses powershell to download a file"})
             self.severity = 3
+            self.weight += 1
+
+        if self.webrequest:
+            self.data.append({"web_request" : "Uses powershell System.Net.WebRequest method to perform a HTTP request potentially to fetch a second stage file"})
+            self.severity = 3
+            self.weight += 1
+
+        if self.bitstransfer:
+            self.data.append({"bitsadmin_download" : "Uses BitsTransfer to download a file"})
+            self.severity = 3
+            self.weight += 1
+
+        if self.invokeitem:
+            self.data.append({"invoke_item" : "Potentially uses Invoke-Item to execute a file"})
             self.weight += 1
 
         if self.weight:
