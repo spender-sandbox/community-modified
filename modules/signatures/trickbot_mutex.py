@@ -7,11 +7,11 @@ class TrickBotMutexes(Signature):
     severity = 3
     categories = ["banker", "trojan"]
     families = ["TrickBot"]
-    authors = ["Eoin Miller"]
+    authors = ["Eoin Miller", "Mark Parsons"]
     minimum = "0.5"
 
     def run(self):
-        if self.check_mutex("Global\\TrickBot"):
+        if self.check_mutex("Global\\TrickBot") or self.check_mutex("Global\\MGlob"):
             return True
 
         return False
