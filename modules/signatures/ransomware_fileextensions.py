@@ -71,6 +71,7 @@ class RansomwareExtensions(Signature):
             (".*\.da_vinci_code$", ["Troldesh"]),
             (".*\.magic_software_syndicate$", ["Troldesh"]),
             (".*\.no_more_ransom$", ["Troldesh"]),
+            (".*\.Dexter$", ["Troldesh"]),
             (".*_luck$", ["CryptoLuck"]),
             (".*\.CHIP$", ["CHIP"]),
             (".*\.DALE$", ["CHIP"]),
@@ -82,6 +83,8 @@ class RansomwareExtensions(Signature):
             (".*\.serpent$", ["Serpent"]),
             (".*\.REVENGE$", ["Revenge"]),
             (".*\.MOLE$", ["Mole"]),
+            (".*\.onion$", ["Dharma"])
+            (".*\.grt$", ["Karmen"]),
         ]
 
         for indicator in indicators:
