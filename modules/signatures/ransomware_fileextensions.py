@@ -83,7 +83,7 @@ class RansomwareExtensions(Signature):
             (".*\.serpent$", ["Serpent"]),
             (".*\.REVENGE$", ["Revenge"]),
             (".*\.MOLE$", ["Mole"]),
-            (".*\.onion$", ["Dharma"])
+            (".*\.onion$", ["Dharma"]),
             (".*\.grt$", ["Karmen"]),
         ]
 
